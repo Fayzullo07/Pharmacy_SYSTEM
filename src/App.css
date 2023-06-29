@@ -1,0 +1,299 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #2A80B9;
+  border-radius: 50px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #95c1da;
+  border-radius: 50px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
+:root {
+  --body_color: #fff;
+  --text_color_blue: #287bff;
+  --text-color-black: #000;
+  --blue: blue;
+  --white: #fff;
+  --grey: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  --g_white: white;
+  --ch_white: white;
+  --g_black: black;
+
+}
+
+[data-theme="dark"] {
+  --body_color: #242424;
+  --text_color_blue: #fff;
+  --blue: blue;
+  --white: #287bff;
+  --grey: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  --g_white: white;
+  --ch_white: white;
+  --g_black: black;
+}
+
+.container_g {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--body_color);
+  transition: 0.5s;
+  padding: 10px 20px;
+}
+
+.container_g.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.cursor_pointer {
+  cursor: pointer;
+}
+
+/* TABLE */
+#table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#table td,
+#table th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+}
+
+#table th {
+  background-color: var(--blue);
+  color: var(--g_white);
+}
+
+#table tbody tr {
+  background-color: var(--g_white);
+  z-index: 55;
+  font-weight: 500;
+}
+
+/* HEADER */
+.header_flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.header_flex h2 {
+  color: var(--text_color_blue);
+}
+
+/*responsive*/
+
+@media(max-width: 900px) {
+  #table thead {
+    display: none;
+  }
+
+  #table,
+  #table tbody,
+  #table tr,
+  #table td {
+    display: block;
+    width: 100%;
+  }
+
+  #table tr {
+    margin-bottom: 15px;
+  }
+
+  #table td {
+    text-align: right;
+    padding-left: 50%;
+    text-align: right;
+    position: relative;
+  }
+
+  #table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+
+/* MODAL */
+.modal {
+  display: block;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+  position: absolute;
+  background-color: #fefefe;
+  /* margin: 5% auto; */
+  /* 15% from the top and centered */
+  padding: 5px;
+  border: 1px solid #888;
+  width: 60%;
+  transition: 0.5s;
+  /* Could be more or less, depending on screen size */
+}
+
+.modal-body {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 3px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #2A80B9;
+  border-radius: 50px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #95c1da;
+  border-radius: 50px;
+}
+
+/* The Close Button */
+.close {
+  color: var(--blue);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.bg_c {
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 0 5px;
+  background-color: var(--ch_white);
+}
+
+/* Responsive */
+
+@media (max-width: 991px) {
+
+  .modal-content {
+    width: 100%;
+  }
+
+
+
+}
+
+/* Responsive */
+
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+
+  .container_g {
+    width: 100%;
+    left: 0;
+  }
+
+  .container_g.active {
+    left: 300px;
+  }
+
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+
+  .toggle {
+    z-index: 1001;
+  }
+
+  .container_g.active .toggle {
+    position: fixed;
+    right: 0;
+    left: initial;
+    color: var(--white);
+  }
+}

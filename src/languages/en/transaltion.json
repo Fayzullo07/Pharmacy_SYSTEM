@@ -1,0 +1,42 @@
+{
+    "Home": [
+        "Branches",
+        "Companies",
+        "Debtors",
+        "Reports",
+        "Contracts with Companies",
+        "Customer Inventory",
+        "Offers",
+        "Popular Products"
+    ],
+    "Navbar": [
+        "Home",
+        "Monitoring",
+        "Profile"
+    ],
+    "Profile": [
+        "Managers",
+        "Branches",
+        "Employees",
+        "Companies",
+        "Expense Types",
+        "Income Types",
+        "Change Language",
+        "Log Out"
+    ],
+    "Reports": [
+        "Date",
+        "Employee Name",
+        "Cash Sales",
+        "Non-cash Sales",
+        "Debt Sales",
+        "Total Sales",
+        "Total Cash Expenses",
+        "Cash Balance in Register",
+        "Total Daily Expenses",
+        "QR Code Receipt Issued",
+        "QR Code Receipt Issued",
+        "Total",
+        "Shift"
+    ]
+}

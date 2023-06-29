@@ -1,0 +1,28 @@
+#remeinder b {
+    font-size: 28px;
+}
+
+#remeinder span {
+    font-size: 22px;
+}
+
+@media (max-width: 768px) {
+    #remeinder b {
+        font-size: 18px;
+    }
+
+    #remeinder span {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    #remeinder b {
+        font-size: 15px;
+    }
+
+    #remeinder span {
+        font-size: 15px;
+    }
+}
+

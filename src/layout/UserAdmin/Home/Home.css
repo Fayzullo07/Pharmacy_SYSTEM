@@ -1,0 +1,43 @@
+.cardBox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+    /* display: grid; */
+    /* grid-template-columns: repeat(4, 1fr); */
+    /* grid-gap: 5px; */
+}
+
+.cardBox .card {
+    position: relative;
+    background: var(--g_white);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px groove var(--blue);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    transition: 1s;
+}
+
+.cardBox .card:hover {
+    /* box-shadow: 0 4px 8px 0 rgba(243, 242, 242, 0.2), 0 6px 20px 0 rgba(248, 244, 244, 0.19); */
+    transform: scale(1.08);
+    transition: 0.1s;
+}
+
+.cardBox .card .numbers {
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: var(--blue);
+}
+
+.cardBox .card .cardName {
+    color: var(--black2);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+/* Responsive */
