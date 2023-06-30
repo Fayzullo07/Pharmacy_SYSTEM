@@ -7,23 +7,22 @@ import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalActio
 import Modal from "../../../../../utils/Modal";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
-import { useToasts } from "react-toast-notifications";
+import { toast } from "react-toastify";
 
-const AddFirma = (props) => {
+const AddFirma = props => {
   const { showModal, setShowModal } = props;
-  const { addToast } = useToasts();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     phone_number1: "+998",
     address: "",
     is_favorite: true,
-    desc: "",
+    desc: ""
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 50) {
       return;
@@ -52,24 +51,18 @@ const AddFirma = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("firms");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
   const handleSubmit = () => {
     if (!formData.name) {
-      addToast("Firma nomini kiriting !", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("Firma nomini kiriting !");
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number1)) {
-      addToast("Telefon raqamni tog'ri kiriting +998 9? 111 22 33 !", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("Telefon raqamni tog'ri kiriting +998 9? 111 22 33 !");
       return;
     }
     mutation.mutate();
@@ -92,7 +85,7 @@ const AddFirma = (props) => {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -112,7 +105,7 @@ const AddFirma = (props) => {
             name="phone_number1"
             value={formData.phone_number1}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -129,8 +122,7 @@ const AddFirma = (props) => {
             type="checkbox"
             checked={formData.is_favorite}
             onClick={() =>
-              setFormData({ ...formData, is_favorite: !formData.is_favorite })
-            }
+              setFormData({ ...formData, is_favorite: !formData.is_favorite })}
           />
           <b className={formData.is_favorite ? "text-success" : "text-danger"}>
             Faol
@@ -146,7 +138,7 @@ const AddFirma = (props) => {
             name="address"
             value={formData.address}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -166,12 +158,12 @@ const AddFirma = (props) => {
               name="desc"
               value={formData.desc}
               onChange={handleInputChange}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.key === "Enter") {
                   handleSubmit();
                 }
               }}
-            ></textarea>
+            />
           </div>
         </div>
       </div>
