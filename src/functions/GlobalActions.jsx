@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import * as GlobalApi from "../api/GlobalRequest";
 
-import { xisob_raqam } from "../api";
 
 // -----------------------------RECEIPTS---------------------
 // RECEIPTS POST

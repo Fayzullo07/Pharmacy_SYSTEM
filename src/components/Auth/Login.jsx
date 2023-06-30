@@ -7,13 +7,12 @@ import { checkPhoneNumber } from "../../functions/NecessaryFunctions";
 import validator from "validator";
 import { loginAction } from "../../functions/AuthFunctions";
 
-import { useToasts } from "react-toast-notifications";
 import { profile } from "../../assets";
 
 import "./Login.css";
+import { toast } from "react-toastify";
 
 const Login = ({ onLogin }) => {
-  const { addToast } = useToasts();
   const [phone_number, setPhoneNumber] = useState("+998");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,18 +27,13 @@ const Login = ({ onLogin }) => {
   });
   const handleSubmit = () => {
     if (checkPhoneNumber(phone_number)) {
-      addToast("Telefon raqamni to'gri kiriting !", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("Telefon raqamni to'gri kiriting !")
       return;
     }
 
     if (!validator.isLength(password, { max: 15 })) {
-      addToast("Parol min 8 !!!!", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("Parol min 8 !!!!")
+  
       return;
     }
     mutation.mutate();

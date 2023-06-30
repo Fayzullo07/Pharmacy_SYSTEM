@@ -1,6 +1,6 @@
+import { toast } from "react-toastify";
 import * as AuthApi from "../api/AuthRequest";
 
-import { useToasts } from "react-toast-notifications";
 // LOGIN TOKEN
 export const loginAction = async (
   phone_number,
@@ -27,23 +27,17 @@ export const loginAction = async (
       }
     }
   } catch (error) {
-    const { addToast } = useToasts();
     if (error.response.status == 401) {
-      addToast("Tizimda mavjud emassiz!!!", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("Tizimda mavjud emassiz!!!");
+
       return;
     }
     const keys = Object.keys(error.response.data);
     for (let key of keys) {
-      addToast(
-        `${error.response.status} ${key} ${error.response.data[key][0]}`,
-        {
-          appearance: "warning",
-          autoDismiss: true,
-        }
+      toast.warning(
+        `${error.response.status} ${key} ${error.response.data[key][0]}`
       );
+
       return;
     }
   }
