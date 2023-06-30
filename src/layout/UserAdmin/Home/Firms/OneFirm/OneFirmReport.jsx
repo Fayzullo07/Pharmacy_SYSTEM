@@ -5,17 +5,16 @@ import { formatNumber } from "../../../../../functions/NecessaryFunctions";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../../utils/PaginationForModal";
 import Empty from "../../../../../utils/Empty";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import SideBarFirms from "../SideBar/SideBarFirms";
-import { useToasts } from "react-toast-notifications";
 import Topbar from "../../../../../components/Topbar/Topbar";
 import Navbar from "../../../../../components/Navbar/Navbar";
+import { toast } from "react-toastify";
 
 const OneFirmReport = () => {
   const { id, name } = useParams();
-  const { addToast } = useToasts();
   const [page, setPage] = useState(1);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -23,7 +22,7 @@ const OneFirmReport = () => {
 
   const [change, setChange] = useState(false);
 
-  const { data, isLoading, refetch, isFetching } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["firm_report", id, page],
     queryFn: async () => {
       return await firmReportGetAPI({
@@ -43,10 +42,7 @@ const OneFirmReport = () => {
 
   const filterFunction = () => {
     if (!startDate || !endDate || new Date(startDate) > new Date(endDate)) {
-      addToast("To'gri tanlang vaqtlarni !", {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      toast.warning("To'gri tanlang vaqtlarni !")
       return;
     }
     refetch();
