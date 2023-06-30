@@ -1,8 +1,8 @@
+import { toast } from "react-toastify";
 import * as GlobalApi from "../../api/GlobalRequest";
 import { GET_GLOBAL_DETEILS } from "../Constants/GlobalConstant";
-import { useToasts } from "react-toast-notifications";
 
-export const getGlobalDeteilsAction = () => async (dispatch) => {
+export const getGlobalDeteilsAction = () => async dispatch => {
   try {
     const { data } = await GlobalApi.companiesDetailsGetApi();
     dispatch({ type: GET_GLOBAL_DETEILS, payload: data });
@@ -14,14 +14,10 @@ export const getGlobalDeteilsAction = () => async (dispatch) => {
         window.location.href = "/";
         return;
       }
-      const { addToast } = useToasts();
-      addToast(
-        `${error.response.status} ${key} ${error.response.data[key][0]}`,
-        {
-          appearance: "warning",
-          autoDismiss: true,
-        }
+      toast.warning(
+        `${error.response.status} ${key} ${error.response.data[key][0]}`
       );
+
       return;
     }
   }
