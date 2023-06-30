@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import AddExPenseToFirm from "./Modal/AddExPenseToFirm";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { firmsExpenseDebtGetAPI } from "../../../../api/GlobalRequest";
-import { today } from "../../../../api";
 import ViewModal from "./Modal/ViewModal";
 import {
   formatNumber,
@@ -15,6 +14,10 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
   const [firm_expense_id, setFirmExpenseId] = useState({});
 
   const [showModal, setShowModal] = useState(false);
+  const [isLeader, setIsLeader] = useState({
+    isTrue: false,
+    price: 0
+  });
 
   const [viewModal, setViewModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
@@ -56,8 +59,12 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           showModal={viewModal}
           setShowModal={setViewModal}
           firm_expense_id={firm_expense_id}
+          getData={getData}
+          deteils={deteils}
+          isLeader={isLeader}
         />
       )}
+
       {showModal && (
         <AddExPenseToFirm
           showModal={showModal}
@@ -68,6 +75,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           setViewModal={setViewModal}
           getData={getData}
           curData={curData}
+          setIsLeader={setIsLeader}
         />
       )}
 
@@ -131,7 +139,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                       <b>{formatNumber(item.price)}</b>
                     </td>
                     <td data-label="To'lov turi" className="text-uppercase">
-                      {item.transfer_type_name}
+                      {item.transfer_type_name == 'payme' ? "Naqd pulsiz": item.transfer_type_name}
                     </td>
                   </tr>
                 ))}

@@ -3,7 +3,7 @@ import SideBar from "../../../../components/SideBar/SideBar";
 
 const SideBarEdit = ({ choose, setChoose }) => {
   return (
-    <SideBar title="Nazorat">
+    <SideBar title="Nazorat" icon="fa fa-list">
       <ul className="list-group">
         <li
           data-bs-dismiss="offcanvas"

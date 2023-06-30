@@ -16,7 +16,7 @@ export function formatNumber(number) {
 }
 
 // CLEAN DATA
-export const cleanedData = (datas) => {
+export const cleanedData = datas => {
   return Object.entries(datas).reduce((acc, [key, value]) => {
     if (typeof value === "string") {
       const cleanedValue = value.trim().replace(/\s+/g, " ");
@@ -33,24 +33,24 @@ export const filterDataByShift = (data, shift) => {
   for (let i = 0; i < data.length; i++) {
     let item = data[i];
     let filteredResults = item.shifts.filter(
-      (result) => result.shift == shift || shift == 0
+      result => result.shift == shift || shift == 0
     );
     if (filteredResults.length > 0) {
       filteredData.push({
         report_date: item.report_date,
-        shifts: filteredResults,
+        shifts: filteredResults
       });
     }
   }
   return filteredData;
 };
 
-export const sortMainWorkersByShift = (workers) => {
-  var filteredWorkers = workers.filter(function (worker) {
+export const sortMainWorkersByShift = workers => {
+  var filteredWorkers = workers.filter(function(worker) {
     return worker.is_main_worker == true;
   });
 
-  filteredWorkers.sort(function (a, b) {
+  filteredWorkers.sort(function(a, b) {
     return a.shift - b.shift;
   });
 
@@ -61,11 +61,12 @@ export const totalMoneyWithIndex = (datas, index) => {
   let total = 0;
   datas.map((data, i) => {
     if (i == index) {
-      data.shifts.map((item) => {
+      data.shifts.map(item => {
         total +=
           Number(item.not_transfer_income) +
           Number(item.transfer_income) +
           Number(item.not_transfer_discount_price) +
+          Number(item.transfer_discount_price) +
           Number(item.debt_income);
       });
     }
@@ -73,14 +74,15 @@ export const totalMoneyWithIndex = (datas, index) => {
   return total;
 };
 
-export const totalMoneyWithOutIndex = (datas) => {
+export const totalMoneyWithOutIndex = datas => {
   let total = 0;
-  datas.map((data) => {
-    data.shifts.map((item) => {
+  datas.map(data => {
+    data.shifts.map(item => {
       total +=
         Number(item.not_transfer_income) +
         Number(item.transfer_income) +
         Number(item.not_transfer_discount_price) +
+        Number(item.transfer_discount_price) +
         Number(item.debt_income);
     });
   });
@@ -91,7 +93,7 @@ export const totalReceiptPriceWithIndex = (datas, index) => {
   let total = 0;
   datas.map((data, i) => {
     if (i == index) {
-      data.shifts.map((item) => {
+      data.shifts.map(item => {
         total += Number(item.receipt_price) + Number(item.debt_income);
       });
     }
@@ -99,10 +101,20 @@ export const totalReceiptPriceWithIndex = (datas, index) => {
   return total;
 };
 
+export const totalReceiptPrice = datas => {
+  let total = 0;
+  datas.map(data => {
+    data.shifts.map(item => {
+      total += Number(item.receipt_price) + Number(item.debt_income);
+    });
+  });
+  return total;
+};
+
 export const totalWatntToByKey = (datas, key) => {
   let total = 0;
-  datas.map((data) => {
-    data.shifts.map((item) => {
+  datas.map(data => {
+    data.shifts.map(item => {
       total += Number(item[key]);
     });
   });
@@ -114,7 +126,7 @@ export function tekshirish3(malumot) {
   var sozlar = malumot.split(" ");
 
   // Uchta harfli so'zlarni topish
-  var uchtaHarfli = sozlar.filter(function (soz) {
+  var uchtaHarfli = sozlar.filter(function(soz) {
     return soz.length >= 3;
   });
 
@@ -145,15 +157,15 @@ export function tekshirish3(malumot) {
   return true;
 }
 
-export const totalMoney = (data) => {
+export const totalMoney = data => {
   let total = 0;
-  data.map((item) => {
+  data.map(item => {
     total += Number(item.price);
   });
   return total;
 };
 
-export const totalYear = (data) => {
+export const totalYear = data => {
   let newDatas = {};
   for (let i = 0; i < data.length; i++) {
     const month = data[i].month;
@@ -166,7 +178,7 @@ export const totalYear = (data) => {
         month,
         price: data[i].price,
         receipt_price: data[i].receipt_price,
-        second_name: Number(data[i].second_name),
+        second_name: Number(data[i].second_name)
       };
     }
   }
@@ -176,13 +188,13 @@ export const totalYear = (data) => {
 
 export const totalMoneyByKey = (data, key) => {
   let total = 0;
-  data.map((item) => {
+  data.map(item => {
     total += Number(item[key]);
   });
   return total;
 };
 
-export const totalYearToFirm = (data) => {
+export const totalYearToFirm = data => {
   let newDatas = {};
   for (let i = 0; i < data.length; i++) {
     const month = data[i].month;
@@ -193,7 +205,7 @@ export const totalYearToFirm = (data) => {
       newDatas[month] = {
         month,
         expense_price: data[i].expense_price,
-        income_price: data[i].income_price,
+        income_price: data[i].income_price
       };
     }
   }
@@ -203,13 +215,13 @@ export const totalYearToFirm = (data) => {
 
 export const totalMoneyByKeyMinus = (data, key1, key2) => {
   let total = 0;
-  data.map((item) => {
+  data.map(item => {
     total += Number(item[key1]) - Number(item[key2]);
   });
   return total;
 };
 
-export const totalYearToLeader = (data) => {
+export const totalYearToLeader = data => {
   let newDatas = {};
   for (let i = 0; i < data.length; i++) {
     const month = data[i].month;
@@ -220,7 +232,7 @@ export const totalYearToLeader = (data) => {
       newDatas[month] = {
         month,
         expense_price: data[i].expense_price,
-        income_price: data[i].income_price,
+        income_price: data[i].income_price
       };
     }
   }

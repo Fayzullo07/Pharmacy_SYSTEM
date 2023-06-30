@@ -34,7 +34,7 @@ const TodayExpenses = ({ deteils, getData }) => {
       report_date: getData.report_date,
       shift: getData.shift,
       from_pharmacy: getData.to_pharmacy,
-      expense_type__gte: 3,
+      expense_type__gte: 4,
     });
   });
 
@@ -47,7 +47,7 @@ const TodayExpenses = ({ deteils, getData }) => {
       report_date: getData.report_date,
       shift: getData.shift,
       to_pharmacy: getData.to_pharmacy,
-    //   expense_type__gte: ,
+      expense_type__gte: 4,
     });
   });
 
@@ -93,7 +93,7 @@ const TodayExpenses = ({ deteils, getData }) => {
           role="alert"
         >
           <strong>Error Worker!</strong>
-          Avval Xarajat turini qoshing!!
+          Avval Xarajat turini qoshing!! {errorAccount.message}
           <button
             type="button"
             class="btn-close"
@@ -109,7 +109,7 @@ const TodayExpenses = ({ deteils, getData }) => {
           role="alert"
         >
           <strong>Error Pharmacy!</strong>
-          Avval Xarajat turini qoshing!!
+          Avval Xarajat turini qoshing!! {error.message}
           <button
             type="button"
             class="btn-close"

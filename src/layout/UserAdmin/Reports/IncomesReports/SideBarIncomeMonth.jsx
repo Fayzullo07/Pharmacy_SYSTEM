@@ -65,7 +65,7 @@ const SideBarIncomeMonth = ({
         className="form-select my-3"
         onChange={(e) => setShift(e.target.value)}
       >
-        <option value={0}>Hamma Smena</option>
+        <option value={0}>Hammasi</option>
         {accounts &&
           accounts.data.results &&
           shifts.map((m, index) => {

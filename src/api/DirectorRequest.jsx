@@ -188,7 +188,7 @@ export const accountsExpensesGetAPI = async ({
   to_pharmacy = "",
 }) =>
   API.get(
-    `/accounts/expenses/?expense_type=${expense_type}&expense_type__gt=${expense_type__gte}&shift=${shift}&report_date=${report_date}&to_pharmacy=${to_pharmacy}`,
+    `/accounts/expenses/?expense_type=${expense_type}&expense_type__gte=${expense_type__gte}&shift=${shift}&report_date=${report_date}&to_pharmacy=${to_pharmacy}`,
     config
   );
 

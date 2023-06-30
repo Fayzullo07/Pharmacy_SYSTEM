@@ -77,11 +77,14 @@ const OneFirmReport = () => {
           {/* TABLE */}
           <div
             className="mx-md-3 m-2"
-            style={{ maxHeight: "calc(100vh - 210px)", overflowY: "scroll" }}
+            style={{ maxHeight: "calc(100vh - 150px)", overflowY: "scroll" }}
           >
             <table
               className="table-stripe table table-sm table-bordered table-hover border-secondary align-middle text-center p-3 py-0 my-0"
-              style={{ width: "max-content", minWidth: "91vw" }}
+               style={{
+                width: "max-content",
+                minWidth: `${toggle ? "79vw" : "91vw"}`,
+              }}
             >
               <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
                 <tr
@@ -159,15 +162,15 @@ const OneFirmReport = () => {
                   <th colSpan={3} className="text-danger">
                     <b>Остаток на начало периода долг: {startDate}</b>
                   </th>
-                  <th colSpan={2} className="text-danger">
+                  <th colSpan={2} className="text-success">
                     <b>
-                      {data &&
+                      {data && data.data.not_transfer_debt_in_start_date == 0 ? '0.00':
                         formatNumber(data.data.not_transfer_debt_in_start_date)}
                     </b>
                   </th>
-                  <th colSpan={2} className="text-danger">
+                  <th colSpan={2} className="text-success">
                     <b>
-                      {data &&
+                      {data && data.data.transfer_debt_in_start_date == 0 ? '0.00':
                         formatNumber(data.data.transfer_debt_in_start_date)}
                     </b>
                   </th>

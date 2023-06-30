@@ -178,9 +178,9 @@ const LeaderMonth = () => {
                         <b>{item.report_date}</b>
                       </td>
                       <td>
-                        <b>{item.creator}</b>
-                        <br />
                         {item.created_at}
+                        <br />
+                        <b>{item.creator}</b>
                       </td>
                       <td className="text-center fw-bold">
                         {!item.is_expense && formatNumber(item.price)}

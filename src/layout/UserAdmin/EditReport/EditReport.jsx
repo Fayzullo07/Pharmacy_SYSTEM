@@ -25,16 +25,16 @@ import "./EditReport.css";
 
 const EditReport = () => {
   const { report_date, shift, to_pharmacy } = useParams();
-  const reduxData = useSelector((state) => state);
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [shows, setShows] = useState("1");
+  const [shows, setShows] = useState("3");
 
   const getData = {
     report_date,
     shift,
-    to_pharmacy,
+    to_pharmacy
   };
 
   const { data: remeinder } = useQuery({
@@ -43,9 +43,9 @@ const EditReport = () => {
       return await remeinderGetAPI({
         report_date: getData.report_date,
         shift: getData.shift,
-        pharmacy_id: getData.to_pharmacy,
+        pharmacy_id: getData.to_pharmacy
       });
-    },
+    }
   });
   return (
     <div className="d-flex">
@@ -85,34 +85,29 @@ const EditReport = () => {
 
         {shows == "1" && <TodayInComes deteils={deteils} getData={getData} />}
         {shows == "2" && <TodayExpenses deteils={deteils} getData={getData} />}
-        {shows == "3" && (
-          <TodayExPenseToFirm deteils={deteils} getData={getData} />
-        )}
-        {shows == "4" && (
-          <TodayTradeToDebt is_client={true} getData={getData} />
-        )}
-        {shows == "5" && (
+        {shows == "3" &&
+          <TodayExPenseToFirm deteils={deteils} getData={getData} />}
+        {shows == "4" &&
+          <TodayTradeToDebt is_client={true} getData={getData} />}
+        {shows == "5" &&
           <TodayTradeToDebtRepay
             deteils={deteils}
             is_client={true}
             getData={getData}
-          />
-        )}
+          />}
         {shows == "6" && <TodayToDebt is_client={false} getData={getData} />}
-        {shows == "7" && (
+        {shows == "7" &&
           <TodayToDeptRepay
             deteils={deteils}
             is_client={false}
             getData={getData}
-          />
-        )}
+          />}
         {shows == "8" && <TodayDebt deteils={deteils} getData={getData} />}
         {shows == "9" && <TodayDebtRepay deteils={deteils} getData={getData} />}
         {shows == "10" && <TodayReturn deteils={deteils} getData={getData} />}
         {shows == "11" && <TodayDiscount getData={getData} />}
-        {shows == "12" && (
-          <TodayExpenseToAccounts deteils={deteils} getData={getData} />
-        )}
+        {shows == "12" &&
+          <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
       </div>
     </div>
   );

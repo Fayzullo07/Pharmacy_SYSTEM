@@ -1,46 +1,40 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import {
-  naxt,
-  transfers,
-  transfersWorker,
-  xisob_raqam,
-} from "../../../../../api";
+import { naxt } from "../../../../../api";
 import {
   accountsExpensesPatchAction,
-  pharmacyExpensesPatchAction,
+  pharmacyExpensesPatchAction
 } from "../../../../../functions/DirectorActions";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
+import ModalSimple from "../../../../../utils/ModalSimple";
 
-const UpdateExpenseToAccounts = (props) => {
-  const { showModal, setShowModal, deteils, data } = props;
+const UpdateExpenseToAccounts = ({
+  showModal,
+  setShowModal,
+  deteils,
+  data
+}) => {
   let director = null;
-  deteils.employees.map((user) => {
+  deteils.employees.map(user => {
     if (user.role == "d") {
       director = user;
       return;
     }
   });
-  const [fromClick, setFromClick] = useState(
-    data.transfer_type == naxt ? false : true
-  );
-  const [input1, setInput1] = useState(
-    data.transfer_type == naxt ? naxt : "naxt_siz"
-  );
+
   const [formData, setFormData] = useState({
     price: data.price,
     desc: data.desc,
     transfer_type: data.transfer_type,
-    from_user: data.from_user ? data.from_user : null,
-    to_user: data.to_user,
+    from_user:
+      data.from_user == undefined
+        ? data.transfer_type == naxt ? "k" : "h"
+        : data.from_user,
+    to_user: data.to_user
   });
 
-  const [from_xisob, setFromXisob] = useState(
-    data.transfer_type == xisob_raqam ? false : true
-  );
-
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "price" && value.length > 9) {
@@ -66,7 +60,7 @@ const UpdateExpenseToAccounts = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expensesA"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -81,16 +75,13 @@ const UpdateExpenseToAccounts = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expensesF"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
   const handleSubmit = () => {
-    if (
-      formData.to_user == formData.from_user &&
-      formData.transfer_type != xisob_raqam
-    ) {
-      toast.warning("O'zidan o'zidan mumkun emas !");
+    if (formData.to_user == formData.from_user) {
+      toast.warning("O'zidan o'zidan mumkun emas!");
       return;
     }
 
@@ -99,197 +90,147 @@ const UpdateExpenseToAccounts = (props) => {
       return;
     }
 
-    if (formData.from_user == null) {
+    if (data.from_user == undefined) {
       mutationFarm.mutate();
     } else {
       mutation.mutate();
     }
   };
   return (
-    <div
-      className="modal d-flex justify-content-center align-items-center"
-      style={{ position: "absolute", zIndex: 555 }}
-      onClick={() => setShowModal(false)}
+    <ModalSimple
+      showModal={showModal}
+      setShowModal={setShowModal}
+      title="Xodimlarga berilgan summa"
     >
-      {/* <!-- Modal content --> */}
-
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h5 className="modal-title">O'zgartirish</h5>
-
-          <span className="close">
-            <i
-              className="fa fa-xmark"
-              onClick={() => setShowModal(!showModal)}
-            />
-          </span>
-        </div>
-
-        <div className="modal-body">
-          {/* CHOOSE PAYMENT TYPE */}
-          <div className="form-floating">
-            <select
-              className="form-select mb-3 cursor_not"
-              id="transfer_type"
-              name="transfer_type"
-              value={input1}
-              disabled
-              onChange={(e) => {
-                setInput1(e.target.value);
-                if (e.target.value == "naxt_siz") {
-                  setFromClick(true);
-                } else {
-                  setFromClick(false);
-                }
-              }}
-            >
-              <option value={naxt}>NAXT</option>
-              <option value="naxt_siz">NAXT PULSIZ</option>
-            </select>
-            <label htmlFor="transfer_type">
-              Pul turini tanlang <b className="text-danger">*</b>
-            </label>
-          </div>
-
-          {/* CHOOSE TRANSFER TYPES */}
-          {fromClick && (
+      <div className="modal-body">
+        <div className="row">
+          <div className="col-md-6">
+            {/* EXPENSE FOR WHO */}
             <div className="form-floating">
               <select
-                className="form-select mb-3 cursor_not"
-                id="transfer_type"
-                name="transfer_type"
-                value={formData.transfer_type}
-                disabled
-                onChange={(e) => {
-                  handleInputChange(e);
-                  if (e.target.value == xisob_raqam) {
-                    setFromXisob(false);
-                  } else {
-                    setFromXisob(true);
-                  }
-                }}
-              >
-                <option value="">O'tkazma turini tanlang . . .</option>
-                {transfers.map((transfer) => (
-                  <option key={transfer.id} value={transfer.id}>
-                    {transfer.name}
-                  </option>
-                ))}
-                {deteils.transfer_types.map((type) => (
-                  <option key={type.id} value={type.id}>
-                    {type.name}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="transfer_type">
-                O'tkazma turini tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
-          )}
-
-          {/* TAKE EXPENSES FROM WHO */}
-          {from_xisob && (
-            <div className="form-floating">
-              <select
-                className={`form-select mb-3 cursor_not`}
-                id="from_user"
-                name="from_user"
-                value={formData.from_user}
+                className="form-select mb-3 "
+                id="to_user"
+                name="to_user"
+                value={formData.to_user}
                 onChange={handleInputChange}
                 disabled
               >
-                {input1 == naxt && <option value={"k"}>Kassadan</option>}
-                <option value={director.id}>
-                  Rahbar - {director.first_name} {director.last_name}
-                </option>
+                {deteils.employees.map(user =>
+                  <option key={user.id} value={user.id}>
+                    {user.first_name} {user.last_name}
+                  </option>
+                )}
               </select>
-              <label htmlFor="from_user">
-                Xarajat kimdan qilindi <b className="text-danger">*</b>
+              <label htmlFor="to_user">
+                Xodimni tanlang <b className="text-danger">*</b>
               </label>
             </div>
-          )}
-
-          {/* EXPENSE FOR WHO */}
-          <div className="form-floating">
-            <select
-              className="form-select mb-3 "
-              id="to_user"
-              name="to_user"
-              value={formData.to_user}
-              onChange={handleInputChange}
-            >
-              {deteils.employees.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.first_name} {user.last_name}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="to_user">
-              Xarajat kimga qilindi <b className="text-danger">*</b>
-            </label>
           </div>
+          <div className="col-md-6">
+            {/* CHOOSE PAYMENT TYPE */}
+            <div className="form-floating">
+              <select
+                className="form-select mb-3"
+                id="transfer_type"
+                name="transfer_type"
+                value={formData.transfer_type}
+                onChange={e => {
+                  setFormData({ ...formData, from_user: "" });
+                  handleInputChange(e);
+                }}
+                disabled
+              >
+                <option value={naxt}>NAXT</option>
+                <option value={2}>NAXT PULSIZ</option>
+              </select>
+              <label htmlFor="transfer_type">
+                To'lov turini tanlang <b className="text-danger">*</b>
+              </label>
+            </div>
+          </div>
+        </div>
 
-          {/* MONEY EXPNESES*/}
-          <div className="form-floating mb-3">
-            <input
-              type="number"
+        {/* TAKE EXPENSES FROM WHO */}
+        <div className="form-floating">
+          <select
+            className={`form-select mb-3`}
+            id="from_user"
+            name="from_user"
+            value={formData.from_user}
+            onChange={handleInputChange}
+            disabled
+          >
+            <option value="">Xarajat kimdan qilindi . . .</option>
+
+            {formData.transfer_type == naxt
+              ? <option value={"k"}>Kassadan</option>
+              : <option value={"h"}>Hisob raqamdan</option>}
+            <option value={director.id}>
+              Rahbardan - {director.first_name} {director.last_name}
+            </option>
+          </select>
+          <label htmlFor="from_user">
+            Xarajat kimdan qilindi <b className="text-danger">*</b>
+          </label>
+        </div>
+
+        {/* MONEY EXPNESES*/}
+        <div className="form-floating mb-3">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Berilgan summa"
+            id="price"
+            name="price"
+            min={0}
+            value={formData.price}
+            onChange={handleInputChange}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+          />
+          <label htmlFor="price">
+            Berilgan summa <b className="text-danger">*</b>
+          </label>
+        </div>
+
+        {/* BIO */}
+        <div className="form-floating mb-3">
+          <div className="mb-3">
+            <textarea
               className="form-control"
-              placeholder="Miqdor"
-              id="price"
-              name="price"
-              min={0}
-              value={formData.price}
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="Izoh"
+              name="desc"
+              value={formData.desc}
               onChange={handleInputChange}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.key === "Enter") {
                   handleSubmit();
                 }
               }}
             />
-            <label htmlFor="price">
-              Miqdor <b className="text-danger">*</b>
-            </label>
-          </div>
-
-          {/* BIO */}
-          <div className="form-floating mb-3">
-            <div className="mb-3">
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Izoh"
-                name="desc"
-                value={formData.desc}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div className="modal-footer">
-          <div className="d-grid col-12">
-            <button
-              className="btn btn-primary rounded-3"
-              style={{ background: "var(--blue)" }}
-              onClick={handleSubmit}
-              disabled={mutation.isLoading || mutationFarm.isLoading}
-            >
-              {mutation.isLoading || mutationFarm.isLoading ? (
-                <i className="fa fa-spinner fa-spin" />
-              ) : (
-                "Saqlash"
-              )}
-            </button>
           </div>
         </div>
       </div>
-    </div>
+      <div className="modal-footer">
+        <div className="d-grid col-12">
+          <button
+            className="btn btn-primary rounded-3"
+            style={{ background: "var(--blue)" }}
+            onClick={handleSubmit}
+            disabled={mutation.isLoading || mutationFarm.isLoading}
+          >
+            {mutation.isLoading || mutationFarm.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Saqlash"}
+          </button>
+        </div>
+      </div>
+    </ModalSimple>
   );
 };
 

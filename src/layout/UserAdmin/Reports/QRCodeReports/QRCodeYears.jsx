@@ -126,13 +126,13 @@ const QRCodeYears = () => {
               <th>
                 <b>QR-code chek</b>
                 <br />
-                <b>berilgan</b>
+                <b>berilmagan</b>
               </th>
 
               <th>
                 <b>QR-code chek</b>
                 <br />
-                <b>berilmagan</b>
+                <b>berilgan</b>
               </th>
 
               <th>
@@ -165,7 +165,7 @@ const QRCodeYears = () => {
                               item.month == m.id &&
                               (item.receipt_price == 0
                                 ? ""
-                                : formatNumber(item.receipt_price))
+                                : "")
                           )}
                         </b>
                       </td>
@@ -174,7 +174,7 @@ const QRCodeYears = () => {
                           {result.map(
                             (item) =>
                               item.month == m.id &&
-                              formatNumber(item.price - item.receipt_price)
+                              formatNumber(item.price)
                           )}
                         </b>
                       </td>
@@ -213,12 +213,12 @@ const QRCodeYears = () => {
                     Jami:
                   </th>
                   <th>
-                    {formatNumber(totalMoneyByKey(result, "receipt_price"))}
+                    {/* {formatNumber(totalMoneyByKey(result, "receipt_price"))} */}
                   </th>
                   <th>
                     {formatNumber(
-                      totalMoneyByKey(result, "price") -
-                        totalMoneyByKey(result, "receipt_price")
+                      totalMoneyByKey(result, "price") 
+                        
                     )}
                   </th>
                   <th>{formatNumber(totalMoneyByKey(result, "price"))}</th>

@@ -3,19 +3,36 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import {
   cleanedData,
-  formatNumber,
+  formatNumber
 } from "../../../../../functions/NecessaryFunctions";
 import { firmsExpenseVerifyPostAction } from "../../../../../functions/GlobalActions";
 import ModalSimple from "../../../../../utils/ModalSimple";
+import { accountsExpensesPostAction } from "../../../../../functions/DirectorActions";
+import { naxt, xodim } from "../../../../../api";
 
-const ViewModal = ({ showModal, setShowModal, firm_expense_id }) => {
+const ViewModal = ({
+  showModal,
+  setShowModal,
+  firm_expense_id,
+  getData,
+  deteils,
+  isLeader
+}) => {
+  let director = null;
+  deteils.employees.map(user => {
+    if (user.role == "d") {
+      director = user;
+      return;
+    }
+  });
+
   const [formData, setFormData] = useState({
     code: "",
-    firm_expense_id: firm_expense_id.id,
+    firm_expense_id: firm_expense_id.id
   });
 
   const queryClient = useQueryClient();
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "code" && value.length > 5) {
       return;
@@ -33,16 +50,35 @@ const ViewModal = ({ showModal, setShowModal, firm_expense_id }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_to_firm"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
+  const mutationAccount = useMutation(async ({ price }) => {
+    return accountsExpensesPostAction(
+      cleanedData({
+        ...formData,
+        from_user: director.id,
+        to_pharmacy: getData.to_pharmacy,
+        shift: getData.shift,
+        report_date: getData.report_date,
+        transfer_type: naxt,
+        expense_type: xodim,
+        price
+      }),
+      setShowModal
+    );
+  });
+
   const handleSubmit = () => {
     if (!formData.code || formData.code.length < 5) {
-      toast.warning("SMS Parolni to'g'ri kiriying!");
+      toast.warning("SMS Parolni to'g'ri kiriting!");
       return;
     }
     mutation.mutate();
+    if (isLeader.isTrue) {
+      mutationAccount.mutate({ price: isLeader.price });
+    }
   };
   return (
     <ModalSimple
@@ -90,7 +126,7 @@ const ViewModal = ({ showModal, setShowModal, firm_expense_id }) => {
             name="code"
             value={formData.code}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -116,11 +152,9 @@ const ViewModal = ({ showModal, setShowModal, firm_expense_id }) => {
             onClick={handleSubmit}
             disabled={mutation.isLoading}
           >
-            {mutation.isLoading ? (
-              <i className="fa fa-spinner fa-spin" />
-            ) : (
-              "Tasdiqlash"
-            )}
+            {mutation.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Tasdiqlash"}
           </button>
         </div>
       </div>

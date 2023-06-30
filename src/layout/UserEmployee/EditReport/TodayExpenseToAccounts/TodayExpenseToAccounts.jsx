@@ -135,12 +135,12 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
               </tr>
             </thead>
             <tbody>
-              {data &&
-                data.data.results.map((item) => (
-                  <tr key={item.id} className="scaleY">
+               {dataFarm &&
+                dataFarm.data.results.map((item) => (
+                  <tr key={item.id}>
                     <td data-label="Kimdan berildi">
-                      <span className="text-muted">Rahbardan</span>{" "}
-                      <b>{item.from_user_name}</b>
+                      <span className="text-muted">Kassadan</span>{" "}
+                      <b>{item.from_pharmacy_name}</b>
                     </td>
                     <td data-label="Kimga berildi" className="text-capitalize">
                       {item.to_user_name}
@@ -173,13 +173,12 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                     </td>
                   </tr>
                 ))}
-
-              {dataFarm &&
-                dataFarm.data.results.map((item) => (
-                  <tr key={item.id}>
+              {data &&
+                data.data.results.map((item) => (
+                  <tr key={item.id} className="scaleY">
                     <td data-label="Kimdan berildi">
-                      <span className="text-muted">Kassadan</span>{" "}
-                      <b>{item.from_pharmacy_name}</b>
+                      <span className="text-muted">Rahbardan</span>{" "}
+                      <b>{item.from_user_name}</b>
                     </td>
                     <td data-label="Kimga berildi" className="text-capitalize">
                       {item.to_user_name}

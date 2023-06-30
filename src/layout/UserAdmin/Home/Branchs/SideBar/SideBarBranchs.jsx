@@ -12,6 +12,8 @@ const SideBarBranchs = ({
   shift,
   setShift,
   filterFunction,
+  smena,
+  hammasi
 }) => {
   return (
     <SideBar>
@@ -44,10 +46,10 @@ const SideBarBranchs = ({
       {/* SHIFTS */}
       <select
         value={shift}
-        className="form-select my-3"
+        className="form-select my-3 text-capitalize"
         onChange={(e) => setShift(e.target.value)}
       >
-        <option value={0}>Hammasi</option>
+        <option value={0}>{hammasi}</option>
         {accounts &&
           accounts.data.results &&
           shifts.map((m, index) => {
@@ -58,7 +60,7 @@ const SideBarBranchs = ({
                 </option>
               );
             } else {
-              return <option value={m.shift}>{m.shift} - smena </option>;
+              return <option value={m.shift}>{m.shift} - {smena} </option>;
             }
           })}
       </select>

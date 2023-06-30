@@ -9,6 +9,7 @@ import {
   sortMainWorkersByShift,
   totalMoneyWithIndex,
   totalMoneyWithOutIndex,
+  totalReceiptPrice,
   totalReceiptPriceWithIndex,
   totalWatntToByKey,
 } from "../../../../../functions/NecessaryFunctions";
@@ -87,6 +88,8 @@ const OneBranchReport = () => {
               shift={shift}
               setShift={setShift}
               filterFunction={filterFunction}
+              smena={t("13")}
+              hammasi={t("19")}
             />
           </Topbar>
 
@@ -97,7 +100,10 @@ const OneBranchReport = () => {
           >
             <table
               className="table table-sm table-hover table-bordered border-dark align-middle text-center p-3"
-              style={{ width: "max-content", minWidth: "92vw" }}
+              style={{
+                width: "max-content",
+                minWidth: `${toggle ? "80vw" : "92vw"}`,
+              }}
             >
               <thead
                 className=" align-middle"
@@ -126,85 +132,85 @@ const OneBranchReport = () => {
 
                   <th>
                     <h6>
-                      <b>{t("2").substring(0, 10)}</b>
+                      <b>{t("2")}</b>
                     </h6>
                     <h6>
-                      <b>{t("2").substring(11)}</b>
-                    </h6>
-                  </th>
-
-                  <th>
-                    <h6>
-                      <b>{t("3").substring(0, 11)}</b>
-                    </h6>
-                    <h6>
-                      <b>{t("3").substring(12)}</b>
+                      <b>{t("14")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>{t("4")}</b>
+                      <b>{t("3")}</b>
+                    </h6>
+                    <h6>
+                      <b>{t("14")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>Chegirma savdo</b>
+                      <b>{t("4")} {t("14")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>{t("5").substring(0, 10)}</b>
-                    </h6>
-                    <h6>
-                      <b>{t("5").substring(11)}</b>
+                      <b>{t("5")} {t("14")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>{t("6").substring(0, 11)}</b>
+                      <b>{t("6")} {t("14")}</b>
                     </h6>
                     <h6>
-                      <b>{t("6").substring(12)}</b>
+                      <b>{t("15")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>{t("7").substring(0, 16)}</b>
+                      <b>{t("7")}</b>
                     </h6>
                     <h6>
-                      <b>{t("7").substring(17)}</b>
+                      <b>{t("16")}</b>
+                    </h6>
+                  </th>
+
+                  <th>
+                    <h6>
+                      <b>{t("8")}</b>
+                    </h6>
+                    <h6>
+                      <b>{t("16")}</b>
                     </h6>
                   </th>
 
                   <th style={{ backgroundColor: "#d9d9d9", color: "#000" }}>
                     <h6>
-                      <b>{t("8").substring(0, 11)}</b>
+                      <b>{t("9")}</b>
                     </h6>
                     <h6>
-                      <b>{t("8").substring(12)}</b>
-                    </h6>
-                  </th>
-
-                  <th>
-                    <h6>
-                      <b>{t("9").substring(0, 12)}</b>
-                    </h6>
-                    <h6>
-                      <b>{t("9").substring(13)}</b>
+                      <b>{t("14")}</b>
                     </h6>
                   </th>
 
                   <th>
                     <h6>
-                      <b>{t("10").substring(0, 12)}</b>
+                      <b>{t("10")}</b>
                     </h6>
                     <h6>
-                      <b>{t("10").substring(13)}</b>
+                      <b>{t("17")}</b>
+                    </h6>
+                  </th>
+
+                  <th>
+                    <h6>
+                      <b>{t("10")}</b>
+                    </h6>
+                    <h6>
+                      <b>{t("18")}</b>
                     </h6>
                   </th>
                 </tr>
@@ -239,16 +245,15 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 <b className="text-muted">
                                   {user.worker
                                     ? user.worker
-                                    : `${user.shift} ${t("12")}`}
+                                    : `${user.shift} - ${t("13")}`}
                                 </b>
                               </td>
                             </tr>
@@ -264,14 +269,13 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.not_transfer_income == 0 ? (
-                                  "~"
+                                  <b>0.00</b>
                                 ) : (
                                   <b>
                                     {formatNumber(user.not_transfer_income)}
@@ -290,14 +294,13 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.transfer_income == 0 ? (
-                                  "~"
+                                  <b>0.00</b>
                                 ) : (
                                   <b>{formatNumber(user.transfer_income)}</b>
                                 )}
@@ -314,14 +317,13 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.debt_income == 0 ? (
-                                  "~"
+                                  <b>0.00</b>
                                 ) : (
                                   <b>{formatNumber(user.debt_income)}</b>
                                 )}
@@ -339,18 +341,17 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
-                                {user.not_transfer_discount_price == 0 ? (
-                                  "~"
+                                {user.not_transfer_discount_price + user.transfer_discount_price == 0 ? (
+                                  <b>0.00</b>
                                 ) : (
                                   <b>
                                     {formatNumber(
-                                      user.not_transfer_discount_price
+                                      user.not_transfer_discount_price + user.transfer_discount_price
                                     )}
                                   </b>
                                 )}
@@ -367,25 +368,24 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.not_transfer_income +
                                   user.transfer_income +
-                                  user.not_transfer_discount_price +
+                                  user.not_transfer_discount_price + user.transfer_discount_price +
                                   user.debt_income ==
-                                0 ? (
-                                  "~"
+                                  0 ? (
+                                  <b>0.00</b>
                                 ) : (
                                   <b>
                                     {formatNumber(
                                       user.not_transfer_income +
-                                        user.transfer_income +
-                                        user.not_transfer_discount_price +
-                                        user.debt_income
+                                      user.transfer_income +
+                                      user.not_transfer_discount_price +
+                                      user.debt_income + user.transfer_discount_price
                                     )}
                                   </b>
                                 )}
@@ -402,14 +402,13 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.total_expense == 0 ? (
-                                  "~"
+                                  <b>0.00</b>
                                 ) : (
                                   <b>{formatNumber(user.total_expense)}</b>
                                 )}
@@ -426,14 +425,13 @@ const OneBranchReport = () => {
                             <tr
                               key={user.id}
                               style={{
-                                borderBottom: `${
-                                  shift == 0 ? "1" : "0"
-                                }px solid #000`,
+                                borderBottom: `${shift == 0 ? "1" : "0"
+                                  }px solid #000`,
                               }}
                             >
                               <td>
                                 {user.remainder == 0 ? (
-                                  "~"
+                                  <b>0.00</b>
                                 ) : (
                                   <b>{formatNumber(user.remainder)}</b>
                                 )}
@@ -449,13 +447,13 @@ const OneBranchReport = () => {
                     >
                       <b>
                         {totalMoneyWithIndex(result, index) == 0
-                          ? "~"
+                          ? '0.00'
                           : formatNumber(totalMoneyWithIndex(result, index))}
                       </b>
                     </td>
                     <td className="text-center">
                       {totalReceiptPriceWithIndex(result, index) == 0 ? (
-                        "~"
+                        <b>0.00</b>
                       ) : (
                         <b>
                           {formatNumber(
@@ -468,12 +466,12 @@ const OneBranchReport = () => {
                       <b>
                         {totalMoneyWithIndex(result, index) -
                           totalReceiptPriceWithIndex(result, index) ==
-                        0
-                          ? "~"
+                          0
+                          ? "0.00"
                           : formatNumber(
-                              totalMoneyWithIndex(result, index) -
-                                totalReceiptPriceWithIndex(result, index)
-                            )}
+                            totalMoneyWithIndex(result, index) -
+                            totalReceiptPriceWithIndex(result, index) 
+                          )} 
                       </b>
                     </td>
                   </tr>
@@ -520,6 +518,9 @@ const OneBranchReport = () => {
                           totalWatntToByKey(
                             result,
                             "not_transfer_discount_price"
+                          ) + totalWatntToByKey(
+                            result,
+                            "transfer_discount_price"
                           )
                         )}
                     </b>
@@ -559,7 +560,7 @@ const OneBranchReport = () => {
                       {data &&
                         data.data &&
                         formatNumber(
-                          totalWatntToByKey(result, "receipt_price")
+                          totalWatntToByKey(result, "receipt_price") + totalWatntToByKey(result, "debt_income")
                         )}
                     </b>
                   </th>
@@ -568,9 +569,7 @@ const OneBranchReport = () => {
                       {data &&
                         data.data &&
                         formatNumber(
-                          totalMoneyWithOutIndex(result) -
-                            totalWatntToByKey(result, "receipt_price") +
-                            totalWatntToByKey(result, "debt_income")
+                          totalMoneyWithOutIndex(result) - totalReceiptPrice(result)
                         )}
                     </b>
                   </th>

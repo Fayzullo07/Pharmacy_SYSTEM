@@ -5,7 +5,7 @@ import { xisob_raqam } from "../api";
 
 // -----------------------------RECEIPTS---------------------
 // RECEIPTS POST
-export const receiptsPostAction = async (datas) => {
+export const receiptsPostAction = async datas => {
   try {
     await GlobalApi.receiptPostAPI(datas);
     toast.success(`Yaratildi`);
@@ -49,7 +49,7 @@ export const receiptsPatchAction = async (id, datas) => {
 
 // -------------------------------------CLINETS-----------------------------------
 // CLIENT POST
-export const offersPostAction = async (datas) => {
+export const offersPostAction = async datas => {
   try {
     await GlobalApi.offersPostAPI(datas);
     toast.success(`Jo'natildi`);
@@ -209,28 +209,23 @@ export const firmIncomePatchAction = async (id, datas, setShowModal) => {
 export const firmsExpenseDebtPostAction = async (
   datas,
   setViewModal,
-  mutationFarm,
-  xisob_raqam1,
   setShowModal,
-  takeDebt,
-  setFirmExpenseId
+  setFirmExpenseId,
+  isSms
 ) => {
   try {
     const { data } = await GlobalApi.firmsExpenseDebtPostAPI(datas);
-    if (xisob_raqam1 == xisob_raqam) {
-      setShowModal(false);
-      toast.success(`Yaratildi`);
-    } else {
+    if (isSms) {
       toast.success(`SMS`);
       setShowModal(false);
       setViewModal(true);
-    }
-    if (takeDebt) {
-      mutationFarm && mutationFarm.mutate({ data });
     } else {
-      setFirmExpenseId(data);
+      setShowModal(false);
+      toast.success(`Yaratildi`);
     }
+    setFirmExpenseId(data);
   } catch (error) {
+    console.log(error);
     if (error.response.status == 403) {
       localStorage.clear();
       window.location.href = "/";

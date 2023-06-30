@@ -25,7 +25,7 @@ const Reports = () => {
   const { toggle } = reduxData.toggle;
   const { is_favorite } = reduxData.is_favorite;
 
-  const [choose, setChoose] = useState("2");
+  const [choose, setChoose] = useState("1");
 
   return (
     <div className="d-flex">

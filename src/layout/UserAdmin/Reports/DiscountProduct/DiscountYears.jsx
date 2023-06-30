@@ -137,7 +137,7 @@ const DiscountYears = () => {
           </thead>
           {data && data.data.length != 0 ? (
             <>
-              <tbody className="">
+              <tbody >
                 {months.map((m) => {
                   return (
                     <tr
@@ -236,6 +236,7 @@ const DiscountYears = () => {
                   <th colSpan="2" className="py-3">
                     Jami:
                   </th>
+                  <th>0</th>
                   <th>0</th>
                 </tr>
               </tfoot>

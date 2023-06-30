@@ -5,17 +5,18 @@ import { naxt, xisob_raqam, xodim } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import {
   accountsExpensesPostAction,
-  pharmacyExpensesPostAction,
+  pharmacyExpensesPostAction
 } from "../../../../../functions/DirectorActions";
+import ModalSimple from "../../../../../utils/ModalSimple";
 
 const AddExpenseToAccounts = ({
   showModal,
   setShowModal,
   deteils,
-  getData,
+  getData
 }) => {
   let director = null;
-  deteils.employees.map((user) => {
+  deteils.employees.map(user => {
     if (user.role == "d") {
       director = user;
       return;
@@ -28,12 +29,12 @@ const AddExpenseToAccounts = ({
     transfer_type: naxt,
     expense_type: xodim,
     from_user: "",
-    to_user: deteils.employees[0]?.id,
+    to_user: deteils.employees[0].id,
     report_date: getData.report_date,
-    shift: getData.shift,
+    shift: getData.shift
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "price" && value.length > 9) {
@@ -57,7 +58,7 @@ const AddExpenseToAccounts = ({
           from_user: director.id,
           to_pharmacy: getData.to_pharmacy,
           transfer_type:
-            formData.from_user == "h" ? xisob_raqam : formData.transfer_type,
+            formData.from_user == "h" ? xisob_raqam : formData.transfer_type
         }),
         setShowModal
       );
@@ -65,7 +66,7 @@ const AddExpenseToAccounts = ({
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expensesA"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -74,9 +75,7 @@ const AddExpenseToAccounts = ({
       return pharmacyExpensesPostAction(
         cleanedData({
           ...formData,
-          from_pharmacy: getData.to_pharmacy,
-          transfer_type:
-            formData.from_user == "h" ? xisob_raqam : formData.transfer_type,
+          from_pharmacy: getData.to_pharmacy
         }),
         setShowModal
       );
@@ -84,7 +83,7 @@ const AddExpenseToAccounts = ({
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expensesF"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -109,156 +108,137 @@ const AddExpenseToAccounts = ({
     }
   };
   return (
-    <div
-      className="modal d-flex justify-content-center align-items-center"
-      style={{ position: "absolute", zIndex: 555 }}
-      onClick={() => setShowModal(!showModal)}
+    <ModalSimple
+      showModal={showModal}
+      setShowModal={setShowModal}
+      title="Xodimlarga berilgan summa"
     >
-      {/* <!-- Modal content --> */}
-
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h5 className="modal-title">Xodimlarga berilgan summa</h5>
-
-          <span className="close">
-            <i
-              className="fa fa-xmark"
-              onClick={() => setShowModal(!showModal)}
-            />
-          </span>
+      <div className="modal-body">
+        <div className="row">
+          <div className="col-md-6">
+            {/* EXPENSE FOR WHO */}
+            <div className="form-floating">
+              <select
+                className="form-select mb-3 "
+                id="to_user"
+                name="to_user"
+                value={formData.to_user}
+                onChange={handleInputChange}
+              >
+                {deteils.employees.map(user =>
+                  <option key={user.id} value={user.id}>
+                    {user.first_name} {user.last_name}
+                  </option>
+                )}
+              </select>
+              <label htmlFor="to_user">
+                Xodimni tanlang <b className="text-danger">*</b>
+              </label>
+            </div>
+          </div>
+          <div className="col-md-6">
+            {/* CHOOSE PAYMENT TYPE */}
+            <div className="form-floating">
+              <select
+                className="form-select mb-3"
+                id="transfer_type"
+                name="transfer_type"
+                value={formData.transfer_type}
+                onChange={e => {
+                  setFormData({ ...formData, from_user: "" });
+                  handleInputChange(e);
+                }}
+              >
+                <option value={naxt}>NAXT</option>
+                <option value={2}>NAXT PULSIZ</option>
+              </select>
+              <label htmlFor="transfer_type">
+                To'lov turini tanlang <b className="text-danger">*</b>
+              </label>
+            </div>
+          </div>
         </div>
 
-        <div className="modal-body">
-          <div className="row">
-            <div className="col-md-6">
-              {/* EXPENSE FOR WHO */}
-              <div className="form-floating">
-                <select
-                  className="form-select mb-3 "
-                  id="to_user"
-                  name="to_user"
-                  value={formData.to_user}
-                  onChange={handleInputChange}
-                >
-                  {deteils.employees.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.first_name} {user.last_name}
-                    </option>
-                  ))}
-                </select>
-                <label htmlFor="to_user">
-                  Xodimni tanlang <b className="text-danger">*</b>
-                </label>
-              </div>
-            </div>
-            <div className="col-md-6">
-              {/* CHOOSE PAYMENT TYPE */}
-              <div className="form-floating">
-                <select
-                  className="form-select mb-3"
-                  id="transfer_type"
-                  name="transfer_type"
-                  value={formData.transfer_type}
-                  onChange={(e) => {
-                    setFormData({ ...formData, from_user: "" });
-                    handleInputChange(e);
-                  }}
-                >
-                  <option value={naxt}>NAXT</option>
-                  <option value={2}>NAXT PULSIZ</option>
-                </select>
-                <label htmlFor="transfer_type">
-                  To'lov turini tanlang <b className="text-danger">*</b>
-                </label>
-              </div>
-            </div>
-          </div>
+        {/* TAKE EXPENSES FROM WHO */}
+        <div className="form-floating">
+          <select
+            className={`form-select mb-3`}
+            id="from_user"
+            name="from_user"
+            value={formData.from_user}
+            onChange={handleInputChange}
+          >
+            <option value="">Xarajat kimdan qilindi . . .</option>
 
-          {/* TAKE EXPENSES FROM WHO */}
-          <div className="form-floating">
-            <select
-              className={`form-select mb-3`}
-              id="from_user"
-              name="from_user"
-              value={formData.from_user}
-              onChange={handleInputChange}
-            >
-              <option value="">Xarajat kimdan qilindi . . .</option>
-              <option value={director.id}>
-                Rahbar - {director.first_name} {director.last_name}
-              </option>
-              {formData.transfer_type == naxt ? (
-                <option value={"k"}>Kassadan</option>
-              ) : (
-                <option value={"h"}>Hisob raqamdan</option>
-              )}
-            </select>
-            <label htmlFor="from_user">
-              Xarajat kimdan qilindi <b className="text-danger">*</b>
-            </label>
-          </div>
+            {formData.transfer_type == naxt
+              ? <option value={"k"}>Kassadan</option>
+              : <option value={"h"}>Hisob raqamdan</option>}
+            <option value={director.id}>
+              Rahbardan - {director.first_name} {director.last_name}
+            </option>
+          </select>
+          <label htmlFor="from_user">
+            Xarajat kimdan qilindi <b className="text-danger">*</b>
+          </label>
+        </div>
 
-          {/* MONEY EXPNESES*/}
-          <div className="form-floating mb-3">
-            <input
-              type="number"
+        {/* MONEY EXPNESES*/}
+        <div className="form-floating mb-3">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Berilgan summa"
+            id="price"
+            name="price"
+            min={0}
+            value={formData.price}
+            onChange={handleInputChange}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+          />
+          <label htmlFor="price">
+            Berilgan summa <b className="text-danger">*</b>
+          </label>
+        </div>
+
+        {/* BIO */}
+        <div className="form-floating mb-3">
+          <div className="mb-3">
+            <textarea
               className="form-control"
-              placeholder="Berilgan summa"
-              id="price"
-              name="price"
-              min={0}
-              value={formData.price}
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="Izoh"
+              name="desc"
+              value={formData.desc}
               onChange={handleInputChange}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.key === "Enter") {
                   handleSubmit();
                 }
               }}
             />
-            <label htmlFor="price">
-              Berilgan summa <b className="text-danger">*</b>
-            </label>
-          </div>
-
-          {/* BIO */}
-          <div className="form-floating mb-3">
-            <div className="mb-3">
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Izoh"
-                name="desc"
-                value={formData.desc}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div className="modal-footer">
-          <div className="d-grid col-12">
-            <button
-              className="btn btn-primary rounded-3"
-              style={{ background: "var(--blue)" }}
-              onClick={handleSubmit}
-              disabled={mutation.isLoading || mutationFarm.isLoading}
-            >
-              {mutation.isLoading || mutationFarm.isLoading ? (
-                <i className="fa fa-spinner fa-spin" />
-              ) : (
-                "Saqlash"
-              )}
-            </button>
           </div>
         </div>
       </div>
-    </div>
+      <div className="modal-footer">
+        <div className="d-grid col-12">
+          <button
+            className="btn btn-primary rounded-3"
+            style={{ background: "var(--blue)" }}
+            onClick={handleSubmit}
+            disabled={mutation.isLoading || mutationFarm.isLoading}
+          >
+            {mutation.isLoading || mutationFarm.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Saqlash"}
+          </button>
+        </div>
+      </div>
+    </ModalSimple>
   );
 };
 

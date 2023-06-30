@@ -11,8 +11,8 @@ const SideBarFirmMonth = ({
   setPharmacy,
   deteils,
   filterFunction,
-  firm_id,
-  setFirm
+  curData,
+  setSearchModal
 }) => {
   return (
     <SideBar>
@@ -20,56 +20,57 @@ const SideBarFirmMonth = ({
       <select
         value={month}
         className="form-select my-3"
-        onChange={(e) => setMonth(e.target.value)}
+        onChange={e => setMonth(e.target.value)}
       >
-        {months.map((m) => (
+        {months.map(m =>
           <option key={m.id} value={m.id}>
             {m.month}
           </option>
-        ))}
+        )}
       </select>
 
       {/* YEARS */}
       <select
         value={year}
         className="form-select my-3"
-        onChange={(e) => setYears(e.target.value)}
+        onChange={e => setYears(e.target.value)}
       >
-        {years.map((y) => (
+        {years.map(y =>
           <option key={y.years} value={y.years}>
             {y.years}
           </option>
-        ))}
+        )}
       </select>
 
       {/* PHARMACY */}
       <select
         value={pharmacy}
         className="form-select my-3"
-        onChange={(e) => setPharmacy(e.target.value)}
+        onChange={e => setPharmacy(e.target.value)}
       >
-        {deteils.pharmacies.map((item) => (
+        {deteils.pharmacies.map(item =>
           <option key={item.id} value={item.id}>
             {item.name}
           </option>
-        ))}
+        )}
       </select>
 
-      {/* FIRMS */}
-      {deteils.firms.length != 0 && (
-        <select
-          value={firm_id}
-          className="form-select my-3"
-          onChange={(e) => setFirm(e.target.value)}
-        >
-          {deteils.firms.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      )}
-      {deteils.firms.length != 0 && (
+      {/* FIRM TITLE */}
+      <div
+        className="cursor_pointer border p-2 rounded d-flex align-items-center justify-content-between  my-3"
+        onClick={() => {
+          setSearchModal(true);
+        }}
+      >
+        {curData.id
+          ? <span>
+              {curData.name}
+            </span>
+          : <span>Firmani tanlang</span>}
+        <i className="fa fa-angle-down mx-1" />
+      </div>
+
+      {curData.id &&
         <button
           className="btn"
           data-bs-dismiss={"offcanvas"}
@@ -77,8 +78,7 @@ const SideBarFirmMonth = ({
           style={{ background: "var(--blue)", color: "#fff" }}
         >
           Tasdiqlash
-        </button>
-      )}
+        </button>}
     </SideBar>
   );
 };

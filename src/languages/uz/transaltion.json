@@ -24,19 +24,25 @@
       "Til o'zgartirish",
       "Chiqish"
    ],
-   "Reports": [
-      "Sana",
-      "Xodim F.I.O",
-      "Naqt pulga savdo",
-      "Naqt pulsiz savdo",
-      "Qarzga savdo",
-      "Jami savdo tushumi",
-      "Jami chiqim naqt pul",
-      "Kassadagi qoldiq naqt pul",
-      "Kunlik jami savdo",
-      "QR-code chek berilmagan",
-      "QR-code chek berilgan",
-      "Jami",
-      "Smena"
-   ]
+   "Reports": {
+      "0": "Sana",
+      "1": "Xodim F.I.O",
+      "2": "Naqt pulga",
+      "3": "Naqt pulsiz",
+      "4": "Qarzga",
+      "5": "Chegirma",
+      "6": "Jami",
+      "7": "Jami chiqim",
+      "8": "Kassadagi qoldiq",
+      "9": "Kunlik jami",
+      "10": "QR-code chek",
+      "12": "Jami",
+      "13": "smena",
+      "14": "savdo",
+      "15": "tushumi",
+      "16": "naqt pul",
+      "17": "berilmagan",
+      "18": "berilgan",
+      "19": "hammasi"
+   }
 }

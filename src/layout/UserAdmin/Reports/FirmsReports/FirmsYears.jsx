@@ -11,15 +11,18 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 
 import { useSelector } from "react-redux";
 import SideBarFirmYears from "./SideBarFirmYears";
+import FirmReportSearch from "./FirmReportSearch";
 
 const FirmsYears = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
   const { toggle } = reduxData.toggle;
 
+  const [searchModal, setSearchModal] = useState(false);
+  const [curData, setCurData] = useState(deteils.firms[0]);
+
   const [year, setYears] = useState(new Date().getFullYear());
   const [pharmacy, setPharmacy] = useState("");
-  const [firm, setFirm] = useState(deteils.firms[0]?.id);
 
   const [change, setChange] = useState(false);
 
@@ -29,7 +32,7 @@ const FirmsYears = () => {
       return await firmReportMonthAPI({
         year,
         pharmacy,
-        firm,
+        firm: curData.id,
       });
     },
   });
@@ -51,6 +54,13 @@ const FirmsYears = () => {
 
   return (
     <>
+      {searchModal && (
+        <FirmReportSearch
+          showModal={searchModal}
+          setShowModal={setSearchModal}
+          setCurData={setCurData}
+        />
+      )}
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>YILLIK</h2>
@@ -62,8 +72,8 @@ const FirmsYears = () => {
             setPharmacy={setPharmacy}
             deteils={deteils}
             filterFunction={filterFunction}
-            firm={firm}
-            setFirm={setFirm}
+            curData={curData}
+            setSearchModal={setSearchModal}
           />
         </div>
       </div>

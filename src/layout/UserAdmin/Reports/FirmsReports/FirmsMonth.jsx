@@ -8,11 +8,18 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SideBarFirmMonth from "./SideBarFirmMonth";
+import FirmReportSearch from "./FirmReportSearch";
 
 const FirmsMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
   const { toggle } = reduxData.toggle;
+
+  const [searchModal, setSearchModal] = useState(false);
+  const [curData, setCurData] = useState({
+    id: "",
+    name: ""
+  });
 
   const [change, setChange] = useState(false);
   const [page, setPage] = useState(1);
@@ -20,7 +27,6 @@ const FirmsMonth = () => {
   const [year, setYears] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [pharmacy, setPharmacy] = useState(deteils.pharmacies[0].id);
-  const [firm_id, setFirm] = useState(deteils.firms[0].id);
 
   const queryClient = useQueryClient();
   useEffect(() => {
@@ -35,7 +41,7 @@ const FirmsMonth = () => {
         month,
         pharmacy_id: pharmacy,
         page,
-        firm_id,
+        firm_id: curData.id,
       });
     },
     enabled: change,
@@ -52,6 +58,14 @@ const FirmsMonth = () => {
 
   return (
     <>
+
+     {searchModal && (
+        <FirmReportSearch
+          showModal={searchModal}
+          setShowModal={setSearchModal}
+          setCurData={setCurData}
+        />
+      )}
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>OYLIK</h2>
@@ -65,8 +79,8 @@ const FirmsMonth = () => {
             setPharmacy={setPharmacy}
             deteils={deteils}
             filterFunction={filterFunction}
-            firm_id={firm_id}
-            setFirm={setFirm}
+            curData={curData}
+            setSearchModal={setSearchModal}
           />
         </div>
       </div>

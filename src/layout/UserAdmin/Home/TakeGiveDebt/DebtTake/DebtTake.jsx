@@ -65,7 +65,7 @@ const DebtTake = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "78vw" : "91vw"}`,
+            minWidth: `${toggle ? "80vw" : "92vw"}`,
           }}
         >
           <thead
