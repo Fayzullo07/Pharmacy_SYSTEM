@@ -21,13 +21,6 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
 
   const [curData, setCurData] = useState({});
 
-  useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || deleteModal || updateModal ? "hidden" : "scroll"
-    }`;
-    window.scrollTo(0, 0);
-  }, [showModal, deleteModal, updateModal]);
-
   const { data, isLoading, error } = useQuery("expensesA", async () => {
     return await accountsExpensesGetAPI({
       expense_type: xodim,
@@ -117,7 +110,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                 <th>Kimdan berildi</th>
                 <th>Kimga berildi</th>
                 <th>To'lov turi</th>
-                <th>Miqdor</th>
+                <th>Berilgan summa</th>
                 <th
                   scope="col"
                   className="text-center"
@@ -135,7 +128,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
               </tr>
             </thead>
             <tbody>
-               {dataFarm &&
+              {dataFarm &&
                 dataFarm.data.results.map((item) => (
                   <tr key={item.id}>
                     <td data-label="Kimdan berildi">
@@ -150,25 +143,25 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                         ? "Naqd pulsiz"
                         : item.transfer_type_name}
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label="Berilgan summa">
                       <b className="text-danger">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'zgartirish">
+                    <td data-label="O'zgartirish" onClick={() => {
+                      setCurData(item);
+                      setUpdateModal(!updateModal);
+                    }}>
                       <i
                         className="fa fa-edit text-warning cursor_pointer"
-                        onClick={() => {
-                          setCurData(item);
-                          setUpdateModal(!updateModal);
-                        }}
+
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
+                    <td data-label="O'chirish" onClick={() => {
+                      setCurData(item);
+                      setDeleteModal(!deleteModal);
+                    }}>
                       <i
                         className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
-                          setCurData(item);
-                          setDeleteModal(!deleteModal);
-                        }}
+
                       ></i>
                     </td>
                   </tr>

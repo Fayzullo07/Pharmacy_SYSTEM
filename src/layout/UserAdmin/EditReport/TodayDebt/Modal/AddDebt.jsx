@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { naxt } from "../../../../../api";
-import { checkPhoneNumber, cleanedData } from "../../../../../functions/NecessaryFunctions";
+import {
+  checkPhoneNumber,
+  cleanedData
+} from "../../../../../functions/NecessaryFunctions";
 import { pharmacyDebtsPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
+import TextInput from "../../../../../ui/TextInput";
+import NumberInput from "../../../../../ui/NumberInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
 
-const AddDebt = (props) => {
+const AddDebt = props => {
   const { showModal, setShowModal, getData } = props;
   const [formData, setFormData] = useState({
     price: null,
@@ -16,13 +23,35 @@ const AddDebt = (props) => {
     transfer_type: naxt,
     report_date: getData.report_date,
     shift: getData.shift,
-    to_pharmacy: getData.to_pharmacy,
+    to_pharmacy: getData.to_pharmacy
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+
+    if (name === "price" && value.length > 9) {
+      return;
+    }
+
+    if (name === "phone_number") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
+    }
+
+    if (name === "desc" && value.length > 300) {
+      return;
+    }
+
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const mutation = useMutation(
@@ -32,7 +61,7 @@ const AddDebt = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("debts"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -63,63 +92,33 @@ const AddDebt = (props) => {
     >
       <div className="modal-body">
         {/* TAKE DEBT FROM WHO */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Kimdan qarz olindi"
-            name="from_who"
-            value={formData.from_who}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Kimgdan qarz olindi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"from_who"}
+          value={formData.from_who}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Kimgdan qarz olindi"}
+        />
 
         {/* MONEY DEBTS*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Qarz summasi"}
+        />
 
         {/* PHONE */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Telefon"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Telefon</label>
-        </div>
+        <PhoneInput
+          name={"phone_number"}
+          value={formData.phone_number}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
         {/* TRANSFER TYPE */}
         <div className="form-floating">
@@ -139,24 +138,11 @@ const AddDebt = (props) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

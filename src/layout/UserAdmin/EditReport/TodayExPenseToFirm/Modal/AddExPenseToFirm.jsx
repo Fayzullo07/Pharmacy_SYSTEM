@@ -16,6 +16,7 @@ import {
 } from "../../../../../functions/NecessaryFunctions";
 import { firmsExpenseDebtPostAction } from "../../../../../functions/GlobalActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
 const AddExPenseToFirm = ({
   showModal,
@@ -281,24 +282,11 @@ const AddExPenseToFirm = ({
 
           <div className="col-md-12">
             {/* BIO */}
-            <div className="form-floating mb-3">
-              <div className="mb-3">
-                <textarea
-                  className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="3"
-                  placeholder="Izoh"
-                  name="desc"
-                  value={formData.desc}
-                  onChange={handleInputChange}
-                  onKeyDown={e => {
-                    if (e.key === "Enter") {
-                      handleSubmit();
-                    }
-                  }}
-                />
-              </div>
-            </div>
+            <Textarea
+              value={formData.desc}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+            />
           </div>
         </div>
       </div>

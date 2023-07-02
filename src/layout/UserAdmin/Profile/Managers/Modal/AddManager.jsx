@@ -3,12 +3,13 @@ import { useMutation, useQueryClient } from "react-query";
 import { managerPostAction } from "../../../../../functions/DirectorActions";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import { toast } from "react-toastify";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
-const AddManager = (props) => {
+const AddManager = props => {
   const { showModal, setShowModal } = props;
 
   const [formData, setFormData] = useState({
@@ -20,12 +21,12 @@ const AddManager = (props) => {
     address: "",
     is_active: true,
     bio: "",
-    father_name: "",
+    father_name: ""
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "first_name" && value.length > 20) {
       return;
@@ -58,7 +59,7 @@ const AddManager = (props) => {
       return managerPostAction(
         cleanedData({
           ...formData,
-          last_name: `${formData.last_name} ${formData.father_name}`,
+          last_name: `${formData.last_name} ${formData.father_name}`
         }),
         setShowModal
       );
@@ -66,7 +67,7 @@ const AddManager = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("managers");
-      },
+      }
     }
   );
 
@@ -116,7 +117,7 @@ const AddManager = (props) => {
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -137,7 +138,7 @@ const AddManager = (props) => {
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -159,7 +160,7 @@ const AddManager = (props) => {
                 name="father_name"
                 value={formData.father_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -181,7 +182,7 @@ const AddManager = (props) => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -203,7 +204,7 @@ const AddManager = (props) => {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -224,7 +225,7 @@ const AddManager = (props) => {
                 name="re_password"
                 value={formData.re_password}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -246,7 +247,7 @@ const AddManager = (props) => {
             name="address"
             value={formData.address}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -262,8 +263,7 @@ const AddManager = (props) => {
             checked={formData.is_active}
             value={formData.is_active}
             onClick={() =>
-              setFormData({ ...formData, is_active: !formData.is_active })
-            }
+              setFormData({ ...formData, is_active: !formData.is_active })}
           />
           <b className={formData.is_active ? "text-success" : "text-danger"}>
             Active
@@ -271,24 +271,12 @@ const AddManager = (props) => {
         </div>
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          name={"bio"}
+          value={formData.bio}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

@@ -16,6 +16,21 @@ const NumberInput = ({
         case "Mahsulot summasi":
           setPlaceholderInput("Mahsulot summasi");
           break;
+        case "Tushum summasi":
+          setPlaceholderInput("Tushum summasi");
+          break;
+        case "Berilgan summasi":
+          setPlaceholderInput("Berilgan summasi");
+          break;
+        case "Chegirma summasi":
+          setPlaceholderInput("Chegirma summasi");
+          break;
+        case "Qarz summasi":
+          setPlaceholderInput("Qarz summasi");
+          break;
+        case "Xarajat summasi":
+          setPlaceholderInput("Xarajat summasi");
+          break;
         default:
           setPlaceholderInput("Miqdor");
       }

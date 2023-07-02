@@ -4,14 +4,17 @@ import { toast } from "react-toastify";
 import { naxt, vozvrat } from "../../../../../api";
 import {
   accountsExpensesPostAction,
-  pharmacyExpensesPostAction,
+  pharmacyExpensesPostAction
 } from "../../../../../functions/DirectorActions";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
+import NumberInput from "../../../../../ui/NumberInput";
+import Textarea from "../../../../../ui/Textarea";
+import ModalSimple from "../../../../../utils/ModalSimple";
 
-const AddReturn = (props) => {
+const AddReturn = props => {
   const { showModal, setShowModal, deteils, getData } = props;
   let director = null;
-  deteils.employees.map((user) => {
+  deteils.employees.map(user => {
     if (user.role == "d") {
       director = user;
       return;
@@ -26,10 +29,10 @@ const AddReturn = (props) => {
     expense_type: vozvrat,
     from_user: "k",
     report_date: getData.report_date,
-    shift: getData.shift,
+    shift: getData.shift
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "second_name" && value.length > 50) {
@@ -51,14 +54,17 @@ const AddReturn = (props) => {
   const mutationPharm = useMutation(
     async () => {
       return pharmacyExpensesPostAction(
-        cleanedData({ ...formData, from_pharmacy: getData.to_pharmacy }),
+        cleanedData({
+          ...formData,
+          from_pharmacy: getData.to_pharmacy
+        }),
         setShowModal
       );
     },
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_return_pharm"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -68,7 +74,7 @@ const AddReturn = (props) => {
         cleanedData({
           ...formData,
           from_user: director.id,
-          to_pharmacy: getData.to_pharmacy,
+          to_pharmacy: getData.to_pharmacy
         }),
         setShowModal
       );
@@ -76,7 +82,7 @@ const AddReturn = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_return_account"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -102,124 +108,81 @@ const AddReturn = (props) => {
     }
   };
   return (
-    <div
-      className="modal d-flex justify-content-center align-items-center"
-      style={{ position: "absolute", zIndex: 555 }}
-      onClick={() => setShowModal(false)}
-    >
-      {/* <!-- Modal content --> */}
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h5 className="modal-title">Qaytarib olingan maxsulot</h5>
-
-          <span className="close">
-            <i
-              className="fa fa-xmark"
-              onClick={() => setShowModal(!showModal)}
-            />
-          </span>
+    <ModalSimple showModal={showModal} setShowModal={setShowModal}>
+      <div className="modal-body">
+        {/* PRODUCT NAME */}
+        <div className="form-floating mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Maxsulot nomi"
+            id="second_name"
+            name="second_name"
+            value={formData.second_name}
+            onChange={handleInputChange}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+          />
+          <label htmlFor="second_name">
+            Maxsulot nomi <b className="text-danger">*</b>
+          </label>
         </div>
 
-        <div className="modal-body">
-          {/* PRODUCT NAME */}
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Maxsulot nomi"
-              id="second_name"
-              name="second_name"
-              value={formData.second_name}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            />
-            <label htmlFor="second_name">
-              Maxsulot nomi <b className="text-danger">*</b>
-            </label>
-          </div>
-          {/* MONEY EXPNESES*/}
-          <div className="form-floating mb-3">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Miqdor"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            />
-            <label htmlFor="price">
-              Miqdor <b className="text-danger">*</b>
-            </label>
-          </div>
+        {/* MONEY EXPNESES*/}
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot summasi"}
+        />
 
-          {/* GIVEN MONEY FROM WHO */}
-          <div className="form-floating">
-            <select
-              className="form-select mb-3"
-              id="from_user"
-              name="from_user"
-              value={formData.from_user}
-              onChange={handleInputChange}
-            >
-              <option value="k">Kassadan</option>
-              <option value={director.id}>
-                Rahbar - {director.first_name} {director.last_name}
-              </option>
-            </select>
-            <label htmlFor="to_user">
-              Pul kimdan berildi <b className="text-danger">*</b>
-            </label>
-          </div>
-
-          {/* BIO */}
-          <div className="form-floating mb-3">
-            <div className="mb-3">
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Izoh"
-                name="desc"
-                value={formData.desc}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              ></textarea>
-            </div>
-          </div>
+        {/* GIVEN MONEY FROM WHO */}
+        <div className="form-floating">
+          <select
+            className="form-select mb-3"
+            id="from_user"
+            name="from_user"
+            value={formData.from_user}
+            onChange={handleInputChange}
+          >
+            <option value="k">Kassadan</option>
+            <option value={director.id}>
+              Rahbar - {director.first_name} {director.last_name}
+            </option>
+          </select>
+          <label htmlFor="to_user">
+            Pul kimdan berildi <b className="text-danger">*</b>
+          </label>
         </div>
 
-        <div className="modal-footer">
-          <div className="d-grid col-12">
-            <button
-              className="btn btn-primary rounded-3"
-              style={{ background: "var(--blue)" }}
-              onClick={handleSubmit}
-              disabled={mutationPharm.isLoading || mutationAccount.isLoading}
-            >
-              {mutationPharm.isLoading || mutationAccount.isLoading ? (
-                <i className="fa fa-spinner fa-spin" />
-              ) : (
-                "Saqlash"
-              )}
-            </button>
-          </div>
+        {/* BIO */}
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+
+      <div className="modal-footer">
+        <div className="d-grid col-12">
+          <button
+            className="btn btn-primary rounded-3"
+            style={{ background: "var(--blue)" }}
+            onClick={handleSubmit}
+            disabled={mutationPharm.isLoading || mutationAccount.isLoading}
+          >
+            {mutationPharm.isLoading || mutationAccount.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Saqlash"}
+          </button>
         </div>
       </div>
-    </div>
+    </ModalSimple>
   );
 };
 

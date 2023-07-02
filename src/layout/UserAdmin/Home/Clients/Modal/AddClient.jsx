@@ -126,7 +126,7 @@ const AddClient = props => {
           isRequired={true}
         />
 
-        {/* TOTAL AMOUNT */}
+        {/* PRICE */}
         <NumberInput
           name={"total_amount"}
           value={formData.total_amount}

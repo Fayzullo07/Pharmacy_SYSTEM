@@ -8,6 +8,8 @@ import {
 } from "../../../../../functions/DirectorActions";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import ModalSimple from "../../../../../utils/ModalSimple";
+import Textarea from "../../../../../ui/Textarea";
+import NumberInput from "../../../../../ui/NumberInput";
 
 const UpdateExpenseToAccounts = ({
   showModal,
@@ -175,46 +177,21 @@ const UpdateExpenseToAccounts = ({
         </div>
 
         {/* MONEY EXPNESES*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Berilgan summa"
-            id="price"
-            name="price"
-            min={0}
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Berilgan summa <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Berilgan summasi"}
+        />
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            />
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
       <div className="modal-footer">
         <div className="d-grid col-12">

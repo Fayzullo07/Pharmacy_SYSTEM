@@ -4,17 +4,18 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   checkPhoneNumber,
   cleanedData,
-  tekshirish3,
+  tekshirish3
 } from "../../../../../../functions/NecessaryFunctions";
 import { firmsReturnPostAction } from "../../../../../../functions/GlobalActions";
 import { toast } from "react-toastify";
+import Textarea from "../../../../../../ui/Textarea";
 
 const AddFirmReturn = ({
   showModal,
   setShowModal,
   curData,
   setViewModal,
-  setFirmReturnId,
+  setFirmReturnId
 }) => {
   const [formData, setFormData] = useState({
     price: "",
@@ -22,10 +23,10 @@ const AddFirmReturn = ({
     second_name: "",
     verified_phone_number: "",
     verified_firm_worker_name: "",
-    firm_income: curData.id,
+    firm_income: curData.id
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "second_name" && value.length > 50) {
       return;
@@ -64,7 +65,7 @@ const AddFirmReturn = ({
     {
       onSuccess: () => {
         queryClient.invalidateQueries("firms_incomes");
-      },
+      }
     }
   );
   const handleSubmit = () => {
@@ -110,7 +111,7 @@ const AddFirmReturn = ({
                 name="second_name"
                 value={formData.second_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -132,7 +133,7 @@ const AddFirmReturn = ({
                 name="price"
                 value={formData.price}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -154,7 +155,7 @@ const AddFirmReturn = ({
                 name="verified_firm_worker_name"
                 value={formData.verified_firm_worker_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -175,7 +176,7 @@ const AddFirmReturn = ({
                 name="verified_phone_number"
                 value={formData.verified_phone_number}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -189,24 +190,11 @@ const AddFirmReturn = ({
         </div>
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

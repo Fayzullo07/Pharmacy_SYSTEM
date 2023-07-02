@@ -5,13 +5,14 @@ import { naxt, transfersWorker } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsRePayPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
 const AddToDebtRepay = ({
   deteils,
   showModal,
   setShowModal,
   user,
-  getData,
+  getData
 }) => {
   const [disabledInput, setDisabledInput] = useState(false);
   const [input1, setInput1] = useState("");
@@ -22,10 +23,10 @@ const AddToDebtRepay = ({
     transfer_type: naxt,
     from_debt: user.id,
     report_date: getData.report_date,
-    shift: getData.shift,
+    shift: getData.shift
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "price" && Number(value) > user.remaining_debt) {
       return;
@@ -45,7 +46,7 @@ const AddToDebtRepay = ({
         cleanedData({
           ...formData,
           price: disabledInput ? user.remaining_debt : formData.price,
-          transfer_type: input1 == naxt ? naxt : formData.transfer_type,
+          transfer_type: input1 == naxt ? naxt : formData.transfer_type
         }),
         setShowModal
       );
@@ -55,7 +56,7 @@ const AddToDebtRepay = ({
         queryClient.invalidateQueries("to_debts_repay"); // Ma'lumotlarni yangilash
         queryClient.invalidateQueries("to_debts_list");
         queryClient.invalidateQueries("to_debts");
-      },
+      }
     }
   );
 
@@ -88,7 +89,9 @@ const AddToDebtRepay = ({
             value={formData.from_debt}
             disabled
           >
-            <option>{user.to_who}</option>
+            <option>
+              {user.to_who}
+            </option>
           </select>
           <label>
             Qarz <b className="text-danger">*</b>
@@ -124,7 +127,7 @@ const AddToDebtRepay = ({
             id="transfer_typ"
             name="transfer_type"
             value={input1}
-            onChange={(e) => {
+            onChange={e => {
               setInput1(e.target.value);
               if (e.target.value == "naxt_siz") {
                 setFromClick(true);
@@ -141,8 +144,7 @@ const AddToDebtRepay = ({
           </label>
         </div>
 
-        {fromClick && (
-          // TUSHUP TURINI TANLANG
+        {fromClick && // TUSHUP TURINI TANLANG
           <div className="form-floating">
             <select
               className="form-select mb-3 bg-light"
@@ -152,22 +154,21 @@ const AddToDebtRepay = ({
               onChange={handleInputChange}
             >
               <option value="">To'lov turini tanlang . . .</option>
-              {transfersWorker.map((transfer) => (
+              {transfersWorker.map(transfer =>
                 <option key={transfer.id} value={transfer.id}>
                   {transfer.name}
                 </option>
-              ))}
-              {deteils.transfer_types.map((type) => (
+              )}
+              {deteils.transfer_types.map(type =>
                 <option key={type.id} value={type.id}>
                   {type.name}
                 </option>
-              ))}
+              )}
             </select>
             <label htmlFor="transfer_type">
               To'lov turini tanlang <b className="text-danger">*</b>
             </label>
-          </div>
-        )}
+          </div>}
 
         {/* MONEY DEBTS*/}
         <div className="form-floating mb-3">
@@ -181,7 +182,7 @@ const AddToDebtRepay = ({
             value={disabledInput ? user.remaining_debt : formData.price}
             onChange={handleInputChange}
             disabled={disabledInput}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -193,24 +194,11 @@ const AddToDebtRepay = ({
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

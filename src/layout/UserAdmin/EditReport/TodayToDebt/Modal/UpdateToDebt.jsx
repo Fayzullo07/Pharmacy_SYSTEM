@@ -4,9 +4,10 @@ import { toast } from "react-toastify";
 import { pharmacyToDebtsPatchAction } from "../../../../../functions/DirectorActions";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
 const UpdateToDebt = ({ showModal, setShowModal, data }) => {
   const [formData, setFormData] = useState({
@@ -14,10 +15,10 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
     price: data.price,
     desc: data.desc,
     to_who: data.to_who,
-    transfer_type: data.transfer_type,
+    transfer_type: data.transfer_type
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "to_who" && value.length > 50) {
       return;
@@ -48,7 +49,7 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
         queryClient.invalidateQueries("to_debts"); // Ma'lumotlarni yangilash
         queryClient.invalidateQueries("to_debts_list");
         queryClient.invalidateQueries("to_debts_repay");
-      },
+      }
     }
   );
 
@@ -86,7 +87,7 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
             name="to_who"
             value={formData.to_who}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -107,7 +108,7 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
             name="price"
             value={formData.price}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -127,7 +128,7 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -137,24 +138,11 @@ const UpdateToDebt = ({ showModal, setShowModal, data }) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

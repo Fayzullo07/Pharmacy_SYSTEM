@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useQuery } from "react-query";
 import { pharmaciesDebtsRePayGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
@@ -16,13 +16,6 @@ const TodayDebtRepay = ({ deteils, getData }) => {
   const [debtsModal, setDebtsModal] = useState(false);
 
   const [curData, setCurData] = useState({});
-
-  useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || deleteModal || debtsModal ? "hidden" : "scroll"
-    }`;
-    window.scrollTo(0, 0);
-  }, [showModal, deleteModal, debtsModal]);
 
   const { data, isLoading, error } = useQuery("debts_repay", async () => {
     return await pharmaciesDebtsRePayGetAPI({
@@ -99,9 +92,9 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                   №
                 </th>
                 <th>Kimga qaytarildi</th>
-                <th>Kim berdi</th>
+                <th>Kimdan berildi</th>
                 <th>To'lov turi</th>
-                <th>Izoh</th>
+                <th>Berilgan summa</th>
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-trash-can text-danger"></i>
                 </th>
@@ -118,7 +111,7 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                     >
                       {item.to_debt_name}
                     </td>
-                    <td data-label="Kim berdi" className="text-capitalize">
+                    <td data-label="Kimdan berildi" className="text-capitalize">
                       {item.from_user_name ? item.from_user_name : "Kassadan"}
                     </td>
                     <td data-label="To'lov turi" className="text-capitalize">
@@ -126,16 +119,16 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                         ? "Naqt pulsiz"
                         : item.transfer_type_name}
                     </td>
-                    <td data-label="Pul">
+                    <td data-label="Berilgan summa">
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'chirish">
-                      <i
-                        className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'chirish"  onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
-                        }}
+                        }}>
+                      <i
+                        className="fa fa-trash-can text-danger cursor_pointer"
+                       
                       ></i>
                     </td>
                   </tr>

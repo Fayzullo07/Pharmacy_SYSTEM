@@ -4,15 +4,16 @@ import { workerPostAction } from "../../../../../functions/DirectorActions";
 import { toast } from "react-toastify";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
-const AddWorker = (props) => {
+const AddWorker = props => {
   const { showModal, setShowModal } = props;
-  const deteils = useSelector((state) => state.deteils.deteils);
+  const deteils = useSelector(state => state.deteils.deteils);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     first_name: "",
@@ -27,12 +28,12 @@ const AddWorker = (props) => {
     address: "",
     is_active: true,
     bio: "",
-    father_name: "",
+    father_name: ""
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "first_name" && value.length > 50) {
       return;
@@ -69,7 +70,7 @@ const AddWorker = (props) => {
       return workerPostAction(
         cleanedData({
           ...formData,
-          last_name: `${formData.last_name} ${formData.father_name}`,
+          last_name: `${formData.last_name} ${formData.father_name}`
         }),
         setShowModal
       );
@@ -78,7 +79,7 @@ const AddWorker = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("workers");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
@@ -144,7 +145,7 @@ const AddWorker = (props) => {
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -165,7 +166,7 @@ const AddWorker = (props) => {
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -187,7 +188,7 @@ const AddWorker = (props) => {
                 name="father_name"
                 value={formData.father_name}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -210,7 +211,7 @@ const AddWorker = (props) => {
                 pattern={`^\+998\d{9}$`}
                 value={formData.phone_number}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -232,11 +233,11 @@ const AddWorker = (props) => {
                 onChange={handleInputChange}
               >
                 <option>Filialni tanlang. . .</option>
-                {deteils.pharmacies.map((item, index) => (
+                {deteils.pharmacies.map((item, index) =>
                   <option key={index} value={item.id}>
                     {item.name}
                   </option>
-                ))}
+                )}
               </select>
               <label>
                 Filialni tanlang <b className="text-danger">*</b>
@@ -280,9 +281,8 @@ const AddWorker = (props) => {
                 onClick={() =>
                   setFormData({
                     ...formData,
-                    is_main_worker: !formData.is_main_worker,
-                  })
-                }
+                    is_main_worker: !formData.is_main_worker
+                  })}
               />
             </div>
           </div>
@@ -300,8 +300,7 @@ const AddWorker = (props) => {
                 checked={formData.is_active}
                 value={formData.is_active}
                 onClick={() =>
-                  setFormData({ ...formData, is_active: !formData.is_active })
-                }
+                  setFormData({ ...formData, is_active: !formData.is_active })}
               />
             </div>
           </div>
@@ -318,7 +317,7 @@ const AddWorker = (props) => {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -339,7 +338,7 @@ const AddWorker = (props) => {
                 name="re_password"
                 value={formData.re_password}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -360,7 +359,7 @@ const AddWorker = (props) => {
                 name="wage"
                 value={formData.wage}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -381,7 +380,7 @@ const AddWorker = (props) => {
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
@@ -393,24 +392,12 @@ const AddWorker = (props) => {
         </div>
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          name={"bio"}
+          value={formData.bio}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

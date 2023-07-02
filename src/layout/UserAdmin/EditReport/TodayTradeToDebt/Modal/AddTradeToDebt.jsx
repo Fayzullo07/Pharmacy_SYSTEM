@@ -4,10 +4,11 @@ import { naxt } from "../../../../../api";
 import { toast } from "react-toastify";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
 const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
   const [formData, setFormData] = useState({
@@ -20,10 +21,10 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
     transfer_type: naxt,
     report_date: getData.report_date,
     shift: getData.shift,
-    from_pharmacy: getData.to_pharmacy,
+    from_pharmacy: getData.to_pharmacy
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "to_who" && value.length > 50) {
       return;
@@ -53,7 +54,7 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
       onSuccess: () => {
         queryClient.invalidateQueries("to_debts_trade"); // Ma'lumotlarni yangilash
         queryClient.invalidateQueries("to_debts_trade_list");
-      },
+      }
     }
   );
 
@@ -97,7 +98,7 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
             name="to_who"
             value={formData.to_who}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -117,7 +118,7 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
             name="second_name"
             value={formData.second_name}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -138,7 +139,7 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
             name="price"
             value={formData.price}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -158,7 +159,7 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -170,24 +171,11 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

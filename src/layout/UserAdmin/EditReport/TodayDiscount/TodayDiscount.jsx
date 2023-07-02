@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { pharmaciesExpensesGetAPI } from "../../../../api/DirectorRequest";
@@ -17,13 +17,6 @@ const TodayDiscount = ({ getData }) => {
   const [updateModal, setUpdateModal] = useState(false);
 
   const [curData, setCurData] = useState({});
-
-  useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || deleteModal || updateModal ? "hidden" : "scroll"
-    }`;
-    window.scrollTo(0, 0);
-  }, [showModal, deleteModal, updateModal]);
 
   const { data, isLoading, error } = useQuery("expenses_discount", async () => {
     return await pharmaciesExpensesGetAPI({
@@ -126,24 +119,24 @@ const TodayDiscount = ({ getData }) => {
                     </td>
                     <td data-label="Chegirma summasi">
                       <b className="text-danger">{formatNumber(item.price)}</b>{" "}
-                      UZS
+                      
                     </td>
-                    <td data-label="O'zgartirish">
-                      <i
-                        className="fa fa-edit text-warning cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'zgartirish"  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
-                        }}
+                        }}>
+                      <i
+                        className="fa fa-edit text-warning cursor_pointer"
+                       
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
-                      <i
-                        className="fa fa-trash-can text-danger  cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'chirish" onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
-                        }}
+                        }}>
+                      <i
+                        className="fa fa-trash-can text-danger  cursor_pointer"
+                        
                       ></i>
                     </td>
                   </tr>

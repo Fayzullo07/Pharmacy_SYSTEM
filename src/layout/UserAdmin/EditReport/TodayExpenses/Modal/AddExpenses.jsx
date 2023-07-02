@@ -5,13 +5,16 @@ import { naxt } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import {
   accountsExpensesPostAction,
-  pharmacyExpensesPostAction,
+  pharmacyExpensesPostAction
 } from "../../../../../functions/DirectorActions";
 import ModalSimple from "../../../../../utils/ModalSimple";
+import Textarea from "../../../../../ui/Textarea";
+import NumberInput from "../../../../../ui/NumberInput";
+import SelectInput from "../../../../../ui/SelectInput";
 
 const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
   let director = null;
-  deteils.employees.map((user) => {
+  deteils.employees.map(user => {
     if (user.role == "d") {
       director = user;
       return;
@@ -25,10 +28,10 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
     expense_type: "",
     from_user: naxt,
     report_date: getData.report_date,
-    shift: getData.shift,
+    shift: getData.shift
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "price" && value.length > 9) {
@@ -51,7 +54,7 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
       return pharmacyExpensesPostAction(
         cleanedData({
           ...formData,
-          from_pharmacy: getData.to_pharmacy,
+          from_pharmacy: getData.to_pharmacy
         }),
         setShowModal
       );
@@ -59,7 +62,7 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_F"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -69,7 +72,7 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
         cleanedData({
           ...formData,
           from_user: director.id,
-          to_pharmacy: getData.to_pharmacy,
+          to_pharmacy: getData.to_pharmacy
         }),
         setShowModal
       );
@@ -77,7 +80,7 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_A"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -104,25 +107,14 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
         <div className="row">
           <div className="col-md-6">
             {/* CHOOSE EXPENSES TYPE */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                id="expense_type"
-                name="expense_type"
-                value={formData.expense_type}
-                onChange={handleInputChange}
-              >
-                <option value="">Xarajat turini tanlang . . .</option>
-                {deteils.expense_types.map((type) => (
-                  <option key={type.id} value={type.id}>
-                    {type.name}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="expense_type">
-                Xarajat turini tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <SelectInput
+              name={"expense_type"}
+              value={formData.expense_type}
+              handleInputChange={handleInputChange}
+              isRequired={true}
+              placeholder={"Xarajat turi"}
+              data={deteils.expense_types}
+            />
           </div>
           <div className="col-md-6">
             {/* CHOOSE TRANSFER TYPE */}
@@ -157,9 +149,8 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
             <option value={director.id}>
               Rahbar - {director.first_name} {director.last_name}
             </option>
-            {formData.transfer_type == naxt && (
-              <option value={1}>Kassadan</option>
-            )}
+            {formData.transfer_type == naxt &&
+              <option value={1}>Kassadan</option>}
           </select>
           <label htmlFor="from_user">
             Xarajat kimdan qilindi <b className="text-danger">*</b>
@@ -167,46 +158,21 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
         </div>
 
         {/* MONEY EXPNESES*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            min={0}
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Xarajat summasi"}
+        />
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
 
       <div className="modal-footer">
@@ -217,11 +183,9 @@ const AddExpenses = ({ showModal, setShowModal, deteils, getData }) => {
             onClick={handleSubmit}
             disabled={mutationPharm.isLoading || mutationAccount.isLoading}
           >
-            {mutationPharm.isLoading || mutationAccount.isLoading ? (
-              <i className="fa fa-spinner fa-spin" />
-            ) : (
-              "Saqlash"
-            )}
+            {mutationPharm.isLoading || mutationAccount.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Saqlash"}
           </button>
         </div>
       </div>

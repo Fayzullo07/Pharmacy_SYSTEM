@@ -4,32 +4,48 @@ import { toast } from "react-toastify";
 import { pharmacyDebtsPatchAction } from "../../../../../functions/DirectorActions";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import Modal from "../../../../../utils/Modal";
 import { naxt } from "../../../../../api";
+import Textarea from "../../../../../ui/Textarea";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import TextInput from "../../../../../ui/TextInput";
+import NumberInput from "../../../../../ui/NumberInput";
 
-const UpdateDebt = (props) => {
+const UpdateDebt = props => {
   const { showModal, setShowModal, data } = props;
   const [formData, setFormData] = useState({
     price: data.price,
     desc: data.desc,
     from_who: data.from_who,
     phone_number: data.phone_number,
-    transfer_type: data.transfer_type,
+    transfer_type: data.transfer_type
   });
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "price" && value.length > 9) {
       return;
     }
 
+    if (name === "phone_number") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
+    }
+
     if (name === "desc" && value.length > 300) {
       return;
     }
 
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const queryClient = useQueryClient();
@@ -45,7 +61,7 @@ const UpdateDebt = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("debts"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -75,64 +91,33 @@ const UpdateDebt = (props) => {
     >
       <div className="modal-body">
         {/* TAKE DEBT FROM WHO */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Kimdan qarz olindi"
-            name="from_who"
-            value={formData.from_who}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Kimgdan qarz olindi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"from_who"}
+          value={formData.from_who}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Kimgdan qarz olindi"}
+        />
 
         {/* MONEY DEBTS*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Qarz summasi"}
+        />
 
         {/* PHONE */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Telefon"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Telefon</label>
-        </div>
-
+        <PhoneInput
+          name={"phone_number"}
+          value={formData.phone_number}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
         {/* TRANSFER TYPE */}
         <div className="form-floating">
           <select
@@ -152,24 +137,11 @@ const UpdateDebt = (props) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

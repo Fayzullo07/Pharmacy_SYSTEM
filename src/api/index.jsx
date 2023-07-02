@@ -187,7 +187,7 @@ export const transfersWorker = [
   },
   {
     id: 3,
-    name: "CLICK"
+    name: "CLICK - XODIM"
   },
   {
     id: 2,

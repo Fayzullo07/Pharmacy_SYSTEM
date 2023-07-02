@@ -3,22 +3,23 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import {
   checkPhoneNumber,
-  cleanedData,
+  cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsPatchAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
 
-const UpdateTradeToDebt = (props) => {
+const UpdateTradeToDebt = props => {
   const { showModal, setShowModal, data } = props;
   const [formData, setFormData] = useState({
     second_name: data.second_name,
     phone_number: data.phone_number,
     price: data.price,
     desc: data.desc,
-    to_who: data.to_who,
+    to_who: data.to_who
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "to_who" && value.length > 50) {
       return;
@@ -52,7 +53,7 @@ const UpdateTradeToDebt = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("to_debts_trade"); // Ma'lumotlarni yangilash
         queryClient.invalidateQueries("to_debts_trade_list");
-      },
+      }
     }
   );
 
@@ -96,7 +97,7 @@ const UpdateTradeToDebt = (props) => {
             name="to_who"
             value={formData.to_who}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -116,7 +117,7 @@ const UpdateTradeToDebt = (props) => {
             name="second_name"
             value={formData.second_name}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -137,7 +138,7 @@ const UpdateTradeToDebt = (props) => {
             name="price"
             value={formData.price}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -157,7 +158,7 @@ const UpdateTradeToDebt = (props) => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -169,24 +170,11 @@ const UpdateTradeToDebt = (props) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

@@ -6,8 +6,7 @@ import {
 } from "../../../../../api/DirectorRequest";
 import ModalSimple from "../../../../../utils/ModalSimple";
 
-const DeleteExpenseToAccounts = props => {
-  const { showModal, setShowModal, data } = props;
+const DeleteExpenseToAccounts = ({ showModal, setShowModal, data }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(

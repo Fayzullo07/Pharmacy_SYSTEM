@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyInComesPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import NumberInput from "../../../../../ui/NumberInput";
+import Textarea from "../../../../../ui/Textarea";
 
-const AddInComes = (props) => {
+const AddInComes = props => {
   const { showModal, setShowModal, deteils, getData } = props;
   const [fromClick, setFromClick] = useState(false);
   const [moveMoney, setMoveMoney] = useState(false);
@@ -18,9 +20,9 @@ const AddInComes = (props) => {
     to_user: null,
     to_pharmacy: getData.to_pharmacy,
     report_date: getData.report_date,
-    shift: getData.shift,
+    shift: getData.shift
   });
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     // Price validatsiyasi
@@ -46,7 +48,7 @@ const AddInComes = (props) => {
             formData.transfer_type != 3 || input1 == naxt
               ? null
               : formData.to_user,
-          transfer_type: input1 == naxt ? naxt : formData.transfer_type,
+          transfer_type: input1 == naxt ? naxt : formData.transfer_type
         }),
         setShowModal
       );
@@ -54,7 +56,7 @@ const AddInComes = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("incomes"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -90,7 +92,7 @@ const AddInComes = (props) => {
       setShowModal={setShowModal}
       mutation={mutation}
       handleSubmit={handleSubmit}
-      title={"Tushum qo'shish"}
+      title={"Tushumlar"}
     >
       <div className="modal-body">
         {/* TUSHUM TURINI TANLANG */}
@@ -100,7 +102,7 @@ const AddInComes = (props) => {
             id="transfer_typ"
             name="transfer_type"
             value={input1}
-            onChange={(e) => {
+            onChange={e => {
               setInput1(e.target.value);
               if (e.target.value == "naxt_siz") {
                 setFromClick(true);
@@ -109,25 +111,25 @@ const AddInComes = (props) => {
               }
             }}
           >
-            <option value="">Pul turini tanlang . . .</option>
+            <option value="">Tushum turini tanlang . . .</option>
             <option value={naxt}>NAXT</option>
             <option value="naxt_siz">NAXT PULSIZ</option>
           </select>
           <label htmlFor="transfer_typ">
-            Pul turini tanlang <b className="text-danger">*</b>
+            Tushum turini tanlang <b className="text-danger">*</b>
           </label>
         </div>
         <div className="row">
           <div className="col-md-6">
-            {fromClick && (
-              // TUSHUP TURINI TANLANG
+            {fromClick &&
               <div className="form-floating">
+                {/* {" "}// TUSHUP TURINI TANLANG */}
                 <select
                   className="form-select mb-3 bg-light"
                   id="transfer_type"
                   name="transfer_type"
                   value={formData.transfer_type}
-                  onChange={(e) => {
+                  onChange={e => {
                     if (e.target.value == 3) {
                       setMoveMoney(true);
                     } else {
@@ -136,28 +138,27 @@ const AddInComes = (props) => {
                     handleInputChange(e);
                   }}
                 >
-                  <option value="">O'tkazma turini tanlang . . .</option>
-                  {transfersWorker.map((transfer) => (
+                  <option value="">Naqdsiz tushum turini tanlang . . .</option>
+                  {transfersWorker.map(transfer =>
                     <option key={transfer.id} value={transfer.id}>
                       {transfer.name}
                     </option>
-                  ))}
-                  {deteils.transfer_types.map((type) => (
+                  )}
+                  {deteils.transfer_types.map(type =>
                     <option key={type.id} value={type.id}>
                       {type.name}
                     </option>
-                  ))}
+                  )}
                 </select>
                 <label htmlFor="transfer_type">
-                  O'tkazma turini tanlang <b className="text-danger">*</b>
+                  Naqdsiz tushum turini tanlang <b className="text-danger">*</b>
                 </label>
-              </div>
-            )}
+              </div>}
           </div>
           <div className="col-md-6">
-            {fromClick && (
-              // CLICK KIMGA TASHLANADI
+            {fromClick &&
               <div className="form-floating">
+                {/* {" "}// CLICK KIMGA TASHLANADI */}
                 <select
                   className="form-select mb-3 bg-light"
                   id="to_user"
@@ -166,70 +167,43 @@ const AddInComes = (props) => {
                   onChange={handleInputChange}
                   disabled={!moveMoney}
                 >
-                  {moveMoney && (
-                    <option value="">Kimga o'tkazildi . . .</option>
-                  )}
-                  {!moveMoney && (
+                  {moveMoney &&
+                    <option value=""> Tushum kimga tashlandi . . .</option>}
+                  {!moveMoney &&
                     <option value="" selected={!moveMoney}>
                       Xisob raqam
-                    </option>
-                  )}
+                    </option>}
 
                   {moveMoney &&
-                    deteils.employees.map((user) => (
+                    deteils.employees.map(user =>
                       <option key={user.id} value={user.id}>
                         {user.first_name} {user.last_name}
                       </option>
-                    ))}
+                    )}
                 </select>
                 <label htmlFor="to_user">
-                  Kimga o'tkazildi <b className="text-danger">*</b>
+                  Tushum kimga tashlandi <b className="text-danger">*</b>
                 </label>
-              </div>
-            )}
+              </div>}
           </div>
         </div>
 
         {/* MONEY INCOMES*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Tushum summasi"}
+        />
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.bio}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyExpensesPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
+import NumberInput from "../../../../../ui/NumberInput";
 
-const AddDiscount = (props) => {
+const AddDiscount = props => {
   const { showModal, setShowModal, getData } = props;
   const [formData, setFormData] = useState({
     second_name: "",
@@ -16,17 +18,17 @@ const AddDiscount = (props) => {
     expense_type: chegirma,
     report_date: getData.report_date,
     shift: getData.shift,
-    from_pharmacy: getData.to_pharmacy,
+    from_pharmacy: getData.to_pharmacy
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "second_name" && value.length > 9) {
       return;
     }
 
-    if (name === "price" && value.length > 9) {
+    if (name === "price" && Number(value) > Number(formData.second_name)) {
       return;
     }
 
@@ -44,7 +46,7 @@ const AddDiscount = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses_discount"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -72,47 +74,25 @@ const AddDiscount = (props) => {
       title={"Chegirma bilan savdo"}
     >
       <div className="modal-body">
-        {/* PRODUCT TOTAL */}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Maxsulot summasi"
-            id="second_name"
-            name="second_name"
-            value={formData.second_name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="second_name">
-            Maxsulot summasi <b className="text-danger">*</b>
-          </label>
-        </div>
+        {/* PRICE */}
+        <NumberInput
+          name={"second_name"}
+          value={formData.second_name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot summasi"}
+        />
 
         {/* MONEY EXPNESES*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Chegirma summasi"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Chegirma summasi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Chegirma summasi"}
+        />
 
         {/* DISCOUNT TURINI TANLANG */}
         <div className="form-floating">
@@ -132,24 +112,11 @@ const AddDiscount = (props) => {
         </div>
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

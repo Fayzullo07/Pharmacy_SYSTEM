@@ -2,34 +2,33 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import { useParams } from "react-router-dom";
-import SideBarEdit from "./Modals/SideBarEdit";
-import TodayInComes from "./TodayInComes/TodayInComes";
-import TodayExpenses from "./TodayExpenses/TodayExpenses";
-import TodayReturn from "./TodayReturn/TodayReturn";
-import TodayDiscount from "./TodayDiscount/TodayDiscount";
-import TodayExpenseToAccounts from "./TodayExpenseToAccounts/TodayExpenseToAccounts";
-import TodayTradeToDebt from "./TodayTradeToDebt/TodayTradeToDebt";
-import TodayToDebt from "./TodayToDebt/TodayToDebt";
-import TodayDebt from "./TodayDebt/TodayDebt";
-import TodayDebtRepay from "./TodayDebtRepay/TodayDebtRepay";
-import TodayTradeToDebtRepay from "./TodayTradeToDebtRepay/TodayTradeToDebtRepay";
-import TodayToDeptRepay from "./TodayToDebtRepay/TodayToDebtRepay";
-import TodayExPenseToFirm from "./TodayExPenseToFirm/TodayExPenseToFirm";
 import { formatNumber } from "../../../functions/NecessaryFunctions";
-import Receipts from "./Modals/Receipts";
 import { useQuery } from "react-query";
 import { remeinderGetAPI } from "../../../api/GlobalRequest";
 
 import "./EditReport.css";
 import { today } from "../../../api";
+import TodayInComes from "../../UserAdmin/EditReport/TodayInComes/TodayInComes";
+import TodayExpenses from "../../UserAdmin/EditReport/TodayExpenses/TodayExpenses";
+import TodayExPenseToFirm from "../../UserAdmin/EditReport/TodayExPenseToFirm/TodayExPenseToFirm";
+import TodayTradeToDebt from "../../UserAdmin/EditReport/TodayTradeToDebt/TodayTradeToDebt";
+import TodayTradeToDebtRepay from "../../UserAdmin/EditReport/TodayTradeToDebtRepay/TodayTradeToDebtRepay";
+import TodayToDebt from "../../UserAdmin/EditReport/TodayToDebt/TodayToDebt";
+import TodayToDeptRepay from "../../UserAdmin/EditReport/TodayToDebtRepay/TodayToDebtRepay";
+import TodayDebt from "../../UserAdmin/EditReport/TodayDebt/TodayDebt";
+import TodayDebtRepay from "../../UserAdmin/EditReport/TodayDebtRepay/TodayDebtRepay";
+import TodayReturn from "../../UserAdmin/EditReport/TodayReturn/TodayReturn";
+import TodayDiscount from "../../UserAdmin/EditReport/TodayDiscount/TodayDiscount";
+import TodayExpenseToAccounts from "../../UserAdmin/EditReport/TodayExpenseToAccounts/TodayExpenseToAccounts";
+import Receipts from "../../UserAdmin/EditReport/Modals/Receipts";
+import SideBarEdit from "../../UserAdmin/EditReport/Modals/SideBarEdit";
 
 const EditReportWorker = ({ user }) => {
-  const reduxData = useSelector((state) => state);
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [shows, setShows] = useState("1");
+  const [shows, setShows] = useState("11");
 
   const { data: remeinder } = useQuery({
     queryKey: ["remeinder", shows],
@@ -37,15 +36,15 @@ const EditReportWorker = ({ user }) => {
       return await remeinderGetAPI({
         report_date: today,
         shift: user.shift,
-        pharmacy_id: user.pharmacy,
+        pharmacy_id: user.pharmacy
       });
-    },
+    }
   });
 
   const getData = {
     report_date: today,
     shift: user.shift,
-    to_pharmacy: user.pharmacy,
+    to_pharmacy: user.pharmacy
   };
   return (
     <div className="d-flex">
@@ -54,7 +53,7 @@ const EditReportWorker = ({ user }) => {
         <Topbar>
           <div className="header_flex">
             <h2 id="remeinder">
-              <span>Kassadagi qoldiq: </span>
+              <span>Kassa: </span>
               <b>
                 {remeinder &&
                   remeinder.data &&
@@ -85,34 +84,29 @@ const EditReportWorker = ({ user }) => {
 
         {shows == "1" && <TodayInComes deteils={deteils} getData={getData} />}
         {shows == "2" && <TodayExpenses deteils={deteils} getData={getData} />}
-        {shows == "3" && (
-          <TodayExPenseToFirm deteils={deteils} getData={getData} />
-        )}
-        {shows == "4" && (
-          <TodayTradeToDebt is_client={true} getData={getData} />
-        )}
-        {shows == "5" && (
+        {shows == "3" &&
+          <TodayExPenseToFirm deteils={deteils} getData={getData} />}
+        {shows == "4" &&
+          <TodayTradeToDebt is_client={true} getData={getData} />}
+        {shows == "5" &&
           <TodayTradeToDebtRepay
             deteils={deteils}
             is_client={true}
             getData={getData}
-          />
-        )}
+          />}
         {shows == "6" && <TodayToDebt is_client={false} getData={getData} />}
-        {shows == "7" && (
+        {shows == "7" &&
           <TodayToDeptRepay
             deteils={deteils}
             is_client={false}
             getData={getData}
-          />
-        )}
+          />}
         {shows == "8" && <TodayDebt deteils={deteils} getData={getData} />}
         {shows == "9" && <TodayDebtRepay deteils={deteils} getData={getData} />}
         {shows == "10" && <TodayReturn deteils={deteils} getData={getData} />}
         {shows == "11" && <TodayDiscount getData={getData} />}
-        {shows == "12" && (
-          <TodayExpenseToAccounts deteils={deteils} getData={getData} />
-        )}
+        {shows == "12" &&
+          <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
       </div>
     </div>
   );

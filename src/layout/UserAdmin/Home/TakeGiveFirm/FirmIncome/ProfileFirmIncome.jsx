@@ -10,13 +10,15 @@ import {
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import { today } from "../../../../../api";
 import ModalSearchFirmIncome from "./ModalSearch/ModalSearchFirmIncome";
+import DeteilsFirmIncome from "./Modal/DeteilsFirmIncome";
 
 const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
   const [searchModal, setSearchModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [deteilModal, setDeteilModal] = useState(false);
 
-  const [curData, setCurData] = useState();
+  const [curData, setCurData] = useState({});
 
   const { data, isLoading, error } = useQuery(
     ["firms_incomes", date_firm],
@@ -62,6 +64,13 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
         />
       )}
 
+      {deteilModal && (
+        <DeteilsFirmIncome
+          showModal={deteilModal}
+          setShowModal={setDeteilModal}
+          data={curData}
+        />
+      )}
       <div>
         <div className="header_flex d-flex justify-content-between align-items-center">
           <p className="bg_c">
@@ -115,6 +124,13 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 >
                   <i className="fa fa-trash-can text-danger"></i>
                 </th>
+                <th
+                  scope="col"
+                  className="text-center"
+                  style={{ width: "5px" }}
+                >
+                  <i className="fa fa-eye text-info"></i>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -148,6 +164,15 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                       }}
                     >
                       <i className="fa fa-trash-can text-danger cursor_pointer"></i>
+                    </td>
+                    <td
+                      data-label="To'liq"
+                      onClick={() => {
+                        setCurData(item);
+                        setDeteilModal(!deteilModal);
+                      }}
+                    >
+                      <i className="fa fa-eye text-info cursor_pointer"></i>
                     </td>
                   </tr>
                 ))}

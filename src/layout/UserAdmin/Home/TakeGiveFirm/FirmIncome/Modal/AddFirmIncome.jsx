@@ -5,8 +5,9 @@ import { firmIncomePostAction } from "../../../../../../functions/GlobalActions"
 import { cleanedData } from "../../../../../../functions/NecessaryFunctions";
 import { today } from "../../../../../../api";
 import Modal from "../../../../../../utils/Modal";
+import Textarea from "../../../../../../ui/Textarea";
 
-const AddFirmIncome = (props) => {
+const AddFirmIncome = props => {
   const { showModal, setShowModal, deteils, date_firm, curData } = props;
   const [formData, setFormData] = useState({
     price: "",
@@ -15,10 +16,10 @@ const AddFirmIncome = (props) => {
     deadline_date: "",
     is_transfer_return: false,
     from_firm: curData.id,
-    report_date: date_firm,
+    report_date: date_firm
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name == "second_name" && value.length > 50) {
@@ -45,7 +46,7 @@ const AddFirmIncome = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("firms_incomes");
-      },
+      }
     }
   );
 
@@ -68,32 +69,17 @@ const AddFirmIncome = (props) => {
     mutation.mutate();
   };
 
-  return (
-    <Modal
-      showModal={showModal}
-      setShowModal={setShowModal}
-      mutation={mutation}
-      handleSubmit={handleSubmit}
-      title={curData.name}
-    >
+  return <Modal showModal={showModal} setShowModal={setShowModal} mutation={mutation} handleSubmit={handleSubmit} title={curData.name}>
       <div className="modal-body">
         <div className="row">
           {/* NAME */}
           <div className="col-md-6">
             <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Olingan mahsulot nomi"
-                className="form-control"
-                name="second_name"
-                value={formData.second_name}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
+              <input type="text" placeholder="Olingan mahsulot nomi" className="form-control" name="second_name" value={formData.second_name} onChange={handleInputChange} onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
-                }}
-              />
+                }} />
               <label>
                 Olingan mahsulot nomi <b className="text-danger">*</b>
               </label>
@@ -103,19 +89,11 @@ const AddFirmIncome = (props) => {
           {/* PRICE */}
           <div className="col-md-6">
             <div className="form-floating mb-3">
-              <input
-                type="number"
-                placeholder="Miqdor"
-                className="form-control"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
+              <input type="number" placeholder="Miqdor" className="form-control" name="price" value={formData.price} onChange={handleInputChange} onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
-                }}
-              />
+                }} />
               <label>
                 Miqdor <b className="text-danger">*</b>{" "}
               </label>
@@ -125,20 +103,11 @@ const AddFirmIncome = (props) => {
           {/* DEADLINE DATE */}
           <div className="col-md-6">
             <div className="form-floating mb-3">
-              <input
-                type="date"
-                placeholder="Qayatarish muddati"
-                className="form-control"
-                name="deadline_date"
-                min={today}
-                value={formData.deadline_date}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
+              <input type="date" placeholder="Qayatarish muddati" className="form-control" name="deadline_date" min={today} value={formData.deadline_date} onChange={handleInputChange} onKeyDown={e => {
                   if (e.key === "Enter") {
                     handleSubmit();
                   }
-                }}
-              />
+                }} />
               <label>
                 Qayatarish muddati <b className="text-danger">*</b>
               </label>
@@ -148,13 +117,7 @@ const AddFirmIncome = (props) => {
           {/* HOW TO RETERN TRANSFER TYPE WITH MONEY OR WITHOUT MONEY */}
           <div className="col-md-6">
             <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                id="is_transfer_return"
-                name="is_transfer_return"
-                value={formData.is_transfer_return}
-                onChange={handleInputChange}
-              >
+              <select className="form-select mb-3" id="is_transfer_return" name="is_transfer_return" value={formData.is_transfer_return} onChange={handleInputChange}>
                 <option value={false}>NAXT</option>
                 <option value={true}>NAXT PULSIZ</option>
               </select>
@@ -166,27 +129,9 @@ const AddFirmIncome = (props) => {
         </div>
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea value={formData.desc} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
       </div>
-    </Modal>
-  );
+    </Modal>;
 };
 
 export default AddFirmIncome;

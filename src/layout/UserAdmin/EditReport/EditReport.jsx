@@ -29,7 +29,7 @@ const EditReport = () => {
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [shows, setShows] = useState("1");
+  const [shows, setShows] = useState("3");
 
   const getData = {
     report_date,
@@ -54,7 +54,7 @@ const EditReport = () => {
         <Topbar>
           <div className="header_flex">
             <h2 id="remeinder">
-              <span>Kassadagi qoldiq: </span>
+              <span>Kassa: </span>
               <b>
                 {remeinder &&
                   remeinder.data &&

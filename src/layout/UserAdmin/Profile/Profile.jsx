@@ -5,9 +5,8 @@ import Topbar from "../../../components/Topbar/Topbar";
 import { user } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 import TextInput from "../../../ui/TextInput";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { profilePatchAction } from "../../../functions/DirectorActions";
-import { profileGetAPI } from "../../../api/DirectorRequest";
 import PasswordInput from "../../../ui/PasswordInput";
 import { toast } from "react-toastify";
 import { cleanedData } from "../../../functions/NecessaryFunctions";
@@ -105,12 +104,15 @@ const Profile = ({ userData }) => {
             <div className="card mb-4">
               <div className="card-body text-center">
                 <img src={user} alt="avatar" className="rounded-circle img-fluid" />
-                <h5 className="my-3">
+                <h5 className="my-1">
                   {userData.role == "Director" ? "Director" : "Worker"}
                 </h5>
                 <h2 className="text-muted">
                   {userData.first_name} {userData.last_name}
                 </h2>
+                <h5 className="my-1">
+                  {userData.phone_number}
+                </h5>
               </div>
             </div>
             <div className="card p-2">

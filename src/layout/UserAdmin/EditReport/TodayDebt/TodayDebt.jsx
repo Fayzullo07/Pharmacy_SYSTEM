@@ -94,8 +94,8 @@ const TodayDebt = (props) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Kimdan</th>
-                <th>Telefon</th>
+                <th>Kimdan qarz olindi</th>
+                <th>Telefon raqami</th>
                 <th>Olingan summa</th>
                 <th>Qolgan summa</th>
                 <th scope="col" style={{ width: "5px" }}>
@@ -111,10 +111,10 @@ const TodayDebt = (props) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Kimdan" className="text-capitalize">
+                    <td data-label="Kimdan qarz olindi" className="text-capitalize">
                       {item.from_who}
                     </td>
-                    <td data-label="Telefon">
+                    <td data-label="Telefon raqami">
                       <b>{item.phone_number}</b>
                     </td>
                     <td data-label="Olingan summa">

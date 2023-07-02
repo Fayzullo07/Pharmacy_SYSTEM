@@ -148,8 +148,8 @@ const TodayExpenses = ({ deteils, getData }) => {
               <tr>
                 <th>Xarajat turi</th>
                 <th>Xarajat kimdan qilindi</th>
-                <th>Pul turi</th>
-                <th>Miqdor</th>
+                <th>To'lov turi</th>
+                <th>Xarajat summasi</th>
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-edit text-warning"></i>
                 </th>
@@ -171,28 +171,28 @@ const TodayExpenses = ({ deteils, getData }) => {
                     >
                       Kassadan
                     </td>
-                    <td data-label="Pul turi" className="text-uppercase">
+                    <td data-label="To'lov turi" className="text-uppercase">
                       {item.transfer_type_name}
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label="Xarajat summasi">
                       <b>{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'zgartirish">
-                      <i
-                        className="fa fa-edit text-warning cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'zgartirish"  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
-                        }}
+                        }}>
+                      <i
+                        className="fa fa-edit text-warning cursor_pointer"
+                       
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
-                      <i
-                        className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'chirish" onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
-                        }}
+                        }}>
+                      <i
+                        className="fa fa-trash-can text-danger cursor_pointer"
+                        
                       ></i>
                     </td>
                   </tr>
