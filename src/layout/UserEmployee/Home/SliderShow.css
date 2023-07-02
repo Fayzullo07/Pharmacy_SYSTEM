@@ -95,14 +95,20 @@
     clear: both;
 }
 
+.container .row {
+    width: 90%;
+    margin: 0 auto;
+}
+
 /* Six columns side by side */
 .column {
     float: left;
-    width: 16.66%;
+    width: calc(100% / 4);
 }
 
 .column img {
     border-radius: 10px;
+    height: 80px;
 }
 
 /* Add a transparency effect for thumnbail images */
@@ -125,6 +131,10 @@
         color: var(--g_white);
 
     }
+     .container .row {
+        width: 100%;
+        /* margin: 0 auto; */
+    }
 }
 
 @media (max-width: 576px) {
@@ -138,4 +148,6 @@
         left: 10px;
         color: var(--g_white);
     }
+
+   
 }

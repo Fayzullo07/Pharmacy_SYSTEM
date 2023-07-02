@@ -7,6 +7,7 @@ import { toggleFunction } from "../../redux/Actions/ToggleActions";
 import { useDispatch, useSelector } from "react-redux";
 import Logout from "./Logout";
 import Languages from "./Languages";
+import { logo } from "../../assets";
 
 const Navbar = () => {
   const [navData, setNavData] = useState([]);
@@ -36,8 +37,7 @@ const Navbar = () => {
         <ul>
           <NavLink href="/profile">
             <li>
-              <span className="title">E</span>
-              <span className="title">Hisobot.com</span>
+            <img src={logo} alt="logo" />
             </li>
           </NavLink>
           {navData.map((item) => (

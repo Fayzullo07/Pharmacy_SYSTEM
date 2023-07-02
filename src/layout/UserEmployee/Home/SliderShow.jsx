@@ -6,34 +6,31 @@ const SliderShow = () => {
   let slides1 = [
     {
       id: 1,
-      img: slider,
+      img:
+        "https://firebasestorage.googleapis.com/v0/b/imageuploadapp-a9f2e.appspot.com/o/DDDD.png?alt=media&token=3ccb92d8-5d0d-4b1b-aabc-28532311ceb2"
     },
     {
       id: 2,
-      img: slider1,
+      img:
+        "https://firebasestorage.googleapis.com/v0/b/imageuploadapp-a9f2e.appspot.com/o/1547222145572%20(1).jpg?alt=media&token=4336f9b5-8a92-4982-9f96-5dbe059b6cc4"
     },
     {
       id: 3,
-      img: slider,
+      img:
+        "https://firebasestorage.googleapis.com/v0/b/imageuploadapp-a9f2e.appspot.com/o/What-is-a-Project-Report-and-How-to-Create-one.jpg.optimal.jpg?alt=media&token=724c6a44-7aaa-4ce2-a7ad-8381a7f0481b"
     },
     {
       id: 4,
-      img: slider1,
+      img:
+        "https://firebasestorage.googleapis.com/v0/b/imageuploadapp-a9f2e.appspot.com/o/e_hisobot_main.png?alt=media&token=de1af6ca-fca4-45bc-9de7-d88050dadbfa"
     },
-    {
-      id: 5,
-      img: slider,
-    },
-    {
-      id: 6,
-      img: slider1,
-    },
+
   ];
   const [slideIndex, setSlideIndex] = useState(1);
 
   // Next/previous controls
 
-  const plusSlides = (n) => {
+  const plusSlides = n => {
     if (slideIndex >= slides1.length) {
       setSlideIndex(1);
     } else {
@@ -41,7 +38,7 @@ const SliderShow = () => {
     }
   };
 
-  const minusSlides = (n) => {
+  const minusSlides = n => {
     if (slideIndex == 1) {
       setSlideIndex(slides1.length);
     } else {
@@ -50,25 +47,28 @@ const SliderShow = () => {
   };
 
   // Thumbnail image controls
-  const currentSlide = (n) => {
+  const currentSlide = n => {
     setSlideIndex(n);
   };
 
   // Automatic slide change
-  useEffect(() => {
-    const timer = setInterval(() => {
-      plusSlides(1);
-    }, 3000);
+  useEffect(
+    () => {
+      const timer = setInterval(() => {
+        plusSlides(1);
+      }, 3000);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, [slideIndex]);
+      return () => {
+        clearInterval(timer);
+      };
+    },
+    [slideIndex]
+  );
 
   return (
     <div className="container">
       {/* <!-- Full-width images with number text --> */}
-      {slides1.map((item, index) => (
+      {slides1.map((item, index) =>
         <div
           key={item.id}
           className={`mySlides ${slideIndex == index + 1 ? "active" : ""}`}
@@ -81,7 +81,7 @@ const SliderShow = () => {
           </div>
           <img src={item.img} style={{ width: "100%" }} />
         </div>
-      ))}
+      )}
 
       {/* <!-- Next and previous buttons --> */}
       <a className="prev" onClick={() => minusSlides(1)}>
@@ -93,19 +93,19 @@ const SliderShow = () => {
 
       {/* <!-- Thumbnail images --> */}
       <div className="row">
-        {slides1.map((item, index) => (
+        {slides1.map((item, index) =>
           <div key={item.id + index} className="column">
             <img
-              className={`demo cursor ${
-                index == slideIndex - 1 ? "active" : ""
-              }`}
+              className={`demo cursor ${index == slideIndex - 1
+                ? "active"
+                : ""}`}
               src={item.img}
               style={{ width: "100%" }}
               onClick={() => currentSlide(index + 1)}
               alt={`The Woods ${index + 1}`}
             />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

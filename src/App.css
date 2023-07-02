@@ -6,17 +6,20 @@
 
 *::-webkit-scrollbar {
   width: 0px;
-  height: 0px;
+  height: 15px;
+  cursor: pointer;
 }
 
 *::-webkit-scrollbar-track {
-  background: #2A80B9;
-  border-radius: 50px;
+  /* background: #2A80B9;
+  border-radius: 50px; */
+  cursor: pointer;
 }
 
 *::-webkit-scrollbar-thumb {
   background: #95c1da;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 *::-webkit-scrollbar-thumb:hover {
