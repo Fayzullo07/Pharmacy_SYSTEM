@@ -3,8 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import ModalDelete from "../../../../../utils/ModalDelete";
 import { firmsDeleteAPI } from "../../../../../api/DirectorRequest";
 
-const DeleteFirm = (props) => {
-  const { showModal, setShowModal, data } = props;
+const DeleteFirm = ({ showModal, setShowModal, data }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -15,7 +14,7 @@ const DeleteFirm = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("firms"); // Ma'lumotlarni yangilash
         setShowModal(false);
-      },
+      }
     }
   );
 

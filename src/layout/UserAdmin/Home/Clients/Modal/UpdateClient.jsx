@@ -4,26 +4,42 @@ import { clientPatchAction } from "../../../../../functions/GlobalActions";
 import {
   checkPhoneNumber,
   cleanedData,
-  tekshirish3,
+  tekshirish3
 } from "../../../../../functions/NecessaryFunctions";
 import { toast } from "react-toastify";
-import { today } from "../../../../../api";
 import Modal from "../../../../../utils/Modal";
+import Textarea from "../../../../../ui/Textarea";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import NumberInput from "../../../../../ui/NumberInput";
+import TextInput from "../../../../../ui/TextInput";
+import DateInput from "../../../../../ui/DateInput";
 
-const UpdateClient = (props) => {
+const UpdateClient = props => {
   const { showModal, setShowModal, data } = props;
   const [formData, setFormData] = useState({
     first_name: data.first_name,
     phone_number1: data.phone_number1,
     total_amount: data.total_amount,
     birthdate: data.birthdate.split(".").reverse().join("-"),
-    bio: data.bio,
+    bio: data.bio
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "first_name" && value.length > 50) {
       return;
+    }
+
+    if (name === "phone_number1") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
     }
 
     if (name === "total_amount" && value.length > 9) {
@@ -33,7 +49,7 @@ const UpdateClient = (props) => {
     if (name === "bio" && value.length > 300) {
       return;
     }
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const queryClient = useQueryClient();
@@ -45,7 +61,7 @@ const UpdateClient = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("clients");
-      },
+      }
     }
   );
 
@@ -60,13 +76,13 @@ const UpdateClient = (props) => {
       return;
     }
 
-    if (checkPhoneNumber(formData.phone_number1)) {
-      toast.warning("Telefon raqamni to'gri kiriting +998 99 111 22 33 !");
+    if (formData.total_amount < 100) {
+      toast.warning("Eng kam summa 100 so'm!");
       return;
     }
 
-    if (formData.total_amount < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+    if (checkPhoneNumber(formData.phone_number1)) {
+      toast.warning("Telefon raqamni to'gri kiriting +998 99 111 22 33 !");
       return;
     }
 
@@ -83,105 +99,51 @@ const UpdateClient = (props) => {
     >
       <div className="modal-body">
         {/* F.I.O */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="F.I.O"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            F.I.O <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"first_name"}
+          value={formData.first_name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"F.I.O"}
+        />
 
         {/* BIRTHDATE */}
-        <div className="form-floating mb-3">
-          <input
-            type="date"
-            className="form-control"
-            placeholder="Tug'ilgan kun"
-            name="birthdate"
-            max={today}
-            value={formData.birthdate}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Tug'ilgan kun <b className="text-danger">*</b>
-          </label>
-        </div>
+        <DateInput
+          name={"birthdate"}
+          value={formData.birthdate}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Tug'ilgan kuni"}
+        />
 
         {/* PHONE 1 */}
-        <div className="form-floating mb-3">
-          <input
-            type="tel"
-            className="form-control"
-            placeholder="Telefon"
-            name="phone_number1"
-            value={formData.phone_number1}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Telefon <b className="text-danger">*</b>
-          </label>
-        </div>
+        <PhoneInput
+          name={"phone_number1"}
+          value={formData.phone_number1}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
         {/* TOTAL AMOUNT */}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Summa"
-            name="total_amount"
-            value={formData.total_amount}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Mahsulot summasi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"total_amount"}
+          value={formData.total_amount}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot summasi"}
+        />
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          name={"bio"}
+          value={formData.bio}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

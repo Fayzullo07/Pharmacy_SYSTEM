@@ -8,13 +8,13 @@ import { firmsGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { formatNumber } from "../../../../functions/NecessaryFunctions";
-import AddFirma from "./Modal/AddFirma";
-import UpdateFirma from "./Modal/UpdateFirma";
 import SearchInput from "../../../../utils/SearchInput";
 import { isFavoriteFunction } from "../../../../redux/Actions/ToggleActions";
-import DeleteFirm from "./Modal/DeleteFirm";
+import AddFirma from "../../Home/Firms/Modal/AddFirma";
+import DeleteFirm from "../../Home/Firms/Modal/DeleteFirm";
+import UpdateFirma from "../../Home/Firms/Modal/UpdateFirma";
 
-const Firms = () => {
+const FirmsProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -127,14 +127,19 @@ const Firms = () => {
                     №
                   </th>
                   <th scope="col">Firma nomi</th>
-                  <th scope="col">Telefon raqamni</th>
+                  <th scope="col">Telefon raqami</th>
                   <th scope="col">Manzil</th>
-                  <th scope="col">Naqd pul qarz</th>
-                  <th scope="col">Naqd pulsiz qarz</th>
-                  
                   <th scope="col" style={{ width: "5px" }}>
-                    <i className="fa fa-eye text-info"></i>
+                    <i className="fa fa-edit text-warning"></i>
                   </th>
+                  <th
+                    scope="col"
+                    className="text-center"
+                    style={{ width: "5px" }}
+                  >
+                    <i className="fa fa-trash-can text-danger"></i>
+                  </th>
+                 
                 </tr>
               </thead>
               <tbody>
@@ -160,36 +165,24 @@ const Firms = () => {
                         {item.address ? item.address : "~"}
                       </td>
 
-                      <td
-                        data-label="Naqd pul qarz"
-                        className={
-                          item.not_transfer_debt > 0
-                            ? "text-danger"
-                            : "text-success"
-                        }
-                      >
-                        <b >
-                          {formatNumber(item.not_transfer_debt)}
-                        </b>
-                      </td>
-                      <td
-                        data-label="Naqd pulsiz qarz"
-                        className={
-                          item.transfer_debt > 0
-                            ? "text-danger"
-                            : "text-success"
-                        }
-                      >
-                        <b>{formatNumber(item.transfer_debt)}</b>
-                      </td>
-                     
-                      <td data-label="Hisobot">
+                      <td data-label="O'zgartirish">
                         <i
-                          className="fa fa-eye text-info cursor_pointer"
-                          onClick={() =>
-                            navigate(`/firms/${item.id}/${item.name}`)
-                          }
+                          className="fa fa-edit text-warning cursor_pointer"
+                          onClick={() => {
+                            setCurData(item);
+                            setUpdateModal(!updateModal);
+                          }}
                         ></i>
+                      </td>
+
+                      <td
+                        data-label="O'chirish"
+                        onClick={() => {
+                          setCurData(item);
+                          setDeleteModal(!deleteModal);
+                        }}
+                      >
+                        <i className="fa fa-trash-can text-danger  cursor_pointer"></i>
                       </td>
                     </tr>
                   ))}
@@ -211,4 +204,4 @@ const Firms = () => {
   );
 };
 
-export default Firms;
+export default FirmsProfile;

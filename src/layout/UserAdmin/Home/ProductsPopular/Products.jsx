@@ -41,7 +41,7 @@ const Products = () => {
         <AddPopularProducts
           showModal={showModal}
           setShowModal={setShowModal}
-          deteils={deteils.pharmacies}
+          deteils={deteils}
         />
       )}
 
@@ -58,6 +58,7 @@ const Products = () => {
           showModal={updateModal}
           setShowModal={setUpdateModal}
           data={curData}
+          deteils={deteils}
         />
       )}
       <div className="d-flex">
@@ -93,8 +94,9 @@ const Products = () => {
               <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
                 <tr>
                   <th style={{ width: "5px" }}>№</th>
-                  <th>Nomi</th>
-                  <th>Miqdori</th>
+                  <th>Filial nomi</th>
+                  <th>Mahsulot nomi</th>
+                  <th>Mahsulot summasi</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -115,7 +117,7 @@ const Products = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2> Mahsulot topilmadi!</h2>
+                      <h2>Malumot topilmadi!</h2>
                     </td>
                   </tr>
                 )}
@@ -123,30 +125,33 @@ const Products = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}>
                       <td data-label="№">{index + 1}</td>
-                      <td data-label="Nomi" className="text-capitalize">
+                      <td data-label="Filial nomi" className="text-capitalize">
+                        <b>{item.pharmacy_name}</b>
+                      </td>
+                      <td data-label="Mahsulot nomi" className="text-capitalize">
                         <b>{item.name}</b>
                       </td>
-                      <td data-label="Miqdori">
+                      <td data-label="Mahsulot summasi">
                         <b className="text-success">
                           {formatNumber(item.price)}
                         </b>
                       </td>
-                      <td data-label="O'zgartirish">
+                      <td data-label="O'zgartirish" onClick={() => {
+                        setCurData(item);
+                        setUpdateModal(!updateModal);
+                      }}>
                         <i
                           className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
-                            setCurData(item);
-                            setUpdateModal(!updateModal);
-                          }}
+
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
+                      <td data-label="O'chirish" onClick={() => {
+                        setCurData(item);
+                        setDeleteModal(!deleteModal);
+                      }}>
                         <i
                           className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
-                            setCurData(item);
-                            setDeleteModal(!deleteModal);
-                          }}
+
                         ></i>
                       </td>
                     </tr>

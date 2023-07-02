@@ -4,17 +4,20 @@ import { toast } from "react-toastify";
 import { popularProductsPostAction } from "../../../../../functions/GlobalActions";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
+import NumberInput from "../../../../../ui/NumberInput";
+import Textarea from "../../../../../ui/Textarea";
+import SelectInput from "../../../../../ui/SelectInput";
 
-const AddPopularProducts = (props) => {
-  const { showModal, setShowModal, deteils } = props;
+const AddPopularProducts = ({ showModal, setShowModal, deteils }) => {
   const [formData, setFormData] = useState({
     name: "",
     price: null,
     desc: "",
-    pharmacy: deteils[0].id,
+    pharmacy: ""
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "name" && value.length > 50) {
       return;
@@ -39,17 +42,22 @@ const AddPopularProducts = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("popular_products"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
   const handleSubmit = () => {
     if (!formData.name) {
-      toast.warning("Nomini kiriting !");
+      toast.warning("Mahsulot nomi !");
       return;
     }
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning("Mahsulot summasi eng kami 100 so'm !");
+      return;
+    }
+
+    if (!formData.pharmacy) {
+      toast.warning("Filialni tanlang!");
       return;
     }
     mutation.mutate();
@@ -64,66 +72,41 @@ const AddPopularProducts = (props) => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Nomi"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="name">
-            Nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot nomi"}
+        />
 
         {/* PRICE*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot summasi"}
+        />
+
+        {/* PHARMACIES */}
+        <SelectInput
+          name={"pharmacy"}
+          value={formData.pharmacy}
+          handleInputChange={handleInputChange}
+          isRequired={true}
+          placeholder={"Filialni tanlang"}
+          data={deteils.pharmacies}
+        />
 
         {/* BIO */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.bio}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

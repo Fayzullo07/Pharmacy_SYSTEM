@@ -61,7 +61,7 @@ const Clients = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Mijozlar</h2>
+              <h2>Klientlar bazasi</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -90,9 +90,9 @@ const Clients = () => {
                 <tr>
                   <th style={{ width: "5px" }}>№</th>
                   <th>F.I.O</th>
-                  <th>Tug'ilgan</th>
-                  <th>Telefon</th>
-                  <th>Miqdor</th>
+                  <th>Tug'ilgan kuni</th>
+                  <th>Telefon raqami</th>
+                  <th>Mahsulot summasi</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -113,7 +113,7 @@ const Clients = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2> Klient topilmadi!</h2>
+                      <h2>Malumot topilmadi!</h2>
                     </td>
                   </tr>
                 )}
@@ -133,22 +133,22 @@ const Clients = () => {
                           {formatNumber(item.total_amount)}
                         </b>
                       </td>
-                      <td data-label="O'zgartirish">
+                      <td data-label="O'zgartirish" onClick={() => {
+                        setCurData(item);
+                        setUpdateModal(!updateModal);
+                      }}>
                         <i
                           className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
-                            setCurData(item);
-                            setUpdateModal(!updateModal);
-                          }}
+
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
+                      <td data-label="O'chirish" onClick={() => {
+                        setCurData(item);
+                        setDeleteModal(!deleteModal);
+                      }}>
                         <i
                           className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
-                            setCurData(item);
-                            setDeleteModal(!deleteModal);
-                          }}
+
                         ></i>
                       </td>
                     </tr>

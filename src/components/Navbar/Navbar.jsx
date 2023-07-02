@@ -5,7 +5,6 @@ import "./Navbar.css";
 import { routes, routesEmployee } from "../../api";
 import { toggleFunction } from "../../redux/Actions/ToggleActions";
 import { useDispatch, useSelector } from "react-redux";
-import { changeLang, handleLogout } from "../../App";
 import Logout from "./Logout";
 import Languages from "./Languages";
 
@@ -60,14 +59,14 @@ const Navbar = () => {
               </li>
             </NavLink>
           ))}
-          <NavLink to={"/"} onClick={() => setLogOutModal(true)}>
+          <a onClick={() => setLogOutModal(true)}>
             <li>
               <span className="icon">
                 <i className="fas fa-right-from-bracket fa-lg"></i>
               </span>
               <span className="title">Log out</span>
             </li>
-          </NavLink>
+          </a>
           <Languages/>
         </ul>
       </div>

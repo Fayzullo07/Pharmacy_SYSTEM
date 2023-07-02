@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import * as GlobalApi from "../api/GlobalRequest";
 
-
 // -----------------------------RECEIPTS---------------------
 // RECEIPTS POST
 export const receiptsPostAction = async datas => {
@@ -248,13 +247,12 @@ export const firmsExpenseVerifyPostAction = async (datas, setShowModal) => {
     toast.success(`Tekshirildi`);
     setShowModal(false);
   } catch (error) {
-    setShowModal(false);
-    toast.error(`Xato!`);
     if (error.response.status == 403) {
       localStorage.clear();
       window.location.href = "/";
       return;
     }
+    toast.error(`Xato!`);
     const keys = Object.keys(error.response.data);
     for (let key of keys) {
       toast.warning(
@@ -308,7 +306,6 @@ export const firmsReturnsVerifyPostAction = async (datas, setShowModal) => {
       window.location.href = "/";
       return;
     }
-    setShowModal(false);
     toast.error(`Xato!`);
     const keys = Object.keys(error.response.data);
     for (let key of keys) {

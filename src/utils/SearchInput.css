@@ -13,7 +13,7 @@
     height: 40px;
     border-radius: 40px;
     padding: 5px 20px;
-    padding-left: 35px;
+    padding-left: 20px;
     font-size: 18px;
     outline: none;
     border: 1px solid var(--black2);
@@ -21,7 +21,19 @@
 
 .search label i {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 5px;
+    right: 4px;
+    background: var(--blue);
+    padding: 6px 20px;
+    border-radius: 50px;
     font-size: 1.2em;
+    color: var(--g_white);
+    transition: .2s;
+}
+
+.search label i:hover {
+    top: 0px;
+    right: 0px;
+    padding: 10px 24px;
+    transition: 0.5s;
 }

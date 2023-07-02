@@ -121,14 +121,17 @@ export const totalWatntToByKey = (datas, key) => {
   return total;
 };
 
-export function tekshirish3(malumot) {
+export function tekshirish3(data) {
   // So'zlarni ajratib olamiz
-  var sozlar = malumot.split(" ");
+  var sozlar = data.split(" ");
 
   // Uchta harfli so'zlarni topish
+  console.log(sozlar, "0");
+
   var uchtaHarfli = sozlar.filter(function(soz) {
-    return soz.length >= 3;
+    return soz.length >= 1;
   });
+  console.log(uchtaHarfli, "1");
 
   // Uchta harfli so'zlar bo'lmasa, "false" qaytaradi
   if (
@@ -141,7 +144,7 @@ export function tekshirish3(malumot) {
 
   // Har bir so'z uchun tekshirish
   for (var i = 0; i < uchtaHarfli.length; i++) {
-    if (uchtaHarfli[i].length < 3) {
+    if (uchtaHarfli[i].length < 1) {
       return false;
     }
   }

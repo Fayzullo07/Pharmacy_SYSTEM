@@ -23,7 +23,6 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
     id: "",
   });
 
-  const [user, setUser] = useState({});
 
   useEffect(() => {
     document.body.style.overflowY = `${

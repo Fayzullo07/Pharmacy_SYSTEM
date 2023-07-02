@@ -8,10 +8,11 @@ import {
 import { useDispatch } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import Textarea from "../../../../../ui/Textarea";
 
-const UpdateFirma = props => {
-  const { showModal, setShowModal, data } = props;
-
+const UpdateFirma = ({ showModal, setShowModal, data }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: data.name,
@@ -31,14 +32,22 @@ const UpdateFirma = props => {
       return;
     }
 
-    if (name == "phone_number1" && value.length > 13) {
-      return;
+    if (name === "phone_number1") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
     }
 
     if (name == "desc" && value.length > 300) {
       return;
     }
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
   const queryClient = useQueryClient();
 
@@ -77,46 +86,25 @@ const UpdateFirma = props => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            placeholder="Nomi"
-            className="form-control"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Firma nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          placeholder={"Firma nomi"}
+          isRequired={true}
+        />
 
         {/* PHONE 1 */}
-        <div className="form-floating mb-3">
-          <input
-            type="tel"
-            placeholder="Telefon raqam kiriting"
-            className="form-control"
-            name="phone_number1"
-            value={formData.phone_number1}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Telefon raqam kiriting <b className="text-danger">*</b>
-          </label>
-        </div>
+        <PhoneInput
+          name={"phone_number1"}
+          value={formData.phone_number1}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
-        <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border rounded py-3 p-1 mb-3">
+        <div className="form-check form-switch d-flex justify-content-between align-item-center p-2 my-2 border rounded py-3 p-1 mb-3">
           <input
             className="form-check-input mx-1"
             type="checkbox"
@@ -130,42 +118,20 @@ const UpdateFirma = props => {
         </div>
 
         {/* ADDRESS */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            placeholder="Manzil"
-            className="form-control"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Manzil </label>
-        </div>
+        <TextInput
+          name={"address"}
+          value={formData.address}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          placeholder={"Manzil"}
+        />
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            />
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

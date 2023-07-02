@@ -6,7 +6,7 @@ import { user } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ userData }) => {
-  const toggleData = useSelector((state) => state.toggle);
+  const toggleData = useSelector(state => state.toggle);
   const { toggle } = toggleData;
 
   const navigate = useNavigate();
@@ -44,11 +44,24 @@ const Profile = ({ userData }) => {
                         onClick={() => navigate("/managers")}
                       >
                         <div className="d-flex align-items-center">
-                          <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded"></i>
+                          <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded" />
                           <h4 className="mb-0">Mangerlar</h4>
                         </div>
 
-                        <i className="fa fa-angle-right fs-4"></i>
+                        <i className="fa fa-angle-right fs-4" />
+                      </div>
+                      <hr />
+
+                      <div
+                        className="d-flex align-items-center justify-content-between cursor_pointer"
+                        onClick={() => navigate("/firms/profile")}
+                      >
+                        <div className="d-flex align-items-center">
+                          <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
+                          <h4 className="mb-0">Firmalar</h4>
+                        </div>
+
+                        <i className="fa fa-angle-right fs-4" />
                       </div>
                       <hr />
 
@@ -60,11 +73,11 @@ const Profile = ({ userData }) => {
                           <i
                             className="fa fa-users mx-4 fs-4 border  rounded"
                             style={{ padding: "12px" }}
-                          ></i>
+                          />
                           <h4 className="mb-0">Xodimlar</h4>
                         </div>
 
-                        <i className="fa fa-angle-right fs-4"></i>
+                        <i className="fa fa-angle-right fs-4" />
                       </div>
                       <hr />
 
@@ -73,11 +86,11 @@ const Profile = ({ userData }) => {
                         onClick={() => navigate("/expenses")}
                       >
                         <div className="d-flex align-items-center">
-                          <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded"></i>
+                          <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded" />
                           <h4>Xarajat turlari</h4>
                         </div>
 
-                        <i className="fa fa-angle-right fs-4"></i>
+                        <i className="fa fa-angle-right fs-4" />
                       </div>
                       <hr />
 
@@ -86,11 +99,11 @@ const Profile = ({ userData }) => {
                         onClick={() => navigate("/incomes")}
                       >
                         <div className="d-flex align-items-center">
-                          <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded"></i>
+                          <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded" />
                           <h4>Tushum turlari</h4>
                         </div>
 
-                        <i className="fa fa-angle-right fs-4"></i>
+                        <i className="fa fa-angle-right fs-4" />
                       </div>
                     </div>
                   </div>
