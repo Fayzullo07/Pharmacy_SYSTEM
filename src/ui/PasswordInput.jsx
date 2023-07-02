@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const TextInput = ({
+const PasswordInput = ({
   name,
   value,
   handleInputChange,
@@ -13,26 +13,14 @@ const TextInput = ({
   useEffect(
     () => {
       switch (placeholder) {
-        case "F.I.O":
-          setPlaceholderInput("F.I.O");
+        case "Parol":
+          setPlaceholderInput("Parolni kiriting");
           break;
-        case "Mahsulot nomi":
-          setPlaceholderInput("Mahsulot nomi");
-          break;
-        case "Manzil":
-          setPlaceholderInput("Manzil");
-          break;
-        case "Firma nomi":
-          setPlaceholderInput("Firma nomi");
-          break;
-        case "Ismingiz":
-          setPlaceholderInput("Ismingiz");
-          break;
-        case "Familiyangiz":
-          setPlaceholderInput("Familiyangiz");
+        case "Parol qayta":
+          setPlaceholderInput("Parolni qaytadan kiriting");
           break;
         default:
-          setPlaceholderInput("Text");
+          setPlaceholderInput("Parol");
       }
     },
     [placeholder]
@@ -41,7 +29,7 @@ const TextInput = ({
   return (
     <div className="form-floating mb-3">
       <input
-        type="text"
+        type="password"
         className="form-control"
         placeholder={placeholderInput}
         name={name}
@@ -61,4 +49,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default PasswordInput;

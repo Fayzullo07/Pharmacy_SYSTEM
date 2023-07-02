@@ -1,161 +1,216 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
 import { user } from "../../../assets";
 import { useNavigate } from "react-router-dom";
+import TextInput from "../../../ui/TextInput";
+import { useMutation, useQuery } from "react-query";
+import { profilePatchAction } from "../../../functions/DirectorActions";
+import { profileGetAPI } from "../../../api/DirectorRequest";
+import PasswordInput from "../../../ui/PasswordInput";
+import { toast } from "react-toastify";
+import { cleanedData } from "../../../functions/NecessaryFunctions";
+import { getGlobalDeteilsAction } from "../../../redux/Actions/GlobalAction";
 
 const Profile = ({ userData }) => {
-  const toggleData = useSelector(state => state.toggle);
-  const { toggle } = toggleData;
+  const dispatch = useDispatch();
+  const reduxData = useSelector((state) => state);
+  const { deteils } = reduxData.deteils;
+  const { toggle } = reduxData.toggle;
+
+  let director = null;
+  deteils.employees.map(user => {
+    if (user.role == "d") {
+      director = user;
+      return;
+    }
+  });
+
+  const [formData, setFormData] = useState({
+    first_name: director.first_name,
+    last_name: director.last_name
+  });
+
+  const [formDataPassword, setFormDataPassword] = useState({
+    password: "",
+    r_password: ""
+  });
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    if (name == "first_name" && value.length > 50) {
+      return;
+    }
+
+    if (name == "last_name" && value.length > 50) {
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleInputChangePassword = e => {
+    const { name, value } = e.target;
+
+    setFormDataPassword({ ...formDataPassword, [name]: value });
+  };
+  const [chamgePass, setChangePass] = useState(false);
+
+  const mutation = useMutation(
+    async () => {
+      return profilePatchAction(cleanedData(formData));
+    },
+    {
+      onSuccess: () => {
+        dispatch(getGlobalDeteilsAction());
+      }
+    }
+  );
+
+  const handleSubmit = () => {
+    if (!formData.first_name) {
+      toast.warning("Ismingizni kiriting !");
+      return;
+    }
+
+    if (!formData.first_name) {
+      toast.warning("Familiyangizni kiriting !");
+      return;
+    }
+
+    if (chamgePass) {
+      if (!formDataPassword.password) {
+        toast.warning("Parolni kiriting !");
+        return;
+      }
+      if (formDataPassword.password != formDataPassword.r_password) {
+        toast.warning("Parolni bir xil kiriting!");
+        return;
+      }
+      setFormDataPassword({ ...formDataPassword, password: formDataPassword.password });
+    }
+
+    mutation.mutate();
+  };
 
   const navigate = useNavigate();
-  return (
-    <div className="d-flex">
-      <Navbar />
-      <div className={`container_g ${toggle ? "" : "active"}`}>
-        <Topbar />
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-3">
-              <div className="card mb-4">
-                <div className="card-body text-center">
-                  <img
-                    src={user}
-                    alt="avatar"
-                    className="rounded-circle img-fluid"
-                  />
-                  <h5 className="my-3">
-                    {userData.role == "Director" ? "Director" : "Worker"}
-                  </h5>
-                  <h2 className="text-muted">
-                    {userData.first_name} {userData.last_name}
-                  </h2>
+  return <div className="d-flex">
+    <Navbar />
+    <div className={`container_g ${toggle ? "" : "active"}`}>
+      <Topbar />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-3">
+            <div className="card mb-4">
+              <div className="card-body text-center">
+                <img src={user} alt="avatar" className="rounded-circle img-fluid" />
+                <h5 className="my-3">
+                  {userData.role == "Director" ? "Director" : "Worker"}
+                </h5>
+                <h2 className="text-muted">
+                  {userData.first_name} {userData.last_name}
+                </h2>
+              </div>
+            </div>
+            <div className="card p-2">
+              <div className="row">
+                <div className="col-md-6 col">
+                  <TextInput name={"first_name"} value={formData.first_name} handleInputChange={handleInputChange} handleSubmit={handleSubmit} isRequired={true} placeholder={"Ismingiz"} />
+                </div>
+                <div className="col-md-6 col">
+                  <TextInput name={"last_name"} value={formData.last_name} handleInputChange={handleInputChange} handleSubmit={handleSubmit} isRequired={true} placeholder={"Familiyangiz"} />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12">
+                  {/* CHECKBOX USER */}
+                  <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border rounded p-1 py-3 mb-3">
+                    <b>Parol o'zgartirish</b>
+                    <input className="form-check-input mx-1" type="checkbox" checked={chamgePass} onClick={() => setChangePass(!chamgePass)} />
+                  </div>
+                </div>
+                {chamgePass && (
+                  <>
+                    <div className="col-12">
+                      <PasswordInput name={"password"} value={formDataPassword.password} handleInputChange={handleInputChangePassword} handleSubmit={handleSubmit} isRequired={true} placeholder={"Parol"} />
+                    </div>
+                    <div className="col-12">
+                      <PasswordInput name={"r_password"} value={formDataPassword.r_password} handleInputChange={handleInputChangePassword} handleSubmit={handleSubmit} isRequired={true} placeholder={"Parol qayta"} />
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="row mb-3">
+                <div className="col text-end">
+                  <button className="btn btn-primary" onClick={handleSubmit}>Saqlash</button>
                 </div>
               </div>
             </div>
-            <div className="col-lg-9">
-              <div className="row  mb-4">
-                <div className="col-md-12">
-                  <div className="card mb-4 mb-md-0">
-                    <div className="card-body">
-                      <div
-                        className="d-flex align-items-center justify-content-between cursor_pointer"
-                        onClick={() => navigate("/managers")}
-                      >
-                        <div className="d-flex align-items-center">
-                          <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded" />
-                          <h4 className="mb-0">Mangerlar</h4>
-                        </div>
-
-                        <i className="fa fa-angle-right fs-4" />
+          </div>
+          <div className="col-lg-9">
+            <div className="row  mb-4">
+              <div className="col-md-12">
+                <div className="card mb-4 mb-md-0">
+                  <div className="card-body">
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/managers")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded" />
+                        <h4 className="mb-0">Mangerlar</h4>
                       </div>
-                      <hr />
 
-                      <div
-                        className="d-flex align-items-center justify-content-between cursor_pointer"
-                        onClick={() => navigate("/firms/profile")}
-                      >
-                        <div className="d-flex align-items-center">
-                          <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
-                          <h4 className="mb-0">Firmalar</h4>
-                        </div>
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
 
-                        <i className="fa fa-angle-right fs-4" />
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
+                        <h4 className="mb-0">Firmalar</h4>
                       </div>
-                      <hr />
 
-                      <div
-                        className="d-flex align-items-center justify-content-between cursor_pointer"
-                        onClick={() => navigate("/workers")}
-                      >
-                        <div className="d-flex align-items-center">
-                          <i
-                            className="fa fa-users mx-4 fs-4 border  rounded"
-                            style={{ padding: "12px" }}
-                          />
-                          <h4 className="mb-0">Xodimlar</h4>
-                        </div>
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
 
-                        <i className="fa fa-angle-right fs-4" />
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/workers")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-users mx-4 fs-4 border  rounded" style={{ padding: "12px" }} />
+                        <h4 className="mb-0">Xodimlar</h4>
                       </div>
-                      <hr />
 
-                      <div
-                        className="d-flex align-items-center justify-content-between cursor_pointer"
-                        onClick={() => navigate("/expenses")}
-                      >
-                        <div className="d-flex align-items-center">
-                          <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded" />
-                          <h4>Xarajat turlari</h4>
-                        </div>
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
 
-                        <i className="fa fa-angle-right fs-4" />
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/expenses")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded" />
+                        <h4>Xarajat turlari</h4>
                       </div>
-                      <hr />
 
-                      <div
-                        className="d-flex align-items-center justify-content-between cursor_pointer"
-                        onClick={() => navigate("/incomes")}
-                      >
-                        <div className="d-flex align-items-center">
-                          <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded" />
-                          <h4>Tushum turlari</h4>
-                        </div>
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
 
-                        <i className="fa fa-angle-right fs-4" />
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/incomes")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded" />
+                        <h4>Tushum turlari</h4>
                       </div>
+
+                      <i className="fa fa-angle-right fs-4" />
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">First Name</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userData.first_name}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Sure Name</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userData.last_name}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Telefon raqam</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userData.phone_number}</p>
-                    </div>
-                  </div>
-
-                  <hr />
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Address</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{userData.address}</p>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  </div>;
 };
 
 export default Profile;

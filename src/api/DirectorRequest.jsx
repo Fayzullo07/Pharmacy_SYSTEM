@@ -8,6 +8,15 @@ const config = {
   },
 };
 
+// -----------------------------------------POFILE-----------------------------
+// GET
+export const profileGetAPI = async () =>
+  API.get("/accounts/profile/", config);
+
+  // POST
+export const profilePatchAPI = async (data) =>
+  API.patch(`/accounts/profile/`,data, config);
+
 // ----------------------------------------DIRECTORS-----------------------------
 // POST
 export const directorPostAPI = async (data) =>

@@ -1,6 +1,28 @@
 import { toast } from "react-toastify";
 import * as DirectorApi from "../api/DirectorRequest";
 
+// --------------------------------------PROFILE--------------------------------
+// PROFILE PATCH
+export const profilePatchAction = async datas => {
+  try {
+    await DirectorApi.profilePatchAPI(datas);
+    toast.success(`O'zgartirildi!`);
+  } catch (error) {
+    if (error.response.status == 403) {
+      localStorage.clear();
+      window.location.href = "/";
+      return;
+    }
+    const keys = Object.keys(error.response.data);
+    for (let key of keys) {
+      toast.warning(
+        `${error.response.status} ${key} ${error.response.data[key][0]}`
+      );
+      return;
+    }
+  }
+};
+
 // ---------------------------------------DIRECTOR--------------------------------
 // DIREKTOR POST
 export const directorPostAction = async (datas, setShowModal) => {
