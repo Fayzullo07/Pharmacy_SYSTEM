@@ -42,11 +42,8 @@ const Login = ({ onLogin }) => {
     <div>
       <>
         <div className="back_login">
-          <img className="wave" />
           <div className="container_log">
-            <div className="img">
-              <div></div>
-            </div>
+           
             <div className="login-content">
               <div className="form">
                 <img src={profile} />

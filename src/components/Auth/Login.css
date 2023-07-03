@@ -2,19 +2,13 @@
     background: linear-gradient(rgb(232, 233, 236), rgba(100, 100, 217, 0.793));
 }
 
-.wave {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    z-index: -1;
-}
+
 
 .container_log {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:  1fr;
     grid-gap: 7rem;
     padding: 0 2rem;
 
@@ -28,7 +22,7 @@
 
 .login-content {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
@@ -205,13 +199,7 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .img {
-        display: none;
-    }
-
-    .wave {
-        display: none;
-    }
+    
 
     .login-content {
         justify-content: center;

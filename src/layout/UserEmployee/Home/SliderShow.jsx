@@ -91,22 +91,7 @@ const SliderShow = () => {
         &#10095;
       </a>
 
-      {/* <!-- Thumbnail images --> */}
-      <div className="row">
-        {slides1.map((item, index) =>
-          <div key={item.id + index} className="column">
-            <img
-              className={`demo cursor ${index == slideIndex - 1
-                ? "active"
-                : ""}`}
-              src={item.img}
-              style={{ width: "100%" }}
-              onClick={() => currentSlide(index + 1)}
-              alt={`The Woods ${index + 1}`}
-            />
-          </div>
-        )}
-      </div>
+    
     </div>
   );
 };
