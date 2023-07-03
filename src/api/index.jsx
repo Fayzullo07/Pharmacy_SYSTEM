@@ -9,11 +9,7 @@ export const routes = [
     img: "fas fa-money-bill-transfer ",
     slug: "/take_give_firm"
   },
-  {
-    name: "Ommabop mahsulotlar",
-    img: "fas fa-cart-plus",
-    slug: "/products"
-  }
+  { name: "Ommabop mahsulotlar", img: "fas fa-cart-plus", slug: "/products" }
 ];
 
 export const routesEmployee = [

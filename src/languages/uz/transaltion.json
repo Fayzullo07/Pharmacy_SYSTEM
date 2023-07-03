@@ -9,11 +9,13 @@
       "Takliflar",
       "Ommabop mahsulotlar"
    ],
-   "Navbar": [
-      "Asosiy",
-      "Nazorat",
-      "Profile"
-   ],
+   "Navbar": {
+      "0": "Asosiy",
+      "1": "Filiallar",
+      "2": "Qarz oldi berdi",
+      "3": "Hisobotlar",
+      "4": "Firma bilan oldi berdi"
+   },
    "Profile": [
       "Managerlar",
       "Filiallar",

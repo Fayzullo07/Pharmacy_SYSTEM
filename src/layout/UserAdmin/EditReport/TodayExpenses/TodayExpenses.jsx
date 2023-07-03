@@ -47,7 +47,7 @@ const TodayExpenses = ({ deteils, getData }) => {
       report_date: getData.report_date,
       shift: getData.shift,
       to_pharmacy: getData.to_pharmacy,
-      expense_type__gte: 4,
+      expense_type__gte: 3,
     });
   });
 
