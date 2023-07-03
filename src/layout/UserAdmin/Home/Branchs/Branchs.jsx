@@ -8,14 +8,12 @@ import { useQuery } from "react-query";
 import { aptekaGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
-import AddApteka from "./Modal/AddApteka";
 import ChooseDate from "./Modal/ChooseDate";
 import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
 
 const Branchs = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
   const [chooseDate, setChooseDate] = useState(false);
   
   const [curData, setCurData] = useState();
@@ -41,9 +39,7 @@ const Branchs = () => {
   //   const { t } = useTranslation("translation", { keyPrefix: "Home" });
   return (
     <>
-      {showModal && (
-        <AddApteka showModal={showModal} setShowModal={setShowModal} />
-      )}
+     
 
       {chooseDate && (
         <ChooseDate
@@ -58,14 +54,7 @@ const Branchs = () => {
           <Topbar>
             <div className="header_flex">
               <h2>Filiallar</h2>
-            </div>
-            <button
-              className="btn btn-sm me-2"
-              style={{ background: "var(--blue)", color: "var(--g_white)" }}
-              onClick={() => setShowModal(!showModal)}
-            >
-              <i className="fa fa-add"></i>
-            </button>
+            </div>   
           </Topbar>
 
           {/* TABLE */}

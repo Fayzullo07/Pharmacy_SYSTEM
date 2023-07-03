@@ -8,183 +8,172 @@ import { firmsGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { formatNumber } from "../../../../functions/NecessaryFunctions";
-import AddFirma from "./Modal/AddFirma";
-import UpdateFirma from "./Modal/UpdateFirma";
 import SearchInput from "../../../../utils/SearchInput";
-import { isFavoriteFunction, toggleFunction } from "../../../../redux/Actions/ToggleActions";
-import DeleteFirm from "./Modal/DeleteFirm";
+import {
+  isFavoriteFunction,
+  toggleFunction
+} from "../../../../redux/Actions/ToggleActions";
 
 const Firms = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(false);
-  const [updateModal, setUpdateModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const [curData, setCurData] = useState();
-
-  const reduxData = useSelector((state) => state);
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { is_favorite } = reduxData.is_favorite;
 
   useEffect(() => {
     dispatch(toggleFunction(true));
-  }, [])
+  }, []);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["firms", page, is_favorite, search],
     queryFn: async () => {
       return await firmsGetAPI({ page, is_favorite, search });
     },
-    keepPreviousData: true,
+    keepPreviousData: true
   });
 
   if (error) return `Error: ${error.message}`;
 
   //   const { t } = useTranslation("translation", { keyPrefix: "Home" });
   return (
-    <>
-      {showModal && (
-        <AddFirma showModal={showModal} setShowModal={setShowModal} />
-      )}
-
-      <div className="d-flex">
-        <Navbar />
-        <div className={`container_g ${toggle ? "" : "active"}`}>
-          <Topbar>
-            <div className="header_flex">
-              <h2>Firmalar</h2>
-            </div>
-            <button
-              className="btn btn-sm me-2"
-              style={{ background: "var(--blue)", color: "var(--g_white)" }}
-              onClick={() => setShowModal(!showModal)}
-            >
-              <i className="fa fa-add"></i>
-            </button>
-          </Topbar>
+    <div className="d-flex">
+      <Navbar />
+      <div className={`container_g ${toggle ? "" : "active"}`}>
+        <Topbar>
           <div className="header_flex">
-            <SearchInput
-              search={search}
-              setSearch={setSearch}
-              setPage={setPage}
-            />
+            <h2>Firmalar</h2>
+          </div>
+        </Topbar>
+        <div className="header_flex">
+          <SearchInput
+            search={search}
+            setSearch={setSearch}
+            setPage={setPage}
+          />
 
-            <div className="btns_flex">
-              <div class="btn-group btn-group-sm me-2">
-                <button
-                  type="button"
-                  className={`btn btn${is_favorite ? "" : "-outline"
-                    }-primary btn-sm`}
-                  onClick={() => {
-                    setPage(1);
-                    dispatch(isFavoriteFunction(true));
-                  }}
-                >
-                  Faol
-                </button>
-                <button
-                  type="button"
-                  className={`btn btn${!is_favorite ? "" : "-outline"
-                    }-danger btn-sm`}
-                  onClick={() => {
-                    setPage(1);
-                    dispatch(isFavoriteFunction(false));
-                  }}
-                >
-                  Faol emas
-                </button>
-              </div>
+          <div className="btns_flex">
+            <div class="btn-group btn-group-sm me-2">
+              <button
+                type="button"
+                className={`btn btn${is_favorite
+                  ? ""
+                  : "-outline"}-primary btn-sm`}
+                onClick={() => {
+                  setPage(1);
+                  dispatch(isFavoriteFunction(true));
+                }}
+              >
+                Faol
+              </button>
+              <button
+                type="button"
+                className={`btn btn${!is_favorite
+                  ? ""
+                  : "-outline"}-danger btn-sm`}
+                onClick={() => {
+                  setPage(1);
+                  dispatch(isFavoriteFunction(false));
+                }}
+              >
+                Faol emas
+              </button>
             </div>
           </div>
-          {/* TABLE */}
-          <div
-            className="container-fluid"
-            style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
-          >
-            <table id="table" className="my-2 table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+        </div>
+        {/* TABLE */}
+        <div
+          className="container-fluid"
+          style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
+        >
+          <table id="table" className="my-2 table table-hover">
+            <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+              <tr>
+                <th scope="col" style={{ width: "5px" }}>
+                  №
+                </th>
+                <th scope="col">Firma nomi</th>
+                <th scope="col">Telefon raqamni</th>
+                <th scope="col">Manzil</th>
+                <th scope="col">Naqd pul qarz</th>
+                <th scope="col">Naqd pulsiz qarz</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data &&
+                data.data.results.length === 0 &&
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
-                    №
-                  </th>
-                  <th scope="col">Firma nomi</th>
-                  <th scope="col">Telefon raqamni</th>
-                  <th scope="col">Manzil</th>
-                  <th scope="col">Naqd pul qarz</th>
-                  <th scope="col">Naqd pulsiz qarz</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.data.results.length === 0 && (
-                  <tr>
-                    <td colSpan={12}>
-                      <h2>Malumot topilmadi!</h2>
+                  <td colSpan={12}>
+                    <h2>Malumot topilmadi!</h2>
+                  </td>
+                </tr>}
+              {data &&
+                data.data.results.map((item, index) =>
+                  <tr
+                    key={item.id}
+                    className="cursor_pointer"
+                    onClick={() => navigate(`/firms/${item.id}/${item.name}`)}
+                  >
+                    <td data-label="№">
+                      {index + 1}
+                    </td>
+                    <td
+                      data-label="Firma nomi"
+                      className="text-capitalize text-break"
+                    >
+                      <b>
+                        {item.name}
+                      </b>
+                    </td>
+                    <td data-label="Telefon raqami">
+                      {item.phone_number1}
+                    </td>
+                    <td data-label="Manzil" className="text-break">
+                      {item.address ? item.address : "~"}
+                    </td>
+
+                    <td
+                      data-label="Naqd pul qarz"
+                      className={
+                        item.not_transfer_debt > 0
+                          ? "text-danger"
+                          : "text-success"
+                      }
+                    >
+                      <b>
+                        {formatNumber(item.not_transfer_debt)}
+                      </b>
+                    </td>
+                    <td
+                      data-label="Naqd pulsiz qarz"
+                      className={
+                        item.transfer_debt > 0 ? "text-danger" : "text-success"
+                      }
+                    >
+                      <b>
+                        {formatNumber(item.transfer_debt)}
+                      </b>
                     </td>
                   </tr>
                 )}
-                {data &&
-                  data.data.results.map((item, index) => (
-                    <tr key={item.id}
-                      className="cursor_pointer"
-                      onClick={() =>
-                        navigate(`/firms/${item.id}/${item.name}`)
-                      }>
-                      <td data-label="№">{index + 1}</td>
-                      <td
-                        data-label="Firma nomi"
-                        className="text-capitalize text-break"
-                      >
-                        <b>{item.name}</b>
-                      </td>
-                      <td data-label="Telefon raqami">{item.phone_number1}</td>
-                      <td data-label="Manzil" className="text-break">
-                        {item.address ? item.address : "~"}
-                      </td>
+            </tbody>
+          </table>
 
-                      <td
-                        data-label="Naqd pul qarz"
-                        className={
-                          item.not_transfer_debt > 0
-                            ? "text-danger"
-                            : "text-success"
-                        }
-                      >
-                        <b >
-                          {formatNumber(item.not_transfer_debt)}
-                        </b>
-                      </td>
-                      <td
-                        data-label="Naqd pulsiz qarz"
-                        className={
-                          item.transfer_debt > 0
-                            ? "text-danger"
-                            : "text-success"
-                        }
-                      >
-                        <b>{formatNumber(item.transfer_debt)}</b>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-
-            {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
-          </div>
-          <div className="fixed-bottom" style={{ zIndex: 1 }}>
-            <PaginationForModal
-              page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
-              setPage={setPage}
-            />
-          </div>
+          {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
+        </div>
+        <div className="fixed-bottom" style={{ zIndex: 1 }}>
+          <PaginationForModal
+            page={page}
+            pages={Math.ceil(data && data.data.count / 10)}
+            setPage={setPage}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
