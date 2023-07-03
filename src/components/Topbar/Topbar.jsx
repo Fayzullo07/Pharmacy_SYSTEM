@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { user } from "../../assets";
+import { profile } from "../../assets";
 
 import "./Topbar.css";
 import {
@@ -65,7 +65,7 @@ const Topbar = ({ children }) => {
         {JSON.parse(savedUser)?.user.role == "Director" && (
           <NavLink to={`/profile`}>
             <div className="user">
-              <img src={user} alt="user" />
+              <img src={profile} alt="user" />
             </div>
           </NavLink>
         )}

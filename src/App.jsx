@@ -34,6 +34,7 @@ import EditReport from "./layout/UserAdmin/EditReport/EditReport";
 import EmployeeHome from "./layout/UserEmployee/Home/EmployeeHome";
 import EditReportWorker from "./layout/UserEmployee/EditReport/EditReportWorker";
 import FirmsProfile from "./layout/UserAdmin/Profile/FirmsPofile/FirmsProfile";
+import ProfileBranches from "./layout/UserAdmin/Profile/Branches/ProfileBranches";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -253,6 +254,15 @@ const Routing = ({ user, handleLogin, navigate }) => {
         element={
           <AdminElement>
             <FirmsProfile />
+          </AdminElement>
+        }
+      />
+
+      <Route
+        path="/branches/profile"
+        element={
+          <AdminElement>
+            <ProfileBranches />
           </AdminElement>
         }
       />

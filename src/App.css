@@ -65,8 +65,8 @@
 }
 
 .container_g.active {
-  width: calc(100% - 80px);
-  left: 80px;
+  width: calc(100% - 0px);
+  left: 0px;
 }
 
 .cursor_pointer {
@@ -227,6 +227,10 @@
   background-color: var(--ch_white);
 }
 
+.fw-600 {
+  font-weight: 600;
+}
+
 /* Responsive */
 
 @media (max-width: 991px) {
@@ -294,9 +298,9 @@
   }
 
   .container_g.active .toggle {
-    position: fixed;
+    /* position: fixed;
     right: 0;
     left: initial;
-    color: var(--white);
+    color: var(--white); */
   }
 }

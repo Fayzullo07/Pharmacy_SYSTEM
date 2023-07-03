@@ -106,15 +106,14 @@ const WorkersDeteils = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id} className="scaleY">
                       <td data-label="№" className="text-capitalize text-break">
-                        <b>{index + 1}</b>
+                        {index + 1}
                       </td>
                       <td
                         data-label="F.I.O"
                         className="text-capitalize text-break"
                       >
-                        <b>
                           {item.first_name} {item.last_name}
-                        </b>
+                      
                       </td>
                       <td data-label="Telefon">{item.phone_number}</td>
                       <td data-label="Filial">{item.pharmacy_name}</td>

@@ -156,7 +156,7 @@ const WorkerMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "80vw" : "92vw"}`,
+            minWidth: `${toggle ? "75vw" : "95vw"}`,
           }}
         >
           <thead

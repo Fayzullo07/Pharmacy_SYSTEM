@@ -28,7 +28,7 @@ const EditReportWorker = ({ user }) => {
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [shows, setShows] = useState("11");
+  const [shows, setShows] = useState("1");
 
   const { data: remeinder } = useQuery({
     queryKey: ["remeinder", shows],

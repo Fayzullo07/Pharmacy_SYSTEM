@@ -29,7 +29,7 @@ const EditReport = () => {
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [shows, setShows] = useState("3");
+  const [shows, setShows] = useState("1");
 
   const getData = {
     report_date,

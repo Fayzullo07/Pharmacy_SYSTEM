@@ -111,6 +111,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
+                <th>Sana</th>
                 <th>Firma</th>
                 <th>Olingan mahsulot nomi</th>
                 <th>Pul</th>
@@ -124,13 +125,6 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 >
                   <i className="fa fa-trash-can text-danger"></i>
                 </th>
-                <th
-                  scope="col"
-                  className="text-center"
-                  style={{ width: "5px" }}
-                >
-                  <i className="fa fa-eye text-info"></i>
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -138,6 +132,9 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
+                    <td data-label="Sana" >
+                      {item.report_date}
+                    </td>
                     <td data-label="Firma" className="text-capitalize">
                       {item.from_firm_name}
                     </td>
@@ -165,15 +162,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                     >
                       <i className="fa fa-trash-can text-danger cursor_pointer"></i>
                     </td>
-                    <td
-                      data-label="To'liq"
-                      onClick={() => {
-                        setCurData(item);
-                        setDeteilModal(!deteilModal);
-                      }}
-                    >
-                      <i className="fa fa-eye text-info cursor_pointer"></i>
-                    </td>
+                    
                   </tr>
                 ))}
             </tbody>

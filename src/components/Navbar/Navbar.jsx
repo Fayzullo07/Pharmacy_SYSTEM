@@ -49,7 +49,7 @@ const Navbar = () => {
               <li
                 key={item.name}
                 onClick={() => {
-                  dispatch(toggleFunction(true));
+                  dispatch(toggleFunction(false));
                 }}
               >
                 <span className="icon">

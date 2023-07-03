@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import { user } from "../../../assets";
+import { profile } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 import TextInput from "../../../ui/TextInput";
 import { useMutation } from "react-query";
@@ -103,7 +103,7 @@ const Profile = ({ userData }) => {
           <div className="col-lg-3">
             <div className="card mb-4">
               <div className="card-body text-center">
-                <img src={user} alt="avatar" className="rounded-circle img-fluid" />
+                <img src={profile} alt="avatar" className="rounded-circle img-fluid" />
                 <h5 className="my-1">
                   {userData.role == "Director" ? "Director" : "Worker"}
                 </h5>
@@ -170,6 +170,16 @@ const Profile = ({ userData }) => {
                       <div className="d-flex align-items-center">
                         <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
                         <h4 className="mb-0">Firmalar</h4>
+                      </div>
+
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
+
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/branches/profile")}>
+                      <div className="d-flex align-items-center">
+                        <i className="fa fa-code-branch mx-4 fs-4 border p-2 px-3 rounded" />
+                        <h4 className="mb-0">Filiallar</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />

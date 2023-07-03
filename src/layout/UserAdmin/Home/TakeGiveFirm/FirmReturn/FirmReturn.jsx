@@ -129,6 +129,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
+                <th>Sana</th>
                 <th>Mahsulot nomi</th>
                 <th>Qabul qiluvchi F.I.O</th>
                 <th>Qabul qiluvchi telefon</th>
@@ -141,6 +142,9 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
+                    <td data-label="Sana" >
+                      {item.report_date}
+                    </td>
                     <td data-label="Firma" className="text-capitalize">
                       {item.second_name}
                     </td>

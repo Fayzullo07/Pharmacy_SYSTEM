@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import Topbar from "../../../../components/Topbar/Topbar";
@@ -8,14 +7,15 @@ import { useQuery } from "react-query";
 import { aptekaGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
-import AddApteka from "./Modal/AddApteka";
-import ChooseDate from "./Modal/ChooseDate";
+import AddApteka from "../../Home/Branchs/Modal/AddApteka";
+import DeleteApteka from "../../Home/Branchs/Modal/DeleteApteka";
+import UpdateApteka from "../../Home/Branchs/Modal/UpdateApteka";
 
-const Branchs = () => {
-  const navigate = useNavigate();
+const ProfileBranches = () => {
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [chooseDate, setChooseDate] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
 
   const [curData, setCurData] = useState();
 
@@ -39,13 +39,23 @@ const Branchs = () => {
         <AddApteka showModal={showModal} setShowModal={setShowModal} />
       )}
 
-      {chooseDate && (
-        <ChooseDate
-          showModal={chooseDate}
-          setShowModal={setChooseDate}
-          pharm_id={curData.id}
+      {deleteModal && (
+        <DeleteApteka
+          showModal={deleteModal}
+          setShowModal={setDeleteModal}
+          data={curData}
         />
       )}
+
+      {updateModal && (
+        <UpdateApteka
+          showModal={updateModal}
+          setShowModal={setUpdateModal}
+          data={curData}
+        />
+      )}
+
+     
       <div className="d-flex">
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>
@@ -75,7 +85,12 @@ const Branchs = () => {
                   </th>
                   <th scope="col">Filial</th>
                   <th scope="col">Manzil</th>
-                  <th scope="col">Nazorat</th>
+                  <th scope="col" style={{ width: "5px" }}>
+                    <i className="fa fa-edit text-warning "></i>
+                  </th>
+                  <th scope="col" style={{ width: "5px" }}>
+                    <i className="fa fa-trash-can text-danger "></i>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -88,11 +103,7 @@ const Branchs = () => {
                 )}
                 {data &&
                   data.data.results.map((item, index) => (
-                    <tr key={item.id}
-                      className="cursor_pointer"
-                      onClick={() =>
-                        navigate(`/branchs/${item.id}/${item.name}`)
-                      }>
+                    <tr key={item.id}>
                       <td data-label="№">{index + 1}</td>
                       <td
                         data-label="Filial"
@@ -103,20 +114,25 @@ const Branchs = () => {
                       <td data-label="Manzil" className="text-break">
                         {item.address ? item.address : "~"}
                       </td>
-                      <td data-label="Nazorat"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <button className="btn btn-outline-primary" onClick={() => {
-                          setCurData(item);
-                          setChooseDate(!chooseDate);
-                        }}>
-                          <i
-                            className="fa-solid fa-clock text-info cursor_pointer me-2"
-
-                          ></i>
-                          Nazorat
-                        </button>
+                      <td data-label="O'zgartirish">
+                        <i
+                          className="fa fa-edit text-warning cursor_pointer"
+                          onClick={() => {
+                            setCurData(item);
+                            setUpdateModal(!updateModal);
+                          }}
+                        ></i>
                       </td>
+                      <td data-label="O'chirish">
+                        <i
+                          className="fa fa-trash-can text-danger cursor_pointer"
+                          onClick={() => {
+                            setCurData(item);
+                            setDeleteModal(!deleteModal);
+                          }}
+                        ></i>
+                      </td>
+                      
                     </tr>
                   ))}
               </tbody>
@@ -138,4 +154,4 @@ const Branchs = () => {
   );
 };
 
-export default Branchs;
+export default ProfileBranches;

@@ -48,22 +48,6 @@ const Firms = () => {
         <AddFirma showModal={showModal} setShowModal={setShowModal} />
       )}
 
-      {deleteModal && (
-        <DeleteFirm
-          showModal={deleteModal}
-          setShowModal={setDeleteModal}
-          data={curData}
-        />
-      )}
-
-      {updateModal && (
-        <UpdateFirma
-          showModal={updateModal}
-          setShowModal={setUpdateModal}
-          data={curData}
-        />
-      )}
-
       <div className="d-flex">
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>
@@ -90,9 +74,8 @@ const Firms = () => {
               <div class="btn-group btn-group-sm me-2">
                 <button
                   type="button"
-                  className={`btn btn${
-                    is_favorite ? "" : "-outline"
-                  }-primary btn-sm`}
+                  className={`btn btn${is_favorite ? "" : "-outline"
+                    }-primary btn-sm`}
                   onClick={() => {
                     setPage(1);
                     dispatch(isFavoriteFunction(true));
@@ -102,9 +85,8 @@ const Firms = () => {
                 </button>
                 <button
                   type="button"
-                  className={`btn btn${
-                    !is_favorite ? "" : "-outline"
-                  }-danger btn-sm`}
+                  className={`btn btn${!is_favorite ? "" : "-outline"
+                    }-danger btn-sm`}
                   onClick={() => {
                     setPage(1);
                     dispatch(isFavoriteFunction(false));
@@ -131,10 +113,6 @@ const Firms = () => {
                   <th scope="col">Manzil</th>
                   <th scope="col">Naqd pul qarz</th>
                   <th scope="col">Naqd pulsiz qarz</th>
-                  
-                  <th scope="col" style={{ width: "5px" }}>
-                    <i className="fa fa-eye text-info"></i>
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -147,7 +125,11 @@ const Firms = () => {
                 )}
                 {data &&
                   data.data.results.map((item, index) => (
-                    <tr key={item.id}>
+                    <tr key={item.id}
+                      className="cursor_pointer"
+                      onClick={() =>
+                        navigate(`/firms/${item.id}/${item.name}`)
+                      }>
                       <td data-label="№">{index + 1}</td>
                       <td
                         data-label="Firma nomi"
@@ -181,15 +163,6 @@ const Firms = () => {
                         }
                       >
                         <b>{formatNumber(item.transfer_debt)}</b>
-                      </td>
-                     
-                      <td data-label="Hisobot">
-                        <i
-                          className="fa fa-eye text-info cursor_pointer"
-                          onClick={() =>
-                            navigate(`/firms/${item.id}/${item.name}`)
-                          }
-                        ></i>
                       </td>
                     </tr>
                   ))}

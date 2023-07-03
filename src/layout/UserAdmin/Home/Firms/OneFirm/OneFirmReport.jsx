@@ -22,7 +22,7 @@ const OneFirmReport = () => {
 
   const [change, setChange] = useState(false);
 
-  const { data, isLoading, refetch, isFetching } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["firm_report", id, page],
     queryFn: async () => {
       return await firmReportGetAPI({
@@ -84,7 +84,7 @@ const OneFirmReport = () => {
             className="table-stripe table table-sm table-bordered table-hover border-secondary align-middle text-center p-3 py-0 my-0"
             style={{
               width: "max-content",
-              minWidth: `${toggle ? "79vw" : "91vw"}`,
+              minWidth: `${toggle ? "75vw" : "95vw"}`,
             }}
           >
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
