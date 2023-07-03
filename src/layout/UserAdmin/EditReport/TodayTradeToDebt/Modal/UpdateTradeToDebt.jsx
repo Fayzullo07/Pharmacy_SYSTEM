@@ -8,6 +8,9 @@ import {
 import { pharmacyToDebtsPatchAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import NumberInput from "../../../../../ui/NumberInput";
+import TextInput from "../../../../../ui/TextInput";
 
 const UpdateTradeToDebt = props => {
   const { showModal, setShowModal, data } = props;
@@ -32,11 +35,22 @@ const UpdateTradeToDebt = props => {
     if (name === "price" && value.length > 9) {
       return;
     }
+    if (name === "phone_number") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
+    }
 
     if (name === "desc" && value.length > 300) {
       return;
     }
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const queryClient = useQueryClient();
@@ -89,85 +103,43 @@ const UpdateTradeToDebt = props => {
     >
       <div className="modal-body">
         {/* DEBT FOR WHO */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Kimga qarz berildi"
-            name="to_who"
-            value={formData.to_who}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Kimga qarz berildi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"to_who"}
+          value={formData.to_who}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Kimga qarz berildi"}
+        />
 
         {/* NAME PRODUCT */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Maxsulot nomi"
-            name="second_name"
-            value={formData.second_name}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Maxsulot nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"second_name"}
+          value={formData.second_name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot nomi"}
+        />
 
         {/* MONEY DEBTS*/}
-        <div className="form-floating mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Miqdor"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
-          </label>
-        </div>
+        <NumberInput
+          name={"price"}
+          value={formData.price}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Qarz summasi"}
+        />
 
         {/* PHONE NUMBER */}
-        <div className="form-floating mb-3">
-          <input
-            type="tel"
-            className="form-control"
-            placeholder="Telefon"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Telefon <b className="text-danger">*</b>
-          </label>
-        </div>
+        <PhoneInput
+          name={"phone_number"}
+          value={formData.phone_number}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
         {/* BIO */}
         <Textarea

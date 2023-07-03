@@ -76,7 +76,7 @@ const AddToDebtRepay = ({
       showModal={showModal}
       setShowModal={setShowModal}
       mutation={mutation}
-      handleSubmit={handleInputChange}
+      handleSubmit={handleSubmit}
       title={"Berilgan qarzni qaytarish"}
     >
       <div className="modal-body">

@@ -34,6 +34,9 @@ const TextInput = ({
         case "Kimgdan qarz olindi":
           setPlaceholderInput("Kimgdan qarz olindi");
           break;
+        case "Kimga qarz berildi":
+          setPlaceholderInput("Kimga qarz berildi");
+          break;
         default:
           setPlaceholderInput("Text");
       }
