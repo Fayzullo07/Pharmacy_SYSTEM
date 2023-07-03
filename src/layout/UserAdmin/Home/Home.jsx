@@ -12,6 +12,7 @@ import { clientsGetAPI } from "../../../api/GlobalRequest";
 import Offers from "../Offers/Offers";
 import SliderShow from "../../UserEmployee/Home/SliderShow";
 import { getGlobalDeteilsAction } from "../../../redux/Actions/GlobalAction";
+import { toggleFunction } from "../../../redux/Actions/ToggleActions";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,9 @@ const Home = () => {
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  // useEffect(() => {
-  //     dispatch(getGlobalDeteilsAction());
-  // }, []);
+  useEffect(() => {
+    dispatch(toggleFunction(true));
+  }, [])
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["clients"],
