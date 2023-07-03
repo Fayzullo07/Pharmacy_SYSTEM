@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../../../components/Navbar/Navbar";
 import Topbar from "../../../../components/Topbar/Topbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import { formatNumber } from "../../../../functions/NecessaryFunctions";
 import AddFirma from "./Modal/AddFirma";
 import UpdateFirma from "./Modal/UpdateFirma";
 import SearchInput from "../../../../utils/SearchInput";
-import { isFavoriteFunction } from "../../../../redux/Actions/ToggleActions";
+import { isFavoriteFunction, toggleFunction } from "../../../../redux/Actions/ToggleActions";
 import DeleteFirm from "./Modal/DeleteFirm";
 
 const Firms = () => {
@@ -30,6 +30,10 @@ const Firms = () => {
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
   const { is_favorite } = reduxData.is_favorite;
+
+  useEffect(() => {
+    dispatch(toggleFunction(true));
+  }, [])
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["firms", page, is_favorite, search],

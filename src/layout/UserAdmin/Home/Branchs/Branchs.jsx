@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,15 +14,19 @@ import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
 
 const Branchs = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [chooseDate, setChooseDate] = useState(false);
-
+  
   const [curData, setCurData] = useState();
-
+  
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(toggleFunction(true));
+  }, [])
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["apteka", page],
@@ -84,7 +88,7 @@ const Branchs = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2> Filial topilmadi!</h2>
+                      <h2>Malumot topilmadi!</h2>
                     </td>
                   </tr>
                 )}
@@ -93,52 +97,51 @@ const Branchs = () => {
                     <tr key={item.id}
                       className="cursor_pointer"
                       onClick={() => {
-
                         navigate(`/branchs/${item.id}/${item.name}`)
                         dispatch(toggleFunction(false));
                       }
                       }>
-                <td data-label="№">{index + 1}</td>
-                <td
-                  data-label="Filial"
-                  className="text-capitalize text-break"
-                >
-                  {item.name}
-                </td>
-                <td data-label="Manzil" className="text-break">
-                  {item.address ? item.address : "~"}
-                </td>
-                <td data-label="Nazorat"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button className="btn btn-outline-primary" onClick={() => {
-                    setCurData(item);
-                    setChooseDate(!chooseDate);
-                  }}>
-                    <i
-                      className="fa-solid fa-clock text-info cursor_pointer me-2"
+                      <td data-label="№">{index + 1}</td>
+                      <td
+                        data-label="Filial"
+                        className="text-capitalize text-break"
+                      >
+                        {item.name}
+                      </td>
+                      <td data-label="Manzil" className="text-break">
+                        {item.address ? item.address : "~"}
+                      </td>
+                      <td data-label="Nazorat"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button className="btn btn-outline-primary" onClick={() => {
+                          setCurData(item);
+                          setChooseDate(!chooseDate);
+                        }}>
+                          <i
+                            className="fa-solid fa-clock text-info cursor_pointer me-2"
 
-                    ></i>
-                    Nazorat
-                  </button>
-                </td>
-              </tr>
+                          ></i>
+                          Nazorat
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
 
-          {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
-        </div>
+            {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
+          </div>
 
-        <div className="fixed-bottom">
-          <PaginationForModal
-            page={page}
-            pages={Math.ceil(data && data.data.count / 10)}
-            setPage={setPage}
-          />
+          <div className="fixed-bottom">
+            <PaginationForModal
+              page={page}
+              pages={Math.ceil(data && data.data.count / 10)}
+              setPage={setPage}
+            />
+          </div>
         </div>
-      </div>
-    </div >
+      </div >
     </>
   );
 };

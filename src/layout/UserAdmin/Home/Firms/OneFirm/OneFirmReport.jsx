@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { firmReportGetAPI } from "../../../../../api/FirmsRequest";
 import { formatNumber } from "../../../../../functions/NecessaryFunctions";
@@ -7,11 +7,12 @@ import PaginationForModal from "../../../../../utils/PaginationForModal";
 import Empty from "../../../../../utils/Empty";
 import { useParams } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SideBarFirms from "../SideBar/SideBarFirms";
 import Topbar from "../../../../../components/Topbar/Topbar";
 import Navbar from "../../../../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
+import { toggleFunction } from "../../../../../redux/Actions/ToggleActions";
 
 const OneFirmReport = () => {
   const { id, name } = useParams();
@@ -21,7 +22,10 @@ const OneFirmReport = () => {
   const [pharm_id, setPharmId] = useState("");
 
   const [change, setChange] = useState(false);
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(toggleFunction(false));
+  }, [])
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["firm_report", id, page],
     queryFn: async () => {
@@ -212,9 +216,9 @@ const OneFirmReport = () => {
                         <td style={{ width: "195px" }}>
                           {firm.is_transfer == false &&
                             firm.is_expense == true &&
-                             <b>
+                            <b>
                               {
-                              formatNumber(firm.price)
+                                formatNumber(firm.price)
                               }
                             </b>}
                         </td>
@@ -223,29 +227,29 @@ const OneFirmReport = () => {
                             firm.is_expense == false &&
                             <b>
                               {
-                              formatNumber(firm.price)
+                                formatNumber(firm.price)
                               }
                             </b>}
                         </td>
                         <td style={{ width: "228px" }}>
                           {firm.is_transfer == true &&
                             firm.is_expense == true &&
-                             <b>
+                            <b>
                               {
-                              formatNumber(firm.price)
+                                formatNumber(firm.price)
                               }
                             </b>
-                            }
+                          }
                         </td>
                         <td style={{ width: "200px" }}>
                           {firm.is_transfer == true &&
                             firm.is_expense == false &&
                             <b>
                               {
-                              formatNumber(firm.price)
+                                formatNumber(firm.price)
                               }
                             </b>
-                            }
+                          }
                         </td>
                       </tr>
                     ))}
