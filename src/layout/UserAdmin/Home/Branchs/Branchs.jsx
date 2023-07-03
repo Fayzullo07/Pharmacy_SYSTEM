@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Topbar from "../../../../components/Topbar/Topbar";
 import Navbar from "../../../../components/Navbar/Navbar";
 import { useQuery } from "react-query";
@@ -10,9 +10,11 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import AddApteka from "./Modal/AddApteka";
 import ChooseDate from "./Modal/ChooseDate";
+import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
 
 const Branchs = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [chooseDate, setChooseDate] = useState(false);
@@ -90,50 +92,53 @@ const Branchs = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}
                       className="cursor_pointer"
-                      onClick={() =>
+                      onClick={() => {
+
                         navigate(`/branchs/${item.id}/${item.name}`)
+                        dispatch(toggleFunction(false));
+                      }
                       }>
-                      <td data-label="№">{index + 1}</td>
-                      <td
-                        data-label="Filial"
-                        className="text-capitalize text-break"
-                      >
-                        {item.name}
-                      </td>
-                      <td data-label="Manzil" className="text-break">
-                        {item.address ? item.address : "~"}
-                      </td>
-                      <td data-label="Nazorat"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <button className="btn btn-outline-primary" onClick={() => {
-                          setCurData(item);
-                          setChooseDate(!chooseDate);
-                        }}>
-                          <i
-                            className="fa-solid fa-clock text-info cursor_pointer me-2"
+                <td data-label="№">{index + 1}</td>
+                <td
+                  data-label="Filial"
+                  className="text-capitalize text-break"
+                >
+                  {item.name}
+                </td>
+                <td data-label="Manzil" className="text-break">
+                  {item.address ? item.address : "~"}
+                </td>
+                <td data-label="Nazorat"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button className="btn btn-outline-primary" onClick={() => {
+                    setCurData(item);
+                    setChooseDate(!chooseDate);
+                  }}>
+                    <i
+                      className="fa-solid fa-clock text-info cursor_pointer me-2"
 
-                          ></i>
-                          Nazorat
-                        </button>
-                      </td>
-                    </tr>
+                    ></i>
+                    Nazorat
+                  </button>
+                </td>
+              </tr>
                   ))}
-              </tbody>
-            </table>
+            </tbody>
+          </table>
 
-            {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
-          </div>
+          {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
+        </div>
 
-          <div className="fixed-bottom">
-            <PaginationForModal
-              page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
-              setPage={setPage}
-            />
-          </div>
+        <div className="fixed-bottom">
+          <PaginationForModal
+            page={page}
+            pages={Math.ceil(data && data.data.count / 10)}
+            setPage={setPage}
+          />
         </div>
       </div>
+    </div >
     </>
   );
 };

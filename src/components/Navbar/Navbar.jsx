@@ -37,7 +37,7 @@ const Navbar = () => {
         <ul>
           <NavLink href="/profile">
             <li>
-            <img src={logo} alt="logo" />
+              <img src={logo} alt="logo" />
             </li>
           </NavLink>
           {navData.map((item) => (
@@ -49,7 +49,10 @@ const Navbar = () => {
               <li
                 key={item.name}
                 onClick={() => {
-                  dispatch(toggleFunction(false));
+                  if (item.slug == '/reports') {
+
+                    dispatch(toggleFunction(false));
+                  }
                 }}
               >
                 <span className="icon">
@@ -67,7 +70,7 @@ const Navbar = () => {
               <span className="title">Log out</span>
             </li>
           </a>
-          <Languages/>
+          <Languages />
         </ul>
       </div>
     </>
