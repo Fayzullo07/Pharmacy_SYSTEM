@@ -12,7 +12,7 @@ import expense from "./expense.png";
 import firm from "./firm.png";
 import qr from "./ic_check.jpg";
 import return1 from "./return.png";
-import workers from "./workers.png";
+import workers from "./clientss.png";
 
 export {
   user,
