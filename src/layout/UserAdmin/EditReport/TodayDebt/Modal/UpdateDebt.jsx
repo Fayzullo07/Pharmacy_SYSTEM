@@ -7,7 +7,7 @@ import {
   cleanedData
 } from "../../../../../functions/NecessaryFunctions";
 import Modal from "../../../../../utils/Modal";
-import { naxt } from "../../../../../api";
+import { Naqd, Naqd_siz, naxt } from "../../../../../api";
 import Textarea from "../../../../../ui/Textarea";
 import PhoneInput from "../../../../../ui/PhoneInput";
 import TextInput from "../../../../../ui/TextInput";
@@ -128,8 +128,8 @@ const UpdateDebt = props => {
             onChange={handleInputChange}
             disabled
           >
-            <option value={naxt}>NAXT</option>
-            <option value={2}>NAXT PULSIZ</option>
+            <option value={naxt}>{Naqd}</option>
+            <option value={2}>{Naqd_siz}</option>
           </select>
           <label htmlFor="transfer_type">
             To'lov turini tanlang <b className="text-danger">*</b>

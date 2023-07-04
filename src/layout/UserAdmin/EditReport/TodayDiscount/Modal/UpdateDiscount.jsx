@@ -6,6 +6,7 @@ import { pharmacyExpensesPatchAction } from "../../../../../functions/DirectorAc
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
+import { Naqd, Naqd_siz } from "../../../../../api";
 
 const UpdateDiscount = props => {
   const { showModal, setShowModal, data } = props;
@@ -104,8 +105,8 @@ const UpdateDiscount = props => {
             onChange={handleInputChange}
             disabled={true}
           >
-            <option value={1}>NAXT</option>
-            <option value={2}>NAXT PULSIZ</option>
+            <option value={1}>{Naqd}</option>
+            <option value={2}>{Naqd_siz}</option>
           </select>
           <label htmlFor="transfer_type">
             Chegirma turi <b className="text-danger">*</b>

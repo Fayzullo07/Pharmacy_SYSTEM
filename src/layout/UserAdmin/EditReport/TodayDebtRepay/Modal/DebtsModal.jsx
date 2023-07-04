@@ -12,7 +12,7 @@ const DebtsModal = ({
   setShowModal,
   setShowAddModal,
   setCurData,
-  getData,
+  getData
 }) => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -26,10 +26,10 @@ const DebtsModal = ({
         is_paid: false,
         report_date: date,
         page,
-        search,
+        search
       });
     },
-    keepPreviousData: true,
+    keepPreviousData: true
   });
 
   if (error) return `Error: ${error.message}`;
@@ -48,7 +48,7 @@ const DebtsModal = ({
             type="date"
             value={date}
             max={today}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={e => setDate(e.target.value)}
           />
         </div>
       </div>
@@ -68,15 +68,15 @@ const DebtsModal = ({
             </tr>
           </thead>
           <tbody>
-            {data && data.data.results.length === 0 && (
-              <tr>
+            {data &&
+              data.data.results.length === 0 &&
+              <tr className="cursor_pointer">
                 <td colSpan={7}>
                   <h2>Qarz topilmadi!</h2>
                 </td>
-              </tr>
-            )}
+              </tr>}
             {data &&
-              data.data.results.map((user, index) => (
+              data.data.results.map((user, index) =>
                 <tr
                   key={user.id}
                   onClick={() => {
@@ -84,15 +84,20 @@ const DebtsModal = ({
                     setShowModal(false);
                     setShowAddModal(true);
                   }}
+                  className="cursor_pointer"
                 >
-                  <td data-label="№">{index + 1}</td>
+                  <td data-label="№">
+                    {index + 1}
+                  </td>
 
                   <td data-label="Ismi" className="text-break">
                     {user.from_who ? user.from_who : user.to_who}
                   </td>
 
                   <td data-label="Qarz">
-                    <b>{user.price}</b>
+                    <b>
+                      {user.price}
+                    </b>
                   </td>
                   <td data-label="Berilgan">
                     <b className="text-success text-break">
@@ -108,7 +113,7 @@ const DebtsModal = ({
                     {user.report_date}
                   </td>
                 </tr>
-              ))}
+              )}
           </tbody>
         </table>
         {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}

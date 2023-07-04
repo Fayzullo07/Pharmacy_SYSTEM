@@ -9,6 +9,7 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import DebtsModal from "./Modal/DebtsModal";
+import { Naqd_siz } from "../../../../api";
 
 const TodayDebtRepay = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -116,7 +117,7 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                     </td>
                     <td data-label="To'lov turi" className="text-capitalize">
                       {item.transfer_type_name == "payme"
-                        ? "Naqt pulsiz"
+                        ? Naqd_siz
                         : item.transfer_type_name}
                     </td>
                     <td data-label="Berilgan summa">

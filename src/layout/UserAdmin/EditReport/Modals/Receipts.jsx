@@ -74,15 +74,7 @@ const Receipts = ({ getData }) => {
             </span>{" "}
             UZS
           </p>
-          {/* <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
-            Chek berilmagan
-          </p>
-          <p className="bg_c px-md-5 px-2 cursor_pointer" onClick={() => setQRModal(!qrModal)}>
-            <span>
-              <b>{formatNumber(qr_price.price)}</b>.0
-            </span>{" "}
-            UZS
-          </p> */}
+          
         </div>
         <div>
           <p className="bg_c">
@@ -92,15 +84,7 @@ const Receipts = ({ getData }) => {
             </span>{" "}
             UZS
           </p>
-          {/* <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
-            Chek berilgan
-          </p>
-          <p className="bg_c px-md-5 px-2">
-            <span>
-              <b>{formatNumber(total - qr_price.price)}</b>.0
-            </span>{" "}
-            UZS
-          </p> */}
+         
         </div>
       </div>
     </>

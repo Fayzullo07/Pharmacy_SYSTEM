@@ -40,19 +40,18 @@ const SideBarEdit = ({ shows, setShows }) => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <i className="fa fa-money-check-dollar fs-5" />
+          <i className="fa fa-money-bill-transfer fs-5" />
         </button>
         <div className="btn-group">
          
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              <button
-                type="button"
+              <a
                 className={`${shows == "4" && "active"} dropdown-item`}
                 onClick={() => setShows("4")}
               >
                 Qarzga qilingan savdo
-              </button>
+              </a>
             </li>
 
             <li>

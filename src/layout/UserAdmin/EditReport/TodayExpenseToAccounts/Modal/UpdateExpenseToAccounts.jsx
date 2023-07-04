@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { naxt } from "../../../../../api";
+import { Naqd, Naqd_siz, naxt } from "../../../../../api";
 import {
   accountsExpensesPatchAction,
   pharmacyExpensesPatchAction
@@ -142,8 +142,8 @@ const UpdateExpenseToAccounts = ({
                 }}
                 disabled
               >
-                <option value={naxt}>NAXT</option>
-                <option value={2}>NAXT PULSIZ</option>
+                <option value={naxt}>{Naqd}</option>
+                <option value={2}>{Naqd_siz}</option>
               </select>
               <label htmlFor="transfer_type">
                 To'lov turini tanlang <b className="text-danger">*</b>

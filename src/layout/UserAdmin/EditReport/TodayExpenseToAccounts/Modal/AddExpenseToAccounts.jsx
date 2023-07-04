@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { naxt, xisob_raqam, xodim } from "../../../../../api";
+import { Naqd, Naqd_siz, naxt, xisob_raqam, xodim } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import {
   accountsExpensesPostAction,
@@ -10,7 +10,6 @@ import {
 import ModalSimple from "../../../../../utils/ModalSimple";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
-import SelectInput from "../../../../../ui/SelectInput";
 
 const AddExpenseToAccounts = ({
   showModal,
@@ -152,8 +151,8 @@ const AddExpenseToAccounts = ({
                   handleInputChange(e);
                 }}
               >
-                <option value={naxt}>NAXT</option>
-                <option value={2}>NAXT PULSIZ</option>
+                <option value={naxt}>{Naqd}</option>
+                <option value={2}>{Naqd_siz}</option>
               </select>
               <label htmlFor="transfer_type">
                 To'lov turini tanlang <b className="text-danger">*</b>
