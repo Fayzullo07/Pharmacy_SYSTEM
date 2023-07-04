@@ -1,5 +1,5 @@
 import React from "react";
-import { profile } from "../../../assets";
+import { expense, firm, income, profile, qr, return1, workers } from "../../../assets";
 import { isFavoriteFunction, toggleFunction } from "../../../redux/Actions/ToggleActions";
 
 const ChooseReports = ({ setChoose, dispatch }) => {
@@ -10,7 +10,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center ">
-              <img src={profile} width={50} alt="img" />
+              <img src={income} width={50} alt="img" />
               <h4 className="px-2">Tushum hisob-kitobi</h4>
             </div>
           </div>
@@ -41,7 +41,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center">
-              <img src={profile} width={50} alt="img" />
+              <img src={expense} width={50} alt="img" />
               <h4 className="px-2">Chiqim hisob-kitobi</h4>
             </div>
           </div>
@@ -72,7 +72,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center">
-              <img src={profile} width={50} alt="img" />
+              <img src={firm} width={50} alt="img" />
               <h4 className="px-2">Firmalarga chiqim hisob-kitobi</h4>
             </div>
           </div>
@@ -103,7 +103,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center">
-              <img src={profile} width={50} alt="img" />
+              <img src={qr} width={50} alt="img" />
               <h4 className="px-2">QR-kod bilan qilingan savdo</h4>
             </div>
           </div>
@@ -165,7 +165,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center">
-              <img src={profile} width={50} alt="img" />
+              <img src={return1} width={50} alt="img" />
               <h4 className="px-2">Qaytarib olingan mahsulotlar</h4>
             </div>
           </div>
@@ -227,7 +227,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         <div className="border rounded d-flex align-items-center justify-content-between px-2 py-1">
           <div className="header_flex">
             <div className=" d-flex align-items-center">
-              <img src={profile} width={50} alt="img" />
+              <img src={workers} width={50} alt="img" />
               <h4 className="px-2">Xodimlar bilan hisob kitobi</h4>
             </div>
           </div>
