@@ -10,6 +10,7 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import { naxt } from "../../../../api";
+import Receipts from "../Modals/Receipts";
 
 const TodayInComes = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -19,9 +20,8 @@ const TodayInComes = ({ deteils, getData }) => {
   const [curData, setCurData] = useState({});
 
   useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || deleteModal || updateModal ? "hidden" : "scroll"
-    }`;
+    document.body.style.overflowY = `${showModal || deleteModal || updateModal ? "hidden" : "scroll"
+      }`;
     window.scrollTo(0, 0);
   }, [showModal, deleteModal, updateModal]);
 
@@ -69,22 +69,39 @@ const TodayInComes = ({ deteils, getData }) => {
       )}
 
       <div>
+        
         <div className="header_flex d-flex justify-content-between align-items-center">
-          <p className="bg_c">
-            Umumiy:{" "}
-            <span>
-              <b>{formatNumber(total)}</b>.0
-            </span>{" "}
-            UZS
-          </p>
+          <div className="row w-100 m-0">
+            <div className="col-md-4 col-12 p-0">
+              <div className="d-flex align-items-center justify-content-between">
 
-          <button
-            className="btn btn-sm"
-            style={{ background: "var(--blue)", color: "var(--g_white)" }}
-            onClick={() => setShowModal(!showModal)}
-          >
-            <i className="fa fa-add"></i>
-          </button>
+                <p className="bg_c">
+                  Umumiy:{" "}
+                  <span>
+                    <b>{formatNumber(total)}</b>.0
+                  </span>{" "}
+                  UZS
+                </p>
+              </div>
+            </div>
+            <div className="col-md-3 "></div>
+            <div className="col-md-5 col-12 p-0">
+              <div className="d-flex align-items-center justify-content-between ">
+
+                <Receipts getData={getData} />
+                <button
+                  className="btn btn-sm"
+                  style={{ background: "var(--blue)", color: "var(--g_white)" }}
+                  onClick={() => setShowModal(!showModal)}
+                >
+                  <i className="fa fa-add"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
 
         {/* TABLE */}

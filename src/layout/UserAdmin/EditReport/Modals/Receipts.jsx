@@ -67,7 +67,14 @@ const Receipts = ({ getData }) => {
       )}
       <div className="d-flex align-items-center gap-2">
         <div>
-          <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
+          <p className="bg_c cursor_pointer" onClick={() => setQRModal(!qrModal)}>
+            Chek berilmagan:{" "}
+            <span>
+              <b>{formatNumber(qr_price.price)}</b>.0
+            </span>{" "}
+            UZS
+          </p>
+          {/* <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
             Chek berilmagan
           </p>
           <p className="bg_c px-md-5 px-2 cursor_pointer" onClick={() => setQRModal(!qrModal)}>
@@ -75,10 +82,17 @@ const Receipts = ({ getData }) => {
               <b>{formatNumber(qr_price.price)}</b>.0
             </span>{" "}
             UZS
-          </p>
+          </p> */}
         </div>
         <div>
-          <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
+          <p className="bg_c">
+            Chek berilgan:{" "}
+            <span>
+              <b>{formatNumber(total - qr_price.price)}</b>.0
+            </span>{" "}
+            UZS
+          </p>
+          {/* <p className="px-1 m-0" style={{ color: "var(--text_color_blue)" }}>
             Chek berilgan
           </p>
           <p className="bg_c px-md-5 px-2">
@@ -86,7 +100,7 @@ const Receipts = ({ getData }) => {
               <b>{formatNumber(total - qr_price.price)}</b>.0
             </span>{" "}
             UZS
-          </p>
+          </p> */}
         </div>
       </div>
     </>

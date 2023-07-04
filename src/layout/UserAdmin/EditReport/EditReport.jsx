@@ -17,7 +17,6 @@ import TodayTradeToDebtRepay from "./TodayTradeToDebtRepay/TodayTradeToDebtRepay
 import TodayToDeptRepay from "./TodayToDebtRepay/TodayToDebtRepay";
 import TodayExPenseToFirm from "./TodayExPenseToFirm/TodayExPenseToFirm";
 import { formatNumber } from "../../../functions/NecessaryFunctions";
-import Receipts from "./Modals/Receipts";
 import { useQuery } from "react-query";
 import { remeinderGetAPI } from "../../../api/GlobalRequest";
 
@@ -31,14 +30,8 @@ const EditReport = () => {
 
   const [shows, setShows] = useState("1");
 
-  const getData = {
-    report_date,
-    shift,
-    to_pharmacy
-  };
-
   const { data: remeinder } = useQuery({
-    queryKey: ["remeinder", shows],
+    queryKey: ["remeinder"],
     queryFn: async () => {
       return await remeinderGetAPI({
         report_date: getData.report_date,
@@ -47,40 +40,47 @@ const EditReport = () => {
       });
     }
   });
+
+  const getData = {
+    report_date,
+    shift,
+    to_pharmacy
+  };
+
   return (
     <div className="d-flex">
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
-          <div className="header_flex">
-            <h2 id="remeinder">
-              <span>Kassa: </span>
-              <b>
-                {remeinder &&
-                  remeinder.data &&
-                  formatNumber(remeinder.data.price)}
-              </b>{" "}
-              <span>UZS</span>
+          <div className="header_flex mb-1">
+            <h2>
+              {shows == "1" && "Tushumlar"}
+              {shows == "2" && "Xarajatlar"}
+              {shows == "3" && "Firmaga chiqim"}
+              {shows == "4" && "Qarzga qilingan savdo"}
+              {shows == "5" && "Qarzga qilingan savdoni qaytarish"}
+              {shows == "6" && "Qarz berish"}
+              {shows == "7" && "Berilgan qarzni qaytarish"}
+              {shows == "8" && "Qarz olish"}
+              {shows == "9" && "Olingan qarzni qaytarish"}
+              {shows == "10" && "Qaytarib olingan mahsulot"}
+              {shows == "11" && "Chegirma bilan savdo"}
+              {shows == "12" && "Xodimlarga berilgan summa"}
             </h2>
+            {shows == "1" &&
+              <h2 id="remeinder">
+                <span>Kassa: </span>
+                <b>
+                  {remeinder &&
+                    remeinder.data &&
+                    formatNumber(remeinder.data.price)}
+                </b>{" "}
+                <span>UZS</span>
+              </h2>}
           </div>
-          <SideBarEdit setChoose={setShows} choose={shows} />
         </Topbar>
-        <div className="header_flex mb-1">
-          <h2>
-            {shows == "1" && "Tushumlar"}
-            {shows == "2" && "Xarajatlar"}
-            {shows == "3" && "Firmaga chiqim"}
-            {shows == "4" && "Qarzga qilingan savdo"}
-            {shows == "5" && "Qarzga qilingan savdoni qaytarish"}
-            {shows == "6" && "Qarz berish"}
-            {shows == "7" && "Berilgan qarzni qaytarish"}
-            {shows == "8" && "Qarz olish"}
-            {shows == "9" && "Olingan qarzni qaytarish"}
-            {shows == "10" && "Qaytarib olingan mahsulot"}
-            {shows == "11" && "Chegirma bilan savdo"}
-            {shows == "12" && "Xodimlarga berilgan summa"}
-          </h2>
-          <Receipts getData={getData} />
+        <div className="header_flex mb-2">
+          <SideBarEdit setShows={setShows} shows={shows} />
         </div>
 
         {shows == "1" && <TodayInComes deteils={deteils} getData={getData} />}

@@ -102,7 +102,7 @@ const Offers = () => {
             <div className="msg-text">
               Assalomu alaykum. Bizning dasturimizni tanlaganizdan hursandmiz.
               Agar qanaqadur muammo yoki taklifingiz bo'lsa shu yerga yozing!
-              Biz bunda hursand bolamiz va albatta inobatga olamiz! 😊
+              Biz bundan hursand bolamiz va albatta inobatga olamiz! 😊
             </div>
           </div>
         </div>
