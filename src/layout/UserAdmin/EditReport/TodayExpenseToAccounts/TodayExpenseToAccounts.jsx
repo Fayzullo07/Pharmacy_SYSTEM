@@ -133,7 +133,6 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                   <tr key={item.id}>
                     <td data-label="Kimdan berildi">
                       <span className="text-muted">Kassadan</span>{" "}
-                      <b>{item.from_pharmacy_name}</b>
                     </td>
                     <td data-label="Kimga berildi" className="text-capitalize">
                       {item.to_user_name}
@@ -171,10 +170,9 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                   <tr key={item.id} className="scaleY">
                     <td data-label="Kimdan berildi">
                       <span className="text-muted">Rahbardan</span>{" "}
-                      <b>{item.from_user_name}</b>
                     </td>
                     <td data-label="Kimga berildi" className="text-capitalize">
-                      {item.to_user_name}
+                      {item.to_user_name == null ? "Firmaga chiqim": item.to_user_name}
                     </td>
                     <td data-label="To'lov turi" className="text-capitalize">
                       {item.transfer_type_name == "payme"

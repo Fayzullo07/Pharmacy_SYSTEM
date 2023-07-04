@@ -143,7 +143,6 @@ const TodayReturn = (props) => {
                     </td>
                     <td data-label="Qaytarilgan pul">
                       <b className="text-danger">{formatNumber(item.price)}</b>{" "}
-                      UZS
                     </td>
                     <td data-label="Qaytarilgan pul">Kassadan</td>
                     <td

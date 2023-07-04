@@ -7,7 +7,7 @@ import { checkPhoneNumber } from "../../functions/NecessaryFunctions";
 import validator from "validator";
 import { loginAction } from "../../functions/AuthFunctions";
 
-import { logo, logo1, profile } from "../../assets";
+import { logo1 } from "../../assets";
 
 import "./Login.css";
 import { toast } from "react-toastify";
@@ -74,12 +74,14 @@ const Login = ({ onLogin }) => {
               }}
               required
             />
-            <label>Username</label>
+            <label>Telefon raqam kiriting</label>
           </div>
           <div className="inputBox">
+
+            <i className={`fa fa-eye${showPassword ? '': "-slash"}`} onClick={() => setShowPassword(!showPassword)}></i>
             <input
-              type="password"
-              placeholder="Password"
+              type={`${showPassword ? "password": "text"}`}
+              placeholder="Parol"
               onChange={handlePasswordChange}
               onKeyDown={e => {
                 if (e.key === "Enter") {
@@ -88,7 +90,7 @@ const Login = ({ onLogin }) => {
               }}
               required
             />
-            <label>Password</label>
+            <label>Parol kiriting</label>
           </div>
           <button
             className="input"
@@ -97,7 +99,7 @@ const Login = ({ onLogin }) => {
           >
             {mutation.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Login"}
+              : "Kirish"}
           </button>
         </form>
       </div>

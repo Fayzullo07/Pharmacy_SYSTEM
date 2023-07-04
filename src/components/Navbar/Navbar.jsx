@@ -68,7 +68,7 @@ const Navbar = () => {
               <span className="icon">
                 <i className="fas fa-right-from-bracket fa-lg"></i>
               </span>
-              <span className="title">Log out</span>
+              <span className="title">Tizimdan chiqish</span>
             </li>
           </a>
           <Languages />
