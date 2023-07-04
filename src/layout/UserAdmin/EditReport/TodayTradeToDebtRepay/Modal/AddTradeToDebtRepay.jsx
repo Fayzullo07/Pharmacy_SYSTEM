@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { naxt, transfersWorker } from "../../../../../api";
+import { Naqd, Naqd_siz, naxt, transfersWorker } from "../../../../../api";
 import { toast } from "react-toastify";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsRePayPostAction } from "../../../../../functions/DirectorActions";
@@ -141,8 +141,8 @@ const AddTradeToDebtRepay = ({
               }
             }}
           >
-            <option value={naxt}>NAXT</option>
-            <option value="naxt_siz">NAXT PULSIZ</option>
+            <option value={naxt}>{Naqd}</option>
+            <option value="naxt_siz">{Naqd_siz}</option>
           </select>
           <label htmlFor="transfer_typ">
             Pul turini tanlang <b className="text-danger">*</b>

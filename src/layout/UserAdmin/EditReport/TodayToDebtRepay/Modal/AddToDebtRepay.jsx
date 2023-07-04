@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { naxt, transfersWorker } from "../../../../../api";
+import { Naqd, Naqd_siz, naxt, transfersWorker } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsRePayPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
@@ -136,8 +136,8 @@ const AddToDebtRepay = ({
               }
             }}
           >
-            <option value={naxt}>NAXT</option>
-            <option value="naxt_siz">NAXT PULSIZ</option>
+            <option value={naxt}>{Naqd}</option>
+            <option value="naxt_siz">{Naqd_siz}</option>
           </select>
           <label htmlFor="transfer_typ">
             Pul turini tanlang <b className="text-danger">*</b>

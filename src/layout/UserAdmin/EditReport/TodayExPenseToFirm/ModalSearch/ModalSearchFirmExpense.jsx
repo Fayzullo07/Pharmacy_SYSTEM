@@ -10,7 +10,7 @@ const ModalSearchFirmExpense = ({
   showModal,
   setShowModal,
   setCurData,
-  setShowAddModal,
+  setShowAddModal
 }) => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -20,7 +20,7 @@ const ModalSearchFirmExpense = ({
     queryFn: async () => {
       return await firmsGetAPI({ page, is_favorite: true, search });
     },
-    keepPreviousData: true,
+    keepPreviousData: true
   });
 
   if (error) return `Error: ${error.message}`;
@@ -47,15 +47,15 @@ const ModalSearchFirmExpense = ({
             </tr>
           </thead>
           <tbody>
-            {data && data.data.results.length === 0 && (
+            {data &&
+              data.data.results.length === 0 &&
               <tr>
                 <td colSpan={2}>
                   <h2> Malumot topilmadi!</h2>
                 </td>
-              </tr>
-            )}
+              </tr>}
             {data &&
-              data.data.results.map((item, index) => (
+              data.data.results.map((item, index) =>
                 <tr
                   key={item.id}
                   onClick={() => {
@@ -63,13 +63,18 @@ const ModalSearchFirmExpense = ({
                     setShowModal(false);
                     setShowAddModal(true);
                   }}
+                  className="cursor_pointer"
                 >
-                  <td data-label="№">{index + 1}</td>
+                  <td data-label="№">
+                    {index + 1}
+                  </td>
                   <td data-label="Firma" className="text-capitalize text-break">
-                    <b>{item.name}</b>
+                    <b>
+                      {item.name}
+                    </b>
                   </td>
                 </tr>
-              ))}
+              )}
           </tbody>
         </table>
         {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}

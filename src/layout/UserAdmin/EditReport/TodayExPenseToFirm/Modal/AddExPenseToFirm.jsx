@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  Naqd,
+  Naqd_siz,
   naxt,
   today,
   xisob_raqam
@@ -138,8 +140,8 @@ const AddExPenseToFirm = ({
                 value={formData.transfer_type}
                 onChange={handleInputChange}
               >
-                <option value={naxt}>NAXT</option>
-                <option value={2}>NAXT PULSIZ</option>
+                <option value={naxt}>{Naqd}</option>
+                <option value={2}>{Naqd_siz}</option>
               </select>
               <label htmlFor="transfer_type">
                 To'lov turini tanlang <b className="text-danger">*</b>

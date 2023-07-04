@@ -115,7 +115,7 @@ const TodayInComes = ({ deteils, getData }) => {
                   №
                 </th>
                 <th>Tushum turi</th>
-                <th>Miqdor</th>
+                <th>Tushum summasi</th>
                 <th>Pul qayerga tushdi</th>
                 <th
                   scope="col"
@@ -141,7 +141,7 @@ const TodayInComes = ({ deteils, getData }) => {
                     <td data-label="Tushum turi" className="text-uppercase">
                       {item.transfer_type_name}
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label="Tushum summasi">
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
                     <td

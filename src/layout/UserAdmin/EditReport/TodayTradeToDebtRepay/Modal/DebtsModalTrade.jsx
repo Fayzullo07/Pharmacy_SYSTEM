@@ -86,6 +86,7 @@ const DebtsModalTrade = ({
                     setShowModal(false);
                     setShowAddModal(true);
                   }}
+                  className="cursor_pointer"
                 >
                   <td data-label="№">{index + 1}</td>
 
