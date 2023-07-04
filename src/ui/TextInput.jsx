@@ -37,6 +37,12 @@ const TextInput = ({
         case "Kimga qarz berildi":
           setPlaceholderInput("Kimga qarz berildi");
           break;
+        case "Qabul qiluvchi F.I.O":
+          setPlaceholderInput("Qabul qiluvchi F.I.O");
+          break;
+        case "Olingan mahsulot nomi":
+          setPlaceholderInput("Olingan mahsulot nomi");
+          break;
         default:
           setPlaceholderInput("Text");
       }

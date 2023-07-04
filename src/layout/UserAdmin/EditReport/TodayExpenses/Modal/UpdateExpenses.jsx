@@ -11,6 +11,7 @@ import ModalSimple from "../../../../../utils/ModalSimple";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
 import SelectInput from "../../../../../ui/SelectInput";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 
 const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
   let director = null;
@@ -114,22 +115,12 @@ const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
           </div>
           <div className="col-md-6">
             {/* CHOOSE TRANSFER TYPE */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                id="transfer_type"
-                name="transfer_type"
-                value={formData.transfer_type}
-                onChange={handleInputChange}
-                disabled
-              >
-                <option value={naxt}>{Naqd}</option>
-                <option value={2}>{Naqd_siz}</option>
-              </select>
-              <label htmlFor="transfer_type">
-                To'lov turini tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TransferTypeSelect
+              name={"transfer_type"}
+              value={formData.transfer_type}
+              handleInputChange={handleInputChange}
+              disabled={true}
+            />
           </div>
         </div>
 

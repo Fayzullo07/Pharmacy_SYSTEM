@@ -114,7 +114,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 <th>Sana</th>
                 <th>Firma</th>
                 <th>Olingan mahsulot nomi</th>
-                <th>Pul</th>
+                <th>Mahsulot summasi</th>
                 <th>Qanday qaytariladi</th>
                 <th>Qaytarish muddati</th>
 
@@ -141,7 +141,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                     <td data-label="Olingan mahsulot nomi">
                       <b>{item.second_name}</b>
                     </td>
-                    <td data-label="Pul">
+                    <td data-label="Mahsulot summasi">
                       <b>{formatNumber(item.price)}</b>
                     </td>
                     <td data-label="Qanday qaytariladi">

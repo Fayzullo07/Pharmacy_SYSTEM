@@ -7,6 +7,7 @@ import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
 import { Naqd, Naqd_siz } from "../../../../../api";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 
 const UpdateDiscount = props => {
   const { showModal, setShowModal, data } = props;
@@ -96,22 +97,12 @@ const UpdateDiscount = props => {
         />
 
         {/* DISCOUNT TURINI TANLANG */}
-        <div className="form-floating">
-          <select
-            className="form-select mb-3"
-            id="transfer_type"
-            name="transfer_type"
-            value={formData.transfer_type}
-            onChange={handleInputChange}
-            disabled={true}
-          >
-            <option value={1}>{Naqd}</option>
-            <option value={2}>{Naqd_siz}</option>
-          </select>
-          <label htmlFor="transfer_type">
-            Chegirma turi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TransferTypeSelect
+          name={"transfer_type"}
+          value={formData.transfer_type}
+          handleInputChange={handleInputChange}
+          disabled={true}
+        />
 
         {/* BIO */}
         <Textarea

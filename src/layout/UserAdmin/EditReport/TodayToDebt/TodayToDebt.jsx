@@ -96,7 +96,7 @@ const TodayToDebt = ({ is_client, getData }) => {
                   №
                 </th>
                 <th>Kimga qarz berildi</th>
-                <th>Telefon</th>
+                <th>Telefon nomeri</th>
                 <th>Qancha berildi</th>
                 <th>Qancha qoldi</th>
                 <th scope="col" style={{ width: "5px" }}>

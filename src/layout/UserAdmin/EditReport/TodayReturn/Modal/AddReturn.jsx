@@ -10,6 +10,7 @@ import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import NumberInput from "../../../../../ui/NumberInput";
 import Textarea from "../../../../../ui/Textarea";
 import ModalSimple from "../../../../../utils/ModalSimple";
+import TextInput from "../../../../../ui/TextInput";
 
 const AddReturn = props => {
   const { showModal, setShowModal, deteils, getData } = props;
@@ -111,25 +112,14 @@ const AddReturn = props => {
     <ModalSimple showModal={showModal} setShowModal={setShowModal}>
       <div className="modal-body">
         {/* PRODUCT NAME */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Maxsulot nomi"
-            id="second_name"
-            name="second_name"
-            value={formData.second_name}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label htmlFor="second_name">
-            Maxsulot nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"second_name"}
+          value={formData.second_name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Mahsulot nomi"}
+        />
 
         {/* MONEY EXPNESES*/}
         <NumberInput

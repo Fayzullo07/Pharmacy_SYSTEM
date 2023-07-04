@@ -71,7 +71,7 @@ const DebtsModal = ({
               {data && data.data.results.length === 0 && (
                 <tr>
                   <td colSpan={4}>
-                    <h2> Firma topilmadi!</h2>
+                    <h2> Malumot topilmadi!</h2>
                   </td>
                 </tr>
               )}
@@ -84,6 +84,7 @@ const DebtsModal = ({
                       setShowModal(false);
                       setShowAddModal(true);
                     }}
+                    className="cursor_pointer"
                   >
                     <td data-label="№">{index + 1}</td>
 

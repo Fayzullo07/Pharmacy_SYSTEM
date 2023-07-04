@@ -12,6 +12,7 @@ import Textarea from "../../../../../ui/Textarea";
 import TextInput from "../../../../../ui/TextInput";
 import NumberInput from "../../../../../ui/NumberInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 
 const AddDebt = props => {
   const { showModal, setShowModal, getData } = props;
@@ -121,21 +122,11 @@ const AddDebt = props => {
         />
 
         {/* TRANSFER TYPE */}
-        <div className="form-floating">
-          <select
-            className="form-select mb-3"
-            id="transfer_type"
-            name="transfer_type"
-            value={formData.transfer_type}
-            onChange={handleInputChange}
-          >
-            <option value={naxt}>{Naqd}</option>
-            <option value={2}>{Naqd_siz}</option>
-          </select>
-          <label htmlFor="transfer_type">
-            To'lov turini tanlang <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TransferTypeSelect
+          name={"transfer_type"}
+          value={formData.transfer_type}
+          handleInputChange={handleInputChange}
+        />
 
         {/* BIO */}
         <Textarea

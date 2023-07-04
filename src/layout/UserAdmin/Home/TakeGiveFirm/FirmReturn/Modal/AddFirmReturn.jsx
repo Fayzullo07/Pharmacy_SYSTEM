@@ -40,15 +40,23 @@ const AddFirmReturn = ({
       return;
     }
 
-    if (name == "verified_phone_number" && value.length > 13) {
-      return;
+    if (name === "verified_phone_number") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
     }
 
     if (name == "desc" && value.length > 300) {
       return;
     }
 
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const queryClient = useQueryClient();

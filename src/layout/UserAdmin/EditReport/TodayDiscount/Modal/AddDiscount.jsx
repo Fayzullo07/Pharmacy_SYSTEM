@@ -7,6 +7,7 @@ import { pharmacyExpensesPostAction } from "../../../../../functions/DirectorAct
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 
 const AddDiscount = props => {
   const { showModal, setShowModal, getData } = props;
@@ -95,21 +96,11 @@ const AddDiscount = props => {
         />
 
         {/* DISCOUNT TURINI TANLANG */}
-        <div className="form-floating">
-          <select
-            className="form-select mb-3"
-            id="transfer_type"
-            name="transfer_type"
-            value={formData.transfer_type}
-            onChange={handleInputChange}
-          >
-            <option value={naxt}>{Naqd}</option>
-            <option value={2}>{Naqd_siz}</option>
-          </select>
-          <label htmlFor="transfer_type">
-            Chegirma turi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TransferTypeSelect
+          name={"transfer_type"}
+          value={formData.transfer_type}
+          handleInputChange={handleInputChange}
+        />
 
         {/* BIO */}
         <Textarea

@@ -84,7 +84,6 @@ const AddToDebtRepay = ({
         <div className="form-floating mb-3">
           <select
             className="form-select cursor_not"
-            placeholder="Kimga qarz qaytarildi"
             name="from_debt"
             value={formData.from_debt}
             disabled
@@ -93,9 +92,6 @@ const AddToDebtRepay = ({
               {user.to_who}
             </option>
           </select>
-          <label>
-            Qarz <b className="text-danger">*</b>
-          </label>
         </div>
 
         <div className="my-2">
@@ -136,8 +132,12 @@ const AddToDebtRepay = ({
               }
             }}
           >
-            <option value={naxt}>{Naqd}</option>
-            <option value="naxt_siz">{Naqd_siz}</option>
+            <option value={naxt}>
+              {Naqd}
+            </option>
+            <option value="naxt_siz">
+              {Naqd_siz}
+            </option>
           </select>
           <label htmlFor="transfer_typ">
             Pul turini tanlang <b className="text-danger">*</b>

@@ -115,8 +115,8 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 <th>Chiqim kimdan qilindi</th>
                 <th style={{textAlign: 'start'}}>Firma</th>
                 <th>F . I . O</th>
-                <th>Telofon</th>
-                <th>Miqdor</th>
+                <th>Telofon nomeri</th>
+                <th>Berilgan summa</th>
                 <th>To'lov turi</th>
               </tr>
             </thead>
@@ -132,12 +132,12 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                         ? item.verified_firm_worker_name
                         : "~"}
                     </td>
-                    <td data-label="Telofon" className="text-capitalize">
+                    <td data-label="Telofon nomer" className="text-capitalize">
                       {item.verified_phone_number
                         ? item.verified_phone_number
                         : "~"}
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label="Berilgan summa">
                       <b>{formatNumber(item.price)}</b>
                     </td>
                     <td data-label="To'lov turi" className="text-uppercase">

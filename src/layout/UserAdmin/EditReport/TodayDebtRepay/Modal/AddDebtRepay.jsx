@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { Naqd, Naqd_siz, naxt, transfers, xisob_raqam } from "../../../../../api";
+import {
+  Naqd,
+  Naqd_siz,
+  naxt,
+  transfers,
+  xisob_raqam
+} from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyDebtsRePayPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 
 const AddDebtRepay = props => {
   const { showModal, setShowModal, deteils, curData, getData } = props;
@@ -131,21 +138,11 @@ const AddDebtRepay = props => {
         <div className="row">
           <div className="col-md-6">
             {/* TUSHUP TURINI TANLANG */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                id="transfer_type"
-                name="transfer_type"
-                value={formData.transfer_type}
-                onChange={handleInputChange}
-              >
-                <option value={naxt}>{Naqd}</option>
-                <option value={2}>{Naqd_siz}</option>
-              </select>
-              <label htmlFor="transfer_type">
-                To'lov turini tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TransferTypeSelect
+              name={"transfer_type"}
+              value={formData.transfer_type}
+              handleInputChange={handleInputChange}
+            />
           </div>
           <div className="col-md-6">
             {/* KIMDAN OLINDI */}

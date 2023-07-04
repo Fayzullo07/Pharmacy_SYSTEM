@@ -16,6 +16,9 @@ import {
 import { firmsExpenseDebtPostAction } from "../../../../../functions/GlobalActions";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
+import TextInput from "../../../../../ui/TextInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
 
 const AddExPenseToFirm = ({
   showModal,
@@ -149,21 +152,12 @@ const AddExPenseToFirm = ({
         <div className="row">
           <div className="col-md-6">
             {/* TRANSFER TYPE */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                id="transfer_type"
-                name="transfer_type"
-                value={formData.transfer_type}
-                onChange={handleInputChange}
-              >
-                <option value={naxt}>{Naqd}</option>
-                <option value={2}>{Naqd_siz}</option>
-              </select>
-              <label htmlFor="transfer_type">
-                To'lov turini tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TransferTypeSelect
+              name={"transfer_type"}
+              value={formData.transfer_type}
+              handleInputChange={handleInputChange}
+            />
+
           </div>
 
           <div className="col-md-6">
@@ -198,49 +192,26 @@ const AddExPenseToFirm = ({
             <>
               <div className="col-md-6">
                 {/* NAME WHO TAKE */}
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Qabul qiluvchi ismi"
-                    id="verified_firm_worker_name"
-                    name="verified_firm_worker_name"
-                    value={formData.verified_firm_worker_name}
-                    onChange={handleInputChange}
-                    onKeyDown={e => {
-                      if (e.key === "Enter") {
-                        handleSubmit();
-                      }
-                    }}
-                  />
-                  <label htmlFor="verified_firm_worker_name">
-                    Qabul qiluvchi F.I.O <b className="text-danger">*</b>
-                  </label>
-                </div>
+                <TextInput
+                  name={"verified_firm_worker_name"}
+                  value={formData.verified_firm_worker_name}
+                  handleInputChange={handleInputChange}
+                  handleSubmit={handleSubmit}
+                  isRequired={true}
+                  placeholder={"Qabul qiluvchi F.I.O"}
+                />
               </div>
 
               <div className="col-md-6">
                 {/* PHONE WHO TAKE */}
-                <div className="form-floating mb-3">
-                  <input
-                    type="tel"
-                    className="form-control"
-                    placeholder="Qabul qiluvchining telefon nomeri"
-                    id="verified_phone_number"
-                    name="verified_phone_number"
-                    value={formData.verified_phone_number}
-                    onChange={handleInputChange}
-                    onKeyDown={e => {
-                      if (e.key === "Enter") {
-                        handleSubmit();
-                      }
-                    }}
-                  />
-                  <label htmlFor="verified_phone_number">
-                    Qabul qiluvchining telefon nomeri{" "}
-                    <b className="text-danger">*</b>
-                  </label>
-                </div>
+                <PhoneInput
+                  name={"verified_phone_number"}
+                  value={formData.verified_phone_number}
+                  handleInputChange={handleInputChange}
+                  handleSubmit={handleSubmit}
+                  isRequired={true}
+                  placeholder={"Qabul qiluvchining telefon nomeri"}
+                />
               </div>
             </>
           )}
