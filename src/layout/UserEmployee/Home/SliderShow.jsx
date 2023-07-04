@@ -84,12 +84,12 @@ const SliderShow = () => {
       )}
 
       {/* <!-- Next and previous buttons --> */}
-      <a className="prev" onClick={() => minusSlides(1)}>
+      <div className="prev" onClick={() => minusSlides(1)}>
         &#10094;
-      </a>
-      <a className="next" onClick={() => plusSlides(1)}>
+      </div>
+      <div className="next" onClick={() => plusSlides(1)}>
         &#10095;
-      </a>
+      </div>
 
     
     </div>

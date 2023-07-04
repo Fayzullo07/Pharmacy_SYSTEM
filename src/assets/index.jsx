@@ -9,7 +9,7 @@ import logo from "./logo1.png";
 import income from "./income.jpg";
 import expense from "./expense.png";
 import firm from "./firm.png";
-import qr from "./qr.jpg";
+import qr from "./ic_check.jpg";
 import return1 from "./return.png";
 import workers from "./workers.png";
 
