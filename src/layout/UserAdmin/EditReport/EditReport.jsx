@@ -38,7 +38,7 @@ const EditReport = () => {
   };
 
   const { data: remeinder, isLoading } = useQuery({
-    queryKey: ["remeinder"],
+    queryKey: ["remeinder", shows],
     queryFn: async () => {
       return await remeinderGetAPI({
         report_date,

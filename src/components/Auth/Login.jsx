@@ -53,6 +53,7 @@ const Login = ({ onLogin }) => {
     mutation.mutate();
   };
   return (
+    <div id="body_image">
       <div class="box">
         <h2>Tizimga kirish</h2>
         <form>
@@ -96,6 +97,7 @@ const Login = ({ onLogin }) => {
           </button>
         </form>
       </div>
+    </div>
   );
 };
 

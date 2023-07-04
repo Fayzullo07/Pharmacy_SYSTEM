@@ -56,6 +56,7 @@ const AddInComes = props => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("incomes"); // Ma'lumotlarni yangilash
+        queryClient.invalidateQueries("remeinder"); // Ma'lumotlarni yangilash
       }
     }
   );
