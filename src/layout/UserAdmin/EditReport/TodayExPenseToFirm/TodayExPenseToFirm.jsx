@@ -9,6 +9,7 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import ModalSearchFirmExpense from "./ModalSearch/ModalSearchFirmExpense";
+import { today, xisob_raqam } from "../../../../api";
 
 const TodayExPenseToFirm = ({ deteils, getData }) => {
   const [firm_expense_id, setFirmExpenseId] = useState({});
@@ -88,7 +89,8 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
             </span>{" "}
             UZS
           </p>
-          {/* {getData.report_date == today && ( */}
+          {getData.report_date == today && (
+
           <button
             className="btn btn-sm"
             style={{ background: "var(--blue)", color: "var(--g_white)" }}
@@ -96,6 +98,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           >
             <i className="fa fa-add"></i>
           </button>
+          )}
         </div>
 
         {/* TABLE */}
@@ -109,7 +112,8 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Firma</th>
+                <th>Chiqim kimdan qilindi</th>
+                <th style={{textAlign: 'start'}}>Firma</th>
                 <th>F . I . O</th>
                 <th>Telofon</th>
                 <th>Miqdor</th>
@@ -121,7 +125,8 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Firma">{item.to_firm_name}</td>
+                    <td data-label="Chiqim kimdan qilindi">{item.transfer_type == xisob_raqam ? "HISOB RAQAM" : item.from_user_name != null ? "RAHBAR": item.from_user_price != 0 ? "KASSA, RAHBAR": "KASSA"}</td>
+                    <td data-label="Firma" style={{textAlign: 'start'}}>{item.to_firm_name}</td>
                     <td data-label="F.I.O" className="text-capitalize">
                       {item.verified_firm_worker_name
                         ? item.verified_firm_worker_name

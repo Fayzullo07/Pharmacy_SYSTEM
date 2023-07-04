@@ -8,7 +8,7 @@ import {
 import { firmsExpenseVerifyPostAction } from "../../../../../functions/GlobalActions";
 import ModalSimple from "../../../../../utils/ModalSimple";
 import { accountsExpensesPostAction } from "../../../../../functions/DirectorActions";
-import { naxt, xodim } from "../../../../../api";
+import { naxt, xisob_raqam, xodim } from "../../../../../api";
 
 const ViewModal = ({
   showModal,
@@ -112,6 +112,20 @@ const ViewModal = ({
           Berilgan summa{" "}
           <span className="mx-2 text-muted">
             {formatNumber(firm_expense_id.price)}
+          </span>
+        </h5>
+        <hr />
+
+        <h5>
+          Chiqim kimdan qilindi{" "}
+          <span className="mx-2 text-muted">
+            {firm_expense_id.transfer_type == xisob_raqam
+              ? "HISOB RAQAM"
+              : firm_expense_id.from_user_name != null
+                ? "RAHBAR"
+                : firm_expense_id.from_user_price != 0
+                  ? "KASSA, RAHBAR"
+                  : "KASSA"}
           </span>
         </h5>
         <hr />

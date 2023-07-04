@@ -58,11 +58,22 @@ const AddExPenseToFirm = ({
     if (name === "price" && value.length > 9) {
       return;
     }
+    if (name === "verified_phone_number") {
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
+    }
 
     if (name === "desc" && value.length > 300) {
       return;
     }
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: e.target.value });
   };
 
   const mutationToFirm = useMutation(
@@ -73,7 +84,8 @@ const AddExPenseToFirm = ({
           from_pharmacy_transfer: formData.transfer_type == naxt ? false : true,
           price: Number(formData.price) + Number(formData.from_user_price),
           from_user: ["k", "h", "k_r"].includes(formData.from_user) ? null : formData.from_user,
-          transfer_type: formData.from_user == 'h' ? xisob_raqam : formData.transfer_type
+          transfer_type: formData.from_user == 'h' ? xisob_raqam : formData.transfer_type,
+          from_user_price: formData.from_user == director.id ? Number(formData.price) : Number(formData.from_user_price)
         }),
         setViewModal,
         setShowModal,
@@ -115,6 +127,11 @@ const AddExPenseToFirm = ({
 
     if (formData.price < 100) {
       toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      return;
+    }
+
+    if (formData.from_user == 'k_r' && formData.from_user_price < 100) {
+      toast.warning("Rahbardan eng kam summa 100 somdan ko'p bo'lish kerak!");
       return;
     }
 
