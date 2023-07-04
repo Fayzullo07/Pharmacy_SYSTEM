@@ -4,10 +4,10 @@ const SideBarEdit = ({ shows, setShows }) => {
   return <div className="btn-toolbar w-100">
       <div className="btn-group btn-group-sm mx-2 w-100">
         <button type="button" className={`btn btn-${shows == "1" ? "primary" : "outline-primary"}`} onClick={() => setShows("1")}>
-          <i className="fa fa-arrow-up fs-5" />
+          <i className="fa fa-arrow-down fs-5" />
         </button>
         <button type="button" className={`btn btn-${shows == "2" ? "primary" : "outline-primary"}`} onClick={() => setShows("2")}>
-          <i className="fa fa-arrow-down fs-5" />
+          <i className="fa fa-arrow-up fs-5" />
         </button>
         <button type="button" className={`btn btn-${shows == "3" ? "primary" : "outline-primary"}`} onClick={() => setShows("3")}>
           <i className="fa fa-building fs-5" />
