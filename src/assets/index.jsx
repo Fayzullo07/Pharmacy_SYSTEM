@@ -5,6 +5,7 @@ import slider from "./download.jpeg";
 import slider1 from "./down.jpeg";
 import slide1 from "./slide1.jpg";
 import logo from "./logo1.png";
+import logo1 from "./logo.png";
 
 import income from "./income.jpg";
 import expense from "./expense.png";
@@ -21,6 +22,7 @@ export {
   slider1,
   slide1,
   logo,
+  logo1,
   income,
   expense,
   firm,

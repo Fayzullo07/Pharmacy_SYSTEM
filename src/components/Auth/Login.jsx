@@ -7,7 +7,7 @@ import { checkPhoneNumber } from "../../functions/NecessaryFunctions";
 import validator from "validator";
 import { loginAction } from "../../functions/AuthFunctions";
 
-import { profile } from "../../assets";
+import { logo, logo1, profile } from "../../assets";
 
 import "./Login.css";
 import { toast } from "react-toastify";
@@ -57,6 +57,8 @@ const Login = ({ onLogin }) => {
     <div id="body_image">
     </div>
       <div className="box">
+
+        <img src={logo1}  alt="logo" />
         <h2>Tizimga kirish</h2>
         <form>
           <div className="inputBox">

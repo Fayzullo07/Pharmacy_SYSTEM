@@ -14,8 +14,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.9);
+    padding: 20px 40px 40px 40px;
+    background: rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
@@ -26,6 +26,14 @@
     padding: 0;
     color: #fff;
     text-align: center;
+}
+
+.box img {
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    height: 100px;
+    object-fit: cover;
 }
 
 .box .inputBox {
@@ -70,8 +78,9 @@
     border: none;
     outline: none;
     color: #fff;
-    background: #03a9f4;
+    background: #1270B8;
     padding: 10px 20px;
     cursor: pointer;
+    letter-spacing: 1px;
     border-radius: 5px;
 }
