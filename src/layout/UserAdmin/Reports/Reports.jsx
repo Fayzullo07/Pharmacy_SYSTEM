@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import SideBarReport from "./SideBar/SideBarReport";
 import IncomesMonth from "./IncomesReports/IncomesMonth";
 import IncomesYears from "./IncomesReports/IncomesYears";
 import ExpensesMonth from "./ExpensesReports.js/ExpensesMonth";
@@ -54,11 +53,6 @@ const Reports = () => {
                 {choose == "8" && "Xodim bilan hisob-kitobi"}
               </h2>
             </div>
-            <SideBarReport
-              choose={choose}
-              setChoose={setChoose}
-              yearOrMonth={is_favorite}
-            />
           </div>
         </Topbar>
         {choose == "0" &&

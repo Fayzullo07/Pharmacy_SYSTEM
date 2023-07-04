@@ -44,7 +44,7 @@ const Topbar = ({ children }) => {
       {children}
 
       <div className="d-flex align-items-center gap-2">
-        <div>
+        {/* <div>
           <input
             type="checkbox"
             className="checkbox"
@@ -60,7 +60,7 @@ const Topbar = ({ children }) => {
             <i className="fas fa-sun"></i>
             <span className="ball"></span>
           </label>
-        </div>
+        </div> */}
         {/* <!-- userImg --> */}
         {JSON.parse(savedUser)?.user.role == "Director" && (
           <NavLink to={`/profile`}>
