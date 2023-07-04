@@ -54,10 +54,10 @@ const Login = ({ onLogin }) => {
   };
   return (
     <div id="body_image">
-      <div class="box">
+      <div className="box">
         <h2>Tizimga kirish</h2>
         <form>
-          <div class="inputBox">
+          <div className="inputBox">
             <input
               type="tel"
               placeholder="+998 90 000 00 00"
@@ -72,7 +72,7 @@ const Login = ({ onLogin }) => {
             />
             <label>Username</label>
           </div>
-          <div class="inputBox">
+          <div className="inputBox">
             <input
               type="password"
               placeholder="Password"

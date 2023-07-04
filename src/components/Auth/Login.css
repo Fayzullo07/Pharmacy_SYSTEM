@@ -1,8 +1,8 @@
 /* --------------------------------------------------- */
-body {
+#body_image {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("../../assets/1.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../assets/1.png");
     background-size: cover;
     background-position: center;
 }
