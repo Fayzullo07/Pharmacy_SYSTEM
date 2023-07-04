@@ -8,8 +8,8 @@
 }
 
 .frame {
-    height: 400px;
-    width: 500px;
+    height: 350px;
+    width: 450px;
     background-position: center;
     background-size: cover;
     background-image: url('../assets/logo.png');
@@ -53,4 +53,22 @@
         background-position: center;
         transform: scale(1, 1);
     }
+}
+
+@media (max-width: 780px) {
+
+    .frame {
+        height: 250px;
+        width: 350px;
+    }
+
+}
+
+@media (max-width: 580px) {
+
+    .frame {
+        height: 200px;
+        width: 250px;
+    }
+
 }
