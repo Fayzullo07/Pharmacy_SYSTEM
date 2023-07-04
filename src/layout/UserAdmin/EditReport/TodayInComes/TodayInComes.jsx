@@ -72,7 +72,7 @@ const TodayInComes = ({ deteils, getData }) => {
         
         <div className="header_flex d-flex justify-content-between align-items-center">
           <div className="row w-100 m-0">
-            <div className="col-md-4 col-12 p-0">
+            <div className="col-md-6 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between">
 
                 <p className="bg_c">
@@ -84,8 +84,7 @@ const TodayInComes = ({ deteils, getData }) => {
                 </p>
               </div>
             </div>
-            <div className="col-md-3 "></div>
-            <div className="col-md-5 col-12 p-0">
+            <div className="col-md-6 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between ">
 
                 <Receipts getData={getData} />
