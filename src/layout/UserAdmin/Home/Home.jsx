@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import CountUp from "react-countup";
@@ -11,19 +11,13 @@ import { useQuery } from "react-query";
 import { clientsGetAPI } from "../../../api/GlobalRequest";
 import Offers from "../Offers/Offers";
 import SliderShow from "../../UserEmployee/Home/SliderShow";
-import { getGlobalDeteilsAction } from "../../../redux/Actions/GlobalAction";
-import { toggleFunction } from "../../../redux/Actions/ToggleActions";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  useEffect(() => {
-    dispatch(toggleFunction(true));
-  }, [])
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["clients"],

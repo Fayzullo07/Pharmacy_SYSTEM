@@ -4,10 +4,10 @@ import {
   accountsGetAPI,
 } from "../../../../api/FirmsRequest";
 import { useQuery, useQueryClient } from "react-query";
-import { formatNumber } from "../../../../functions/NecessaryFunctions";
+import { formatNumber, totalMoney, totalWatntToByKey } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
-import { months, years } from "../../../../api";
+import { months, number_0, years } from "../../../../api";
 import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
@@ -48,7 +48,6 @@ const WorkerMonth = () => {
       return await accountReportDayGetAPI({
         year,
         month,
-        pharmacy,
         page,
         worker,
       });
@@ -238,8 +237,8 @@ const WorkerMonth = () => {
                   </th>
                   <th>
                     {data &&
-                      data.data &&
-                      formatNumber(data.data.month_income_total_price)}
+                      data.data && totalMoney(data.data.results, "price") == 0 ? number_0 :
+                      formatNumber(totalMoney(data.data.results, "price"))}
                   </th>
                 </tr>
               </tfoot>

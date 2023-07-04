@@ -50,7 +50,7 @@ const ModalSearchFirmExpense = ({
             {data && data.data.results.length === 0 && (
               <tr>
                 <td colSpan={2}>
-                  <h2> Firma topilmadi!</h2>
+                  <h2> Malumot topilmadi!</h2>
                 </td>
               </tr>
             )}

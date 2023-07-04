@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
 import SideBarReport from "./SideBar/SideBarReport";
@@ -19,13 +19,15 @@ import LeaderYears from "./LeaderReports/LeaderYears";
 import LeaderMonth from "./LeaderReports/LeaderMonth";
 import WorkerYears from "./WorkerReports/WorkerYears";
 import WorkerMonth from "./WorkerReports/WorkerMonth";
+import ChooseReports from "./ChooseReports";
 
 const Reports = () => {
-  const reduxData = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { is_favorite } = reduxData.is_favorite;
 
-  const [choose, setChoose] = useState("1");
+  const [choose, setChoose] = useState("0");
 
   return (
     <div className="d-flex">
@@ -33,16 +35,25 @@ const Reports = () => {
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
           <div className="header_flex">
-            <h2>
-              {choose == "1" && "Tushum hisob-kitobi"}
-              {choose == "2" && "Chiqim hisob-kitobi"}
-              {choose == "3" && "Firmalarga chiqim hisob-kitobi"}
-              {choose == "4" && "QR-kod bilan qilingan savdo"}
-              {choose == "5" && "Chegirma bilan savdo"}
-              {choose == "6" && "Qaytarib olingan mahsulotlar"}
-              {choose == "7" && "Rahbar bilan hisob-kitobi"}
-              {choose == "8" && "Xodim bilan hisob-kitobi"}
-            </h2>
+            <div className="d-flex align-items-center">
+              {choose != "0" &&
+                <i
+                  className="fa fa-arrow-left fs-4 me-2"
+                  style={{ color: "var(--text_color_blue)" }}
+                  onClick={() => setChoose("0")}
+                />}
+              <h2>
+                {choose == "0" && "Hisbotlar"}
+                {choose == "1" && "Tushum hisob-kitobi"}
+                {choose == "2" && "Chiqim hisob-kitobi"}
+                {choose == "3" && "Firmalarga chiqim hisob-kitobi"}
+                {choose == "4" && "QR-kod bilan qilingan savdo"}
+                {choose == "5" && "Chegirma bilan savdo"}
+                {choose == "6" && "Qaytarib olingan mahsulotlar"}
+                {choose == "7" && "Rahbar bilan hisob-kitobi"}
+                {choose == "8" && "Xodim bilan hisob-kitobi"}
+              </h2>
+            </div>
             <SideBarReport
               choose={choose}
               setChoose={setChoose}
@@ -50,6 +61,8 @@ const Reports = () => {
             />
           </div>
         </Topbar>
+        {choose == "0" &&
+          <ChooseReports setChoose={setChoose} dispatc={dispatch} />}
         {choose == "1" && is_favorite == false && <IncomesYears />}
         {choose == "1" && is_favorite == true && <IncomesMonth />}
 

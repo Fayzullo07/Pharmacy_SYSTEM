@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { reportsPharmacyAPI } from "../../../../../api/GlobalRequest";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
@@ -21,10 +21,10 @@ import Topbar from "../../../../../components/Topbar/Topbar";
 import SideBarBranchs from "../SideBar/SideBarBranchs";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { number_0 } from "../../../../../api";
 
 const OneBranchReport = () => {
   const { id, name } = useParams();
-  const navigate = useNavigate();
   const { t } = useTranslation("translation", { keyPrefix: "Reports" });
 
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -275,7 +275,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.not_transfer_income == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">
                                     {formatNumber(user.not_transfer_income)}
@@ -300,7 +300,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.transfer_income == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">{formatNumber(user.transfer_income)}</b>
                                 )}
@@ -323,7 +323,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.debt_income == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">{formatNumber(user.debt_income)}</b>
                                 )}
@@ -347,7 +347,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.not_transfer_discount_price + user.transfer_discount_price == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">
                                     {formatNumber(
@@ -378,7 +378,7 @@ const OneBranchReport = () => {
                                   user.not_transfer_discount_price + user.transfer_discount_price +
                                   user.debt_income ==
                                   0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">
                                     {formatNumber(
@@ -408,7 +408,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.total_expense == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">{formatNumber(user.total_expense)}</b>
                                 )}
@@ -431,7 +431,7 @@ const OneBranchReport = () => {
                             >
                               <td>
                                 {user.remainder == 0 ? (
-                                  <b className="fw-normal">0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
                                   <b className="fw-normal">{formatNumber(user.remainder)}</b>
                                 )}
@@ -447,7 +447,7 @@ const OneBranchReport = () => {
                     >
                       <b className="fw-normal">
                         {totalMoneyWithIndex(result, index) == 0
-                          ? '0.00'
+                          ? number_0
                           : formatNumber(totalMoneyWithIndex(result, index))}
                       </b>
                     </td>
@@ -467,7 +467,7 @@ const OneBranchReport = () => {
                         {totalMoneyWithIndex(result, index) -
                           totalReceiptPriceWithIndex(result, index) ==
                           0
-                          ? "0.00"
+                          ? number_0
                           : formatNumber(
                             totalMoneyWithIndex(result, index) -
                             totalReceiptPriceWithIndex(result, index) 
@@ -489,7 +489,7 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "not_transfer_income") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "not_transfer_income")
                         )}
@@ -498,7 +498,7 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "transfer_income") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "transfer_income")
                         )}
@@ -507,14 +507,20 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "debt_income") == 0 ? number_0 :
                         formatNumber(totalWatntToByKey(result, "debt_income"))}
                     </b>
                   </th>
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data &&  totalWatntToByKey(
+                            result,
+                            "not_transfer_discount_price"
+                          ) + totalWatntToByKey(
+                            result,
+                            "transfer_discount_price"
+                          ) == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(
                             result,
@@ -529,14 +535,14 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalMoneyWithOutIndex(result) == 0 ? number_0 :
                         formatNumber(totalMoneyWithOutIndex(result))}
                     </b>
                   </th>
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "total_expense") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "total_expense")
                         )}
@@ -545,21 +551,21 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "remainder") == 0 ? number_0 :
                         formatNumber(totalWatntToByKey(result, "remainder"))}
                     </b>
                   </th>
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalMoneyWithOutIndex(result) == 0 ? number_0 :
                         formatNumber(totalMoneyWithOutIndex(result))}
                     </b>
                   </th>
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "receipt_price") + totalWatntToByKey(result, "debt_income") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "receipt_price") + totalWatntToByKey(result, "debt_income")
                         )}
@@ -568,7 +574,7 @@ const OneBranchReport = () => {
                   <th>
                     <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalMoneyWithOutIndex(result) - totalReceiptPrice(result) == 0 ? number_0 :
                         formatNumber(
                           totalMoneyWithOutIndex(result) - totalReceiptPrice(result)
                         )}

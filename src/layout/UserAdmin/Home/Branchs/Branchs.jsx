@@ -13,6 +13,7 @@ import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
 
 const Branchs = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [chooseDate, setChooseDate] = useState(false);
   
@@ -21,7 +22,6 @@ const Branchs = () => {
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
   
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(toggleFunction(true));
   }, [])

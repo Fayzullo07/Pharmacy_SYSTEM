@@ -198,3 +198,5 @@ export const transfersWorker = [
     name: "UZUM"
   }
 ];
+
+export const number_0 = "0.00";

@@ -50,8 +50,9 @@ const Navbar = () => {
                 key={item.name}
                 onClick={() => {
                   if (item.slug == '/reports') {
-
                     dispatch(toggleFunction(false));
+                  } else {
+                    dispatch(toggleFunction(true));
                   }
                 }}
               >

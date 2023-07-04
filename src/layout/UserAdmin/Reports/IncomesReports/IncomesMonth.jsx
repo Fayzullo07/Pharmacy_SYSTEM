@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import {
   filterDataByShift,
   formatNumber,
-  sortMainWorkersByShift,
   totalMoneyWithIndex,
   totalMoneyWithOutIndex,
   totalWatntToByKey,
@@ -14,8 +13,8 @@ import { reportsPharmacyAPI } from "../../../../api/GlobalRequest";
 
 import { useSelector } from "react-redux";
 import { ReportsPharmacyExcelDownload } from "../../../../functions/ExcelActions";
-import { accountsGetAPI } from "../../../../api/FirmsRequest";
 import SideBarIncomeMonth from "./SideBarIncomeMonth";
+import { number_0 } from "../../../../api";
 
 const IncomesMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -24,21 +23,11 @@ const IncomesMonth = () => {
 
   const [change, setChange] = useState(false);
 
+  const shift = 0;
+
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYears] = useState(new Date().getFullYear());
   const [pharmacy, setPharmacy] = useState(deteils.pharmacies.reverse()[0]?.id);
-
-  const [shift, setShift] = useState(0);
-
-  const { data: accounts } = useQuery({
-    queryKey: ["users", pharmacy],
-    queryFn: async () => {
-      return await accountsGetAPI({
-        role: "w",
-        pharmacy,
-      });
-    },
-  });
 
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["INCOME_MONTH"],
@@ -58,11 +47,7 @@ const IncomesMonth = () => {
   if (data && data.data) {
     result = filterDataByShift(data.data, shift);
   }
-
-  let users = [];
-  if (accounts && accounts.data) {
-    users = sortMainWorkersByShift(accounts.data.results);
-  }
+ 
   const filterFunction = () => {
     setChange(true);
     refetch();
@@ -88,10 +73,6 @@ const IncomesMonth = () => {
             setPharmacy={setPharmacy}
             filterFunction={filterFunction}
             deteils={deteils}
-            shift={shift}
-            setShift={setShift}
-            accounts={accounts}
-            users={users}
           />
         </div>
       </div>
@@ -175,10 +156,10 @@ const IncomesMonth = () => {
                     }}
                   >
                     <td>
-                      <b>{index + 1}</b>
+                      <b className="fw-normal">{index + 1}</b>
                     </td>
                     <td>
-                      <b>{day.report_date}</b>
+                      <b className="fw-normal">{day.report_date}</b>
                     </td>
                     <td className="p-0">
                       <table className="w-100 table-sm m-0">
@@ -219,9 +200,9 @@ const IncomesMonth = () => {
                             >
                               <td>
                                 {user.not_transfer_income == 0 ? (
-                                  "0.00"
+                                  number_0
                                 ) : (
-                                  <b>
+                                  <b className="fw-normal">
                                     {formatNumber(user.not_transfer_income)}
                                   </b>
                                 )}
@@ -245,9 +226,9 @@ const IncomesMonth = () => {
                             >
                               <td>
                                 {user.transfer_income == 0 ? (
-                                  "0.00"
+                                  number_0
                                 ) : (
-                                  <b>{formatNumber(user.transfer_income)}</b>
+                                  <b className="fw-normal">{formatNumber(user.transfer_income)}</b>
                                 )}
                               </td>
                             </tr>
@@ -269,9 +250,9 @@ const IncomesMonth = () => {
                             >
                               <td>
                                 {user.debt_income == 0 ? (
-                                  <b>0.00</b>
+                                  <b className="fw-normal">{number_0}</b>
                                 ) : (
-                                  <b>{formatNumber(user.debt_income)}</b>
+                                  <b className="fw-normal">{formatNumber(user.debt_income)}</b>
                                 )}
                               </td>
                             </tr>
@@ -295,9 +276,9 @@ const IncomesMonth = () => {
                                 {user.not_transfer_income +
                                   user.transfer_income ==
                                 0 ? (
-                                  "0.00"
+                                  number_0
                                 ) : (
-                                  <b>
+                                  <b className="fw-normal">
                                     {formatNumber(
                                       user.not_transfer_income +
                                         user.transfer_income
@@ -315,9 +296,9 @@ const IncomesMonth = () => {
                       className="text-center"
                       style={{ backgroundColor: "#d9d9d9" }}
                     >
-                      <b>
+                      <b className="fw-normal">
                         {totalMoneyWithIndex(data.data, index) == 0
-                          ? "0.00"
+                          ? number_0
                           : formatNumber(totalMoneyWithIndex(data.data, index))}
                       </b>
                     </td>
@@ -347,41 +328,41 @@ const IncomesMonth = () => {
                     Jami:
                   </th>
                   <th>
-                    <b>
+                    <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "not_transfer_income") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "not_transfer_income")
                         )}
                     </b>
                   </th>
                   <th>
-                    <b>
+                    <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "transfer_income") == 0 ? number_0 :
                         formatNumber(
                           totalWatntToByKey(result, "transfer_income")
                         )}
                     </b>
                   </th>
                   <th>
-                    <b>
+                    <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalWatntToByKey(result, "debt_income") == 0 ? number_0: 
                         formatNumber(totalWatntToByKey(result, "debt_income"))}
                     </b>
                   </th>
                   <th>
-                    <b>
+                    <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && totalMoneyWithOutIndex(result) == 0 ? number_0 :
                         formatNumber(totalMoneyWithOutIndex(result))}
                     </b>
                   </th>
                   <th>
-                    <b>
+                    <b className="fw-600">
                       {data &&
-                        data.data &&
+                        data.data && formatNumber(totalMoneyWithOutIndex(result)) == 0 ? number_0 :
                         formatNumber(totalMoneyWithOutIndex(result))}
                     </b>
                   </th>

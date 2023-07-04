@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import { remeinderGetAPI } from "../../../api/GlobalRequest";
 
 import "./EditReport.css";
-import { today } from "../../../api";
+import { number_0, today } from "../../../api";
 import TodayInComes from "../../UserAdmin/EditReport/TodayInComes/TodayInComes";
 import TodayExpenses from "../../UserAdmin/EditReport/TodayExpenses/TodayExpenses";
 import TodayExPenseToFirm from "../../UserAdmin/EditReport/TodayExPenseToFirm/TodayExPenseToFirm";
@@ -29,7 +29,7 @@ const EditReportWorker = ({ user }) => {
 
   const [shows, setShows] = useState("1");
 
-  const { data: remeinder } = useQuery({
+  const { data: remeinder, isLoading } = useQuery({
     queryKey: ["remeinder", shows],
     queryFn: async () => {
       return await remeinderGetAPI({
@@ -45,7 +45,8 @@ const EditReportWorker = ({ user }) => {
     shift: user.shift,
     to_pharmacy: user.pharmacy
   };
-  return <div className="d-flex">
+  return (
+    <div className="d-flex">
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
@@ -64,35 +65,56 @@ const EditReportWorker = ({ user }) => {
               {shows == "11" && "Chegirma bilan savdo"}
               {shows == "12" && "Xodimlarga berilgan summa"}
             </h2>
-            {shows == "1" && <h2 id="remeinder">
+            {shows == "1" &&
+              <h2 id="remeinder">
                 <span>Kassa: </span>
                 <b>
-                  {remeinder &&
-                    remeinder.data &&
-                    formatNumber(remeinder.data.price)}
-                </b> <span>UZS</span>
+                  {isLoading
+                    ? <span>
+                        {number_0}
+                      </span>
+                    : remeinder.data.price == 0
+                      ? <span>
+                          {number_0}
+                        </span>
+                      : formatNumber(remeinder.data.price)}
+                </b>{" "}
+                <span> UZS</span>
               </h2>}
           </div>
         </Topbar>
         <div className="header_flex mb-2">
           <SideBarEdit setShows={setShows} shows={shows} />
         </div>
-       
 
         {shows == "1" && <TodayInComes deteils={deteils} getData={getData} />}
         {shows == "2" && <TodayExpenses deteils={deteils} getData={getData} />}
-        {shows == "3" && <TodayExPenseToFirm deteils={deteils} getData={getData} />}
-        {shows == "4" && <TodayTradeToDebt is_client={true} getData={getData} />}
-        {shows == "5" && <TodayTradeToDebtRepay deteils={deteils} is_client={true} getData={getData} />}
+        {shows == "3" &&
+          <TodayExPenseToFirm deteils={deteils} getData={getData} />}
+        {shows == "4" &&
+          <TodayTradeToDebt is_client={true} getData={getData} />}
+        {shows == "5" &&
+          <TodayTradeToDebtRepay
+            deteils={deteils}
+            is_client={true}
+            getData={getData}
+          />}
         {shows == "6" && <TodayToDebt is_client={false} getData={getData} />}
-        {shows == "7" && <TodayToDeptRepay deteils={deteils} is_client={false} getData={getData} />}
+        {shows == "7" &&
+          <TodayToDeptRepay
+            deteils={deteils}
+            is_client={false}
+            getData={getData}
+          />}
         {shows == "8" && <TodayDebt deteils={deteils} getData={getData} />}
         {shows == "9" && <TodayDebtRepay deteils={deteils} getData={getData} />}
         {shows == "10" && <TodayReturn deteils={deteils} getData={getData} />}
         {shows == "11" && <TodayDiscount getData={getData} />}
-        {shows == "12" && <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
+        {shows == "12" &&
+          <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default EditReportWorker;

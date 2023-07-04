@@ -19,7 +19,20 @@ const Login = ({ onLogin }) => {
 
   const navigate = useNavigate();
 
-  const handleUserNameChange = (event) => setPhoneNumber(event.target.value);
+  const handleUserNameChange = (e) => {
+    const {value} = e.target;
+      if (value.length > 13) {
+        return;
+      } else {
+        e.target.value = value.slice(0, 13);
+        if (typeof value === "string") {
+          // Raqam matn (string) turida kiritilgan
+          e.target.value = value.replace(/[^0-9+]|(?<=^[\s\S]*?\+)[+]+/g, "");
+        }
+      }
+
+      setPhoneNumber(e.target.value);
+  }
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
   const mutation = useMutation(() => {

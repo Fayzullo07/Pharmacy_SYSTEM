@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import {
   naxt,
   today,
-  transfers,
-  transfersWorker,
   xisob_raqam
 } from "../../../../../api";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { accountsExpensesPostAction, pharmacyDebtsPostAction } from "../../../../../functions/DirectorActions";
 import {
   checkPhoneNumber,
   cleanedData,
@@ -240,7 +237,7 @@ const AddExPenseToFirm = ({
                   <input
                     type="number"
                     className="form-control"
-                    placeholder={`${formData.from_user == 'k' ? "Kassadan" : formData.from_user == 'h' ? 'Hisob raqamdan' : "Berilgan summa"}`}
+                    placeholder={`${formData.from_user == 'h' ? "Hisob raqamdan" : formData.from_user == director.id ? "Rahbardan" : 'Kassadan'}`}
                     id="price"
                     name="price"
                     value={formData.price}
@@ -258,7 +255,7 @@ const AddExPenseToFirm = ({
                   {/* MONEY FROM LEADER*/}
                   <div class="mb-3">
                     <label htmlFor="from_user_price" className="form-label">
-                      Berilgan summa <b className="text-danger">*</b>
+                      Rahbardan berilgan summa <b className="text-danger">*</b>
                     </label>
                     <input
                       type="number"

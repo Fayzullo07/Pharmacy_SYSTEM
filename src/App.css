@@ -87,6 +87,11 @@
   font-size: 16px;
 }
 
+#table td:nth-child(2),
+#table th:nth-child(2) {
+  text-align: start !important;
+}
+
 #table th {
   background-color: var(--blue);
   color: var(--g_white);
@@ -107,8 +112,14 @@
   padding: 0 10px;
 }
 
-.header_flex h2 {
+.header_flex h2,
+.header_flex h4 {
   color: var(--text_color_blue);
+  letter-spacing: 1px;
+}
+
+.header_flex h4 {
+  font-weight: 400;
 }
 
 /*responsive*/
@@ -297,10 +308,5 @@
     z-index: 1001;
   }
 
-  .container_g.active .toggle {
-    /* position: fixed;
-    right: 0;
-    left: initial;
-    color: var(--white); */
-  }
+  
 }

@@ -42,7 +42,6 @@ const WorkerYears = () => {
     queryFn: async () => {
       return await accountReportMonthGetAPI({
         year,
-        pharmacy,
         worker,
       });
     },

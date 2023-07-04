@@ -21,6 +21,7 @@ import { useQuery } from "react-query";
 import { remeinderGetAPI } from "../../../api/GlobalRequest";
 
 import "./EditReport.css";
+import { number_0 } from "../../../api";
 
 const EditReport = () => {
   const { report_date, shift, to_pharmacy } = useParams();
@@ -30,22 +31,22 @@ const EditReport = () => {
 
   const [shows, setShows] = useState("1");
 
-  const { data: remeinder } = useQuery({
-    queryKey: ["remeinder"],
-    queryFn: async () => {
-      return await remeinderGetAPI({
-        report_date: getData.report_date,
-        shift: getData.shift,
-        pharmacy_id: getData.to_pharmacy
-      });
-    }
-  });
-
   const getData = {
     report_date,
     shift,
     to_pharmacy
   };
+
+  const { data: remeinder, isLoading } = useQuery({
+    queryKey: ["remeinder"],
+    queryFn: async () => {
+      return await remeinderGetAPI({
+        report_date,
+        shift,
+        pharmacy_id: to_pharmacy
+      });
+    }
+  });
 
   return (
     <div className="d-flex">
@@ -71,11 +72,17 @@ const EditReport = () => {
               <h2 id="remeinder">
                 <span>Kassa: </span>
                 <b>
-                  {remeinder &&
-                    remeinder.data &&
-                    formatNumber(remeinder.data.price)}
+                  {isLoading
+                    ? <span>
+                        {number_0}
+                      </span>
+                    : remeinder.data.price == 0
+                      ? <span>
+                          {number_0}
+                        </span>
+                      : formatNumber(remeinder.data.price)}
                 </b>{" "}
-                <span>UZS</span>
+                <span> UZS</span>
               </h2>}
           </div>
         </Topbar>

@@ -13,7 +13,7 @@ const SideBarFirmYears = ({
   setSearchModal
 }) => {
   return (
-    <SideBar>
+    <SideBar id={77}>
       {/* YEARS */}
       <select
         value={year}
@@ -44,6 +44,7 @@ const SideBarFirmYears = ({
       {/* FIRM TITLE */}
       <div
         className="cursor_pointer border p-2 rounded d-flex align-items-center justify-content-between  my-3"
+        data-bs-dismiss="offcanvas"
         onClick={() => {
           setSearchModal(true);
         }}

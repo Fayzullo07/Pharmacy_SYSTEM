@@ -96,7 +96,6 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           >
             <i className="fa fa-add"></i>
           </button>
-          {/* //   )} */}
         </div>
 
         {/* TABLE */}
@@ -110,7 +109,6 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Filial</th>
                 <th>Firma</th>
                 <th>F . I . O</th>
                 <th>Telofon</th>
@@ -123,7 +121,6 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Filial">{item.from_pharmacy_name}</td>
                     <td data-label="Firma">{item.to_firm_name}</td>
                     <td data-label="F.I.O" className="text-capitalize">
                       {item.verified_firm_worker_name
