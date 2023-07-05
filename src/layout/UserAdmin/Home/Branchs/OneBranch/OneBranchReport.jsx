@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { reportsPharmacyAPI } from "../../../../../api/GlobalRequest";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
@@ -26,6 +26,7 @@ import { number_0 } from "../../../../../api";
 const OneBranchReport = () => {
   const { id, name } = useParams();
   const { t } = useTranslation("translation", { keyPrefix: "Reports" });
+  const navigate = useNavigate();
 
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYears] = useState(new Date().getFullYear());
@@ -75,6 +76,11 @@ const OneBranchReport = () => {
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
+              <i
+                  className="fa fa-arrow-left fs-4 me-2"
+                  style={{ color: "var(--text_color_blue)" }}
+                  onClick={() => navigate("/branchs")}
+                />
             <div className="header_flex">
               <h2>{name}</h2>
             </div>
