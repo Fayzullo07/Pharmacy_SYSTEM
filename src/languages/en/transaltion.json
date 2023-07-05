@@ -32,21 +32,39 @@
         "10": "Enter password",
         "11": "Confirm password"
     },
-    "Reports": [
-        "Date",
-        "Employee Name",
-        "Cash Sales",
-        "Non-cash Sales",
-        "Debt Sales",
-        "Total Sales",
-        "Total Cash Expenses",
-        "Cash Balance in Register",
-        "Total Daily Expenses",
-        "QR Code Receipt Issued",
-        "QR Code Receipt Issued",
-        "Total",
-        "Shift"
-    ],
+    "Reports": {
+        "0": "Date",
+        "1": "Employee Name",
+        "2": "Cash Sales",
+        "3": "Non-cash Sales",
+        "4": "Debt Sales",
+        "5": "Discount Sales",
+        "6": "Total Sales Amount",
+        "7": "Total Cash Revenue",
+        "8": "Cash Balance in Cash Register",
+        "9": "Total Daily Sales",
+        "10": "QR Codeless Receipts",
+        "11": "QR Code Receipts",
+        "12": "Total",
+        "13": "Shift",
+        "14": "All",
+        "15": "Confirmation"
+    },
+    "Firm": {
+        "0": "Name",
+        "1": "Operations",
+        "2": "Cash Amount",
+        "3": "Non-cash Amount",
+        "4": "Money Issued",
+        "5": "Money Transferred",
+        "6": "Goods Received",
+        "7": "Expense",
+        "8": "Income",
+        "9": "Start Date",
+        "10": "End Date",
+        "11": "All Branches",
+        "12": "Confirmation"
+    },
     "Offers": {
         "0": "You can write your offers if you have any",
         "1": "Hello. We are pleased that you have chosen our program. If you have any issues or suggestions, please write them here! We are happy about it and will definitely take it into account!",
@@ -67,6 +85,14 @@
         "11": "Employee Name",
         "12": "Debtor",
         "13": "Debt Amount",
-        "14": "Remaining Amount"
+        "14": "Remaining Amount",
+        "15": "Data Not Found",
+        "16": "Companies",
+        "17": "Branch Name",
+        "18": "Product Name",
+        "19": "Product Amount",
+        "20": "Edit",
+        "21": "Delete",
+        "22": "Popular Products"
     }
 }

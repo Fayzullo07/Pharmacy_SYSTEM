@@ -13,7 +13,8 @@ const SideBarBranchs = ({
   setShift,
   filterFunction,
   smena,
-  hammasi
+  hammasi,
+  tasdiq
 }) => {
   return (
     <SideBar>
@@ -71,7 +72,7 @@ const SideBarBranchs = ({
         onClick={filterFunction}
         style={{ background: "var(--blue)", color: "#fff" }}
       >
-        Tasdiqlash
+        {tasdiq}
       </button>
     </SideBar>
   );

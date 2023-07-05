@@ -88,8 +88,9 @@ const OneBranchReport = () => {
               shift={shift}
               setShift={setShift}
               filterFunction={filterFunction}
-              smena={t("13")}
-              hammasi={t("19")}
+              smena={t(13)}
+              hammasi={t(14)}
+              tasdiq={t(15)}
             />
           </Topbar>
 
@@ -116,102 +117,84 @@ const OneBranchReport = () => {
                 }}
               >
                 <tr>
-                  <th style={{ width: "5px" }}>№</th>
+                  <th style={{ width: "30px" }}>№</th>
 
-                  <th>
+                  <th style={{width: '80px'}}>
                     <h6>
-                      <b>{t("0")}</b>
+                      <b>{t(0)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '155px'}}>
                     <h6>
-                      <b>{t("1")}</b>
+                      <b>{t(1)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '120px'}}>
                     <h6>
-                      <b>{t("2")}</b>
+                      <b>{t(2)}</b>
                     </h6>
+                   
+                  </th>
+
+                  <th style={{width: '100px'}}>
                     <h6>
-                      <b>{t("14")}</b>
+                      <b>{t(3)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '100px'}}>
                     <h6>
-                      <b>{t("3")}</b>
-                    </h6>
-                    <h6>
-                      <b>{t("14")}</b>
+                      <b>{t(4)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '100px'}}>
                     <h6>
-                      <b>{t("4")} {t("14")}</b>
+                      <b>{t(5)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '120px'}}>
                     <h6>
-                      <b>{t("5")} {t("14")}</b>
+                      <b>{t(6)}</b>
                     </h6>
                   </th>
 
-                  <th>
+                  <th style={{width: '120px'}}>
                     <h6>
-                      <b>{t("6")} {t("14")}</b>
+                      <b>{t(7)}</b>
                     </h6>
-                    <h6>
-                      <b>{t("15")}</b>
-                    </h6>
+                    
                   </th>
 
-                  <th>
+                  <th style={{width: '150px'}}>
                     <h6>
-                      <b>{t("7")}</b>
+                      <b>{t(8)}</b>
                     </h6>
-                    <h6>
-                      <b>{t("16")}</b>
-                    </h6>
+                   
                   </th>
 
-                  <th>
+                  <th style={{ backgroundColor: "#d9d9d9", color: "#000",width: '120px' }}>
                     <h6>
-                      <b>{t("8")}</b>
+                      <b>{t(9)}</b>
                     </h6>
-                    <h6>
-                      <b>{t("16")}</b>
-                    </h6>
+                    
                   </th>
 
-                  <th style={{ backgroundColor: "#d9d9d9", color: "#000" }}>
+                  <th style={{width: '120px'}}>
                     <h6>
-                      <b>{t("9")}</b>
+                      <b>{t(10)}</b>
                     </h6>
-                    <h6>
-                      <b>{t("14")}</b>
-                    </h6>
+                   
                   </th>
 
-                  <th>
+                  <th style={{width: '120px'}}>
                     <h6>
-                      <b>{t("10")}</b>
+                      <b>{t(11)}</b>
                     </h6>
-                    <h6>
-                      <b>{t("17")}</b>
-                    </h6>
-                  </th>
-
-                  <th>
-                    <h6>
-                      <b>{t("10")}</b>
-                    </h6>
-                    <h6>
-                      <b>{t("18")}</b>
-                    </h6>
+                    
                   </th>
                 </tr>
               </thead>
@@ -253,7 +236,7 @@ const OneBranchReport = () => {
                                 <b className="text-muted">
                                   {user.worker
                                     ? user.worker
-                                    : `${user.shift} - ${t("13")}`}
+                                    : `${user.shift} - ${t(13)}`}
                                 </b>
                               </td>
                             </tr>
@@ -484,7 +467,7 @@ const OneBranchReport = () => {
                   style={{ backgroundColor: "#dae1f3" }}
                 >
                   <th colSpan="3" className="py-2">
-                    {t("12")}:
+                    {t(12)}:
                   </th>
                   <th>
                     <b className="fw-600">

@@ -11,6 +11,7 @@ import SearchInput from "../../../../utils/SearchInput";
 import AddPopularProducts from "./Modal/AddPopularProducts";
 import DeletePopularProducts from "./Modal/DeletePopularProducts";
 import UpdatePopularProducts from "./Modal/UpdatePopularProducts";
+import { useTranslation } from "react-i18next";
 
 const Products = () => {
   const reduxData = useSelector((state) => state);
@@ -34,6 +35,8 @@ const Products = () => {
   });
 
   if (error) return `Error: ${error.message}`;
+ 
+  const { t } = useTranslation("translation", { keyPrefix: "Global" });
 
   return (
     <>
@@ -66,7 +69,7 @@ const Products = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Ommabob mahsulotlar</h2>
+              <h2>{t(22)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -94,9 +97,9 @@ const Products = () => {
               <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
                 <tr>
                   <th style={{ width: "5px" }}>№</th>
-                  <th>Filial nomi</th>
-                  <th>Mahsulot nomi</th>
-                  <th>Mahsulot summasi</th>
+                  <th>{t(17)}</th>
+                  <th>{t(18)}</th>
+                  <th>{t(19)}</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -117,7 +120,7 @@ const Products = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2>Malumot topilmadi!</h2>
+                      <h2>{t(15)}</h2>
                     </td>
                   </tr>
                 )}
@@ -125,18 +128,18 @@ const Products = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}>
                       <td data-label="№">{index + 1}</td>
-                      <td data-label="Filial nomi" className="text-capitalize">
+                      <td data-label={t(17)} className="text-capitalize">
                         <b>{item.pharmacy_name}</b>
                       </td>
-                      <td data-label="Mahsulot nomi" className="text-capitalize">
+                      <td data-label={t(18)} className="text-capitalize">
                         <b>{item.name}</b>
                       </td>
-                      <td data-label="Mahsulot summasi">
+                      <td data-label={t(19)}>
                         <b className="text-success">
                           {formatNumber(item.price)}
                         </b>
                       </td>
-                      <td data-label="O'zgartirish" onClick={() => {
+                      <td data-label={t(20)} onClick={() => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
                       }}>
@@ -145,7 +148,7 @@ const Products = () => {
 
                         ></i>
                       </td>
-                      <td data-label="O'chirish" onClick={() => {
+                      <td data-label={t(21)} onClick={() => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
                       }}>

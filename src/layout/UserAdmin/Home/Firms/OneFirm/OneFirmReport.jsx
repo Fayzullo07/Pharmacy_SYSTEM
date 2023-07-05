@@ -13,6 +13,7 @@ import Topbar from "../../../../../components/Topbar/Topbar";
 import Navbar from "../../../../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
 import { toggleFunction } from "../../../../../redux/Actions/ToggleActions";
+import { useTranslation } from "react-i18next";
 
 const OneFirmReport = () => {
   const { id, name } = useParams();
@@ -54,10 +55,7 @@ const OneFirmReport = () => {
     setChange(true);
   };
 
-  let results = []
-  if (data && data.data) {
-    results = data
-  }
+  const { t } = useTranslation("translation", { keyPrefix: "Firm" });
 
   return (
     <div className="d-flex">
@@ -98,34 +96,34 @@ const OneFirmReport = () => {
               >
                 <th style={{ width: "5px" }}>№</th>
                 <th style={{ width: "250px" }}>
-                  <b>Nomi</b>
+                  <b>{t(0)}</b>
                 </th>
                 <th style={{ width: "200px" }}>
-                  <b>Operatsiyalar</b>
+                  <b>{t(1)}</b>
                 </th>
                 <th colSpan={2} className="p-0">
                   <table className="w-100 table-sm table-bordered m-0">
                     <tbody>
                       <tr>
                         <th colSpan="2">
-                          <b>Summa naqt pul</b>
+                          <b>{t(2)}</b>
                         </th>
                       </tr>
                       <tr>
                         <th>
                           <h6>
-                            <b>Pul berildi</b>
+                            <b>{t(4)}</b>
                           </h6>
                           <h6>
-                            <b>Chiqim</b>
+                            <b>{t(7)}</b>
                           </h6>
                         </th>
                         <th>
                           <h6>
-                            <b>Tovar olindi</b>
+                            <b>{t(6)}</b>
                           </h6>
                           <h6>
-                            <b>Kirim</b>
+                            <b>{t(8)}</b>
                           </h6>
                         </th>
                       </tr>
@@ -137,25 +135,25 @@ const OneFirmReport = () => {
                     <tbody>
                       <tr>
                         <th colSpan="2">
-                          <b>Summa naqt pulsiz</b>
+                          <b>{t(3)}</b>
                         </th>
                       </tr>
                       <tr>
                         <th>
                           <h6>
-                            <b>Pul ko'chirildi</b>
+                            <b>{t(5)}</b>
                           </h6>
                           <h6>
-                            <b>Chiqim</b>
+                            <b>{t(7)}</b>
                           </h6>
                         </th>
 
                         <th>
                           <h6>
-                            <b>Tovar olindi</b>
+                            <b>{t(6)}</b>
                           </h6>
                           <h6>
-                            <b>Kirim</b>
+                            <b>{t(8)}</b>
                           </h6>
                         </th>
                       </tr>

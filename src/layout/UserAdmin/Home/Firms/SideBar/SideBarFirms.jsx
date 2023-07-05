@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../../../../../components/SideBar/SideBar";
 import { today } from "../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const SideBarFirms = ({
   startDate,
@@ -10,13 +11,14 @@ const SideBarFirms = ({
   pharm_id,
   setPharmId,
   deteils,
-  filterFunction,
+  filterFunction
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <SideBar>
       {/* START */}
       <label htmlFor="start" class="form-label">
-        Boshlanish sana
+        {t(9)}
       </label>
       <div className="input-group mb-2">
         <input
@@ -24,13 +26,13 @@ const SideBarFirms = ({
           className="form-control p-2 bg-light"
           max={today}
           value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          onChange={e => setStartDate(e.target.value)}
         />
       </div>
 
       {/* END */}
       <label htmlFor="end" class="form-label">
-        Tugash sana
+        {t(10)}
       </label>
       <div className="input-group">
         <input
@@ -38,7 +40,7 @@ const SideBarFirms = ({
           className="form-control p-2 bg-light"
           max={today}
           value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          onChange={e => setEndDate(e.target.value)}
         />
       </div>
 
@@ -46,14 +48,16 @@ const SideBarFirms = ({
       <select
         className="form-select my-3"
         value={pharm_id}
-        onChange={(e) => setPharmId(e.target.value)}
+        onChange={e => setPharmId(e.target.value)}
       >
-        <option value="">Hamma filiallar</option>
-        {deteils.pharmacies.map((pharm) => (
+        <option value="">
+          {t(11)}
+        </option>
+        {deteils.pharmacies.map(pharm =>
           <option key={pharm.key} value={pharm.id}>
             {pharm.name}
           </option>
-        ))}
+        )}
       </select>
 
       <button
@@ -64,9 +68,9 @@ const SideBarFirms = ({
             : "offcanvas"
         }
         onClick={filterFunction}
-        style={{ background: "#000088", color: "#fff" }}
+        style={{ background: "var(--blue)", color: "#fff" }}
       >
-        Tasdiqlash
+        {t(12)}
       </button>
     </SideBar>
   );
