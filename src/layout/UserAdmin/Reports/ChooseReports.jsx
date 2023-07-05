@@ -213,7 +213,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
             <button
               className="btn btn-outline-primary"
               onClick={() => {
-                setChoose("8");
+                setChoose("7");
                 dispatch(isFavoriteFunction(false));
               }}
             >

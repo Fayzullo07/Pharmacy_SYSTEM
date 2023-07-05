@@ -59,6 +59,21 @@
       "2": "O'zingizni taklifingizni yozing"
    },
    "Global": {
-      "0": ""
+      "0": "Filial",
+      "1": "Filiallar",
+      "2": "Manzil",
+      "3": "Nazorat",
+      "4": "Firma nomi",
+      "5": "Telefon nomeri",
+      "6": "Naqd pul qarz",
+      "7": "Naqd pulsiz qarz",
+      "8": "Faol",
+      "9": "Faol emas",
+      "10": "Sana",
+      "11": "Xodim F.I.O",
+      "12": "Kim qarz oldi",
+      "13": "Qarz summasi",
+      "14": "Qanchasi qoldi",
+      "15": "Malumot topilmadi"
    }
 }

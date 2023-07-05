@@ -10,6 +10,7 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import ChooseDate from "./Modal/ChooseDate";
 import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
+import { useTranslation } from "react-i18next";
 
 const Branchs = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Branchs = () => {
 
   if (error) return `Error: ${error.message}`;
 
-  //   const { t } = useTranslation("translation", { keyPrefix: "Home" });
+    const { t } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
      
@@ -53,7 +54,7 @@ const Branchs = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Filiallar</h2>
+              <h2>{t(1)}</h2>
             </div>   
           </Topbar>
 
@@ -68,16 +69,16 @@ const Branchs = () => {
                   <th scope="col" style={{ width: "5px" }}>
                     №
                   </th>
-                  <th scope="col">Filial</th>
-                  <th scope="col">Manzil</th>
-                  <th scope="col">Nazorat</th>
+                  <th scope="col">{t(0)}</th>
+                  <th scope="col">{t(2)}</th>
+                  <th scope="col">{t(3)}</th>
                 </tr>
               </thead>
               <tbody>
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2>Malumot topilmadi!</h2>
+                      <h2>{t(15)}</h2>
                     </td>
                   </tr>
                 )}
@@ -92,15 +93,15 @@ const Branchs = () => {
                       }>
                       <td data-label="№">{index + 1}</td>
                       <td
-                        data-label="Filial"
+                        data-label={t(0)}
                         className="text-capitalize text-break"
                       >
                         {item.name}
                       </td>
-                      <td data-label="Manzil" className="text-break">
+                      <td data-label={t(2)} className="text-break">
                         {item.address ? item.address : "~"}
                       </td>
-                      <td data-label="Nazorat"
+                      <td data-label={t(3)}
                         onClick={(e) => e.stopPropagation()}
                       >
                         <button className="btn btn-outline-primary" onClick={() => {
@@ -111,7 +112,7 @@ const Branchs = () => {
                             className="fa-solid fa-clock text-info cursor_pointer me-2"
 
                           ></i>
-                          Nazorat
+                          {t(3)}
                         </button>
                       </td>
                     </tr>

@@ -51,5 +51,22 @@
         "0": "You can write your offers if you have any",
         "1": "Hello. We are pleased that you have chosen our program. If you have any issues or suggestions, please write them here! We are happy about it and will definitely take it into account!",
         "2": "Write your offer"
+    },
+    "Global": {
+        "0": "Branch",
+        "1": "Branches",
+        "2": "Address",
+        "3": "Supervision",
+        "4": "Company Name",
+        "5": "Phone Number",
+        "6": "Cash Debt",
+        "7": "Non-cash Debt",
+        "8": "Active",
+        "9": "Inactive",
+        "10": "Date",
+        "11": "Employee Name",
+        "12": "Debtor",
+        "13": "Debt Amount",
+        "14": "Remaining Amount"
     }
 }
