@@ -9,6 +9,9 @@ import {
 import { firmsReturnPostAction } from "../../../../../../functions/GlobalActions";
 import { toast } from "react-toastify";
 import Textarea from "../../../../../../ui/Textarea";
+import TextInput from "../../../../../../ui/TextInput";
+import NumberInput from "../../../../../../ui/NumberInput";
+import PhoneInput from "../../../../../../ui/PhoneInput";
 
 const AddFirmReturn = ({
   showModal,
@@ -21,7 +24,7 @@ const AddFirmReturn = ({
     price: "",
     desc: "",
     second_name: "",
-    verified_phone_number: "",
+    verified_phone_number: "+998",
     verified_firm_worker_name: "",
     firm_income: curData.id
   });
@@ -111,89 +114,48 @@ const AddFirmReturn = ({
         <div className="row">
           {/* NAME */}
           <div className="col-md-6">
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Mahsulot nomi"
-                className="form-control"
-                name="second_name"
-                value={formData.second_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Mahsulot nomi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"second_name"}
+              value={formData.second_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Mahsulot nomi"}
+            />
           </div>
-
-          {/* PRICE */}
           <div className="col-md-6">
-            <div className="form-floating mb-3">
-              <input
-                type="number"
-                placeholder="Miqdor"
-                className="form-control"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Miqdor <b className="text-danger">*</b>{" "}
-              </label>
-            </div>
-          </div>
-
-          {/* DEADLINE DATE */}
-          <div className="col-md-6">
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Qabul qiluvchi ismi"
-                className="form-control"
-                name="verified_firm_worker_name"
-                value={formData.verified_firm_worker_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Qabul qiluvchi ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            {/* PRICE */}
+            <NumberInput
+              name={"price"}
+              value={formData.price}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Mahsulot summasi"}
+            />
           </div>
 
           <div className="col-md-6">
-            <div className="form-floating mb-3">
-              <input
-                type="tel"
-                placeholder="Qabul qiluvchi telefon nomeri"
-                className="form-control"
-                name="verified_phone_number"
-                value={formData.verified_phone_number}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Qabul qiluvchi telefon nomeri <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"verified_firm_worker_name"}
+              value={formData.verified_firm_worker_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Qabul qiluvchi F.I.O"}
+            />
+          </div>
+
+          <div className="col-md-6">
+            {/* PHONE */}
+            <PhoneInput
+              name={"verified_phone_number"}
+              value={formData.verified_phone_number}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Qabul qiluvchining telefon nomeri"}
+            />
           </div>
         </div>
 

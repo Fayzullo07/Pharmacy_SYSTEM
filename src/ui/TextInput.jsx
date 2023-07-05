@@ -43,6 +43,24 @@ const TextInput = ({
         case "Olingan mahsulot nomi":
           setPlaceholderInput("Olingan mahsulot nomi");
           break;
+        case "Ismi":
+          setPlaceholderInput("Ismi");
+          break;
+        case "Familiyasi":
+          setPlaceholderInput("Familiyasi");
+          break;
+        case "Otasini ismi":
+          setPlaceholderInput("Otasini ismi");
+          break;
+        case "Tushum nomi":
+          setPlaceholderInput("Tushum nomi");
+          break;
+        case "Xarajat nomi":
+          setPlaceholderInput("Xarajat nomi");
+          break;
+        case "Filial nomi":
+          setPlaceholderInput("Filial nomi");
+          break;
         default:
           setPlaceholderInput("Text");
       }

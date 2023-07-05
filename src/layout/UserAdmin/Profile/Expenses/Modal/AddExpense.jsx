@@ -6,17 +6,18 @@ import { toast } from "react-toastify";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import { useDispatch } from "react-redux";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
 
-const AddExpense = (props) => {
+const AddExpense = props => {
   const { showModal, setShowModal } = props;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: "",
+    name: ""
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 30) {
       return;
@@ -35,11 +36,11 @@ const AddExpense = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     if (!formData.name) {
       toast.warning("Xarajat turini kiriting !");
       return;
@@ -56,25 +57,14 @@ const AddExpense = (props) => {
       <div className="modal-body">
         <div class="col-md-12">
           {/* NAME */}
-          <div className="form-floating mb-3">
-            <input
-              type="tel"
-              placeholder="Xarajat turi"
-              className="form-control"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit(e);
-                }
-              }}
-              required
-            />
-            <label className="form-label">
-              Xarajat nomi <b className="text-danger">*</b>
-            </label>
-          </div>
+          <TextInput
+            name={"name"}
+            value={formData.name}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            isRequired={true}
+            placeholder={"Xarajat nomi"}
+          />
         </div>
       </div>
     </Modal>

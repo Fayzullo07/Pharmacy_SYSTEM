@@ -42,6 +42,9 @@ const Modal = ({
         case "Qarzga qilingan savdoni qaytarish":
           setPlaceholderInput("Qarzga qilingan savdoni qaytarish");
           break;
+        case "Firmaga qaytarilgan mahsulot":
+          setPlaceholderInput("Firmaga qaytarilgan mahsulot");
+          break;
         default:
           setPlaceholderInput(title);
       }

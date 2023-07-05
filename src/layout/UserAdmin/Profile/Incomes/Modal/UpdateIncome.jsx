@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { transfersTypesPatchAction } from "../../../../../functions/DirectorActions";
 import { toast } from "react-toastify";
-import { cleanedData } from "../../../../../functions/hodimActions";
+import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { useDispatch } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
 
-const UpdateIncome = (props) => {
+const UpdateIncome = props => {
   const { showModal, setShowModal, data } = props;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ name: data.name });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 30) {
       return;
@@ -33,7 +34,7 @@ const UpdateIncome = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("transfer");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
@@ -55,24 +56,14 @@ const UpdateIncome = (props) => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            placeholder="O'tkazma nomi"
-            className="form-control"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            O'tkazma nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Tushum nomi"}
+        />
       </div>
     </Modal>
   );

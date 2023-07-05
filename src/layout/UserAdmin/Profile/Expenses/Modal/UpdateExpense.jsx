@@ -6,17 +6,18 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
 
-const UpdateExpense = (props) => {
+const UpdateExpense = props => {
   const { showModal, setShowModal, data } = props;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: data.name,
+    name: data.name
   });
 
   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 30) {
       return;
@@ -37,7 +38,7 @@ const UpdateExpense = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("expenses");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
@@ -58,24 +59,14 @@ const UpdateExpense = (props) => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            placeholder="Xarajat turi"
-            className="form-control"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Xarajat nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Xarajat nomi"}
+        />
       </div>
     </Modal>
   );

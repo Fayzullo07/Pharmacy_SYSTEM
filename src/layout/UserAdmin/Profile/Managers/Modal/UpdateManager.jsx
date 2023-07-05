@@ -7,6 +7,9 @@ import {
 } from "../../../../../functions/NecessaryFunctions";
 import { toast } from "react-toastify";
 import Modal from "../../../../../utils/Modal";
+import PasswordInput from "../../../../../ui/PasswordInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import TextInput from "../../../../../ui/TextInput";
 
 const UpdateManager = (props) => {
   const { showModal, setShowModal, data } = props;
@@ -22,8 +25,15 @@ const UpdateManager = (props) => {
   const queryClient = useQueryClient();
 
   const [chamgePass, setChangePass] = useState(false);
-  const [password, setPassword] = useState("");
-  const [re_password, setRePassword] = useState("");
+  const [formPassword, setFormPassword] = useState({
+    password: "",
+    re_password: ""
+  });
+
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setFormPassword({ ...formPassword, [name]: value })
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +50,7 @@ const UpdateManager = (props) => {
       return;
     }
 
-   if (name === "phone_number") {
+    if (name === "phone_number") {
       if (value.length > 13) {
         return;
       } else {
@@ -80,15 +90,16 @@ const UpdateManager = (props) => {
     }
 
     if (chamgePass) {
-      if (!password) {
+      if (!formPassword.password) {
         toast.warning("Parolni kiriting !");
         return;
       }
-      if (password != re_password) {
+
+      if (formPassword.password != formPassword.re_password) {
         toast.warning("Parolni bir xil kiriting!");
         return;
       }
-      setFormData({ ...formData, password });
+      setFormData({ ...formData, password: formPassword.password });
     }
     mutation.mutate();
   };
@@ -104,88 +115,47 @@ const UpdateManager = (props) => {
         <div className="row">
           <div className="col-md-4">
             {/* FIRST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Ismi"
-                className="form-control"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"first_name"}
+              value={formData.first_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Ismi"}
+            />
           </div>
           <div className="col-md-4">
             {/* LAST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Familiya"
-                className="form-control"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Familiya <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"last_name"}
+              value={formData.last_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Familiyasi"}
+            />
           </div>
 
           <div className="col-md-4">
             {/* FATHER NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="O'tasini ismi"
-                className="form-control"
-                name="father_name"
-                value={formData.father_name}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                O'tasini ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"father_name"}
+              value={formData.father_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Otasini ismi"}
+            />
           </div>
         </div>
         {/* PHONE */}
-        <div className="form-floating mb-3">
-          <input
-            type="tel"
-            placeholder="Telefon raqam"
-            className="form-control"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Telefon raqam <b className="text-danger">*</b>
-          </label>
-        </div>
+        <PhoneInput
+          name={"phone_number"}
+          value={formData.phone_number}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
         <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border py-3 p-1 rounded">
           <b className={formData.is_active ? "text-success" : "text-danger"}>
@@ -219,45 +189,25 @@ const UpdateManager = (props) => {
             <div className="row">
               <div className="col-md-6">
                 {/* PASSWORD */}
-                <div className="form-floating mb-3">
-                  <input
-                    type="password"
-                    placeholder="Parol"
-                    className="form-control"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleSubmit();
-                      }
-                    }}
-                  />
-                  <label>
-                    Parol <b className="text-danger">*</b>
-                  </label>
-                </div>
+                <PasswordInput
+                  name={"password"}
+                  value={formPassword.password}
+                  handleInputChange={handlePasswordChange}
+                  handleSubmit={handleSubmit}
+                  isRequired={true}
+                  placeholder={"Parol"}
+                />
               </div>
               <div className="col-md-6">
                 {/* PASSWORD CHECK */}
-                <div className="mb-3 form-floating">
-                  <input
-                    type="password"
-                    placeholder="Parolni qaytadan kiriting"
-                    className="form-control"
-                    name="re_password"
-                    value={re_password}
-                    onChange={(e) => setRePassword(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleSubmit();
-                      }
-                    }}
-                  />
-                  <label>
-                    Parolni qaytadan kiriting <b className="text-danger">*</b>
-                  </label>
-                </div>
+                <PasswordInput
+                  name={"re_password"}
+                  value={formPassword.re_password}
+                  handleInputChange={handlePasswordChange}
+                  handleSubmit={handleSubmit}
+                  isRequired={true}
+                  placeholder={"Parol qayta"}
+                />
               </div>
             </div>
           </>

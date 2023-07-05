@@ -7,6 +7,9 @@ import { transfersTypesGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { transfers } from "../../../../api";
+import AddIncome from "./Modal/AddIncome";
+import DeleteIncome from "./Modal/DeleteIncome";
+import UpdateIncome from "./Modal/UpdateIncome";
 
 const Incomes = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -32,6 +35,17 @@ const Incomes = () => {
 
   return (
     <>
+    {showModal && (
+        <AddIncome showModal={showModal} setShowModal={setShowModal} />
+      )}
+
+      {deleteModal && (
+        <DeleteIncome showModal={deleteModal} setShowModal={setDeleteModal} data={curData} />
+      )}
+
+      {updateModal && (
+        <UpdateIncome showModal={updateModal} setShowModal={setUpdateModal} data={curData} />
+      )}
       <div className="d-flex">
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>

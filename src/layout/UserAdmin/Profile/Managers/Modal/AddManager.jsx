@@ -8,6 +8,9 @@ import {
 import { toast } from "react-toastify";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import TextInput from "../../../../../ui/TextInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import PasswordInput from "../../../../../ui/PasswordInput";
 
 const AddManager = props => {
   const { showModal, setShowModal } = props;
@@ -117,152 +120,82 @@ const AddManager = props => {
         <div className="row">
           <div className="col-md-4">
             {/* FIRST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Ismi"
-                className="form-control"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"first_name"}
+              value={formData.first_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Ismi"}
+            />
           </div>
           <div className="col-md-4">
             {/* LAST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Familiya"
-                className="form-control"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Familiya <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"last_name"}
+              value={formData.last_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Familiyasi"}
+            />
           </div>
 
           <div className="col-md-4">
             {/* FATHER NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="O'tasini ismi"
-                className="form-control"
-                name="father_name"
-                value={formData.father_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                O'tasini ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"father_name"}
+              value={formData.father_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Otasini ismi"}
+            />
           </div>
         </div>
 
         {/* PHONE */}
-        <div className="form-floating mb-3">
-          <input
-            type="tel"
-            placeholder="Telefon raqam"
-            className="form-control"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Telefon raqam <b className="text-danger">*</b>
-          </label>
-        </div>
+        <PhoneInput
+          name={"phone_number"}
+          value={formData.phone_number}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+        />
 
         <div className="row">
           <div className="col-md-6">
             {/* PASSWORD */}
-            <div className="form-floating mb-3">
-              <input
-                type="password"
-                placeholder="Parol"
-                className="form-control"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Parol <b className="text-danger">*</b>
-              </label>
-            </div>
+            <PasswordInput
+              name={"password"}
+              value={formData.password}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Parol"}
+            />
           </div>
           <div className="col-md-6">
             {/* PASSWORD CHECK */}
-            <div className="mb-3 form-floating">
-              <input
-                type="password"
-                placeholder="Parolni qaytadan kiriting"
-                className="form-control"
-                name="re_password"
-                value={formData.re_password}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Parolni qaytadan kiriting <b className="text-danger">*</b>
-              </label>
-            </div>
+            <PasswordInput
+              name={"re_password"}
+              value={formData.re_password}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Parol qayta"}
+            />
           </div>
         </div>
 
         {/* ADDRESS */}
-        <div className="mb-3 form-floating">
-          <input
-            type="text"
-            placeholder="Manzil"
-            className="form-control"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            onKeyDown={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Manzil</label>
-        </div>
+        <TextInput
+          name={"address"}
+          value={formData.address}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          placeholder={"Manzil"}
+        />
 
         <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border rounded py-3 p-1 mb-3">
           <input

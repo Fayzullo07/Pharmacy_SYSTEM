@@ -22,7 +22,6 @@ const SideBarEdit = ({ shows, setShows }) => {
           type="button"
           className={`btn btn-${shows == "3" ? "primary" : "outline-primary"}`}
           onClick={() => setShows("3")}
-          
         >
           <i className="fa fa-building fs-5" />
         </button>
@@ -43,15 +42,15 @@ const SideBarEdit = ({ shows, setShows }) => {
           <i className="fa fa-money-bill-transfer fs-5" />
         </button>
         <div className="btn-group">
-         
           <ul className="dropdown-menu dropdown-menu-end">
             <li>
-              <a
+              <button
                 className={`${shows == "4" && "active"} dropdown-item`}
                 onClick={() => setShows("4")}
+                data-bs-toggle="dropdown"
               >
                 Qarzga qilingan savdo
-              </a>
+              </button>
             </li>
 
             <li>

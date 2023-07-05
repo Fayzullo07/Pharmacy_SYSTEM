@@ -4,19 +4,19 @@ import { toast } from "react-toastify";
 import { firmsReturnsVerifyPostAction } from "../../../../../../functions/GlobalActions";
 import {
   cleanedData,
-  formatNumber,
+  formatNumber
 } from "../../../../../../functions/NecessaryFunctions";
 import ModalSimple from "../../../../../../utils/ModalSimple";
 
-const ViewModalSMS = (props) => {
+const ViewModalSMS = props => {
   const { showModal, setShowModal, firm_return_id } = props;
   const [formData, setFormData] = useState({
     code: "",
-    firm_return_id: firm_return_id.id,
+    firm_return_id: firm_return_id.id
   });
 
   const queryClient = useQueryClient();
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "code" && value.length > 5) {
       return;
@@ -34,7 +34,7 @@ const ViewModalSMS = (props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("firm_returns"); // Ma'lumotlarni yangilash
-      },
+      }
     }
   );
 
@@ -84,7 +84,7 @@ const ViewModalSMS = (props) => {
             name="code"
             value={formData.code}
             onChange={handleInputChange}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -106,15 +106,13 @@ const ViewModalSMS = (props) => {
           </button>
           <button
             className="btn btn-primary rounded-3 col-5 col-md-4 py-2"
-            style={{ background: "#2A80B9" }}
+            style={{ background: "var(--blue)" }}
             onClick={handleSubmit}
             disabled={mutation.isLoading}
           >
-            {mutation.isLoading ? (
-              <i className="fa fa-spinner fa-spin" />
-            ) : (
-              "Tasdiqlash"
-            )}
+            {mutation.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Tasdiqlash"}
           </button>
         </div>
       </div>

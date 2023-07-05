@@ -31,6 +31,9 @@ const NumberInput = ({
         case "Xarajat summasi":
           setPlaceholderInput("Xarajat summasi");
           break;
+        case "Ish haqi":
+          setPlaceholderInput("Ish haqi");
+          break;
         default:
           setPlaceholderInput("Miqdor");
       }

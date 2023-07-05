@@ -6,18 +6,20 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
+import Textarea from "../../../../../ui/Textarea";
 
-const AddApteka = (props) => {
+const AddApteka = props => {
   const { showModal, setShowModal } = props;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     desc: "",
-    last_shift_end_hour: 0,
+    last_shift_end_hour: 0
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 50) {
       return;
@@ -50,7 +52,7 @@ const AddApteka = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("apteka");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
@@ -71,24 +73,14 @@ const AddApteka = (props) => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="mb-3 form-floating">
-          <input
-            type="text"
-            placeholder="Filial nomi"
-            className="form-control"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Filial nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Filial nomi"}
+        />
 
         <div className="mb-3">
           <label for="basic-url" className="form-label">
@@ -120,42 +112,20 @@ const AddApteka = (props) => {
         </div>
 
         {/* ADDRESS */}
-        <div className="mb-3 form-floating">
-          <input
-            type="text"
-            placeholder="Manzil"
-            className="form-control"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Manzil</label>
-        </div>
+        <TextInput
+          name={"address"}
+          value={formData.address}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          placeholder={"Manzil"}
+        />
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );

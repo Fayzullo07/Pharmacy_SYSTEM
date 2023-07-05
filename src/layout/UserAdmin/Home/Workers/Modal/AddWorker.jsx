@@ -10,6 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import TextInput from "../../../../../ui/TextInput";
+import PhoneInput from "../../../../../ui/PhoneInput";
+import NumberInput from "../../../../../ui/NumberInput";
+import SelectInput from "../../../../../ui/SelectInput";
+import SmenaSelect from "../../../../../ui/SmenaSelect";
+import PasswordInput from "../../../../../ui/PasswordInput";
 
 const AddWorker = props => {
   const { showModal, setShowModal } = props;
@@ -145,131 +151,68 @@ const AddWorker = props => {
         <div className="row">
           <div className="col-md-4">
             {/* FIRST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Ismi"
-                className="form-control"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"first_name"}
+              value={formData.first_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Ismi"}
+            />
           </div>
           <div className="col-md-4">
             {/* LAST NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="Familiya"
-                className="form-control"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Familiya <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"last_name"}
+              value={formData.last_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Familiyasi"}
+            />
           </div>
 
           <div className="col-md-4">
             {/* FATHER NAME */}
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                placeholder="O'tasini ismi"
-                className="form-control"
-                name="father_name"
-                value={formData.father_name}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Otasini ismi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <TextInput
+              name={"father_name"}
+              value={formData.father_name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Otasini ismi"}
+            />
           </div>
 
           <div className="col-md-4">
             {/* PHONE */}
-            <div className="mb-3 form-floating">
-              <input
-                type="tel"
-                placeholder="Telefon"
-                className="form-control"
-                name="phone_number"
-                pattern={`^\+998\d{9}$`}
-                value={formData.phone_number}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Telefon <b className="text-danger">*</b>
-              </label>
-            </div>
+            <PhoneInput
+              name={"phone_number"}
+              value={formData.phone_number}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+            />
           </div>
           <div className="col-md-4">
             {/* PHARMACY */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                aria-label="Default select example"
-                name="pharmacy"
-                value={formData.pharmacy}
-                onChange={handleInputChange}
-              >
-                <option>Filialni tanlang. . .</option>
-                {deteils.pharmacies.map((item, index) =>
-                  <option key={index} value={item.id}>
-                    {item.name}
-                  </option>
-                )}
-              </select>
-              <label>
-                Filialni tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <SelectInput
+              name={"pharmacy"}
+              value={formData.pharmacy}
+              handleInputChange={handleInputChange}
+              isRequired={true}
+              placeholder={"Filialni tanlang"}
+              data={deteils.pharmacies}
+            />
           </div>
           <div className="col-md-4">
             {/* SHIFT */}
-            <div className="form-floating">
-              <select
-                className="form-select mb-3"
-                name="shift"
-                value={formData.shift}
-                onChange={handleInputChange}
-              >
-                <option selected>Smena tanlang. . .</option>
-                <option value={1}>Smena 1</option>
-                <option value={2}>Smena 2</option>
-                <option value={3}>Smena 3</option>
-              </select>
-              <label>
-                Smena tanlang <b className="text-danger">*</b>
-              </label>
-            </div>
+            <SmenaSelect
+              name={"shift"}
+              value={formData.shift}
+              handleInputChange={handleInputChange}
+              isRequired={true}
+            />
           </div>
           <div className="col-md-6">
             {/* CHECKBOX USER */}
@@ -317,85 +260,46 @@ const AddWorker = props => {
         <div className="row">
           <div className="col-md-6">
             {/* PASSWORD */}
-            <div className="form-floating mb-3">
-              <input
-                type="password"
-                placeholder="Parol"
-                className="form-control"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Parol <b className="text-danger">*</b>
-              </label>
-            </div>
+            <PasswordInput
+              name={"password"}
+              value={formData.password}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Parol"}
+            />
           </div>
           <div className="col-md-6">
             {/* PASSWORD CHECK */}
-            <div className="mb-3 form-floating">
-              <input
-                type="password"
-                placeholder="Parolni qaytadan kiriting"
-                className="form-control"
-                name="re_password"
-                value={formData.re_password}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Parolni qaytadan kiriting <b className="text-danger">*</b>
-              </label>
-            </div>
+            <PasswordInput
+              name={"re_password"}
+              value={formData.re_password}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Parol qayta"}
+            />
           </div>
           <div className="col-md-6">
             {/* WAGE */}
-            <div className="mb-3 form-floating">
-              <input
-                type="number"
-                placeholder="Ish haqi"
-                className="form-control"
-                name="wage"
-                value={formData.wage}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>
-                Ish haqi <b className="text-danger">*</b>
-              </label>
-            </div>
+            <NumberInput
+              name={"wage"}
+              value={formData.wage}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Ish haqi"}
+            />
           </div>
           <div className="col-md-6">
             {/* ADDRESS */}
-            <div className="mb-3 form-floating">
-              <input
-                type="text"
-                placeholder="Manzil"
-                className="form-control"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
-              <label>Manzil</label>
-            </div>
+            <TextInput
+              name={"address"}
+              value={formData.address}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              placeholder={"Manzil"}
+            />
           </div>
         </div>
 

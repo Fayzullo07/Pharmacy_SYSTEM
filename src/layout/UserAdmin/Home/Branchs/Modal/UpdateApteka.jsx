@@ -6,18 +6,20 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalAction";
 import Modal from "../../../../../utils/Modal";
+import TextInput from "../../../../../ui/TextInput";
+import Textarea from "../../../../../ui/Textarea";
 
-const UpdateApteka = (props) => {
+const UpdateApteka = props => {
   const { showModal, setShowModal, data } = props;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: data.name,
     address: data.address,
     desc: data.desc,
-    last_shift_end_hour: data.last_shift_end_hour,
+    last_shift_end_hour: data.last_shift_end_hour
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name == "name" && value.length > 50) {
       return;
@@ -50,7 +52,7 @@ const UpdateApteka = (props) => {
       onSuccess: () => {
         queryClient.invalidateQueries("apteka");
         dispatch(getGlobalDeteilsAction());
-      },
+      }
     }
   );
 
@@ -72,24 +74,14 @@ const UpdateApteka = (props) => {
     >
       <div className="modal-body">
         {/* NAME */}
-        <div className="mb-3 form-floating">
-          <input
-            type="text"
-            placeholder="Filial nomi"
-            className="form-control"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>
-            Filial nomi <b className="text-danger">*</b>
-          </label>
-        </div>
+        <TextInput
+          name={"name"}
+          value={formData.name}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isRequired={true}
+          placeholder={"Filial nomi"}
+        />
 
         {/* DATE */}
         <div className="mb-3">
@@ -122,42 +114,20 @@ const UpdateApteka = (props) => {
         </div>
 
         {/* ADDRESS */}
-        <div className="mb-3 form-floating">
-          <input
-            type="text"
-            placeholder="Manzil"
-            className="form-control"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <label>Manzil</label>
-        </div>
+        <TextInput
+          name={"address"}
+          value={formData.address}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          placeholder={"Manzil"}
+        />
 
         {/* IZOH */}
-        <div className="form-floating mb-3">
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Izoh"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-            ></textarea>
-          </div>
-        </div>
+        <Textarea
+          value={formData.desc}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </Modal>
   );
