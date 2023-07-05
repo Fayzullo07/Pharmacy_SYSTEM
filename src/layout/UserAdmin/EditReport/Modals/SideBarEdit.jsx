@@ -1,4 +1,5 @@
 import React from "react";
+import "./SideBarEdit.css"
 
 const SideBarEdit = ({ shows, setShows }) => {
   return (
@@ -26,28 +27,28 @@ const SideBarEdit = ({ shows, setShows }) => {
           <i className="fa fa-building fs-5" />
         </button>
 
-        <button
-          type="button"
-          className={`px-2 btn btn-${shows == "4" ||
-          shows == "5" ||
-          shows == "6" ||
-          shows == "7" ||
-          shows == "8" ||
-          shows == "9"
-            ? "primary"
-            : "outline-primary"} btn-sm dropdown-toggle`}
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i className="fa fa-money-bill-transfer fs-5" />
-        </button>
+          <button
+            className={`px-2 btn btn-${shows == "4" ||
+            shows == "5" ||
+            shows == "6" ||
+            shows == "7" ||
+            shows == "8" ||
+            shows == "9"
+              ? "primary"
+              : "outline-primary"} btn-sm dropdown-toggle`}
+            type="button"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="true"
+            aria-expanded="false"
+          >
+            <i className="fa fa-money-bill-transfer fs-5" />
+          </button>
         <div className="btn-group">
-          <ul className="dropdown-menu dropdown-menu-end">
+          <ul className="dropdown-menu">
             <li>
               <button
                 className={`${shows == "4" && "active"} dropdown-item`}
                 onClick={() => setShows("4")}
-                data-bs-toggle="dropdown"
               >
                 Qarzga qilingan savdo
               </button>

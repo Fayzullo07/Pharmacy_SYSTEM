@@ -1,31 +1,31 @@
 export const routes = [
-  { name: "Asosiy", img: "fas fa-gauge ", slug: "/" },
-  { name: "Filiallar", img: "fas fa-code-branch ", slug: "/branchs" },
-  { name: "Firmalar", img: "fas fa-building", slug: "/firms" },
-  { name: "Qarz oldi berdi", img: "fas fa-rotate", slug: "/take_give_debt" },
-  { name: "Hisobotlar", img: "fa fa-chart-pie", slug: "/reports" },
+  { name: 0, img: "fas fa-gauge ", slug: "/" },
+  { name: 1, img: "fas fa-code-branch ", slug: "/branchs" },
+  { name: 2, img: "fas fa-building", slug: "/firms" },
+  { name: 3, img: "fas fa-rotate", slug: "/take_give_debt" },
+  { name: 4, img: "fa fa-chart-pie", slug: "/reports" },
   {
-    name: "Firma bilan oldi berdi",
+    name: 5,
     img: "fas fa-money-bill-transfer ",
     slug: "/take_give_firm"
   },
-  { name: "Ommabop mahsulotlar", img: "fas fa-cart-plus", slug: "/products" }
+  { name: 6, img: "fas fa-cart-plus", slug: "/products" }
 ];
 
 export const routesEmployee = [
-  { name: "Asosiy", img: "fas fa-gauge ", slug: "/" },
+  { name: 0, img: "fas fa-gauge ", slug: "/" },
   {
-    name: "Hisobot topshirish",
+    name: 8,
     img: "fas fa-chart-pie ",
     slug: "/edit/report"
   },
   {
-    name: "Mijoz qo'shish",
+    name: 9,
     img: "fas fa-user-plus",
     slug: "/add/clients"
   },
   {
-    name: "Ommabop mahsulotlar",
+    name: 6,
     img: "fas fa-cart-plus",
     slug: "/add/products"
   }

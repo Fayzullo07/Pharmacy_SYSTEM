@@ -9,11 +9,18 @@
         "Offers",
         "Popular Products"
     ],
-    "Navbar": [
-        "Home",
-        "Monitoring",
-        "Profile"
-    ],
+    "Navbar": {
+        "0": "Main",
+        "1": "Branches",
+        "2": "Companies",
+        "3": "Debts and Loans",
+        "4": "Reports",
+        "5": "Dealing with Company",
+        "6": "Popular Products",
+        "7": "Log Out",
+        "8": "Submit Report",
+        "9": "Add Customer"
+    },
     "Profile": [
         "Managers",
         "Branches",

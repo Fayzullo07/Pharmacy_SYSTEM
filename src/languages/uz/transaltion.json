@@ -12,9 +12,14 @@
    "Navbar": {
       "0": "Asosiy",
       "1": "Filiallar",
-      "2": "Qarz oldi berdi",
-      "3": "Hisobotlar",
-      "4": "Firma bilan oldi berdi"
+      "2": "Firmalar",
+      "3": "Qarz oldi berdi",
+      "4": "Hisobotlar",
+      "5": "Firma bilan oldi berdi",
+      "6": "Ommabop mahsulotlar",
+      "7": "Tizimdan chiqish",
+      "8": "Hisobot topshirish",
+      "9": "Mijoz qo'shish"
    },
    "Profile": [
       "Managerlar",

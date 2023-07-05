@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Logout from "./Logout";
 import Languages from "./Languages";
 import { logo } from "../../assets";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [navData, setNavData] = useState([]);
@@ -27,6 +28,8 @@ const Navbar = () => {
       }
     }
   }, []);
+
+  const { t } = useTranslation("translation", { keyPrefix: "Navbar" });
 
   return (
     <>
@@ -59,7 +62,7 @@ const Navbar = () => {
                 <span className="icon">
                   <i className={`${item.img}`}></i>
                 </span>
-                <span className="title">{item.name}</span>
+                <span className="title">{t(item.name)}</span>
               </li>
             </NavLink>
           ))}
@@ -68,7 +71,7 @@ const Navbar = () => {
               <span className="icon">
                 <i className="fas fa-right-from-bracket fa-lg"></i>
               </span>
-              <span className="title">Tizimdan chiqish</span>
+              <span className="title">{t(7)}</span>
             </li>
           </a>
           <Languages />
