@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import CountUp from "react-countup";
@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { clientsGetAPI } from "../../../api/GlobalRequest";
 import Offers from "../Offers/Offers";
 import SliderShow from "../../UserEmployee/Home/SliderShow";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Home = () => {
   });
 
   if (error) return `Error: ${error.message}`;
-
+  const { t } = useTranslation("translation", { keyPrefix: "Home" });
   return (
     <>
       <div className="d-flex">
@@ -42,7 +43,7 @@ const Home = () => {
               <SliderShow />
             </div>
             <div className="col-md-4">
-              <h2 style={{ color: "var(--text_color_blue)" }}>Takliflar</h2>
+              <h2 style={{ color: "var(--text_color_blue)" }}>{t(4)}</h2>
               <Offers />
             </div>
           </div>
@@ -60,7 +61,7 @@ const Home = () => {
                       />
                     }
                   </div>
-                  <div className="cardName">Filiallar</div>
+                  <div className="cardName">{t(0)}</div>
                 </div>
               </div>
             </div>
@@ -77,7 +78,7 @@ const Home = () => {
                       />
                     }
                   </div>
-                  <div className="cardName">Xodimlar</div>
+                  <div className="cardName">{t(2)}</div>
                 </div>
               </div>
             </div>
@@ -94,7 +95,7 @@ const Home = () => {
                       />
                     }
                   </div>
-                  <div className="cardName">Firmalar</div>
+                  <div className="cardName">{t(1)}</div>
                 </div>
               </div>
             </div>
@@ -113,7 +114,7 @@ const Home = () => {
                       />
                     )}
                   </div>
-                  <div className="cardName">Mijozlar</div>
+                  <div className="cardName">{t(3)}</div>
                 </div>
               </div>
             </div>

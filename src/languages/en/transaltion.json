@@ -1,18 +1,15 @@
 {
-    "Home": [
-        "Branches",
-        "Companies",
-        "Debtors",
-        "Reports",
-        "Contracts with Companies",
-        "Customer Inventory",
-        "Offers",
-        "Popular Products"
-    ],
+    "Home": {
+        "0": "Branches",
+        "1": "Firms",
+        "2": "Employees",
+        "3": "Customers",
+        "4": "Offers"
+    },
     "Navbar": {
         "0": "Main",
         "1": "Branches",
-        "2": "Companies",
+        "2": "Firms",
         "3": "Debts and Loans",
         "4": "Reports",
         "5": "Dealing with Company",
@@ -21,16 +18,20 @@
         "8": "Submit Report",
         "9": "Add Customer"
     },
-    "Profile": [
-        "Managers",
-        "Branches",
-        "Employees",
-        "Companies",
-        "Expense Types",
-        "Income Types",
-        "Change Language",
-        "Log Out"
-    ],
+    "Profile": {
+        "0": "Managers",
+        "1": "Firms",
+        "2": "Branches",
+        "3": "Employees",
+        "4": "Expense Types",
+        "5": "Income Types",
+        "6": "Save",
+        "7": "Change Password",
+        "8": "Enter your name",
+        "9": "Enter your surname",
+        "10": "Enter password",
+        "11": "Confirm password"
+    },
     "Reports": [
         "Date",
         "Employee Name",
@@ -45,5 +46,10 @@
         "QR Code Receipt Issued",
         "Total",
         "Shift"
-    ]
+    ],
+    "Offers": {
+        "0": "You can write your offers if you have any",
+        "1": "Hello. We are pleased that you have chosen our program. If you have any issues or suggestions, please write them here! We are happy about it and will definitely take it into account!",
+        "2": "Write your offer"
+    }
 }

@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 const Login = ({ onLogin }) => {
   const [phone_number, setPhoneNumber] = useState("+998");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   const navigate = useNavigate();
 

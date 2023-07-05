@@ -1,14 +1,11 @@
 {
-   "Home": [
-      "Filiallar",
-      "Firmalar",
-      "Qarz oldi berdi",
-      "Hisobotlar",
-      "Firma bilan oldi berdi",
-      "Klientalar bazasi",
-      "Takliflar",
-      "Ommabop mahsulotlar"
-   ],
+   "Home": {
+      "0": "Filiallar",
+      "1": "Firmalar",
+      "2": "Xodimlar",
+      "3": "Mijozlar",
+      "4": "Takliflar"
+   },
    "Navbar": {
       "0": "Asosiy",
       "1": "Filiallar",
@@ -21,16 +18,20 @@
       "8": "Hisobot topshirish",
       "9": "Mijoz qo'shish"
    },
-   "Profile": [
-      "Managerlar",
-      "Filiallar",
-      "Xodimlar",
-      "Firmalar",
-      "Xarajat nomlari",
-      "Tushum nomlari",
-      "Til o'zgartirish",
-      "Chiqish"
-   ],
+   "Profile": {
+      "0": "Menegerlar",
+      "1": "Firmalar",
+      "2": "Filiallar",
+      "3": "Xodimlar",
+      "4": "Xarajat turlari",
+      "5": "Tushum turlari",
+      "6": "Saqlash",
+      "7": "Parol o'zgartirish",
+      "8": "Ismingizni kiriting",
+      "9": "Familiyangizni kiriting",
+      "10": "Parolni kiriting",
+      "11": "Parolni bir xil kiriting"
+   },
    "Reports": {
       "0": "Sana",
       "1": "Xodim F.I.O",
@@ -51,5 +52,13 @@
       "17": "berilmagan",
       "18": "berilgan",
       "19": "hammasi"
+   },
+   "Offers": {
+      "0": "Takliflaringiz bo'lsa yozishingiz mumkun",
+      "1": "Assalomu alaykum. Bizning dasturimizni tanlaganizdan hursandmiz. Agar qanaqadur muammo yoki taklifingiz bo'lsa shu yerga yozing! Biz bundan hursand bolamiz va albatta inobatga olamiz!",
+      "2": "O'zingizni taklifingizni yozing"
+   },
+   "Global": {
+      "0": ""
    }
 }

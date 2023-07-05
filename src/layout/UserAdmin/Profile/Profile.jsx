@@ -11,6 +11,7 @@ import PasswordInput from "../../../ui/PasswordInput";
 import { toast } from "react-toastify";
 import { cleanedData } from "../../../functions/NecessaryFunctions";
 import { getGlobalDeteilsAction } from "../../../redux/Actions/GlobalAction";
+import { useTranslation } from "react-i18next";
 
 const Profile = ({ userData }) => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Profile = ({ userData }) => {
     setFormDataPassword({ ...formDataPassword, [name]: value });
   };
   const [chamgePass, setChangePass] = useState(false);
-
+const { t } = useTranslation("translation", { keyPrefix: "Profile" });
   const mutation = useMutation(
     async () => {
       return profilePatchAction(cleanedData(formData));
@@ -69,22 +70,22 @@ const Profile = ({ userData }) => {
 
   const handleSubmit = () => {
     if (!formData.first_name) {
-      toast.warning("Ismingizni kiriting !");
+      toast.warning(`${t(8)} !`);
       return;
     }
 
     if (!formData.first_name) {
-      toast.warning("Familiyangizni kiriting !");
+      toast.warning(`${t(9)} !`);
       return;
     }
 
     if (chamgePass) {
       if (!formDataPassword.password) {
-        toast.warning("Parolni kiriting !");
+        toast.warning(`${t(10)} !`);
         return;
       }
       if (formDataPassword.password != formDataPassword.r_password) {
-        toast.warning("Parolni bir xil kiriting!");
+        toast.warning(`${11} !`);
         return;
       }
       setFormDataPassword({ ...formDataPassword, password: formDataPassword.password });
@@ -103,13 +104,13 @@ const Profile = ({ userData }) => {
           <div className="col-lg-3">
             <div className="card mb-4">
               <div className="card-body text-center">
-                <img src={profile} alt="avatar" className="rounded-circle img-fluid" />
+                <img src={profile} alt="avatar" width={120} className="rounded-circle img-fluid" />
                 <h5 className="my-1">
                   {userData.role == "Director" ? "Director" : "Worker"}
                 </h5>
-                <h2 className="text-muted">
+                <h4 className="text-muted">
                   {userData.first_name} {userData.last_name}
-                </h2>
+                </h4>
                 <h5 className="my-1">
                   {userData.phone_number}
                 </h5>
@@ -129,7 +130,7 @@ const Profile = ({ userData }) => {
                 <div className="col-12">
                   {/* CHECKBOX USER */}
                   <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border rounded p-1 py-3 mb-3">
-                    <b>Parol o'zgartirish</b>
+                    <b>{t(7)}</b>
                     <input className="form-check-input mx-1" type="checkbox" checked={chamgePass} onClick={() => setChangePass(!chamgePass)} />
                   </div>
                 </div>
@@ -146,7 +147,7 @@ const Profile = ({ userData }) => {
               </div>
               <div className="row mb-3">
                 <div className="col text-end">
-                  <button className="btn btn-primary" onClick={handleSubmit}>Saqlash</button>
+                  <button className="btn btn-primary" onClick={handleSubmit}>{t(6)}</button>
                 </div>
               </div>
             </div>
@@ -159,7 +160,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/managers")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded" />
-                        <h4 className="mb-0">Mangerlar</h4>
+                        <h4 className="mb-0">{t(0)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
@@ -169,7 +170,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
-                        <h4 className="mb-0">Firmalar</h4>
+                        <h4 className="mb-0">{t(1)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
@@ -179,7 +180,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/branches/profile")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-code-branch mx-4 fs-4 border p-2 px-3 rounded" />
-                        <h4 className="mb-0">Filiallar</h4>
+                        <h4 className="mb-0">{t(2)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
@@ -189,7 +190,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/workers")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-users mx-4 fs-4 border  rounded" style={{ padding: "12px" }} />
-                        <h4 className="mb-0">Xodimlar</h4>
+                        <h4 className="mb-0">{t(3)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
@@ -199,7 +200,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/expenses")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded" />
-                        <h4>Xarajat turlari</h4>
+                        <h4>{t(4)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
@@ -209,7 +210,7 @@ const Profile = ({ userData }) => {
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/incomes")}>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded" />
-                        <h4>Tushum turlari</h4>
+                        <h4>{t(5)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />
