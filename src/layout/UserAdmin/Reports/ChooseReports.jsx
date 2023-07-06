@@ -1,7 +1,10 @@
 import React from "react";
 import {
+  debt_png,
+  discount_png,
   expense,
   firm,
+  firm_png,
   income,
   profile,
   qr,
@@ -25,7 +28,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         >
           <div className="header_flex">
             <div>
-              <img src={income} width={50} alt="img" />
+              <img src={debt_png} width={50} alt="img" />
               <h4>Tushum hisob-kitobi</h4>
             </div>
           </div>
@@ -59,7 +62,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         >
           <div className="header_flex">
             <div>
-              <img src={firm} width={50} alt="img" />
+              <img src={firm_png} width={50} alt="img" />
               <h4>Firmalarga chiqim hisob-kitobi</h4>
             </div>
           </div>
@@ -93,7 +96,7 @@ const ChooseReports = ({ setChoose, dispatch }) => {
         >
           <div className="header_flex">
             <div>
-              <img src={profile} width={50} alt="img" />
+              <img src={discount_png} width={50} alt="img" />
               <h4>Chegirma bilan savdo</h4>
             </div>
           </div>
