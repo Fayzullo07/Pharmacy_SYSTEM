@@ -163,7 +163,7 @@ const QRCodeMonth = () => {
                       key={item.report_date}
                       style={{
                         border: "dotted 2px #000",
-                        background: "var(--blue)",
+                        background: "var(--ch_white)",
                       }}
                     >
                       <td className="p-2">
