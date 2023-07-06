@@ -46,8 +46,7 @@ const DebtGive = () => {
   return (
     <>
       {/* SIDEBAR */}
-      <div className="header_flex">
-        <h2>Qarz berilganlar</h2>
+      <div className="header_flex justify-content-end">
         <SideBarDebtGive
           month={month}
           setMonth={setMonth}

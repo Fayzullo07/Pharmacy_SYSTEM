@@ -45,7 +45,7 @@ const DebtTake = () => {
     <>
       {/* SIDEBAR */}
       <div className="header_flex ">
-        <h2>Qarz olinganlar</h2>
+        
         <SideBarDebtGive
           month={month}
           setMonth={setMonth}
