@@ -56,7 +56,11 @@ const LeaderMonth = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>OYLIK</h2>
+        <h2>{change && deteils.pharmacies.map((item) => {
+          if(item.id == pharmacy){
+            return item.name
+          }
+        })}{pharmacy == "" && "Hamma filiallar"}</h2>
         <div className="d-flex">
           <AccountReportDayExcelGetDownload
             year={year}
@@ -140,7 +144,7 @@ const LeaderMonth = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "15px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Sana</b>
               </th>

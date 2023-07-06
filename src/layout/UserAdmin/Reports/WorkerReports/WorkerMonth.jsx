@@ -4,7 +4,7 @@ import {
   accountsGetAPI,
 } from "../../../../api/FirmsRequest";
 import { useQuery, useQueryClient } from "react-query";
-import { formatNumber, totalMoney, totalWatntToByKey } from "../../../../functions/NecessaryFunctions";
+import { formatNumber, totalMoney } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { months, number_0, years } from "../../../../api";
@@ -68,7 +68,11 @@ const WorkerMonth = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>OYLIK</h2>
+        <h2>{change && deteils.employees.map((item) => {
+          if(item.id == worker){
+            return item.short_name
+          }
+        })}</h2>
         <div className="d-flex">
           {accounts && accounts.data.results.length != 0 && worker != "" && (
             <AccountReportDayExcelGetDownload
@@ -169,7 +173,7 @@ const WorkerMonth = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Sana</b>
               </th>
@@ -232,7 +236,7 @@ const WorkerMonth = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="3" className="py-3">
+                  <th colSpan="3" className="py-2">
                     Jami:
                   </th>
                   <th>

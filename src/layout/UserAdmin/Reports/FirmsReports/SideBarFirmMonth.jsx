@@ -48,6 +48,7 @@ const SideBarFirmMonth = ({
         className="form-select my-3"
         onChange={e => setPharmacy(e.target.value)}
       >
+        <option value="">Hamma filiallar</option>
         {deteils.pharmacies.map(item =>
           <option key={item.id} value={item.id}>
             {item.name}

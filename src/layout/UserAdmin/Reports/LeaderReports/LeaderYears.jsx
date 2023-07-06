@@ -57,7 +57,11 @@ const LeaderYears = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{ deteils.pharmacies.map((item) => {
+          if(item.id == pharmacy){
+            return item.name
+          }
+        })}{pharmacy == "" && "Hamma filiallar"}</h2>
         <div className="d-flex">
           <AccountReportMonthExcelGetDownload
             year={year}
@@ -96,7 +100,7 @@ const LeaderYears = () => {
               className="btn"
               data-bs-dismiss={"offcanvas"}
               onClick={filterFunction}
-              style={{ background: "#000088", color: "#fff" }}
+              style={{ background: "var(--blue)", color: "#fff" }}
             >
               Tasdiqlash
             </button>
@@ -127,7 +131,7 @@ const LeaderYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -201,7 +205,7 @@ const LeaderYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>{formatNumber(income_price)}</th>

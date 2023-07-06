@@ -1,0 +1,89 @@
+#yearOrMonth {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    margin: 5px 0;
+    padding: 2px 3px;
+    border: 1px solid lightblue;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#yearOrMonth:hover,
+#yearOrMonth:hover button.activeBtn {
+    border-radius: 0 20px;
+    transition: .5s;
+    box-shadow: 0 0 8px 2px lightblue;
+}
+
+#yearOrMonth button {
+    width: 50%;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#yearOrMonth button:hover {
+    border: 1px groove lightblue;
+    border-radius: 0 20px;
+    transition: 1s;
+}
+
+#yearOrMonth button.activeBtn {
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 20px 0;
+    color: var(--g_white);
+    transition: 1s;
+
+}
+
+.reports {
+    height: 55px;
+    margin-bottom: 5px;
+    border: 1px groove lightblue;
+    border-radius: 20px 0;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.reports:hover {
+    border-radius: 0 20px;
+    transition: .5s;
+    box-shadow: 0 0 8px 2px lightblue;
+}
+
+.reports .header_flex div img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.reports .header_flex div {
+    display: flex;
+    align-items: center;
+}
+
+.reports .header_flex div h4 {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin: 0;
+    padding: 0 10px;
+}
+
+@media (max-width: 587px) {
+    #yearOrMonth {
+        width: 50%;
+    }
+
+
+
+
+}

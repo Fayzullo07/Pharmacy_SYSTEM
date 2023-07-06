@@ -68,7 +68,7 @@ const FirmsMonth = () => {
       )}
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>OYLIK</h2>
+        <h2>{curData.name}</h2>
         <div className="d-flex">
           <SideBarFirmMonth
             month={month}
@@ -108,7 +108,7 @@ const FirmsMonth = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Sana</b>
               </th>
@@ -193,7 +193,7 @@ const FirmsMonth = () => {
                       data.data &&
                       formatNumber(
                         data.data.expense_transfer_total_price +
-                          data.data.expense_not_transfer_total_price
+                          data.data.expense_not_transfer_total_price + data.data.income_not_transfer_total_price
                       )}
                   </th>
                 </tr>

@@ -8,7 +8,7 @@ import DebtToTrade from "./DebtToTrade/DebtToTrade";
 import DebtTake from "./DebtTake/DebtTake";
 
 const TakeGiveDebt = () => {
-  const reduxData = useSelector((state) => state);
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
 
   const [choose, setChoose] = useState("1");
@@ -20,26 +20,19 @@ const TakeGiveDebt = () => {
         <Topbar>
           <div className="header_flex">
             <h2>
-              {choose == "1"
-                ? "Qarzga qilingan savdo"
-                : choose == "2"
-                ? "Qarz berilganlar"
-                : "Qarz olinganlar"}
+              {choose == "1" && "Qarzga qilingan savdo"}
+              {choose == "2" && "Qarz berilganlar"}
+              {choose == "3" && "Qarz olinganlar"}
             </h2>
 
             <div className="d-flex align-items-center">
-              <SideBarTakeGive setChoose={setChoose} choose={choose} />
+              <SideBarTakeGive setShows={setChoose} shows={choose} />
             </div>
           </div>
         </Topbar>
-
-        {choose == "1" ? (
-          <DebtToTrade />
-        ) : choose == "2" ? (
-          <DebtGive />
-        ) : (
-          <DebtTake />
-        )}
+        {choose == "1" && <DebtToTrade />}
+        {choose == "2" && <DebtGive />}
+        {choose == "3" && <DebtTake />}
       </div>
     </div>
   );

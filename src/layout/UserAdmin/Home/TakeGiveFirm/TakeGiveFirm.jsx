@@ -8,11 +8,11 @@ import ProfileFirmIncome from "./FirmIncome/ProfileFirmIncome";
 import FirmReturn from "./FirmReturn/FirmReturn";
 
 const TakeGiveFirm = () => {
-  const reduxData = useSelector((state) => state);
+  const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
-  const [choose, setChoose] = useState(true);
+  const [choose, setChoose] = useState("1");
 
   const [date_firm, setDateFirm] = useState(today);
   return (
@@ -22,23 +22,20 @@ const TakeGiveFirm = () => {
         <Topbar>
           <div className="header_flex">
             <h2>
-              {!choose
-                ? "Firmaga qaytarilgan mahsulot"
-                : "Firmadan olingan mahsulot"}
+              {choose == "1" && "Firmadan olingan mahsulot"}
+              {choose == "2" && "Firmaga qaytarilgan mahsulot"}
             </h2>
           </div>
-          <SideBarTakeGiveFirm setChoose={setChoose} choose={choose} />
+          <SideBarTakeGiveFirm setShows={setChoose} shows={choose} />
         </Topbar>
-
-        {choose ? (
+        {choose == "1" &&
           <ProfileFirmIncome
             deteils={deteils}
             date_firm={date_firm}
             setDateFirm={setDateFirm}
-          />
-        ) : (
-          <FirmReturn date_firm={date_firm} setDateFirm={setDateFirm} />
-        )}
+          />}
+        {choose == "2" &&
+          <FirmReturn date_firm={date_firm} setDateFirm={setDateFirm} />}
       </div>
     </div>
   );

@@ -64,7 +64,11 @@ const WorkerYears = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{change && deteils.employees.map((item) => {
+          if(item.id == worker){
+            return item.short_name
+          }
+        })}</h2>
         <div className="d-flex">
           <AccountReportMonthExcelGetDownload
             year={year}
@@ -154,7 +158,7 @@ const WorkerYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -214,7 +218,7 @@ const WorkerYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>
@@ -258,7 +262,7 @@ const WorkerYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>0</th>

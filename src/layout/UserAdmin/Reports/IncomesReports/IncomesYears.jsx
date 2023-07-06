@@ -46,7 +46,11 @@ const IncomesYears = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{ deteils.pharmacies.map((item) => {
+          if(item.id == pharmacy){
+            return item.name
+          }
+        })}{pharmacy == "" && "Hamma filiallar"}</h2>
         <div className="d-flex">
           <SideBarIncomeYears
             year={year}
@@ -81,7 +85,7 @@ const IncomesYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "20px" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -134,7 +138,7 @@ const IncomesYears = () => {
                 style={{ position: "sticky", bottom: 0, background: "#d9d9d9" }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>{formatNumber(totalMoneyByKey(result, "price"))}</th>
@@ -170,7 +174,7 @@ const IncomesYears = () => {
                 style={{ position: "sticky", bottom: 0, background: "#d9d9d9" }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>0</th>

@@ -54,7 +54,11 @@ const DiscountYears = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{deteils.pharmacies.map((item) => {
+          if(item.id == pharmacy){
+            return item.name
+          }
+        })}{pharmacy == "" && "Hamma filiallar"}</h2>
         <div className="d-flex">
           <SideBar>
             {/* YEARS */}
@@ -119,7 +123,7 @@ const DiscountYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -192,7 +196,7 @@ const DiscountYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>{formatNumber(total)}</th>

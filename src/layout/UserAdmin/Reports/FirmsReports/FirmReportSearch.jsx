@@ -26,10 +26,10 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
       setShowModal={setShowModal}
       title={"Izlash"}
     >
-      <div className="header_flex mt-2">
+      <div className="header_flex my-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
       </div>
-      <div className="modal-body">
+      <div className="modal-body py-0 mb-0">
         {/* TABLE */}
         <table id="table" className="table table-hover">
           <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
@@ -59,6 +59,7 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
                     setCurData(item);
                     setShowModal(false);
                   }}
+                  className="cursor_pointer"
                 >
                   <td data-label="№">
                     {index + 1}

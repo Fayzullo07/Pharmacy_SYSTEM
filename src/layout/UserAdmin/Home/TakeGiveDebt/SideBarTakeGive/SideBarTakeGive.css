@@ -21,14 +21,14 @@
     letter-spacing: 1px;
 }
 
-#child {
+#child_debts {
     position: relative;
     list-style: none;
     padding: 0px;
     z-index: 555;
 }
 
-#child li:hover {
+#child_debts li:hover {
     background-color: var(--blue);
     border-radius: 20px 0;
     transition: .2s;
@@ -37,7 +37,7 @@
     width: 100%;
 }
 
-#child li.active {
+#child_debts li.active {
     background-color: var(--blue);
     width: 100%;
     background-color: var(--blue);
@@ -48,12 +48,12 @@
     width: 100%;
 }
 
-#btn_hover_parent {
+#btn_hover_parent_debt {
     position: relative;
 }
 
-#child {
+#child_debts {
     position: absolute;
-    left: 40%;
-    top: 35px;
+    right: 0;
+    top: 0;
 }

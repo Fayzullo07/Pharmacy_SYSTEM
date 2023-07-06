@@ -40,6 +40,7 @@ const ChooseDate = props => {
             type="date"
             placeholder="Ismi"
             className="form-control"
+            name="date"
             value={formData.date}
             max={today}
             onChange={handleInputChange}

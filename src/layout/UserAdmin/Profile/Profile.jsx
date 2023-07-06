@@ -109,10 +109,10 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
                   {userData.role == "Director" ? "Director" : "Worker"}
                 </h5>
                 <h4 className="text-muted">
-                  {userData.first_name} {userData.last_name}
+                  {director.first_name} {director.last_name}
                 </h4>
                 <h5 className="my-1">
-                  {userData.phone_number}
+                  {director.phone_number}
                 </h5>
               </div>
             </div>

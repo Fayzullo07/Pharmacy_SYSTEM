@@ -39,10 +39,6 @@ const FirmsYears = () => {
 
   if (error) return `Error: ${error.message}`;
 
-  let total = 0;
-  if (data && data.data) {
-    total = totalMoneyByKey(data.data, "expense_price");
-  }
 
   let result = null;
   if (data && data.data) {
@@ -63,7 +59,7 @@ const FirmsYears = () => {
       )}
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{curData.name}</h2>
         <div className="d-flex">
           <SideBarFirmYears
             year={year}
@@ -101,7 +97,7 @@ const FirmsYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "15px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -157,7 +153,7 @@ const FirmsYears = () => {
                 style={{ position: "sticky", bottom: 0, background: "#d9d9d9" }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>
@@ -197,7 +193,7 @@ const FirmsYears = () => {
                 style={{ position: "sticky", bottom: 0, background: "#d9d9d9" }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>0</th>

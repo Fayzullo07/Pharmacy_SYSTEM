@@ -1,30 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "../../../../../components/SideBar/SideBar";
 
-const SideBarTakeGiveFirm = ({ setChoose, choose }) => {
+const SideBarTakeGiveFirm = ({ setShows, shows }) => {
+  const [showUl, setShowUl] = useState(false);
   return (
-    <SideBar title="Firma bilan oldi berdi" icon="fa fa-list">
-      <ul className="list-group">
-        <li
-          data-bs-dismiss="offcanvas"
-          onClick={() => setChoose(true)}
-          className={`${choose
-            ? "active"
-            : ""} list-group-item cursor_pointer `}
-          aria-current={!choose}
-        >
-          <i className="fa fa-arrow-down mx-4" />Firmadan olingan mahsulot
+    <div id="btn_hover_parent_debt">
+      <button
+        className="btn border border-primary mx-3"
+        onMouseEnter={() => {
+          setShowUl(true);
+        }}
+        onMouseLeave={() => {
+          setShowUl(false);
+        }}
+      >
+        <i className="fa fa-list" />
+      </button>
+      <ul
+        id="child_debts"
+        className="child"
+        onMouseEnter={() => {
+          setShowUl(true);
+        }}
+        onMouseLeave={() => {
+          setShowUl(false);
+        }}
+        style={showUl ? { display: "block" } : { display: "none" }}
+      >
+        <li className={`${shows == "1" && "active"}`}>
+          <button
+            className={`dropdown-item`}
+            onClick={() => {
+              setShows("1");
+              setShowUl(false);
+            }}
+            onMouseEnter={() => {
+              setShows("1");
+            }}
+          >
+            Firmadan olingan mahsulotlar
+          </button>
         </li>
-        <li
-          data-bs-dismiss="offcanvas"
-          onClick={() => setChoose(false)}
-          className={`${choose ? "" : "active"} list-group-item cursor_pointer`}
-          aria-current={choose}
-        >
-          <i className="fa fa-arrow-up mx-4" /> Firmaga qaytarilgan mahsulot
+        <li className={`${shows == "2" && "active"}`}>
+          <button
+            type="button"
+            className={`dropdown-item`}
+            onClick={() => {
+              setShows("2");
+              setShowUl(false);
+            }}
+            onMouseEnter={() => {
+              setShows("2");
+            }}
+          >
+            Firmaga qaytarilgan mahsulotlar
+          </button>
         </li>
       </ul>
-    </SideBar>
+    </div>
   );
 };
 

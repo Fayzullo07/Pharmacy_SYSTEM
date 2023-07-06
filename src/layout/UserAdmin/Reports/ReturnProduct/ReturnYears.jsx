@@ -48,7 +48,11 @@ const ReturnYears = () => {
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>YILLIK</h2>
+        <h2>{ deteils.pharmacies.map((item) => {
+          if(item.id == pharmacy){
+            return item.name
+          }
+        })}{pharmacy == "" && "Hamma filiallar"}</h2>
         <div className="d-flex">
           <SideBar>
             {/* YEARS */}
@@ -113,7 +117,7 @@ const ReturnYears = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px", padding: "25px 0" }}>№</th>
+              <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
                 <b>Oy</b>
               </th>
@@ -173,7 +177,7 @@ const ReturnYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>
@@ -218,7 +222,7 @@ const ReturnYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
+                  <th colSpan="2" className="py-2">
                     Jami:
                   </th>
                   <th>0</th>

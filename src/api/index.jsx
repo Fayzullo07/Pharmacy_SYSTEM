@@ -4,12 +4,9 @@ export const routes = [
   { name: 2, img: "fas fa-building", slug: "/firms" },
   { name: 3, img: "fas fa-rotate", slug: "/take_give_debt" },
   { name: 4, img: "fa fa-chart-pie", slug: "/reports" },
-  {
-    name: 5,
-    img: "fas fa-money-bill-transfer ",
-    slug: "/take_give_firm"
-  },
-  { name: 6, img: "fas fa-cart-plus", slug: "/products" }
+  { name: 5, img: "fas fa-money-bill-transfer ", slug: "/take_give_firm" },
+  { name: 6, img: "fas fa-cart-plus", slug: "/products" },
+  { name: 9, img: "fas fa-user-plus", slug: "/clients" }
 ];
 
 export const routesEmployee = [

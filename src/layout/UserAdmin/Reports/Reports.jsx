@@ -20,6 +20,8 @@ import WorkerYears from "./WorkerReports/WorkerYears";
 import WorkerMonth from "./WorkerReports/WorkerMonth";
 import ChooseReports from "./ChooseReports";
 
+import "./Reports.css";
+import { isFavoriteFunction } from "../../../redux/Actions/ToggleActions";
 const Reports = () => {
   const dispatch = useDispatch();
   const reduxData = useSelector(state => state);
@@ -33,14 +35,15 @@ const Reports = () => {
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
-          <div className="header_flex">
-            <div className="d-flex align-items-center">
+          <div className="header_flex ">
+            <div className="d-flex align-items-center justify-content-beetwen">
               {choose != "0" &&
                 <i
                   className="fa fa-arrow-left fs-4 me-2"
                   style={{ color: "var(--text_color_blue)" }}
                   onClick={() => setChoose("0")}
                 />}
+
               <h2>
                 {choose == "0" && "Hisbotlar"}
                 {choose == "1" && "Tushum hisob-kitobi"}
@@ -53,6 +56,21 @@ const Reports = () => {
                 {choose == "8" && "Xodim bilan hisob-kitobi"}
               </h2>
             </div>
+            {choose == "0" &&
+              <div id="yearOrMonth">
+                <button
+                  className={`${is_favorite == true ? "activeBtn" : ""}`}
+                  onClick={() => dispatch(isFavoriteFunction(true))}
+                >
+                  OYLIK
+                </button>
+                <button
+                  className={`${is_favorite == false ? "activeBtn" : ""}`}
+                  onClick={() => dispatch(isFavoriteFunction(false))}
+                >
+                  YILLIK
+                </button>
+              </div>}
           </div>
         </Topbar>
         {choose == "0" &&

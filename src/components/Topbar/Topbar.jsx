@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { profile } from "../../assets";
@@ -9,9 +9,11 @@ import {
   toggleFunction,
 } from "../../redux/Actions/ToggleActions";
 import { setDarkMode, setLightMode } from "../../functions/DarkModeFunction";
+import ModalSimple from "../../utils/ModalSimple";
 
 const Topbar = ({ children }) => {
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
 
   const savedUser = localStorage.getItem("user");
 
@@ -25,6 +27,27 @@ const Topbar = ({ children }) => {
   };
 
   return (
+    <>
+    {showModal && (
+
+    <ModalSimple title="" showModal={showModal} setShowModal={setShowModal}>
+      <div className="card mb-4">
+              <div className="card-body text-center">
+                <img src={profile} alt="avatar" width={120} className="rounded-circle img-fluid" />
+                <h5 className="my-1">
+                  {JSON.parse(savedUser)?.user.role == "Director" ? "Director" : "Worker"}
+                  
+                </h5>
+                <h4 className="text-muted">
+                  {JSON.parse(savedUser)?.user.first_name} {JSON.parse(savedUser)?.user.last_name}
+                </h4>
+                <h5 className="my-1">
+                  {JSON.parse(savedUser)?.user.phone_number}
+                </h5>
+              </div>
+            </div>
+    </ModalSimple>
+    )}
     <div className="topbar">
       <div
         className="toggle"
@@ -62,15 +85,18 @@ const Topbar = ({ children }) => {
           </label>
         </div> */}
         {/* <!-- userImg --> */}
-        {JSON.parse(savedUser)?.user.role == "Director" && (
+        {JSON.parse(savedUser)?.user.role == "Director" ? (
           <NavLink to={`/profile`}>
-            <div className="user">
+            <div className="user border border-primary">
               <img src={profile} alt="user" />
             </div>
           </NavLink>
-        )}
+        ) : <div className="user border border-primary" onClick={() => setShowModal(!showModal)}>
+          <img src={profile} alt="user" />
+        </div>}
       </div>
     </div>
+    </>
   );
 };
 

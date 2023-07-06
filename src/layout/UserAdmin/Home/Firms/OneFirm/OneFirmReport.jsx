@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { firmReportGetAPI } from "../../../../../api/FirmsRequest";
-import { formatNumber } from "../../../../../functions/NecessaryFunctions";
+import { formatDate, formatNumber } from "../../../../../functions/NecessaryFunctions";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../../utils/PaginationForModal";
 import Empty from "../../../../../utils/Empty";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import SideBarFirms from "../SideBar/SideBarFirms";
@@ -14,16 +14,18 @@ import Navbar from "../../../../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
 import { toggleFunction } from "../../../../../redux/Actions/ToggleActions";
 import { useTranslation } from "react-i18next";
+import { number_0 } from "../../../../../api";
 
 const OneFirmReport = () => {
   const { id, name } = useParams();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [page, setPage] = useState(1);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [pharm_id, setPharmId] = useState("");
 
   const [change, setChange] = useState(false);
-  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(toggleFunction(false));
   }, [])
@@ -62,6 +64,11 @@ const OneFirmReport = () => {
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
+          <i
+            className="fa fa-arrow-left fs-4 me-2"
+            style={{ color: "var(--text_color_blue)" }}
+            onClick={() => navigate("/firms")}
+          />
           <div className="header_flex">
             <h2>{name}</h2>
             <SideBarFirms
@@ -94,7 +101,7 @@ const OneFirmReport = () => {
                 className="align-middle"
                 style={{ backgroundColor: "var(--blue)", color: "#fff" }}
               >
-                <th style={{ width: "5px" }}>№</th>
+                <th style={{ width: "5px", padding: '10px' }}>№</th>
                 <th style={{ width: "250px" }}>
                   <b>{t(0)}</b>
                 </th>
@@ -163,18 +170,18 @@ const OneFirmReport = () => {
               </tr>
               <tr style={{ background: "var(--g_white)" }}>
                 <th colSpan={3} className="text-danger">
-                  <b>Остаток на начало периода долг: {startDate}</b>
+                  <b>Остаток на начало периода долг:{" "} {startDate && formatDate(startDate)}</b>
                 </th>
                 <th colSpan={2} className="text-success">
 
                   <b>
-                    {data && data?.data ?
+                    {data && data?.data ? data?.data?.not_transfer_debt_in_start_date == 0 ? number_0 :
                       formatNumber(data?.data?.not_transfer_debt_in_start_date) : '0.00'}
                   </b>
                 </th>
                 <th colSpan={2} className="text-success">
                   <b>
-                    {data && data?.data ?
+                    {data && data?.data ? data?.data?.transfer_debt_in_start_date == 0 ? number_0 :
                       formatNumber(data?.data?.transfer_debt_in_start_date) : '0.00'}
                   </b>
                 </th>
@@ -283,32 +290,34 @@ const OneFirmReport = () => {
                       Обороты за период
                     </th>
                     <th>
-                      {data &&
+                      {data && data.data.expense_not_transfer_total_price == 0 ? number_0 :
                         formatNumber(
                           data.data.expense_not_transfer_total_price
                         )}
                     </th>
                     <th>
-                      {data &&
+                      {data && data.data.income_not_transfer_total_price == 0 ? number_0 :
                         formatNumber(
                           data.data.income_not_transfer_total_price
                         )}
                     </th>
                     <th>
-                      {data &&
+                      {data && data.data.expense_transfer_total_price == 0 ? number_0 :
                         formatNumber(data.data.expense_transfer_total_price)}
                     </th>
                     <th>
-                      {data &&
+                      {data && data.data.income_transfer_total_price == 0 ? number_0 :
                         formatNumber(data.data.income_transfer_total_price)}
                     </th>
                   </tr>
                   <tr className="text-center">
                     <th className="text-danger" colSpan={3}>
-                      Остаток на конец периода долг: <span className="mx-4">{endDate}</span>
+                      Остаток на конец периода долг: <span className="mx-4">{endDate && formatDate(startDate)}</span>
                     </th>
                     <th className="text-success" colSpan={2}>
-                      {data &&
+                      {data && data.data.income_not_transfer_total_price -
+                        data.data.expense_not_transfer_total_price +
+                        data.data.not_transfer_debt_in_start_date == 0 ? number_0 :
                         formatNumber(
                           data.data.income_not_transfer_total_price -
                           data.data.expense_not_transfer_total_price +
@@ -316,7 +325,9 @@ const OneFirmReport = () => {
                         )}
                     </th>
                     <th className="text-success" colSpan={2}>
-                      {data &&
+                      {data && data.data.income_transfer_total_price -
+                        data.data.expense_transfer_total_price +
+                        data.data.transfer_debt_in_start_date == 0 ? number_0 :
                         formatNumber(
                           data.data.income_transfer_total_price -
                           data.data.expense_transfer_total_price +

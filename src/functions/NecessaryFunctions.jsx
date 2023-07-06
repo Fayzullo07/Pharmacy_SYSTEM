@@ -242,3 +242,10 @@ export const totalYearToLeader = data => {
 
   return Object.values(newDatas);
 };
+
+export function formatDate(dateString) {
+  // Gelen tarihi "yyyy-mm-dd" formatından "dd-mm-yyyy" formatına dönüştür
+  var dateParts = dateString.split("-");
+  var formattedDate = dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
+  return formattedDate;
+}
