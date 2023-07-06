@@ -17,7 +17,7 @@ const TakeGiveDebt = () => {
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
-          <div className="header_flex justify-content-end">
+          <div className="header_flex justify-content-center">
            
             
             
