@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { transfersTypesGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import PaginationForModal from "../../../../utils/PaginationForModal";
-import { transfers } from "../../../../api";
+import { pagination, transfers } from "../../../../api";
 import AddIncome from "./Modal/AddIncome";
 import DeleteIncome from "./Modal/DeleteIncome";
 import UpdateIncome from "./Modal/UpdateIncome";
@@ -146,7 +146,7 @@ const Incomes = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

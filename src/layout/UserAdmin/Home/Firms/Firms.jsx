@@ -14,7 +14,7 @@ import {
   toggleFunction
 } from "../../../../redux/Actions/ToggleActions";
 import { useTranslation } from "react-i18next";
-import { number_0 } from "../../../../api";
+import { number_0, pagination } from "../../../../api";
 
 const Firms = () => {
   const navigate = useNavigate();
@@ -189,7 +189,7 @@ const Firms = () => {
         <div className="fixed-bottom" style={{ zIndex: 1 }}>
           <PaginationForModal
             page={page}
-            pages={Math.ceil(data && data.data.count / 10)}
+            pages={Math.ceil(data && data.data.count / pagination)}
             setPage={setPage}
           />
         </div>

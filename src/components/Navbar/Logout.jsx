@@ -8,6 +8,7 @@ const Logout = ({ showModal, setShowModal }) => {
       showModal={showModal}
       setShowModal={setShowModal}
       title={"Tizimdan chiqish"}
+      zIndex={55555555}
     >
       <div className="modal-body">
         <h2 className="text-muted text-center">

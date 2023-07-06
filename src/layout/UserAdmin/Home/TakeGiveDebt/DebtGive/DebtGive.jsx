@@ -7,6 +7,7 @@ import PaginationForModal from "../../../../../utils/PaginationForModal";
 
 import { useSelector } from "react-redux";
 import SideBarDebtGive from "../SideBar/SideBarDebtGive";
+import { pagination } from "../../../../../api";
 
 const DebtGive = () => {
   const reduxData = useSelector((state) => state);
@@ -147,7 +148,7 @@ const DebtGive = () => {
       <div className="fixed-bottom">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

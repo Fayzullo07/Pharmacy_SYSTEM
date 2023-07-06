@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { firmsGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../utils/SkeletLoading";
+import { pagination } from "../../../../api";
 
 const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
   const [search, setSearch] = useState("");
@@ -78,7 +79,7 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
       <div className="modal-footer">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

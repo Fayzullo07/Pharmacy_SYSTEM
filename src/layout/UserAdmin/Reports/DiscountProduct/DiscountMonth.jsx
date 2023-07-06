@@ -7,7 +7,7 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
-import { chegirma, months, years } from "../../../../api";
+import { chegirma, months, pagination, years } from "../../../../api";
 import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
@@ -242,7 +242,7 @@ const DiscountMonth = () => {
       <div className="fixed-bottom">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

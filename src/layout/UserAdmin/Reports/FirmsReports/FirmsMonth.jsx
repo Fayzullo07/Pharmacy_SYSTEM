@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SideBarFirmMonth from "./SideBarFirmMonth";
 import FirmReportSearch from "./FirmReportSearch";
+import { pagination } from "../../../../api";
 
 const FirmsMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -208,7 +209,7 @@ const FirmsMonth = () => {
       <div className="fixed-bottom">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

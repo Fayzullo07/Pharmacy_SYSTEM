@@ -76,7 +76,7 @@
 
 .box .inputBox input:focus~label,
 .box .inputBox input:valid~label {
-    top: -25px;
+    top: -35px;
     left: 0;
     color: #03a9f4;
     font-size: 12px;

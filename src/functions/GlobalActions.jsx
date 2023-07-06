@@ -8,6 +8,7 @@ export const receiptsPostAction = async datas => {
     await GlobalApi.receiptPostAPI(datas);
     toast.success(`Yaratildi`);
   } catch (error) {
+    console.log(error);
     if (error.response.status == 403) {
       localStorage.clear();
       window.location.href = "/";
@@ -16,7 +17,7 @@ export const receiptsPostAction = async datas => {
     const keys = Object.keys(error.response.data);
     for (let key of keys) {
       toast.warning(
-        `${error.response.status} ${key} ${error.response.data[key][0]}`
+        `${error.response.status} ${key} ${error.response.data[key][0]} `
       );
       return;
     }

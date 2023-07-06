@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import SkeletLoading from "../../../../../../utils/SkeletLoading";
 import { firmsInComesGetAPI } from "../../../../../../api/GlobalRequest";
 import { formatNumber } from "../../../../../../functions/NecessaryFunctions";
+import { pagination } from "../../../../../../api";
 
 const DebtsModal = ({
   showModal,
@@ -116,7 +117,7 @@ const DebtsModal = ({
         <div className="modal-footer m-0 p-0">
           <PaginationForModal
             page={page}
-            pages={Math.ceil(data && data.data.count / 10)}
+            pages={Math.ceil(data && data.data.count / pagination)}
             setPage={setPage}
           />
         </div>

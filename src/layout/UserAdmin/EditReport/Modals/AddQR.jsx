@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import {
   receiptsPatchAction,
-  receiptsPostAction,
+  receiptsPostAction
 } from "../../../../functions/GlobalActions";
 import { useMutation, useQueryClient } from "react-query";
 import { cleanedData } from "../../../../functions/NecessaryFunctions";
 import ModalSimple from "../../../../utils/ModalSimple";
+import { toast } from "react-toastify";
 
-const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
+const AddQR = ({
+  showModal,
+  setShowModal,
+  getData,
+  qr_price,
+  total,
+  check_qr_price
+}) => {
   const [qr, setQR] = useState(qr_price.price);
 
   const queryClient = useQueryClient();
@@ -18,7 +26,7 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
           price: qr,
           report_date: getData.report_date,
           shift: getData.shift,
-          pharmacy: getData.to_pharmacy,
+          pharmacy: getData.to_pharmacy
         })
       );
     },
@@ -26,7 +34,7 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
       onSuccess: () => {
         queryClient.invalidateQueries("receipts");
         setShowModal(false);
-      },
+      }
     }
   );
 
@@ -35,7 +43,7 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
       return receiptsPatchAction(
         qr_price.id,
         cleanedData({
-          price: qr,
+          price: qr
         })
       );
     },
@@ -43,12 +51,16 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
       onSuccess: () => {
         queryClient.invalidateQueries("receipts");
         setShowModal(false);
-      },
+      }
     }
   );
 
   const handleSubmit = () => {
-    if (qr_price.price == 0) {
+    if (total < qr) {
+      toast.warning("Tushumdan ko'p summa mumkunemas!");
+      return;
+    }
+    if (check_qr_price == false) {
       mutationPost.mutate();
     } else {
       mutationPatch.mutate();
@@ -64,13 +76,13 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
             className="form-control back_a"
             placeholder="0 UZS"
             value={qr}
-            onChange={(e) => {
-              if (total < Number(e.target.value)) {
+            onChange={e => {
+              if (e.target.value.length > 9) {
                 return;
               }
               setQR(e.target.value);
             }}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleSubmit();
               }
@@ -84,11 +96,9 @@ const AddQR = ({ showModal, setShowModal, getData, qr_price, total }) => {
             onClick={handleSubmit}
             disabled={mutationPatch.isLoading || mutationPost.isLoading}
           >
-            {mutationPatch.isLoading || mutationPost.isLoading ? (
-              <i className="fa fa-spinner fa-spin" />
-            ) : (
-              "Saqlash"
-            )}
+            {mutationPatch.isLoading || mutationPost.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Saqlash"}
           </button>
         </div>
       </div>

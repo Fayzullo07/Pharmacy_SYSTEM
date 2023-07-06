@@ -64,7 +64,7 @@ const Login = ({ onLogin }) => {
           <div className="inputBox">
             <input
               type="tel"
-              placeholder="+998 90 000 00 00"
+              placeholder="Telefon raqam kiriting"
               value={phone_number}
               onChange={handleUserNameChange}
               onKeyDown={e => {

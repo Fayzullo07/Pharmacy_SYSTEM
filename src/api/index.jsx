@@ -199,3 +199,4 @@ export const transfersWorker = [
 export const number_0 = "0.00";
 export const Naqd = "NAQD";
 export const Naqd_siz = "NAQD PULSIZ";
+export const pagination = 14;

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { PharmaciesExpensesReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
 import SideBarExpenseMonth from "./SideBarExpenseMonth";
+import { pagination } from "../../../../api";
 
 const ExpensesMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -192,7 +193,7 @@ const ExpensesMonth = () => {
       <div className="fixed-bottom">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

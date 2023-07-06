@@ -13,6 +13,7 @@ import { isFavoriteFunction } from "../../../../redux/Actions/ToggleActions";
 import AddFirma from "../../Home/Firms/Modal/AddFirma";
 import DeleteFirm from "../../Home/Firms/Modal/DeleteFirm";
 import UpdateFirma from "../../Home/Firms/Modal/UpdateFirma";
+import { pagination } from "../../../../api";
 
 const FirmsProfile = () => {
   const navigate = useNavigate();
@@ -194,7 +195,7 @@ const FirmsProfile = () => {
           <div className="fixed-bottom" style={{ zIndex: 1 }}>
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

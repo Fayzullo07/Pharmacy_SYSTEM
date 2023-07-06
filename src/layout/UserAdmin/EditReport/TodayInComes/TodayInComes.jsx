@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { pharmaciesInComesGetAPI } from "../../../../api/DirectorRequest";
+import { pharmaciesInComesGetAPI, pharmaciesToDebtsGetAPINOT } from "../../../../api/DirectorRequest";
 import { useQuery } from "react-query";
 import DeleteInComes from "./Modal/DeleteInComes";
 import UpdateInComes from "./Modal/UpdateInComes";
@@ -33,11 +33,21 @@ const TodayInComes = ({ deteils, getData }) => {
     });
   });
 
+   const { data: debtTrade, } = useQuery("to_debts_trade", async () => {
+    return await pharmaciesToDebtsGetAPINOT({
+      is_client: true,
+      report_date: getData.report_date,
+      shift: getData.shift,
+      from_pharmacy: getData.to_pharmacy,
+    });
+  });
+
   if (error) return `Error: ${error.message}`;
 
   let total = 0;
-  if (data && data.data.results) {
+  if (data && data.data.results && debtTrade && debtTrade.data.results) {
     total = totalMoney(data.data.results);
+    total += totalMoney(debtTrade.data.results);
   }
 
   return (
@@ -87,7 +97,7 @@ const TodayInComes = ({ deteils, getData }) => {
             <div className="col-md-6 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between ">
 
-                <Receipts getData={getData} />
+                <Receipts getData={getData} total={total} />
                 <button
                   className="btn btn-sm"
                   style={{ background: "var(--blue)", color: "var(--g_white)" }}

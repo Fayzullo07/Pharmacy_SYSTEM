@@ -11,6 +11,7 @@ import PaginationForModal from "../../../../utils/PaginationForModal";
 import ChooseDate from "./Modal/ChooseDate";
 import { toggleFunction } from "../../../../redux/Actions/ToggleActions";
 import { useTranslation } from "react-i18next";
+import { pagination } from "../../../../api";
 
 const Branchs = () => {
   const navigate = useNavigate();
@@ -126,7 +127,7 @@ const Branchs = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

@@ -14,7 +14,7 @@ import Navbar from "../../../../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
 import { toggleFunction } from "../../../../../redux/Actions/ToggleActions";
 import { useTranslation } from "react-i18next";
-import { number_0 } from "../../../../../api";
+import { number_0, pagination } from "../../../../../api";
 
 const OneFirmReport = () => {
   const { id, name } = useParams();
@@ -345,7 +345,7 @@ const OneFirmReport = () => {
         <div className="fixed-bottom">
           <PaginationForModal
             page={page}
-            pages={Math.ceil(data && data?.data?.count / 10)}
+            pages={Math.ceil(data && data?.data?.count / pagination)}
             setPage={setPage}
           />
         </div>

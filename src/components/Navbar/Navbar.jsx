@@ -29,6 +29,13 @@ const Navbar = () => {
     }
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = `${
+      logOutModal  ? "hidden" : "scroll"
+    }`;
+    window.scrollTo(0, 0);
+  }, [logOutModal]);
+
   const { t } = useTranslation("translation", { keyPrefix: "Navbar" });
 
   return (
@@ -66,7 +73,7 @@ const Navbar = () => {
               </li>
             </NavLink>
           ))}
-          <a onClick={() => setLogOutModal(true)}>
+          <a onClick={() => setLogOutModal(true)} className="cursor_pointer">
             <li>
               <span className="icon">
                 <i className="fas fa-right-from-bracket fa-lg"></i>

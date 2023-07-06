@@ -10,6 +10,7 @@ import PaginationForModal from "../../../../utils/PaginationForModal";
 import AddApteka from "../../Home/Branchs/Modal/AddApteka";
 import DeleteApteka from "../../Home/Branchs/Modal/DeleteApteka";
 import UpdateApteka from "../../Home/Branchs/Modal/UpdateApteka";
+import { pagination } from "../../../../api";
 
 const ProfileBranches = () => {
   const [page, setPage] = useState(1);
@@ -144,7 +145,7 @@ const ProfileBranches = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

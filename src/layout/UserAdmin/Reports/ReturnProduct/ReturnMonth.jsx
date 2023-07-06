@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { formatNumber } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
-import { months, vozvrat, years } from "../../../../api";
+import { months, pagination, vozvrat, years } from "../../../../api";
 import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
@@ -232,7 +232,7 @@ const ReturnMonth = () => {
       <div className="fixed-bottom">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

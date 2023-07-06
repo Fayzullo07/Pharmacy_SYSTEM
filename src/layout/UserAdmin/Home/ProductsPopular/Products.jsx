@@ -12,6 +12,7 @@ import AddPopularProducts from "./Modal/AddPopularProducts";
 import DeletePopularProducts from "./Modal/DeletePopularProducts";
 import UpdatePopularProducts from "./Modal/UpdatePopularProducts";
 import { useTranslation } from "react-i18next";
+import { pagination } from "../../../../api";
 
 const Products = () => {
   const reduxData = useSelector((state) => state);
@@ -168,7 +169,7 @@ const Products = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

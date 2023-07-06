@@ -11,6 +11,7 @@ import AddClient from "./Modal/AddClient";
 import { formatNumber } from "../../../../functions/NecessaryFunctions";
 import DeleteClient from "./Modal/DeleteClients";
 import UpdateClient from "./Modal/UpdateClient";
+import { pagination } from "../../../../api";
 
 const Clients = () => {
   const reduxData = useSelector((state) => state);
@@ -61,7 +62,7 @@ const Clients = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Klientlar bazasi</h2>
+              <h2>Mijozlar bazasi</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -162,7 +163,7 @@ const Clients = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

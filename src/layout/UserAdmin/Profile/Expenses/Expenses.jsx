@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { pharmacyExpensesTypesGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../utils/SkeletLoading";
+import { pagination } from "../../../../api";
 
 const Expenses = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -144,7 +145,7 @@ const Expenses = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>

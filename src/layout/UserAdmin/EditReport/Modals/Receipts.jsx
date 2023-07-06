@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
   formatNumber,
-  totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import { useQuery } from "react-query";
-import { pharmaciesInComesGetAPI } from "../../../../api/DirectorRequest";
 import { receiptGetAPI } from "../../../../api/GlobalRequest";
 import AddQR from "./AddQR";
 
-const Receipts = ({ getData }) => {
+const Receipts = ({ getData, total }) => {
   const [qr_price, setQRPrice] = useState({ price: 0 });
+  const [check_qr_price, setCheckQRPrice] = useState(false);
   const [qrModal, setQRModal] = useState(false);
 
   const {
@@ -35,25 +34,15 @@ const Receipts = ({ getData }) => {
     if (receipt && receipt.data) {
       if (receipt.data.results.length != 0) {
         setQRPrice(receipt.data.results[0]);
+        setCheckQRPrice(true);
       }
     }
   }, [isLoading, receipt]);
 
-  const { data: incomes, error } = useQuery("incomes", async () => {
-    return await pharmaciesInComesGetAPI({
-      report_date: getData.report_date,
-      shift: getData.shift,
-      to_pharmacy: getData.to_pharmacy,
-    });
-  });
+ 
   if (errorReceipt) return `Error: ${errorReceipt.message}`;
-  if (error) return `Error: ${error.message}`;
 
-  let total = 0;
-
-  if (incomes && incomes.data) {
-    total = totalMoney(incomes.data.results);
-  }
+ 
   return (
     <>
       {qrModal && (
@@ -62,6 +51,7 @@ const Receipts = ({ getData }) => {
           setShowModal={setQRModal}
           getData={getData}
           qr_price={qr_price}
+          check_qr_price={check_qr_price}
           total={total}
         />
       )}

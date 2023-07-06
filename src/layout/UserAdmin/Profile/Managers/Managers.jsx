@@ -9,6 +9,7 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import { useQuery } from "react-query";
 import { managerGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
+import { pagination } from "../../../../api";
 
 const Managers = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -159,7 +160,7 @@ const Managers = () => {
           <div className="fixed-bottom">
             <PaginationForModal
               page={page}
-              pages={Math.ceil(data && data.data.count / 10)}
+              pages={Math.ceil(data && data.data.count / pagination)}
               setPage={setPage}
             />
           </div>
