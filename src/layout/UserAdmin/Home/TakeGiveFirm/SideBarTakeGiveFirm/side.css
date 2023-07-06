@@ -1,0 +1,58 @@
+#firms2 {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 5px 0;
+    padding: 2px 3px;
+    border: 1px solid lightblue;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#firms2:hover,
+#firms2:hover button.activeBtn {
+    border-radius: 0 20px;
+    transition: .5s;
+    box-shadow: 0 0 8px 2px lightblue;
+}
+
+#firms2 button {
+    width: 50%;
+    padding: 2px;
+    border: none;
+    background: transparent;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#firms2 button:hover {
+    border: 1px groove lightblue;
+    border-radius: 0 20px;
+    transition: 1s;
+}
+
+#firms2 button.activeBtn {
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 20px 0;
+    color: var(--g_white);
+    transition: 1s;
+
+}
+
+
+
+@media (max-width: 687px) {
+    #firms2 {
+        width: 100%;
+    }
+
+    #firms2 button {
+        padding: 2px;
+        font-size: 10px;
+    }
+}

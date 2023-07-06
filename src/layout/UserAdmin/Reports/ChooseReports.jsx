@@ -3,20 +3,14 @@ import {
   debt_png,
   discount_png,
   expense,
-  firm,
   firm_png,
-  income,
   profile,
   qr,
   return1,
   workers
 } from "../../../assets";
-import {
-  isFavoriteFunction,
-  toggleFunction
-} from "../../../redux/Actions/ToggleActions";
 
-const ChooseReports = ({ setChoose, dispatch }) => {
+const ChooseReports = ({ setChoose }) => {
   return (
     <div className="container-fluid row px-0 mx-0 mt-3">
       <div className="col-12 col-md-10 offset-md-1 mb-2 ">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
@@ -21,7 +21,10 @@ import WorkerMonth from "./WorkerReports/WorkerMonth";
 import ChooseReports from "./ChooseReports";
 
 import "./Reports.css";
-import { isFavoriteFunction } from "../../../redux/Actions/ToggleActions";
+import {
+  isFavoriteFunction,
+  toggleFunction
+} from "../../../redux/Actions/ToggleActions";
 const Reports = () => {
   const dispatch = useDispatch();
   const reduxData = useSelector(state => state);

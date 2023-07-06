@@ -57,3 +57,65 @@
     right: 0;
     top: 0;
 }
+
+
+
+#debts3 {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin: 5px 0;
+    padding: 2px 3px;
+    border: 1px solid lightblue;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#debts3:hover,
+#debts3:hover button.activeBtn {
+    border-radius: 0 20px;
+    transition: .5s;
+    box-shadow: 0 0 8px 2px lightblue;
+}
+
+#debts3 button {
+    width: 33.3%;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 20px 0;
+    transition: 1s;
+}
+
+#debts3 button:hover {
+    border: 1px groove lightblue;
+    border-radius: 0 20px;
+    transition: 1s;
+}
+
+#debts3 button.activeBtn {
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 20px 0;
+    color: var(--g_white);
+    transition: 1s;
+
+}
+
+
+
+@media (max-width: 687px) {
+    #debts3 {
+        width: 100%;
+    }
+
+    #debts3 button {
+        padding: 2px;
+        font-size: 10px;
+    }
+}
+

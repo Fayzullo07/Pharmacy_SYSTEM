@@ -20,13 +20,10 @@ const TakeGiveFirm = () => {
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
-          <div className="header_flex">
-            <h2>
-              {choose == "1" && "Firmadan olingan mahsulot"}
-              {choose == "2" && "Firmaga qaytarilgan mahsulot"}
-            </h2>
-          </div>
+          <div className="header_flex justify-content-center">
+            
           <SideBarTakeGiveFirm setShows={setChoose} shows={choose} />
+          </div>
         </Topbar>
         {choose == "1" &&
           <ProfileFirmIncome
