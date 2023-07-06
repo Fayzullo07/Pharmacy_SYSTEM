@@ -81,7 +81,7 @@ const Navbar = () => {
               <span className="title">{t(7)}</span>
             </li>
           </a>
-          {/* <Languages /> */}
+          <Languages />
         </ul>
       </div>
     </>
