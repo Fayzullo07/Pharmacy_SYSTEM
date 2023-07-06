@@ -80,8 +80,11 @@
 }
 
 .navigation ul a li .icon img {
-    width: 20px;
-    height: 20px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: -5px;
+    object-fit: contain;
 }
 
 .navigation ul a li .icon i {

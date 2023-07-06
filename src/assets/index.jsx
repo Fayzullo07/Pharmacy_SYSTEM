@@ -14,6 +14,24 @@ import qr from "./ic_check.jpg";
 import return1 from "./return.png";
 import workers from "./clientss.png";
 
+import reports from "./ic_check2.png";
+import clients from "./add_group.png";
+import products from "./best_product.png";
+import dashboard from "./dashboard.png";
+import logout from "./logout.png";
+import branches from "./office.png";
+import firms from "./company_office.png";
+
+import debts from "./debts.png";
+
+import income_png from "./income_3.png";
+import expense_png from "./expense_3.png";
+import firm_png from "./enterprise.png";
+import return_png from "./return_icon.png";
+import discount_png from "./discount.png";
+import team from "./team.png";
+import debt_png from "./debt_take_give.png";
+
 export {
   user,
   profile,
@@ -28,5 +46,20 @@ export {
   firm,
   qr,
   return1,
-  workers
+  workers,
+  reports,
+  clients,
+  products,
+  dashboard,
+  logout,
+  branches,
+  firms,
+  debts,
+  income_png,
+  expense_png,
+  firm_png,
+  return_png,
+  discount_png,
+  team,
+  debt_png
 };

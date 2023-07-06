@@ -1,191 +1,120 @@
 import React, { useState } from "react";
 import "./SideBarEdit.css";
+import {
+  debt_png,
+  discount_png,
+  expense_png,
+  firm_png,
+  income_png,
+  return_png,
+  team
+} from "../../../../assets";
 
 const SideBarEdit = ({ shows, setShows }) => {
   const [showUl, setShowUl] = useState(false);
-  return (
-    <div id="btn_hover_parent" className="btn-toolbar w-100">
+  return <div id="btn_hover_parent" className="btn-toolbar w-100">
       <div className="btn-group btn-group-sm mx-2 w-100">
-        <button
-          type="button"
-          className={`btn btn-${shows == "1" ? "primary" : "outline-primary"}`}
-          onClick={() => setShows("1")}
-        >
-          <i className="fa fa-arrow-down fs-5" />
+        <button type="button" className={`btn btn-${shows == "1" ? "primary" : "outline-primary"}`} onClick={() => setShows("1")}>
+          <img src={expense_png} width={30} alt="income" />
         </button>
-        <button
-          type="button"
-          className={`btn btn-${shows == "2" ? "primary" : "outline-primary"}`}
-          onClick={() => setShows("2")}
-        >
-          <i className="fa fa-arrow-up fs-5" />
+        <button type="button" className={`btn btn-${shows == "2" ? "primary" : "outline-primary"}`} onClick={() => setShows("2")}>
+          <img src={income_png} width={30} alt="expense" />
         </button>
-        <button
-          id="btn_hover"
-          type="button"
-          className={`btn btn-${shows == "3" ? "primary" : "outline-primary"}`}
-          onClick={() => {
+        <button id="btn_hover" type="button" className={`btn btn-${shows == "3" ? "primary" : "outline-primary"}`} onClick={() => {
             setShows("3");
-          }}
-        >
-          <i className="fa fa-building fs-5" />
+          }}>
+          <img src={firm_png} width={30} alt="firm" />
         </button>
 
-        <button
-          id="btn_hover"
-          className={`px-2 btn btn-${shows == "4" ||
-          shows == "5" ||
-          shows == "6" ||
-          shows == "7" ||
-          shows == "8" ||
-          shows == "9"
-            ? "primary"
-            : "outline-primary"} btn-sm`}
-          type="button"
-          onMouseEnter={() => {
+        <button id="btn_hover" className={`px-2 btn btn-${shows == "4" || shows == "5" || shows == "6" || shows == "7" || shows == "8" || shows == "9" ? "primary" : "outline-primary"} btn-sm`} type="button" onMouseEnter={() => {
             setShowUl(true);
-          }}
-          onMouseLeave={() => {
+          }} onMouseLeave={() => {
             setShowUl(false);
-          }}
-        >
-          <i className="fa fa-money-bill-transfer fs-5" />
+          }}>
+          <img src={debt_png} width={30} alt="debts" />
         </button>
-        
 
-        <button
-          type="button"
-          className={`btn btn-${shows == "10" ? "primary" : "outline-primary"}`}
-          onClick={() => setShows("10")}
-        >
-          <i className="fa fa-rotate-left fs-5" />
+        <button type="button" className={`btn btn-${shows == "10" ? "primary" : "outline-primary"}`} onClick={() => setShows("10")}>
+          <img src={return_png} width={30} alt="return" />
         </button>
-        <button
-          type="button"
-          className={`btn btn-${shows == "11" ? "primary" : "outline-primary"}`}
-          onClick={() => setShows("11")}
-        >
-          <i className="fa fa-cart-shopping  fs-5" />
+        <button type="button" className={`btn btn-${shows == "11" ? "primary" : "outline-primary"}`} onClick={() => setShows("11")}>
+          <img src={discount_png} width={30} alt="discount" />
         </button>
-        <button
-          type="button"
-          className={`btn btn-${shows == "12" ? "primary" : "outline-primary"}`}
-          onClick={() => setShows("12")}
-        >
-          <i className="fa fa-users fs-5" />
+        <button type="button" className={`btn btn-${shows == "12" ? "primary" : "outline-primary"}`} onClick={() => setShows("12")}>
+          <img src={team} width={30} alt="team" />
         </button>
       </div>
 
-      <ul
-        id="child"
-        class="child"
-        onMouseEnter={() => {
+      <ul id="child" class="child" onMouseEnter={() => {
           setShowUl(true);
-        }}
-        onMouseLeave={() => {
+        }} onMouseLeave={() => {
           setShowUl(false);
-        }}
-        style={
-          showUl
-            ? { display: "block" }
-            : { display: "none" }
-        }
-      >
+        }} style={showUl ? { display: "block" } : { display: "none" }}>
         <li className={`${shows == "4" && "active"}`}>
-          <button
-            className={`${shows == "4" && "active"} dropdown-item`}
-            onClick={() => {
+          <button className={`${shows == "4" && "active"} dropdown-item`} onClick={() => {
               setShows("4");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("4");
-            }}
-          >
+            }}>
             Qarzga qilingan savdo
           </button>
         </li>
         <li className={`${shows == "5" && "active"}`}>
-          <button
-            type="button"
-            className={`${shows == "5" && "active"} dropdown-item`}
-            onClick={() => {
+          <button type="button" className={`${shows == "5" && "active"} dropdown-item`} onClick={() => {
               setShows("5");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("5");
-            }}
-          >
+            }}>
             Qarzga qilingan savdoni qaytarish
           </button>
         </li>
         <li className={`${shows == "6" && "active"}`}>
-          <button
-            type="button"
-            className={`${shows == "6" && "active"} dropdown-item`}
-            onClick={() => {
+          <button type="button" className={`${shows == "6" && "active"} dropdown-item`} onClick={() => {
               setShows("6");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("6");
-            }}
-          >
+            }}>
             Qarz berish
           </button>
         </li>
 
         <li className={`${shows == "7" && "active"}`}>
-          <button
-            type="button"
-            className={`${shows == "7" && "active"} dropdown-item`}
-            onClick={() => {
+          <button type="button" className={`${shows == "7" && "active"} dropdown-item`} onClick={() => {
               setShows("7");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("7");
-            }}
-          >
+            }}>
             Berilgan qarzni qaytarish
           </button>
         </li>
 
         <li className={`${shows == "8" && "active"}`}>
-          <button
-            type="button"
-            className={`${shows == "8" && "active"} dropdown-item`}
-            onClick={() => {
+          <button type="button" className={`${shows == "8" && "active"} dropdown-item`} onClick={() => {
               setShows("8");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("8");
-            }}
-          >
+            }}>
             Qarz olish
           </button>
         </li>
 
         <li className={`${shows == "9" && "active"}`}>
-          <button
-            type="button"
-            className={`${shows == "9" && "active"} dropdown-item`}
-            onClick={() => {
+          <button type="button" className={`${shows == "9" && "active"} dropdown-item`} onClick={() => {
               setShows("9");
               setShowUl(false);
-            }}
-            onMouseEnter={() => {
+            }} onMouseEnter={() => {
               setShows("9");
-            }}
-          >
+            }}>
             Olingan qarzni qaytarish
           </button>
         </li>
       </ul>
-    </div>
-  );
+    </div>;
 };
 
 export default SideBarEdit;

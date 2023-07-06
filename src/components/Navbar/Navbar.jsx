@@ -7,7 +7,7 @@ import { toggleFunction } from "../../redux/Actions/ToggleActions";
 import { useDispatch, useSelector } from "react-redux";
 import Logout from "./Logout";
 import Languages from "./Languages";
-import { logo } from "../../assets";
+import { logo, logout } from "../../assets";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
@@ -67,7 +67,7 @@ const Navbar = () => {
                 }}
               >
                 <span className="icon">
-                  <i className={`${item.img}`}></i>
+                  <img src={item.img} className={`${item.img}`}/>
                 </span>
                 <span className="title">{t(item.name)}</span>
               </li>
@@ -76,7 +76,7 @@ const Navbar = () => {
           <a onClick={() => setLogOutModal(true)} className="cursor_pointer">
             <li>
               <span className="icon">
-                <i className="fas fa-right-from-bracket fa-lg"></i>
+                <img src={logout} alt="logout" />
               </span>
               <span className="title">{t(7)}</span>
             </li>

@@ -1,29 +1,31 @@
+import { branches, clients, dashboard, debts, firms, products, reports, return1 } from "../assets";
+
 export const routes = [
-  { name: 0, img: "fas fa-gauge ", slug: "/" },
-  { name: 1, img: "fas fa-code-branch ", slug: "/branchs" },
-  { name: 2, img: "fas fa-building", slug: "/firms" },
-  { name: 3, img: "fas fa-rotate", slug: "/take_give_debt" },
-  { name: 4, img: "fa fa-chart-pie", slug: "/reports" },
-  { name: 5, img: "fas fa-money-bill-transfer ", slug: "/take_give_firm" },
-  { name: 6, img: "fas fa-cart-plus", slug: "/products" },
-  { name: 9, img: "fas fa-user-plus", slug: "/clients" }
+  { name: 0, img: dashboard, slug: "/" },
+  { name: 1, img: branches, slug: "/branchs" },
+  { name: 2, img: firms, slug: "/firms" },
+  { name: 3, img: debts, slug: "/take_give_debt" },
+  { name: 4, img: reports, slug: "/reports" },
+  { name: 5, img: return1, slug: "/take_give_firm" },
+  { name: 6, img: products, slug: "/products" },
+  { name: 9, img: clients, slug: "/clients" }
 ];
 
 export const routesEmployee = [
-  { name: 0, img: "fas fa-gauge ", slug: "/" },
+  { name: 0, img: dashboard, slug: "/" },
   {
     name: 8,
-    img: "fas fa-chart-pie ",
+    img: reports,
     slug: "/edit/report"
   },
   {
     name: 9,
-    img: "fas fa-user-plus",
+    img: clients,
     slug: "/add/clients"
   },
   {
     name: 6,
-    img: "fas fa-cart-plus",
+    img: products,
     slug: "/add/products"
   }
 ];
