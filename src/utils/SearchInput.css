@@ -1,6 +1,7 @@
 .search {
     position: relative;
     width: 50%;
+    margin-bottom: 10px ;
 }
 
 .search label {
