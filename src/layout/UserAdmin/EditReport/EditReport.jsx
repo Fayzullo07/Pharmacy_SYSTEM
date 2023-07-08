@@ -24,7 +24,7 @@ import "./EditReport.css";
 import { number_0 } from "../../../api";
 
 const EditReport = () => {
-  const { report_date, shift, to_pharmacy } = useParams();
+  const { report_date, shift, to_pharmacy, name } = useParams();
   const reduxData = useSelector(state => state);
   const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
@@ -48,7 +48,8 @@ const EditReport = () => {
     }
   });
 
-  return <div className="d-flex">
+  return (
+    <div className="d-flex">
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
@@ -67,42 +68,72 @@ const EditReport = () => {
               {shows == "11" && "Chegirma bilan savdo"}
               {shows == "12" && "Xodimlarga berilgan summa"}
             </h2>
-            {shows == "1" && <h2 id="remeinder">
+            {shows == "1" &&
+              <h2 id="remeinder">
                 <span>Kassa: </span>
                 <b>
-                  {isLoading ? <span>
+                  {isLoading
+                    ? <span>
                         {number_0}
-                      </span> : remeinder.data.price == 0 ? <span>
+                      </span>
+                    : remeinder.data.price == 0
+                      ? <span>
                           {number_0}
-                        </span> : formatNumber(remeinder.data.price)}
-                </b> <span> UZS</span>
+                        </span>
+                      : formatNumber(remeinder.data.price)}
+                </b>{" "}
+                <span> UZS</span>
               </h2>}
-            <div className="border border-primary p-1 rounded">
+          </div>
+        </Topbar>
+        <div className="header_flex mb-2">
+          {name &&
+            <div className="border border-primary p-1 mx-2 rounded">
               <span>
                 {report_date}
               </span>
               <i className="fa fa-clock mx-1 text-warning" />
-            </div>
+            </div>}
+          <div className="border border-primary p-1 mx-2 rounded">
+            <span>
+              <span>
+                {name.length > 16 ? `${name.substring(0, 16)}. . .` : name}
+              </span>
+            </span>
           </div>
-        </Topbar>
+        </div>
         <div className="header_flex mb-2">
           <SideBarEdit setShows={setShows} shows={shows} />
         </div>
 
         {shows == "1" && <TodayInComes deteils={deteils} getData={getData} />}
         {shows == "2" && <TodayExpenses deteils={deteils} getData={getData} />}
-        {shows == "3" && <TodayExPenseToFirm deteils={deteils} getData={getData} />}
-        {shows == "4" && <TodayTradeToDebt is_client={true} getData={getData} />}
-        {shows == "5" && <TodayTradeToDebtRepay deteils={deteils} is_client={true} getData={getData} />}
+        {shows == "3" &&
+          <TodayExPenseToFirm deteils={deteils} getData={getData} />}
+        {shows == "4" &&
+          <TodayTradeToDebt is_client={true} getData={getData} />}
+        {shows == "5" &&
+          <TodayTradeToDebtRepay
+            deteils={deteils}
+            is_client={true}
+            getData={getData}
+          />}
         {shows == "6" && <TodayToDebt is_client={false} getData={getData} />}
-        {shows == "7" && <TodayToDeptRepay deteils={deteils} is_client={false} getData={getData} />}
+        {shows == "7" &&
+          <TodayToDeptRepay
+            deteils={deteils}
+            is_client={false}
+            getData={getData}
+          />}
         {shows == "8" && <TodayDebt deteils={deteils} getData={getData} />}
         {shows == "9" && <TodayDebtRepay deteils={deteils} getData={getData} />}
         {shows == "10" && <TodayReturn deteils={deteils} getData={getData} />}
         {shows == "11" && <TodayDiscount getData={getData} />}
-        {shows == "12" && <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
+        {shows == "12" &&
+          <TodayExpenseToAccounts deteils={deteils} getData={getData} />}
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default EditReport;

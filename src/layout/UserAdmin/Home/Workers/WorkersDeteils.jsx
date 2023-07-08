@@ -85,8 +85,8 @@ const WorkersDeteils = () => {
                   <th scope="col">Smena</th>
                   <th scope="col">Manzil</th>
                   <th scope="col">Ish haqi</th>
-                  <th scope="col">Active</th>
-                  <th scope="col">Main</th>
+                  <th scope="col">Faol</th>
+                  <th scope="col">Asosiy</th>
                   <th scope="col" style={{ width: "5px" }}>
                     <i className="fa fa-edit text-warning "></i>
                   </th>
@@ -125,40 +125,42 @@ const WorkersDeteils = () => {
                       <td data-label="Ish haqi">
                         {item.wage == 0 ? "~" : formatNumber(item.wage)}
                       </td>
-                      <td data-label="Active">
+                      <td data-label="Faol">
                         {item.is_active ? (
-                          <span className="badge text-bg-success">Active</span>
+                          <span className="badge text-bg-success"><i className="fa fa-check"></i></span>
                         ) : (
                           <span className="badge text-bg-danger">
-                            Not Actiove
+                            <i className="fa fa-xmark"></i>
                           </span>
                         )}
                       </td>
-                      <td data-label="Main">
+                      <td data-label="Asosiy">
                         {item.is_main_worker ? (
-                          <span className="badge text-bg-success">Active</span>
+                          <span className="badge text-bg-success"><i className="fa fa-check"></i></span>
                         ) : (
                           <span className="badge text-bg-danger">
-                            Not Actiove
+                            <i className="fa fa-xmark"></i>
                           </span>
                         )}
                       </td>
-                      <td data-label="O'zgartirish">
-                        <i
-                          className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'zgartirish" onClick={() => {
                             setCurData(item);
                             setUpdateModal(!updateModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-edit text-warning"
+                          
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
-                        <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'chirish" onClick={() => {
                             setCurData(item);
                             setDeleteModal(!deleteModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-trash-can text-danger"
+                          
                         ></i>
                       </td>
                     </tr>

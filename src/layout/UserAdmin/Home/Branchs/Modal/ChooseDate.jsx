@@ -5,7 +5,7 @@ import ModalSimple from "../../../../../utils/ModalSimple";
 import SmenaSelect from "../../../../../ui/SmenaSelect";
 
 const ChooseDate = props => {
-  const { showModal, setShowModal, pharm_id } = props;
+  const { showModal, setShowModal, pharm_id, pharm_name  } = props;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ const ChooseDate = props => {
     setFormData({ ...formData, [name]: value });
   };
   const handleSubmit = () => {
-    navigate(`/edit/report/${pharm_id}/${formData.shift}/${formData.date}`);
+    navigate(`/edit/report/${pharm_id}/${formData.shift}/${formData.date}/${pharm_name}`);
   };
   return (
     <ModalSimple

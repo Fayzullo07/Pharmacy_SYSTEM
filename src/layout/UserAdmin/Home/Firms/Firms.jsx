@@ -120,9 +120,9 @@ const Firms = () => {
                       className="text-capitalize text-break"
                       style={{ textAlign: "start" }}
                     >
-                      <b>
+                      
                         {item.name}
-                      </b>
+                      
                     </td>
                     <td data-label={t(5)}>
                       {item.phone_number1}
@@ -139,7 +139,7 @@ const Firms = () => {
                           : "text-success"
                       }
                     >
-                      <b>
+                      <b className="fw-600">
                         {item.not_transfer_debt == 0
                           ? number_0
                           : formatNumber(item.not_transfer_debt)}
@@ -153,7 +153,7 @@ const Firms = () => {
                           : "text-success"
                       }
                     >
-                      <b>
+                      <b className="fw-600">
                         {item.transfer_debt == 0
                           ? number_0
                           : formatNumber(item.transfer_debt)}

@@ -126,36 +126,38 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
                       {item.second_name ? item.second_name : "~"}
                     </td>
                     <td data-label="Telefon">
-                      <b>{item.phone_number}</b>
+                      {item.phone_number}
                     </td>
                     <td data-label="Qancha berildi">
-                      <b>{formatNumber(item.price)}</b>
+                      {formatNumber(item.price)}
                     </td>
                     <td data-label="Qancha qoldi">
                       <b className="text-danger">
                         {item.remaining_debt == 0 ? (
-                          <span class="badge text-bg-success">To'landi</span>
+                          <span class="badge text-bg-success"><i className="fa fa-check"></i></span>
                         ) : (
                           formatNumber(item.remaining_debt)
                         )}
                       </b>
                     </td>
-                    <td data-label="O'zgartirish">
-                      <i
-                        className="fa fa-edit text-warning cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'zgartirish"  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
                         }}
+                        className="cursor_pointer">
+                      <i
+                        className="fa fa-edit text-warning"
+                       
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
-                      <i
-                        className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
+                    <td data-label="O'chirish" onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
                         }}
+                        className="cursor_pointer">
+                      <i
+                        className="fa fa-trash-can text-danger"
+                        
                       ></i>
                     </td>
                   </tr>

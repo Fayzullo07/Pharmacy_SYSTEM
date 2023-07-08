@@ -130,31 +130,33 @@ const Products = () => {
                     <tr key={item.id}>
                       <td data-label="№">{index + 1}</td>
                       <td data-label={t(17)} className="text-capitalize">
-                        <b>{item.pharmacy_name}</b>
+                        {item.pharmacy_name}
                       </td>
                       <td data-label={t(18)} className="text-capitalize">
-                        <b>{item.name}</b>
+                        {item.name}
                       </td>
                       <td data-label={t(19)}>
-                        <b className="text-success">
+                        <b className="text-success fw-600">
                           {formatNumber(item.price)}
                         </b>
                       </td>
                       <td data-label={t(20)} onClick={() => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
-                      }}>
+                      }}
+                      className="cursor_pointer">
                         <i
-                          className="fa fa-edit text-warning cursor_pointer"
+                          className="fa fa-edit text-warning"
 
                         ></i>
                       </td>
                       <td data-label={t(21)} onClick={() => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
-                      }}>
+                      }} 
+                      className="cursor_pointer">
                         <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
+                          className="fa fa-trash-can text-danger "
 
                         ></i>
                       </td>

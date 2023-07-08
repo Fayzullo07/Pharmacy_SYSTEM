@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { pharmaciesDebtsRePayGetAPI } from "../../../../api/DirectorRequest";
 import SkeletLoading from "../../../../utils/SkeletLoading";
@@ -10,11 +10,13 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import DebtsModal from "./Modal/DebtsModal";
 import { Naqd_siz } from "../../../../api";
+import ModalDescription from "../../../../utils/ModalDescription";
 
 const TodayDebtRepay = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [debtsModal, setDebtsModal] = useState(false);
+  const [descModal, setDescModal] = useState(false);
 
   const [curData, setCurData] = useState({});
 
@@ -35,6 +37,10 @@ const TodayDebtRepay = ({ deteils, getData }) => {
 
   return (
     <>
+
+      {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {debtsModal && (
         <DebtsModal
           showModal={debtsModal}
@@ -104,7 +110,10 @@ const TodayDebtRepay = ({ deteils, getData }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item)
+                    setDescModal(!descModal)
+                  }}>
                     <td data-label="№">{index + 1}</td>
                     <td
                       data-label="Kimga qaytarildi"
@@ -123,13 +132,14 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                     <td data-label="Berilgan summa">
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'chirish"  onClick={() => {
-                          setCurData(item);
-                          setDeleteModal(!deleteModal);
-                        }}>
+                    <td data-label="O'chirish" onClick={(e) => {
+                      e.stopPropagation()
+                      setCurData(item);
+                      setDeleteModal(!deleteModal);
+                    }}>
                       <i
                         className="fa fa-trash-can text-danger cursor_pointer"
-                       
+
                       ></i>
                     </td>
                   </tr>

@@ -11,11 +11,13 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import DebtsModalTrade from "../TodayTradeToDebtRepay/Modal/DebtsModalTrade";
+import ModalDescription from "../../../../utils/ModalDescription";
 
 const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [debtsModal, setDebtsModal] = useState(false);
+  const [descModal, setDescModal] = useState(false);
 
   const [curData, setCurData] = useState({});
 
@@ -44,6 +46,9 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
 
   return (
     <>
+    {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {debtsModal && (
         <DebtsModalTrade
           showModal={debtsModal}
@@ -115,7 +120,10 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item);
+                    setDescModal(!descModal);
+                  }}>
                     <td data-label="№">{index + 1}</td>
                     <td data-label="Kim qaytardi" className="text-capitalize">
                       <b>{item.from_debt_name}</b>
@@ -129,13 +137,15 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
                     <td data-label="Miqdor">
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'chirish">
+                    <td data-label="O'chirish"
+                     onClick={e => {
+                      e.stopPropagation()
+                      setCurData(item);
+                      setDeleteModal(!deleteModal);
+                    }}>
                       <i
                         className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
-                          setCurData(item);
-                          setDeleteModal(!deleteModal);
-                        }}
+                        
                       ></i>
                     </td>
                   </tr>

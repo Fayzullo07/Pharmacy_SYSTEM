@@ -104,7 +104,7 @@ const Routing = ({ user, handleLogin, navigate }) => {
       />
 
       <Route
-        path="/edit/report/:to_pharmacy/:shift/:report_date"
+        path="/edit/report/:to_pharmacy/:shift/:report_date/:name"
         element={
           <AdminElement>
             <EditReport />

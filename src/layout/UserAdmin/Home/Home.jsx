@@ -71,7 +71,7 @@ const Home = () => {
                     {
                       <CountUp
                         start={0}
-                        end={deteils?.employees?.length - 1}
+                        end={deteils?.employees.filter((item) => item.role != 'm').length - 1 }
                         duration={2}
                         delay={0}
                       />

@@ -10,6 +10,7 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import ModalSearchFirmExpense from "./ModalSearch/ModalSearchFirmExpense";
 import { today, xisob_raqam } from "../../../../api";
+import ModalDescription from "../../../../utils/ModalDescription";
 
 const TodayExPenseToFirm = ({ deteils, getData }) => {
   const [firm_expense_id, setFirmExpenseId] = useState({});
@@ -22,13 +23,13 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
 
   const [viewModal, setViewModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
+  const [descModal, setDescModal] = useState(false);
 
   const [curData, setCurData] = useState({});
 
   useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || viewModal ? "hidden" : "scroll"
-    }`;
+    document.body.style.overflowY = `${showModal || viewModal ? "hidden" : "scroll"
+      }`;
     window.scrollTo(0, 0);
   }, [showModal, viewModal]);
 
@@ -46,6 +47,9 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
   }
   return (
     <>
+      {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {searchModal && (
         <ModalSearchFirmExpense
           showModal={searchModal}
@@ -91,13 +95,13 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           </p>
           {getData.report_date == today && (
 
-          <button
-            className="btn btn-sm"
-            style={{ background: "var(--blue)", color: "var(--g_white)" }}
-            onClick={() => setSearchModal(!searchModal)}
-          >
-            <i className="fa fa-add"></i>
-          </button>
+            <button
+              className="btn btn-sm"
+              style={{ background: "var(--blue)", color: "var(--g_white)" }}
+              onClick={() => setSearchModal(!searchModal)}
+            >
+              <i className="fa fa-add"></i>
+            </button>
           )}
         </div>
 
@@ -123,9 +127,12 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item)
+                    setDescModal(!descModal)
+                  }}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Chiqim kimdan qilindi">{item.transfer_type == xisob_raqam ? "HISOB RAQAM" : item.from_user_name != null ? "RAHBAR": item.from_user_price != 0 ? "KASSA, RAHBAR": "KASSA"}</td>
+                    <td data-label="Chiqim kimdan qilindi">{item.transfer_type == xisob_raqam ? "HISOB RAQAM" : item.from_user_name != null ? "RAHBAR" : item.from_user_price != 0 ? "KASSA, RAHBAR" : "KASSA"}</td>
                     <td data-label="Firma" className="text-start">{item.to_firm_name}</td>
                     <td data-label="F.I.O" className="text-capitalize">
                       {item.verified_firm_worker_name
@@ -141,7 +148,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                       <b>{formatNumber(item.price)}</b>
                     </td>
                     <td data-label="To'lov turi" className="text-uppercase">
-                      {item.transfer_type_name == 'payme' ? "Naqd pulsiz": item.transfer_type_name}
+                      {item.transfer_type_name == 'payme' ? "Naqd pulsiz" : item.transfer_type_name}
                     </td>
                   </tr>
                 ))}

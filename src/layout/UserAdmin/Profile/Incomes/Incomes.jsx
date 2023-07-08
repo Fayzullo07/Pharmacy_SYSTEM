@@ -73,7 +73,7 @@ const Incomes = () => {
                   <th scope="col" style={{ width: "5px" }}>
                     №
                   </th>
-                  <th scope="col">Tushum nomlari</th>
+                  <th scope="col">Tushum nomi</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -94,13 +94,13 @@ const Incomes = () => {
                 {transfers.map((item, index) => (
                   <tr>
                     <td data-label="№" className="text-capitalize text-break">
-                      <b>{index + 1}</b>
+                      {index + 1}
                     </td>
                     <td
                       data-label="Tushum nomi"
                       className="text-capitalize text-break"
                     >
-                      <b>{item.name}</b>
+                      {item.name}
                     </td>
                     <td></td>
                     <td></td>
@@ -110,30 +110,32 @@ const Incomes = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}>
                       <td data-label="№" className="text-capitalize text-break">
-                        <b>{index + 1 + transfers.length}</b>
+                        {index + 1 + transfers.length}
                       </td>
                       <td
                         data-label="Tushum nomi"
                         className="text-capitalize text-break"
                       >
-                        <b>{item.name}</b>
+                        {item.name}
                       </td>
-                      <td data-label="O'zgartirish">
-                        <i
-                          className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'zgartirish" onClick={() => {
                             setCurData(item);
                             setUpdateModal(!updateModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-edit text-warning"
+                          
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
-                        <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'chirish"  onClick={() => {
                             setCurData(item);
                             setDeleteModal(!deleteModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-trash-can text-danger"
+                         
                         ></i>
                       </td>
                     </tr>

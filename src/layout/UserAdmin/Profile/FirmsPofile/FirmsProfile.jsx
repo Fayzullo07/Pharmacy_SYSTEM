@@ -159,7 +159,7 @@ const FirmsProfile = () => {
                         data-label="Firma nomi"
                         className="text-capitalize text-break text-start"
                       >
-                        <b>{item.name}</b>
+                        {item.name}
                       </td>
                       <td data-label="Telefon raqami">{item.phone_number1}</td>
                       <td data-label="Manzil" className="text-break">

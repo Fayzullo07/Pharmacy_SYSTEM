@@ -48,6 +48,7 @@ const Branchs = () => {
           showModal={chooseDate}
           setShowModal={setChooseDate}
           pharm_id={curData.id}
+          pharm_name={curData.name}
         />
       )}
       <div className="d-flex">

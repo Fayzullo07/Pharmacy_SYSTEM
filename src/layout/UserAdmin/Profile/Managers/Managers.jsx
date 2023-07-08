@@ -83,7 +83,7 @@ const Managers = () => {
                   <th scope="col">F.I.O</th>
                   <th scope="col">Telefon</th>
                   <th scope="col">Manzil</th>
-                  <th scope="col">Active</th>
+                  <th scope="col">Faol</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -112,42 +112,44 @@ const Managers = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}>
                       <td data-label="№" className="text-capitalize text-break">
-                        <b>{index + 1}</b>
+                        {index + 1}
                       </td>
-                      <td data-label="F>I.O" className="text-capitalize">
-                        <b>
+                      <td data-label="F.I.O" className="text-capitalize">
+                        
                           {item.first_name} {item.last_name}
-                        </b>
+                        
                       </td>
                       <td data-label="Telefon">{item.phone_number}</td>
                       <td data-label="Manzil" className="text-break">
                         {item.address ? item.address : "~"}
                       </td>
-                      <td data-label="Active">
+                      <td data-label="Faol">
                         {item.is_active ? (
-                          <span className="badge text-bg-success">Active</span>
+                          <span className="badge text-bg-success"><i className="fa fa-check"></i></span>
                         ) : (
                           <span className="badge text-bg-danger">
-                            Not Actiove
+                            <i className="fa fa-xmark"></i>
                           </span>
                         )}
                       </td>
-                      <td data-label="O'zgartirish">
-                        <i
-                          className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'zgartirish" onClick={() => {
                             setCurData(item);
                             setUpdateModal(!updateModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-edit text-warning"
+                          
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
-                        <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'chirish" onClick={() => {
                             setCurData(item);
                             setDeleteModal(!deleteModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-trash-can text-danger"
+                          
                         ></i>
                       </td>
                     </tr>

@@ -11,6 +11,7 @@ import ViewModalSMS from "./Modal/ViewModalSMS";
 import { today } from "../../../../../api";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import ModalSearchFirmReturn from "./ModalSearch/ModalSearchFirmReturn";
+import ModalDescription from "../../../../../utils/ModalDescription";
 
 const FirmReturn = ({ date_firm, setDateFirm }) => {
   const [showModal, setShowModal] = useState(false);
@@ -19,6 +20,8 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
   const [debtsModal, setDebtsModal] = useState(false);
 
   const [firm_return_id, setFirmReturnId] = useState({});
+
+  const [descModal, setDescModal] = useState(false);
   const [curData, setCurData] = useState({
     id: "",
   });
@@ -47,6 +50,9 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
 
   return (
     <>
+    {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {searchModal && (
         <ModalSearchFirmReturn
           showModal={searchModal}
@@ -85,7 +91,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
       )}
 
       <div className="bg_head">
-        <div className="header_flex d-flex justify-content-end align-items-center">
+        <div className="header_flex d-flex justify-content-end align-items-center mb-2">
          
           <div className="d-flex align-items-center gap-2">
             <div>
@@ -98,7 +104,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                   if(e.target.value){
                     setDateFirm(e.target.value)
                   }else {
-                    setDateFirm(e.target.value)
+                    setDateFirm(today)
                   }
                 }}
               />
@@ -140,7 +146,10 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item)
+                    setDescModal(!descModal)
+                  }}>
                     <td data-label="№">{index + 1}</td>
                     <td data-label="Sana" >
                       {item.report_date}
@@ -149,13 +158,13 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                       {item.second_name}
                     </td>
                     <td data-label="Olingan mahsulot nomi">
-                      <b>{item.verified_firm_worker_name}</b>
+                      {item.verified_firm_worker_name}
                     </td>
                     <td data-label="Pul">
-                      <b>{item.verified_phone_number}</b>
+                      {item.verified_phone_number}
                     </td>
                     <td data-label="Pul">
-                      <b>{formatNumber(item.price)}</b>
+                      {formatNumber(item.price)}
                     </td>
                     <td data-label="Firma" className="text-start">{item.firm_name}</td>
                   </tr>

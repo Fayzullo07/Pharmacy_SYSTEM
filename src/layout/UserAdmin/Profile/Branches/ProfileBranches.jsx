@@ -115,22 +115,24 @@ const ProfileBranches = () => {
                       <td data-label="Manzil" className="text-break">
                         {item.address ? item.address : "~"}
                       </td>
-                      <td data-label="O'zgartirish">
-                        <i
-                          className="fa fa-edit text-warning cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'zgartirish" onClick={() => {
                             setCurData(item);
                             setUpdateModal(!updateModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-edit text-warning"
+                          
                         ></i>
                       </td>
-                      <td data-label="O'chirish">
-                        <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
-                          onClick={() => {
+                      <td data-label="O'chirish" onClick={() => {
                             setCurData(item);
                             setDeleteModal(!deleteModal);
                           }}
+                          className="cursor_pointer">
+                        <i
+                          className="fa fa-trash-can text-danger"
+                          
                         ></i>
                       </td>
                       

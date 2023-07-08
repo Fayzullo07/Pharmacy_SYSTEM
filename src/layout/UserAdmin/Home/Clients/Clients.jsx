@@ -122,33 +122,34 @@ const Clients = () => {
                   data.data.results.map((item, index) => (
                     <tr key={item.id}>
                       <td data-label="№">{index + 1}</td>
-                      <td data-label="F.I.O" className="text-capitalize">
-                        <b>{item.first_name}</b>
+                      <td data-label="F.I.O" className="text-capitalize text-start">
+                        {item.first_name}
                       </td>
-                      <td data-label="Tug'ilgan">
+                      <td data-label="Tug'ilgan kuni">
                         {item.birthdate ? item.birthdate : "~"}
                       </td>
-                      <td data-label="Telefon">{item.phone_number1}</td>
-                      <td data-label="Miqdor">
-                        <b className="text-success">
+                      <td data-label="Telefon raqami">{item.phone_number1}</td>
+                      <td data-label="Mahsulot summasi">
+                        <b className="text-success fw-600">
                           {formatNumber(item.total_amount)}
                         </b>
                       </td>
                       <td data-label="O'zgartirish" onClick={() => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
-                      }}>
+                      }}
+                       className="cursor_pointer">
                         <i
-                          className="fa fa-edit text-warning cursor_pointer"
+                          className="fa fa-edit text-warning"
 
                         ></i>
                       </td>
                       <td data-label="O'chirish" onClick={() => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
-                      }}>
+                      }} className="cursor_pointer">
                         <i
-                          className="fa fa-trash-can text-danger cursor_pointer"
+                          className="fa fa-trash-can text-danger"
 
                         ></i>
                       </td>

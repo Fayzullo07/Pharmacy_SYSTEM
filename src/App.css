@@ -95,7 +95,9 @@
     left: -8px;
   }
 }
-select {
+
+select,
+input[type="date"] {
   cursor: pointer;
 }
 

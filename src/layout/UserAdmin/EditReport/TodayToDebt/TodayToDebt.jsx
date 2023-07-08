@@ -118,16 +118,16 @@ const TodayToDebt = ({ is_client, getData }) => {
                     >
                       {item.to_who}
                     </td>
-                    <td data-label="Telefon">
-                      <b>{item.phone_number}</b>
+                    <td data-label="Telefon nomeri">
+                      {item.phone_number}
                     </td>
                     <td data-label="Qancha berildi">
-                      <b>{formatNumber(item.price)}</b>
+                      {formatNumber(item.price)}
                     </td>
                     <td data-label="Qancha qoldi">
-                      <b className="text-danger">
+                      <b className="text-danger fw-600">
                         {item.remaining_debt == 0 ? (
-                          <span class="badge text-bg-success">To'landi</span>
+                          <span class="badge text-bg-success"><i className="fa fa-check"></i></span>
                         ) : (
                           formatNumber(item.remaining_debt)
                         )}

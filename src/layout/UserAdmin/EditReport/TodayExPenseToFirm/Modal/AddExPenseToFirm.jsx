@@ -42,7 +42,7 @@ const AddExPenseToFirm = ({
   const [formData, setFormData] = useState({
     price: "",
     from_user_price: 0,
-    verified_phone_number: "",
+    verified_phone_number: "+998",
     verified_firm_worker_name: "",
     transfer_type: naxt,
     from_user: null,

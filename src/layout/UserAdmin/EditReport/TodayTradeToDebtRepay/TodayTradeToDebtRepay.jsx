@@ -9,12 +9,14 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import DebtsModalTrade from "./Modal/DebtsModalTrade";
+import ModalDescription from "../../../../utils/ModalDescription";
 
 const TodayTradeToDebtRepay = ({ deteils, is_client, getData }) => {
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
   const [debtsModal, setDebtsModal] = useState(false);
+  const [descModal, setDescModal] = useState(false);
 
   const [curData, setCurData] = useState({});
 
@@ -46,6 +48,9 @@ const TodayTradeToDebtRepay = ({ deteils, is_client, getData }) => {
 
   return (
     <>
+    {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {debtsModal && (
         <DebtsModalTrade
           showModal={debtsModal}
@@ -116,31 +121,36 @@ const TodayTradeToDebtRepay = ({ deteils, is_client, getData }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item);
+                    setDescModal(!descModal);
+                  }}>
                     <td data-label="№">{index + 1}</td>
                     <td
                       data-label="Kim qaytardi"
                       className="text-capitalize text-break"
                     >
-                      <b>{item.from_debt_name}</b>
+                      {item.from_debt_name}
                     </td>
                     <td
                       data-label="To'lov turi"
                       className="text-capitalize text-break"
                     >
-                      <b>{item.transfer_type_name}</b>
+                      {item.transfer_type_name}
                     </td>
                     <td data-label="Miqdor">
-                      <b className="text-success">{formatNumber(item.price)}</b>
+                      <b className="text-success fw-600">{formatNumber(item.price)}</b>
                     </td>
 
-                    <td data-label="O'chirish">
+                    <td data-label="O'chirish" onClick={e => {
+                      e.stopPropagation()
+                      setCurData(item);
+                      setDeleteModal(!deleteModal);
+                    }}
+                    className="cursor_pointer">
                       <i
-                        className="fa fa-trash-can text-danger cursor_pointer"
-                        onClick={() => {
-                          setCurData(item);
-                          setDeleteModal(!deleteModal);
-                        }}
+                        className="fa fa-trash-can text-danger"
+                      
                       ></i>
                     </td>
                   </tr>

@@ -11,6 +11,7 @@ import SkeletLoading from "../../../../../utils/SkeletLoading";
 import { today } from "../../../../../api";
 import ModalSearchFirmIncome from "./ModalSearch/ModalSearchFirmIncome";
 import DeteilsFirmIncome from "./Modal/DeteilsFirmIncome";
+import ModalDescription from "../../../../../utils/ModalDescription";
 
 const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
   const [searchModal, setSearchModal] = useState(false);
@@ -19,6 +20,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
   const [deteilModal, setDeteilModal] = useState(false);
 
   const [curData, setCurData] = useState({});
+const [descModal, setDescModal] = useState(false);
 
   const { data, isLoading, error } = useQuery(
     ["firms_incomes", date_firm],
@@ -37,6 +39,9 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
   }
   return (
     <>
+    {descModal && (
+        <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
+      )}
       {searchModal && (
         <ModalSearchFirmIncome
           showModal={searchModal}
@@ -72,7 +77,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
         />
       )}
       <div>
-        <div className="header_flex d-flex justify-content-end align-items-center">
+        <div className="header_flex d-flex justify-content-end align-items-center mb-2">
           
           <div className="d-flex align-items-center gap-2">
             <div>
@@ -85,7 +90,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                   if(e.target.value){
                     setDateFirm(e.target.value)
                   }else {
-                    setDateFirm(e.target.value)
+                    setDateFirm(today)
                   }
                 }}
               />
@@ -130,7 +135,10 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
             <tbody>
               {data &&
                 data.data.results.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="cursor_pointer" onClick={() => {
+                    setCurData(item)
+                    setDescModal(!descModal)
+                  }}>
                     <td data-label="№">{index + 1}</td>
                     <td data-label="Sana" >
                       {item.report_date}
@@ -139,13 +147,13 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                       {item.from_firm_name}
                     </td>
                     <td data-label="Olingan mahsulot nomi">
-                      <b>{item.second_name}</b>
+                      {item.second_name}
                     </td>
                     <td data-label="Mahsulot summasi">
-                      <b>{formatNumber(item.price)}</b>
+                      <b className="fw-600">{formatNumber(item.price)}</b>
                     </td>
                     <td data-label="Qanday qaytariladi">
-                      <b className="text-success">
+                      <b className="text-success fw-600">
                         {item.is_transfer_return ? "NAXT PULSIZ" : "NAXT"}
                       </b>
                     </td>
@@ -155,7 +163,8 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
 
                     <td
                       data-label="O'chirish"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation()
                         setCurData(item);
                         setDeleteModal(!deleteModal);
                       }}

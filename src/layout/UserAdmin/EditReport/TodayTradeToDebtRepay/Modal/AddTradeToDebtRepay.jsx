@@ -29,6 +29,9 @@ const AddTradeToDebtRepay = ({
   const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "price" && Number(value) > user.remaining_debt) {
+      toast.warning(
+        `Qarz summasidan ko'p bervossiz tekshirib ko'ring! Qarz: ${user.remaining_debt}`
+      );
       return;
     }
 
@@ -141,8 +144,12 @@ const AddTradeToDebtRepay = ({
               }
             }}
           >
-            <option value={naxt}>{Naqd}</option>
-            <option value="naxt_siz">{Naqd_siz}</option>
+            <option value={naxt}>
+              {Naqd}
+            </option>
+            <option value="naxt_siz">
+              {Naqd_siz}
+            </option>
           </select>
           <label htmlFor="transfer_typ">
             Pul turini tanlang <b className="text-danger">*</b>

@@ -104,24 +104,27 @@ const DebtGive = () => {
                 <tr key={item.id} style={{ background: "var(--ch_white)" }}>
                   <td data-label="№">{index + 1}</td>
                   <td data-label="Sana">
-                    <b>{item.report_date}</b>
+                    {item.report_date}
                   </td>
                   <td data-label="Xodim">
-                    <b>{item.creator_name}</b>
+                    <b className="fw-600">{item.creator_name}</b>
                     <br />
                     {item.created_at}
                   </td>
                   <td data-label="Kim qarz oldi" className="text-break">
+                    <b className="fw-600">
+
                     {item.to_who?.substring(0, 50)}
+                    </b>
                     <br />
-                    <b>{item.phone_number}</b>
+                    {item.phone_number}
                   </td>
                   <td data-label="Qarz summasi">
-                    <b>{formatNumber(item.price)}</b>
+                    {formatNumber(item.price)}
                   </td>
                   <td data-label="Qanchasi berildi">
                     {
-                      <b className="text-success">
+                      <b className="text-success fw-600">
                         {item.price - item.remaining_debt == 0
                           ? "0.00"
                           : formatNumber(item.price - item.remaining_debt)}
@@ -129,9 +132,9 @@ const DebtGive = () => {
                     }
                   </td>
                   <td data-label="Qanchasi qoldi">
-                    <b className="text-danger">
+                    <b className="text-danger fw-600">
                       {item.remaining_debt == 0 ? (
-                        <span class="badge text-bg-success">To'landi</span>
+                        <span class="badge text-bg-success"><i className="fa fa-check"></i></span>
                       ) : (
                         formatNumber(item.remaining_debt)
                       )}
