@@ -24,7 +24,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
     ["firms_incomes", date_firm],
     async () => {
       return await firmsInComesGetAPI({
-        report_date: date_firm,
+        report_date: date_firm ? date_firm : today,
       });
     }
   );
@@ -81,7 +81,13 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                 type="date"
                 value={date_firm}
                 max={today}
-                onChange={(e) => setDateFirm(e.target.value)}
+                onChange={(e) => {
+                  if(e.target.value){
+                    setDateFirm(e.target.value)
+                  }else {
+                    setDateFirm(e.target.value)
+                  }
+                }}
               />
             </div>
             <button
@@ -101,7 +107,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
         >
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
-              <tr>
+              <tr className="align-middle">
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
@@ -129,7 +135,7 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
                     <td data-label="Sana" >
                       {item.report_date}
                     </td>
-                    <td data-label="Firma" className="text-capitalize">
+                    <td data-label="Firma" className="text-capitalize text-start">
                       {item.from_firm_name}
                     </td>
                     <td data-label="Olingan mahsulot nomi">

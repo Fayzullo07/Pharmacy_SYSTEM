@@ -340,10 +340,9 @@ export const pharmaciesDebtsRePayGetAPI = async ({
   report_date = "",
   shift = "",
   to_debt__to_pharmacy = "",
-  page = 1,
 }) =>
   API.get(
-    `/pharmacies/debts/repay/?report_date=${report_date}&shift=${shift}&to_debt__to_pharmacy=${to_debt__to_pharmacy}&page=${page}`,
+    `/pharmacies/debts/repay/?report_date=${report_date}&shift=${shift}&to_debt__to_pharmacy=${to_debt__to_pharmacy}`,
     config
   );
 
@@ -377,9 +376,10 @@ export const pharmaciesToDebtsGetAPI = async ({
   year = "",
   month = "",
   pharmacy = "",
+  report_date= ""
 }) =>
   API.get(
-    `/pharmacies/to-debts/?is_client=${is_client}&is_paid=${is_paid}&report_date__year=${year}&report_date__month=${month}&page=${page}&search=${search}&from_pharmacy=${pharmacy}`,
+    `/pharmacies/to-debts/?is_client=${is_client}&report_date=${report_date}&is_paid=${is_paid}&report_date__year=${year}&report_date__month=${month}&page=${page}&search=${search}&from_pharmacy=${pharmacy}`,
     config
   );
 

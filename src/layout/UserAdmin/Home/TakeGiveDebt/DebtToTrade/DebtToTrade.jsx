@@ -84,7 +84,7 @@ const DebtToTrade = () => {
             <tr>
               <th style={{ width: "5px", padding: '20px 10px' }}>№</th>
               <th>Sana</th>
-              <th>Xodim F.I.O</th>
+              <th>Xodim</th>
               <th>Kim qarz oldi</th>
               <th>Qarz summasi</th>
               <th>Qanchasi berildi</th>
@@ -106,7 +106,7 @@ const DebtToTrade = () => {
                   <td data-label="Sana">
                     <b>{item.report_date}</b>
                   </td>
-                  <td data-label="Xodim F.I.O">
+                  <td data-label="Xodim">
                     <b>{item.creator_name}</b>
                     <br />
                     {item.created_at}
@@ -138,7 +138,7 @@ const DebtToTrade = () => {
                     </b>
                   </td>
                 </tr>
-              )).reverse()}
+              ))}
           </tbody>
         </table>
 

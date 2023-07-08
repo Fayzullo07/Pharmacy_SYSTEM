@@ -85,46 +85,59 @@ const UpdateFirma = ({ showModal, setShowModal, data }) => {
       title={"O'zgartirish"}
     >
       <div className="modal-body">
-        {/* NAME */}
-        <TextInput
-          name={"name"}
-          value={formData.name}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          placeholder={"Firma nomi"}
-          isRequired={true}
-        />
-
-        {/* PHONE 1 */}
-        <PhoneInput
-          name={"phone_number1"}
-          value={formData.phone_number1}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isRequired={true}
-        />
-
-        <div className="form-check form-switch d-flex justify-content-between align-item-center p-2 my-2 border rounded py-3 p-1 mb-3">
-          <input
-            className="form-check-input mx-1"
-            type="checkbox"
-            checked={formData.is_favorite}
-            onClick={() =>
-              setFormData({ ...formData, is_favorite: !formData.is_favorite })}
-          />
-          <b className={formData.is_favorite ? "text-success" : "text-danger"}>
-            Faol
-          </b>
+        <div className="row">
+          <div className="col-md-6 col-12">
+            {/* NAME */}
+            <TextInput
+              name={"name"}
+              value={formData.name}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              placeholder={"Firma nomi"}
+              isRequired={true}
+            />
+          </div>
+          <div className="col-md-6 col-12">
+            {/* PHONE 1 */}
+            <PhoneInput
+              name={"phone_number1"}
+              value={formData.phone_number1}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+            />
+          </div>
+          <div className="col-md-6 col-12 ">
+            <div className="form-check form-switch d-flex justify-content-between align-item-center p-2 border rounded py-3 p-1 mb-3">
+              <input
+                className="form-check-input mx-1"
+                type="checkbox"
+                checked={formData.is_favorite}
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    is_favorite: !formData.is_favorite
+                  })}
+              />
+              <b
+                className={
+                  formData.is_favorite ? "text-success" : "text-danger"
+                }
+              >
+                Faol
+              </b>
+            </div>
+          </div>
+          <div className="col-md-6 col-12">
+            <TextInput
+              name={"address"}
+              value={formData.address}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              placeholder={"Manzil"}
+            />
+          </div>
         </div>
-
-        {/* ADDRESS */}
-        <TextInput
-          name={"address"}
-          value={formData.address}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          placeholder={"Manzil"}
-        />
 
         {/* IZOH */}
         <Textarea

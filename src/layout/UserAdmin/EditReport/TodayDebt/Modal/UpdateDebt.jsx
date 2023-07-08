@@ -25,7 +25,9 @@ const UpdateDebt = props => {
   });
   const handleInputChange = e => {
     const { name, value } = e.target;
-
+    if (name === "from_who" && value.length > 50) {
+      return;
+    }
     if (name === "price" && value.length > 9) {
       return;
     }

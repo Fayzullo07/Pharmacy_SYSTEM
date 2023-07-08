@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Naqd,
-  Naqd_siz,
   naxt,
   today,
   xisob_raqam

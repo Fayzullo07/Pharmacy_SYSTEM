@@ -65,6 +65,7 @@ const OneFirmReport = () => {
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
           <i
+          id="back_arrow"
             className="fa fa-arrow-left fs-4 me-2"
             style={{ color: "var(--text_color_blue)" }}
             onClick={() => navigate("/firms")}

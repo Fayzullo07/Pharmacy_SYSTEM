@@ -76,23 +76,28 @@
 #back_arrow {
   transition: .5s;
 }
+
 #back_arrow:hover {
+  position: relative;
   transform: scale(1.5);
   cursor: pointer;
   transition: .2s;
-  position: relative;
-  right: 5px;
+  animation: example 1s linear alternate;
+  animation-iteration-count: 20;
 }
+
 @keyframes example {
-  from {
-    background-color: red;
+  0% {
+    left: 8px;
   }
 
-  to {
-    background-color: yellow;
+  100% {
+    left: -8px;
   }
 }
-
+select {
+  cursor: pointer;
+}
 
 /* TABLE */
 #table {
@@ -325,5 +330,5 @@
     z-index: 1001;
   }
 
-  
+
 }

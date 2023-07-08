@@ -68,7 +68,11 @@ const ExpensesMonth = () => {
           if(item.id == pharmacy){
             return item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && "Hamma filiallar"} {" "} {change && deteils.expense_types.map((item) => {
+          if(item.id == expense_type){
+            return item.name
+          }
+        })}</h2>
         <div className="d-flex">
           <PharmaciesExpensesReportDayExcelGetDownload
             year={year}

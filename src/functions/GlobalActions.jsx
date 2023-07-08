@@ -254,13 +254,13 @@ export const firmsExpenseVerifyPostAction = async (datas, setShowModal) => {
       return;
     }
     toast.error(`Xato!`);
-    const keys = Object.keys(error.response.data);
-    for (let key of keys) {
-      toast.warning(
-        `${error.response.status} ${key} ${error.response.data[key][0]}`
-      );
-      return;
-    }
+    // const keys = Object.keys(error.response.data);
+    // for (let key of keys) {
+    //   toast.warning(
+    //     `${error.response.status} ${key} ${error.response.data[key][0]}`
+    //   );
+    //   return;
+    // }
   }
 };
 
@@ -308,12 +308,12 @@ export const firmsReturnsVerifyPostAction = async (datas, setShowModal) => {
       return;
     }
     toast.error(`Xato!`);
-    const keys = Object.keys(error.response.data);
-    for (let key of keys) {
-      toast.warning(
-        `${error.response.status} ${key} ${error.response.data[key][0]}`
-      );
-      return;
-    }
+    // const keys = Object.keys(error.response.data);
+    // for (let key of keys) {
+    //   toast.warning(
+    //     `${error.response.status} ${key} ${error.response.data[key][0]}`
+    //   );
+    //   return;
+    // }
   }
 };

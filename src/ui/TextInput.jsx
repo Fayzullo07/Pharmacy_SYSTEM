@@ -31,8 +31,8 @@ const TextInput = ({
         case "Familiyangiz":
           setPlaceholderInput("Familiyangiz");
           break;
-        case "Kimgdan qarz olindi":
-          setPlaceholderInput("Kimgdan qarz olindi");
+        case "Kimdan qarz olindi":
+          setPlaceholderInput("Kimdan qarz olindi");
           break;
         case "Kimga qarz berildi":
           setPlaceholderInput("Kimga qarz berildi");

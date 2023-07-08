@@ -63,7 +63,7 @@ const AddFirmIncome = props => {
       return;
     }
 
-    if (!formData.deadline_date) {
+    if (formData.deadline_date == "" || new Date(formData.deadline_date) < new Date(today)) {
       toast.warning("Qaytarish muddati !");
       return;
     }

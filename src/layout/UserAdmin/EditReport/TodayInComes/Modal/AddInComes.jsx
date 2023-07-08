@@ -201,7 +201,7 @@ const AddInComes = props => {
 
         {/* BIO */}
         <Textarea
-          value={formData.bio}
+          value={formData.desc}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
         />

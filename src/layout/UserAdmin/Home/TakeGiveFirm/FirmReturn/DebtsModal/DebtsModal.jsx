@@ -17,11 +17,12 @@ const DebtsModal = ({
   const [page, setPage] = useState(1);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["firms_debts_list", from_firm],
+    queryKey: ["firms_debts_list", from_firm, page],
     queryFn: async () => {
       return await firmsInComesGetAPI({
         is_paid: false,
         from_firm: from_firm?.id,
+        page
       });
     },
   });
@@ -46,6 +47,9 @@ const DebtsModal = ({
               <i className="fa fa-angle-down"></i>
             </span>
           </h5>
+          <h5 className="modal-title text-center ">
+            Olingan mahsulotlar
+          </h5>
 
           <span className="close">
             <i
@@ -59,7 +63,7 @@ const DebtsModal = ({
           {/* TABLE */}
           <table id="table" className="table table-hover align-middle">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
-              <tr>
+              <tr className="align-middle">
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>

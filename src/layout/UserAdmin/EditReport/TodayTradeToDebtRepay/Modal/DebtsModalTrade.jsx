@@ -5,7 +5,7 @@ import PaginationForModal from "../../../../../utils/PaginationForModal";
 import { useQuery } from "react-query";
 import { pharmaciesToDebtsGetAPI } from "../../../../../api/DirectorRequest";
 import SearchInput from "../../../../../utils/SearchInput";
-import { today } from "../../../../../api";
+import { pagination, today } from "../../../../../api";
 
 const DebtsModalTrade = ({
   showModal,
@@ -23,7 +23,7 @@ const DebtsModalTrade = ({
     queryKey: [`to_debts_trade_list${is_client}`, page, search, date],
     queryFn: async () => {
       return await pharmaciesToDebtsGetAPI({
-        from_pharmacy: getData.to_pharmacy,
+        pharmacy: getData.to_pharmacy,
         is_paid: false,
         is_client,
         page,
@@ -40,7 +40,7 @@ const DebtsModalTrade = ({
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title="Qarizdorlar"
+      title="Qarzdorlar"
     >
       <div className="header_flex m-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
@@ -73,7 +73,7 @@ const DebtsModalTrade = ({
             {data && data.data.results.length === 0 && (
               <tr>
                 <td colSpan={7}>
-                  <h2>Qarz topilmadi!</h2>
+                  <h2>Malumot topilmadi!</h2>
                 </td>
               </tr>
             )}
@@ -107,7 +107,7 @@ const DebtsModalTrade = ({
                       {user.remaining_debt}
                     </b>
                   </td>
-                  <td data-label="Vaqt" className="text-break">
+                  <td data-label="Vaqt" className="text-break" style={{width: '150px'}}>
                     {user.report_date}
                   </td>
                 </tr>
@@ -119,7 +119,7 @@ const DebtsModalTrade = ({
       <div className="modal-footer m-0 p-0">
         <PaginationForModal
           page={page}
-          pages={Math.ceil(data && data.data.count / 10)}
+          pages={Math.ceil(data && data.data.count / pagination)}
           setPage={setPage}
         />
       </div>

@@ -32,6 +32,9 @@ const AddDebt = props => {
   const handleInputChange = e => {
     const { name, value } = e.target;
 
+    if (name === "from_who" && value.length > 50) {
+      return;
+    }
     if (name === "price" && value.length > 9) {
       return;
     }
@@ -99,7 +102,7 @@ const AddDebt = props => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           isRequired={true}
-          placeholder={"Kimgdan qarz olindi"}
+          placeholder={"Kimdan qarz olindi"}
         />
 
         {/* MONEY DEBTS*/}

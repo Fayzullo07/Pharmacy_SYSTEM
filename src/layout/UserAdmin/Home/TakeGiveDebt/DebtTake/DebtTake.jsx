@@ -83,7 +83,7 @@ const DebtTake = () => {
             <tr>
               <th style={{ width: "5px", padding: '20px 10px' }}>№</th>
               <th>Sana</th>
-              <th>Xodim F.I.O</th>
+              <th>Xodim</th>
               <th>Kimdan qarz olindi</th>
               <th>Qarz summasi</th>
               <th>Qanchasi berildi</th>

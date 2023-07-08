@@ -63,7 +63,7 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
                   <td data-label="№">
                     {index + 1}
                   </td>
-                  <td data-label="Firma" className="text-capitalize text-break">
+                  <td data-label="Firma" className="text-capitalize text-break text-start" >
                     <b>
                       {item.name}
                     </b>

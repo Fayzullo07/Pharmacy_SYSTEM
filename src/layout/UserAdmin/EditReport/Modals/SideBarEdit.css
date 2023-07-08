@@ -12,7 +12,7 @@
     border-radius: 20px 0;
     width: 100%;
     padding: 0 2px;
-    transition: 1s;
+    transition: .2s;
 }
 
 .child li button {
@@ -30,22 +30,16 @@
 
 #child li:hover {
     background-color: var(--blue);
-    border-radius: 20px 0;
-    transition: .2s;
+    border-radius: 0 20px;
+    transition: .1s;
     color: #fff;
-    border: 2px solid #fff;
-    width: 100%;
 }
 
 #child li.active {
     background-color: var(--blue);
-    width: 100%;
-    background-color: var(--blue);
     border-radius: 20px 0;
-    transition: .2s;
     color: #fff;
     border: 2px solid #fff;
-    width: 100%;
 }
 
 #btn_hover_parent {

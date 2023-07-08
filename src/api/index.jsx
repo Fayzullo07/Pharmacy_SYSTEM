@@ -65,7 +65,7 @@ export const months = [
   },
   {
     id: 9,
-    month: "SETYABR"
+    month: "SENTYABR"
   },
   {
     id: 10,
@@ -182,7 +182,7 @@ export const transfersWorker = [
   },
   {
     id: 3,
-    name: "CLICK - XODIM"
+    name: "CLICK"
   },
   {
     id: 2,

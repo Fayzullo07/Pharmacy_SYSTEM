@@ -174,7 +174,7 @@ const UpdateInComes = props => {
                   name="to_user"
                   value={formData.to_user}
                   onChange={handleInputChange}
-                  disabled={!moveMoney}
+                  disabled
                 >
                   {moveMoney &&
                     <option value=""> Tushum kimga tashlandi . . .</option>}
@@ -209,7 +209,7 @@ const UpdateInComes = props => {
 
         {/* BIO */}
         <Textarea
-          value={formData.bio}
+          value={formData.desc}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
         />

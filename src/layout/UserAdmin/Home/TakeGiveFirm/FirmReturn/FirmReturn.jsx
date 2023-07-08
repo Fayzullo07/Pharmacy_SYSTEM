@@ -94,7 +94,13 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                 type="date"
                 value={date_firm}
                 max={today}
-                onChange={(e) => setDateFirm(e.target.value)}
+                onChange={(e) => {
+                  if(e.target.value){
+                    setDateFirm(e.target.value)
+                  }else {
+                    setDateFirm(e.target.value)
+                  }
+                }}
               />
             </div>
             {today == date_firm && (
@@ -151,7 +157,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                     <td data-label="Pul">
                       <b>{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="Firma" style={{alignItems: 'center'}}>{item.firm_name}</td>
+                    <td data-label="Firma" className="text-start">{item.firm_name}</td>
                   </tr>
                 ))}
             </tbody>
