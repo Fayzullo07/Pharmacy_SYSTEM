@@ -80,7 +80,7 @@ const TodayInComes = ({ deteils, getData }) => {
 
       <div>
         
-        <div className="header_flex d-flex justify-content-between align-items-center">
+        <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <div className="row w-100 m-0">
             <div className="col-md-4 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between">

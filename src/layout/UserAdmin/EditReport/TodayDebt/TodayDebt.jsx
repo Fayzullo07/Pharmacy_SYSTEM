@@ -65,7 +65,7 @@ const TodayDebt = (props) => {
         />
       )}
       <div className="bg_head mb-2">
-        <div className="header_flex d-flex justify-content-between align-items-center">
+        <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
             Umumiy:{" "}
             <span>
