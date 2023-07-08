@@ -85,14 +85,8 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
       )}
 
       <div className="bg_head">
-        <div className="header_flex d-flex justify-content-between align-items-center">
-          <p className="bg_c">
-            Umumiy:{" "}
-            <span>
-              <b>{formatNumber(total)}</b>.0
-            </span>{" "}
-            UZS
-          </p>
+        <div className="header_flex d-flex justify-content-end align-items-center">
+         
           <div className="d-flex align-items-center gap-2">
             <div>
               <input
@@ -134,7 +128,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                 <th>Qabul qiluvchi F.I.O</th>
                 <th>Qabul qiluvchi telefon</th>
                 <th>Pul</th>
-                <th>Qaysi Firmaga</th>
+                <th>Firma</th>
               </tr>
             </thead>
             <tbody>
@@ -157,7 +151,7 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
                     <td data-label="Pul">
                       <b>{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="Qaytarish muddati">{item.firm_name}</td>
+                    <td data-label="Firma" style={{alignItems: 'center'}}>{item.firm_name}</td>
                   </tr>
                 ))}
             </tbody>

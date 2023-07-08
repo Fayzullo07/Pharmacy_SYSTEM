@@ -58,7 +58,7 @@ const Managers = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Managerlar</h2>
+              <h2>Menejerlar</h2>
             </div>
             <button
               className="btn btn-sm me-2"

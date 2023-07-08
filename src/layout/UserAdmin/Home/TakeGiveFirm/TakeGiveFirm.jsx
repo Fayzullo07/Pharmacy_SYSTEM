@@ -21,8 +21,7 @@ const TakeGiveFirm = () => {
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
           <div className="header_flex justify-content-center">
-            
-          <SideBarTakeGiveFirm setShows={setChoose} shows={choose} />
+            <SideBarTakeGiveFirm setShows={setChoose} shows={choose} />
           </div>
         </Topbar>
         {choose == "1" &&

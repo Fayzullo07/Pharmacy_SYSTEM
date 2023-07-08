@@ -307,7 +307,7 @@ function App() {
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 2000);
+  }, 1000);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

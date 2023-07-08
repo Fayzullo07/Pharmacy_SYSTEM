@@ -72,14 +72,8 @@ const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
         />
       )}
       <div>
-        <div className="header_flex d-flex justify-content-between align-items-center">
-          <p className="bg_c">
-            Umumiy:{" "}
-            <span>
-              <b>{formatNumber(total)}</b>.0
-            </span>{" "}
-            UZS
-          </p>
+        <div className="header_flex d-flex justify-content-end align-items-center">
+          
           <div className="d-flex align-items-center gap-2">
             <div>
               <input

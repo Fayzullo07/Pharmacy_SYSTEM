@@ -44,7 +44,7 @@ const DebtTake = () => {
   return (
     <>
       {/* SIDEBAR */}
-      <div className="header_flex ">
+      <div className="header_flex justify-content-end ">
         
         <SideBarDebtGive
           month={month}
@@ -67,7 +67,7 @@ const DebtTake = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "76vw" : "95vw"}`,
+            minWidth: `${toggle ? "78vw" : "96vw"}`,
           }}
         >
           <thead

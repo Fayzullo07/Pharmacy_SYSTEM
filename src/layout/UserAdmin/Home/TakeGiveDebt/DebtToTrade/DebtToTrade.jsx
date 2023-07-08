@@ -68,7 +68,7 @@ const DebtToTrade = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "76vw" : "95vw"}`,
+            minWidth: `${toggle ? "78vw" : "96vw"}`,
           }}
         >
           <thead

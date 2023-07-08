@@ -51,7 +51,7 @@ const Incomes = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Tushum nomlari</h2>
+              <h2>Tushum turlari</h2>
             </div>
             <button
               className="btn btn-sm me-2"

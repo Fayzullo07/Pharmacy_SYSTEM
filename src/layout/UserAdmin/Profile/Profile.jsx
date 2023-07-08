@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
-import { profile } from "../../../assets";
+import { branches, expense_png, firm_png, firms, income, income_png, profile, team } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 import TextInput from "../../../ui/TextInput";
 import { useMutation } from "react-query";
@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { cleanedData } from "../../../functions/NecessaryFunctions";
 import { getGlobalDeteilsAction } from "../../../redux/Actions/GlobalAction";
 import { useTranslation } from "react-i18next";
+
+import "./Profile.css";
 
 const Profile = ({ userData }) => {
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const Profile = ({ userData }) => {
     setFormDataPassword({ ...formDataPassword, [name]: value });
   };
   const [chamgePass, setChangePass] = useState(false);
-const { t } = useTranslation("translation", { keyPrefix: "Profile" });
+  const { t } = useTranslation("translation", { keyPrefix: "Profile" });
   const mutation = useMutation(
     async () => {
       return profilePatchAction(cleanedData(formData));
@@ -159,7 +161,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
                   <div className="card-body">
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/managers")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-user mx-4 fs-4 border p-2 px-3 rounded" />
+                        <img id="profile_img" src={profile}  alt="img" />
                         <h4 className="mb-0">{t(0)}</h4>
                       </div>
 
@@ -169,7 +171,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-building mx-4 fs-4 border p-2 px-3 rounded" />
+                        <img id="profile_img" src={firm_png}  alt="" />
                         <h4 className="mb-0">{t(1)}</h4>
                       </div>
 
@@ -179,7 +181,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/branches/profile")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-code-branch mx-4 fs-4 border p-2 px-3 rounded" />
+                        <img id="profile_img" src={branches}  alt="branches" />
                         <h4 className="mb-0">{t(2)}</h4>
                       </div>
 
@@ -189,7 +191,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/workers")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-users mx-4 fs-4 border  rounded" style={{ padding: "12px" }} />
+                        <img id="profile_img" src={team}  alt="img" />
                         <h4 className="mb-0">{t(3)}</h4>
                       </div>
 
@@ -199,7 +201,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/expenses")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-arrow-up mx-4 fs-4 border p-2 px-3 rounded" />
+                        <img id="profile_img" src={income_png} alt="img" />
                         <h4>{t(4)}</h4>
                       </div>
 
@@ -209,7 +211,7 @@ const { t } = useTranslation("translation", { keyPrefix: "Profile" });
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/incomes")}>
                       <div className="d-flex align-items-center">
-                        <i className="fa fa-arrow-down mx-4 fs-4 border p-2 px-3 rounded" />
+                        <img id="profile_img" src={expense_png} alt="expense" />
                         <h4>{t(5)}</h4>
                       </div>
 
