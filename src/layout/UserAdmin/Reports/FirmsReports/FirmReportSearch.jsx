@@ -21,12 +21,7 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
 
   if (error) return `Error: ${error.message}`;
 
-  return (
-    <ModalSimple
-      showModal={showModal}
-      setShowModal={setShowModal}
-      title={"Izlash"}
-    >
+  return <ModalSimple showModal={showModal} setShowModal={setShowModal} title={"Firmalar"}>
       <div className="header_flex my-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
       </div>
@@ -38,19 +33,16 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
               <th scope="col" style={{ width: "5px" }}>
                 №
               </th>
-              <th scope="col">Firmalar</th>
+              <th scope="col">Firma</th>
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.data.results.length === 0 &&
-              <tr>
+            {data && data.data.results.length === 0 && <tr>
                 <td colSpan={2}>
                   <h2> Firma topilmadi!</h2>
                 </td>
               </tr>}
-            {data &&
-              data.data.results.map((item, index) =>
+            {data && data.data.results.map((item, index) =>
                 <tr
                   key={item.id}
                   data-bs-toggle="offcanvas"
@@ -65,7 +57,10 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
                   <td data-label="№">
                     {index + 1}
                   </td>
-                  <td data-label="Firma" className="text-capitalize text-break">
+                  <td
+                    data-label="Firma"
+                    className="text-capitalize text-break text-start"
+                  >
                     <b>
                       {item.name}
                     </b>
@@ -77,14 +72,9 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
         {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
       </div>
       <div className="modal-footer">
-        <PaginationForModal
-          page={page}
-          pages={Math.ceil(data && data.data.count / pagination)}
-          setPage={setPage}
-        />
+        <PaginationForModal page={page} pages={Math.ceil(data && data.data.count / pagination)} setPage={setPage} />
       </div>
-    </ModalSimple>
-  );
+    </ModalSimple>;
 };
 
 export default FirmReportSearch;

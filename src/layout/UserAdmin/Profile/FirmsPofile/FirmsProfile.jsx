@@ -157,7 +157,7 @@ const FirmsProfile = () => {
                       <td data-label="№">{index + 1}</td>
                       <td
                         data-label="Firma nomi"
-                        className="text-capitalize text-break"
+                        className="text-capitalize text-break text-start"
                       >
                         <b>{item.name}</b>
                       </td>

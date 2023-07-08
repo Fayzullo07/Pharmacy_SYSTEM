@@ -113,7 +113,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                   №
                 </th>
                 <th>Chiqim kimdan qilindi</th>
-                <th style={{textAlign: 'start'}}>Firma</th>
+                <th>Firma</th>
                 <th>F . I . O</th>
                 <th>Telofon nomeri</th>
                 <th>Berilgan summa</th>
@@ -126,7 +126,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
                     <td data-label="Chiqim kimdan qilindi">{item.transfer_type == xisob_raqam ? "HISOB RAQAM" : item.from_user_name != null ? "RAHBAR": item.from_user_price != 0 ? "KASSA, RAHBAR": "KASSA"}</td>
-                    <td data-label="Firma" style={{textAlign: 'start'}}>{item.to_firm_name}</td>
+                    <td data-label="Firma" className="text-start">{item.to_firm_name}</td>
                     <td data-label="F.I.O" className="text-capitalize">
                       {item.verified_firm_worker_name
                         ? item.verified_firm_worker_name

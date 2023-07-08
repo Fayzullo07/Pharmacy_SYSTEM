@@ -25,7 +25,7 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Izlash"}
+      title={"Firmalar"}
     >
       <div className="header_flex mt-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
@@ -39,7 +39,7 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
               <th scope="col" style={{ width: "5px" }}>
                 №
               </th>
-              <th scope="col">Firmalar</th>
+              <th scope="col">Firma</th>
             </tr>
           </thead>
           <tbody>
