@@ -14,7 +14,7 @@ const UpdateInComes = props => {
     data.transfer_type == naxt ? false : true
   );
   const [moveMoney, setMoveMoney] = useState(
-    data.transfer_type == 3 ? true : false
+    data.transfer_type == 3 && data.to_user ? true : false
   );
   const [input1, setInput1] = useState(
     data.transfer_type == naxt ? naxt : "naxt_siz"
@@ -22,7 +22,7 @@ const UpdateInComes = props => {
   const [formData, setFormData] = useState({
     price: data.price,
     desc: data.desc,
-    transfer_type: data.transfer_type,
+    transfer_type: data.transfer_type == 3 && data.to_user ? 'c': data.transfer_type,
     to_user: data.to_user
   });
 
@@ -119,8 +119,12 @@ const UpdateInComes = props => {
             disabled
           >
             <option value="">Pul turini tanlang . . .</option>
-            <option value={naxt}>{Naqd}</option>
-            <option value="naxt_siz">{Naqd_siz}</option>
+            <option value={naxt}>
+              {Naqd}
+            </option>
+            <option value="naxt_siz">
+              {Naqd_siz}
+            </option>
           </select>
           <label htmlFor="transfer_typ">
             Pul turini tanlang <b className="text-danger">*</b>
@@ -148,6 +152,7 @@ const UpdateInComes = props => {
                   disabled
                 >
                   <option value=""> Naqdsiz tushum turini tanlang . . .</option>
+                  <option value="c">CLICK - XODIM</option>
                   {transfersWorker.map(transfer =>
                     <option key={transfer.id} value={transfer.id}>
                       {transfer.name}

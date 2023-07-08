@@ -31,7 +31,6 @@ const Home = () => {
   if (error) return `Error: ${error.message}`;
   const { t } = useTranslation("translation", { keyPrefix: "Home" });
   return (
-    <>
       <div className="d-flex">
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>
@@ -121,7 +120,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

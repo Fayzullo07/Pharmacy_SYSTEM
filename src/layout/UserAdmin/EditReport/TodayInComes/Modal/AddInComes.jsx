@@ -45,10 +45,13 @@ const AddInComes = props => {
         cleanedData({
           ...formData,
           to_user:
-            formData.transfer_type != 3 || input1 == naxt
+            formData.transfer_type != "c" || input1 == naxt
               ? null
               : formData.to_user,
-          transfer_type: input1 == naxt ? naxt : formData.transfer_type
+          transfer_type:
+            input1 == naxt
+              ? naxt
+              : formData.transfer_type == "c" ? 3 : formData.transfer_type
         }),
         setShowModal
       );
@@ -72,10 +75,10 @@ const AddInComes = props => {
     }
 
     if (
-      (formData.transfer_type == 3 && formData.to_user == null) ||
+      (formData.transfer_type == "c" && formData.to_user == null) ||
       formData.to_user == ""
     ) {
-      toast.warning("Kimga o'tkazildi tanlang!");
+      toast.warning("Kimga tushirildi tanlang!");
       return;
     }
 
@@ -113,8 +116,12 @@ const AddInComes = props => {
             }}
           >
             <option value="">Tushum turini tanlang . . .</option>
-            <option value={naxt}>{Naqd}</option>
-            <option value="naxt_siz">{Naqd_siz}</option>
+            <option value={naxt}>
+              {Naqd}
+            </option>
+            <option value="naxt_siz">
+              {Naqd_siz}
+            </option>
           </select>
           <label htmlFor="transfer_typ">
             Tushum turini tanlang <b className="text-danger">*</b>
@@ -131,7 +138,7 @@ const AddInComes = props => {
                   name="transfer_type"
                   value={formData.transfer_type}
                   onChange={e => {
-                    if (e.target.value == 3) {
+                    if (e.target.value == "c") {
                       setMoveMoney(true);
                     } else {
                       setMoveMoney(false);
@@ -140,6 +147,7 @@ const AddInComes = props => {
                   }}
                 >
                   <option value="">Naqdsiz tushum turini tanlang . . .</option>
+                  <option value="c">CLICK - XODIM</option>
                   {transfersWorker.map(transfer =>
                     <option key={transfer.id} value={transfer.id}>
                       {transfer.name}

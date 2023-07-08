@@ -82,7 +82,7 @@ const TodayInComes = ({ deteils, getData }) => {
         
         <div className="header_flex d-flex justify-content-between align-items-center">
           <div className="row w-100 m-0">
-            <div className="col-md-6 col-12 p-0">
+            <div className="col-md-4 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between">
 
                 <p className="bg_c">
@@ -94,7 +94,7 @@ const TodayInComes = ({ deteils, getData }) => {
                 </p>
               </div>
             </div>
-            <div className="col-md-6 col-12 p-0">
+            <div className="col-md-8 col-12 p-0">
               <div className="d-flex align-items-center justify-content-between ">
 
                 <Receipts getData={getData} total={total} />
@@ -149,7 +149,7 @@ const TodayInComes = ({ deteils, getData }) => {
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
                     <td data-label="Tushum turi" className="text-uppercase">
-                      {item.transfer_type_name}
+                      {item.transfer_type_name == 'click' && item.to_user_name ? 'click - xodim': item.transfer_type_name }
                     </td>
                     <td data-label="Tushum summasi">
                       <b className="text-success">{formatNumber(item.price)}</b>
