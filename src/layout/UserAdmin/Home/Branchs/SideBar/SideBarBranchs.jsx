@@ -17,7 +17,7 @@ const SideBarBranchs = ({
   tasdiq
 }) => {
   return (
-    <SideBar>
+    <SideBar title="">
       {/* MONTH BUTTON */}
       <select
         value={month}
