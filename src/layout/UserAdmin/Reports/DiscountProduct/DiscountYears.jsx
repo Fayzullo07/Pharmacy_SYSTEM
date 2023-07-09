@@ -133,9 +133,8 @@ const DiscountYears = () => {
                 <b>summa</b>
               </th>
               <th>
-                <b>Mahsulot tan</b>
-                <br/>
-                <b>narxi</b>
+                <b>Mahsulot summasi</b>
+               
               </th>
             </tr>
           </thead>
