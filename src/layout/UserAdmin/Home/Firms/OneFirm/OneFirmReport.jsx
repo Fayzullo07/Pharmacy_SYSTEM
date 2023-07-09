@@ -313,7 +313,7 @@ const OneFirmReport = () => {
                   </tr>
                   <tr className="text-center">
                     <th className="text-danger" colSpan={3}>
-                      Остаток на конец периода долг: <span className="mx-4">{endDate && formatDate(startDate)}</span>
+                      Остаток на конец периода долг: <span className="mx-4">{endDate && formatDate(endDate)}</span>
                     </th>
                     <th className="text-success" colSpan={2}>
                       {data && data.data.income_not_transfer_total_price -
