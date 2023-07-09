@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { today } from "../api";
+import { useTranslation } from "react-i18next";
 
 const DateInput = ({
   name,
@@ -11,12 +12,12 @@ const DateInput = ({
   maxORmin = true
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "Tug'ilgan kuni":
-          setPlaceholderInput("Tug'ilgan kuni");
+          setPlaceholderInput(t(0));
           break;
         default:
           setPlaceholderInput("Date");

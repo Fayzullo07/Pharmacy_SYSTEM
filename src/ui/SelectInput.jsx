@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SelectInput = ({
   name,
@@ -10,18 +11,18 @@ const SelectInput = ({
   disabled = false
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "Filialni tanlang":
-          setPlaceholderInput("Filialni tanlang");
+          setPlaceholderInput(t(12));
           break;
         case "Xodimni tanlang":
-          setPlaceholderInput("Xodimni tanlang");
+          setPlaceholderInput(t(13));
           break;
         case "Xarajat turi":
-          setPlaceholderInput("Xarajat turi");
+          setPlaceholderInput(t(14));
           break;
         default:
           setPlaceholderInput("Select");

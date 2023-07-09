@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const PhoneInput = ({
   name,
@@ -11,15 +12,15 @@ const PhoneInput = ({
   placeholder = ""
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "Qabul qiluvchining telefon nomeri":
-          setPlaceholderInput("Qabul qiluvchining telefon nomeri");
+          setPlaceholderInput(t(10));
           break;
         default:
-          setPlaceholderInput("Telefon raqam kiriting");
+          setPlaceholderInput(t(11));
       }
     },
     [placeholder]
@@ -29,7 +30,7 @@ const PhoneInput = ({
       <input
         type="tel"
         className="form-control"
-        placeholder="Telefon raqam kiriting"
+        placeholder={placeholder}
         name={name}
         value={value}
         onChange={handleInputChange}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const NumberInput = ({
   name,
@@ -9,30 +10,30 @@ const NumberInput = ({
   placeholder = ""
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "Mahsulot summasi":
-          setPlaceholderInput("Mahsulot summasi");
+          setPlaceholderInput(t(1));
           break;
         case "Tushum summasi":
-          setPlaceholderInput("Tushum summasi");
+          setPlaceholderInput(t(2));
           break;
         case "Berilgan summasi":
-          setPlaceholderInput("Berilgan summasi");
+          setPlaceholderInput(t(3));
           break;
         case "Chegirma summasi":
-          setPlaceholderInput("Chegirma summasi");
+          setPlaceholderInput(t(4));
           break;
         case "Qarz summasi":
-          setPlaceholderInput("Qarz summasi");
+          setPlaceholderInput(t(5));
           break;
         case "Xarajat summasi":
-          setPlaceholderInput("Xarajat summasi");
+          setPlaceholderInput(t(6));
           break;
         case "Ish haqi":
-          setPlaceholderInput("Ish haqi");
+          setPlaceholderInput(t(7));
           break;
         default:
           setPlaceholderInput("Miqdor");

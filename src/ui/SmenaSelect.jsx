@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SmenaSelect = ({
   name,
@@ -6,6 +7,7 @@ const SmenaSelect = ({
   handleInputChange,
   isRequired = false
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <div className="form-floating">
       <select
@@ -14,13 +16,13 @@ const SmenaSelect = ({
         value={value}
         onChange={handleInputChange}
       >
-        <option selected>Smena tanlang. . .</option>
-        <option value={1}>Smena 1</option>
-        <option value={2}>Smena 2</option>
-        <option value={3}>Smena 3</option>
+        <option selected>{t(15)}. . .</option>
+        <option value={1}>{t(16)} 1</option>
+        <option value={2}>{t(16)} 2</option>
+        <option value={3}>{t(16)} 3</option>
       </select>
       <label>
-        Smena tanlang {isRequired ? <b className="text-danger">*</b> : null}
+        {t(15)} {isRequired ? <b className="text-danger">*</b> : null}
       </label>
     </div>
   );

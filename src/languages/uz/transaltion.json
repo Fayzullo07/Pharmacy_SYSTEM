@@ -120,7 +120,7 @@
       "21": "Firma nomi",
       "22": "Ismingiz",
       "23": "Familiyangiz",
-      "24": "Kimgdan qarz olindi",
+      "24": "Kimdan qarz olindi",
       "25": "Kimga qarz berildi",
       "26": "Qabul qiluvchi F.I.O",
       "27": "Olingan mahsulot nomi",
@@ -131,6 +131,7 @@
       "32": "Filial nomi",
       "33": "Xarajat nomi",
       "34": "NAQD",
-      "35": "NAQD PULSIZ"
+      "35": "NAQD PULSIZ",
+      "36": "To'lov turini tang"
    }
 }

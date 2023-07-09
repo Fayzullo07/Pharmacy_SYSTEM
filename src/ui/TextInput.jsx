@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TextInput = ({
   name,
@@ -9,57 +10,57 @@ const TextInput = ({
   placeholder = ""
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "F.I.O":
-          setPlaceholderInput("F.I.O");
+          setPlaceholderInput(t(18));
           break;
         case "Mahsulot nomi":
-          setPlaceholderInput("Mahsulot nomi");
+          setPlaceholderInput(t(19));
           break;
         case "Manzil":
-          setPlaceholderInput("Manzil");
+          setPlaceholderInput(t(20));
           break;
         case "Firma nomi":
-          setPlaceholderInput("Firma nomi");
+          setPlaceholderInput(t(21));
           break;
         case "Ismingiz":
-          setPlaceholderInput("Ismingiz");
+          setPlaceholderInput(t(22));
           break;
         case "Familiyangiz":
-          setPlaceholderInput("Familiyangiz");
+          setPlaceholderInput(t(23));
           break;
         case "Kimdan qarz olindi":
-          setPlaceholderInput("Kimdan qarz olindi");
+          setPlaceholderInput(t(24));
           break;
         case "Kimga qarz berildi":
-          setPlaceholderInput("Kimga qarz berildi");
+          setPlaceholderInput(t(25));
           break;
         case "Qabul qiluvchi F.I.O":
-          setPlaceholderInput("Qabul qiluvchi F.I.O");
+          setPlaceholderInput(t(26));
           break;
         case "Olingan mahsulot nomi":
-          setPlaceholderInput("Olingan mahsulot nomi");
+          setPlaceholderInput(t(27));
           break;
         case "Ismi":
-          setPlaceholderInput("Ismi");
+          setPlaceholderInput(t(28));
           break;
         case "Familiyasi":
-          setPlaceholderInput("Familiyasi");
+          setPlaceholderInput(t(29));
           break;
         case "Otasini ismi":
-          setPlaceholderInput("Otasini ismi");
+          setPlaceholderInput(t(30));
           break;
         case "Tushum nomi":
-          setPlaceholderInput("Tushum nomi");
+          setPlaceholderInput(t(31));
           break;
         case "Xarajat nomi":
-          setPlaceholderInput("Xarajat nomi");
+          setPlaceholderInput(t(33));
           break;
         case "Filial nomi":
-          setPlaceholderInput("Filial nomi");
+          setPlaceholderInput(t(32));
           break;
         default:
           setPlaceholderInput("Text");

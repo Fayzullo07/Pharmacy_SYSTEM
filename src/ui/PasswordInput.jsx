@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const PasswordInput = ({
   name,
@@ -9,18 +10,18 @@ const PasswordInput = ({
   placeholder = ""
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {
         case "Parol":
-          setPlaceholderInput("Parolni kiriting");
+          setPlaceholderInput(t(8));
           break;
         case "Parol qayta":
-          setPlaceholderInput("Parolni qaytadan kiriting");
+          setPlaceholderInput(t(9));
           break;
         default:
-          setPlaceholderInput("Parol");
+          setPlaceholderInput("Password");
       }
     },
     [placeholder]

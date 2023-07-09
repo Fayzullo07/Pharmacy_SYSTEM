@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const TransferTypeSelect = ({
   name = "transfer_type",
@@ -7,6 +8,7 @@ const TransferTypeSelect = ({
   isRequired = true,
   disabled = false
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <div className="form-floating">
       <select
@@ -16,15 +18,18 @@ const TransferTypeSelect = ({
         onChange={handleInputChange}
         disabled={disabled}
       >
-        <option value={1}>NAQD</option>
-        <option value={2}>NAQD PULSIZ</option>
+        <option value={1}>
+          {t(34)}
+        </option>
+        <option value={2}>
+          {t(35)}
+        </option>
       </select>
       <label>
         <b className="text-danger">*</b>
       </label>
       <label>
-        To'lov turini tanlang{" "}
-        {isRequired ? <b className="text-danger">*</b> : null}
+        {t(36)} {isRequired ? <b className="text-danger">*</b> : null}
       </label>
     </div>
   );
