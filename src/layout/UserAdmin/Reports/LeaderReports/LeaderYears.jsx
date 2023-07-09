@@ -133,7 +133,7 @@ const LeaderYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year}</b>
+                <b>{year} - yil</b>
               </th>
               <th>
                 <b>Rahbarga berilgan</b>
@@ -141,7 +141,7 @@ const LeaderYears = () => {
                 <b>pullar</b>
               </th>
               <th>
-                <b>Rahbarga olingan</b>
+                <b>Rahbardan olingan</b>
                 <br />
                 <b>pullar</b>
               </th>

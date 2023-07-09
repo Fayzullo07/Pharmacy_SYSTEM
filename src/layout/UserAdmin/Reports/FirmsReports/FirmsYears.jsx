@@ -99,7 +99,7 @@ const FirmsYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "15px 10px" }}>№</th>
               <th>
-                <b>{year}</b>
+                <b>{year} - yil</b>
               </th>
               <th>
                 <b>Firmalarga berilgan</b>
