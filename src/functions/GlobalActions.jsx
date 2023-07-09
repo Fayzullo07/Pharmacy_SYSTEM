@@ -216,7 +216,7 @@ export const firmsExpenseDebtPostAction = async (
     const { data } = await GlobalApi.firmsExpenseDebtPostAPI(datas);
     if (isSms) {
       toast.success(`SMS`);
-      setShowModal(false);
+      // setShowModal(false);
       setViewModal(true);
     } else {
       setShowModal(false);
@@ -224,7 +224,6 @@ export const firmsExpenseDebtPostAction = async (
     }
     setFirmExpenseId(data);
   } catch (error) {
-    console.log(error);
     if (error.response.status == 403) {
       localStorage.clear();
       window.location.href = "/";
@@ -242,18 +241,26 @@ export const firmsExpenseDebtPostAction = async (
 
 // -------------------------------------FIRMS EXPENSES VERIFY-----------------------------------
 // FRIMS EXPENSES FROM VERIFY
-export const firmsExpenseVerifyPostAction = async (datas, setShowModal) => {
+export const firmsExpenseVerifyPostAction = async (
+  datas,
+  setShowModal,
+  isLeader,
+  mutationAccount
+) => {
   try {
     await GlobalApi.firmsExpenseVerifyPostAPI(datas);
     toast.success(`Tekshirildi`);
     setShowModal(false);
+    if (isLeader.isTrue) {
+      mutationAccount.mutate({ price: isLeader.price });
+    }
   } catch (error) {
     if (error.response.status == 403) {
       localStorage.clear();
       window.location.href = "/";
       return;
     }
-    toast.error(`Xato!`);
+    toast.error(`SMS Parolni to'g'ri kiriting!!`);
     // const keys = Object.keys(error.response.data);
     // for (let key of keys) {
     //   toast.warning(

@@ -44,7 +44,9 @@ const ViewModal = ({
     async () => {
       return firmsExpenseVerifyPostAction(
         cleanedData({ ...formData, code: Number(formData.code) }),
-        setShowModal
+        setShowModal,
+        isLeader,
+        mutationAccount
       );
     },
     {
@@ -75,10 +77,7 @@ const ViewModal = ({
       toast.warning("SMS Parolni to'g'ri kiriting!");
       return;
     }
-    mutation.mutate();
-    if (isLeader.isTrue) {
-      mutationAccount.mutate({ price: isLeader.price });
-    }
+    mutation.mutate(); 
   };
   return (
     <ModalSimple

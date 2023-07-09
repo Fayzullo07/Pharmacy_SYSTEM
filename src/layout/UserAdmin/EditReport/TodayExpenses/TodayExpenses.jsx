@@ -141,7 +141,7 @@ const TodayExpenses = ({ deteils, getData }) => {
         {/* TABLE */}
         <div
           className="container-fluid my-2"
-          style={{ maxHeight: "calc(100vh - 200px)", overflowY: "scroll" }}
+          style={{ maxHeight: "calc(100vh - 235px)", overflowY: "scroll" }}
         >
           <table id="table" className=" table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>

@@ -18,9 +18,8 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
   const [curData, setCurData] = useState({});
 
   useEffect(() => {
-    document.body.style.overflowY = `${
-      showModal || deleteModal || updateModal ? "hidden" : "scroll"
-    }`;
+    document.body.style.overflowY = `${showModal || deleteModal || updateModal ? "hidden" : "scroll"
+      }`;
     window.scrollTo(0, 0);
   }, [showModal, deleteModal, updateModal]);
 
@@ -87,7 +86,7 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
         {/* TABLE */}
         <div
           className="container-fluid"
-          style={{ maxHeight: "calc(100vh - 130px)", overflowY: "scroll" }}
+          style={{ maxHeight: "calc(100vh - 235px)", overflowY: "scroll" }}
         >
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
@@ -140,24 +139,24 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
                         )}
                       </b>
                     </td>
-                    <td data-label="O'zgartirish"  onClick={() => {
-                          setCurData(item);
-                          setUpdateModal(!updateModal);
-                        }}
-                        className="cursor_pointer">
+                    <td data-label="O'zgartirish" onClick={() => {
+                      setCurData(item);
+                      setUpdateModal(!updateModal);
+                    }}
+                      className="cursor_pointer">
                       <i
                         className="fa fa-edit text-warning"
-                       
+
                       ></i>
                     </td>
                     <td data-label="O'chirish" onClick={() => {
-                          setCurData(item);
-                          setDeleteModal(!deleteModal);
-                        }}
-                        className="cursor_pointer">
+                      setCurData(item);
+                      setDeleteModal(!deleteModal);
+                    }}
+                      className="cursor_pointer">
                       <i
                         className="fa fa-trash-can text-danger"
-                        
+
                       ></i>
                     </td>
                   </tr>

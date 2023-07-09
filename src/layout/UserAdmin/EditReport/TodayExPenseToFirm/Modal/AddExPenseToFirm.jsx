@@ -86,7 +86,9 @@ const AddExPenseToFirm = ({
           price: Number(formData.price) + Number(formData.from_user_price),
           from_user: ["k", "h", "k_r"].includes(formData.from_user) ? null : formData.from_user,
           transfer_type: formData.from_user == 'h' ? xisob_raqam : formData.transfer_type,
-          from_user_price: formData.from_user == director.id ? Number(formData.price) : Number(formData.from_user_price)
+          from_user_price: formData.from_user == director.id ? Number(formData.price) : Number(formData.from_user_price),
+          verified_phone_number: formData.transfer_type == naxt ? formData.verified_phone_number : "",
+          verified_firm_worker_name: formData.transfer_type == naxt ? formData.verified_firm_worker_name : "",
         }),
         setViewModal,
         setShowModal,

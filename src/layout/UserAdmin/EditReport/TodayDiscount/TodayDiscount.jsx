@@ -124,18 +124,20 @@ const TodayDiscount = ({ getData }) => {
                     <td data-label="O'zgartirish"  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
-                        }}>
+                        }}
+                        className="cursor_pointer">
                       <i
-                        className="fa fa-edit text-warning cursor_pointer"
+                        className="fa fa-edit text-warning"
                        
                       ></i>
                     </td>
                     <td data-label="O'chirish" onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
-                        }}>
+                        }}
+                        className="cursor_pointer">
                       <i
-                        className="fa fa-trash-can text-danger  cursor_pointer"
+                        className="fa fa-trash-can text-danger  "
                         
                       ></i>
                     </td>

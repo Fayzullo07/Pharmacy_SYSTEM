@@ -54,13 +54,13 @@ const Login = ({ onLogin }) => {
   };
   return (
     <>
-    <div id="body_image">
-    </div>
+      <div id="body_image">
+      </div>
       <div className="box">
 
-        <img src={logo1}  alt="logo" />
+        <img src={logo1} alt="logo" />
         <h2>Tizimga kirish</h2>
-        <form>
+        <form className="mb-2">
           <div className="inputBox">
             <input
               type="tel"
@@ -78,9 +78,9 @@ const Login = ({ onLogin }) => {
           </div>
           <div className="inputBox">
 
-            <i className={`fa fa-eye${showPassword ? '': "-slash"}`} onClick={() => setShowPassword(!showPassword)}></i>
+            <i className={`fa fa-eye${showPassword ? '' : "-slash"}`} onClick={() => setShowPassword(!showPassword)}></i>
             <input
-              type={`${showPassword ? "password": "text"}`}
+              type={`${showPassword ? "password" : "text"}`}
               placeholder="Parol"
               onChange={handlePasswordChange}
               onKeyDown={e => {
@@ -102,6 +102,7 @@ const Login = ({ onLogin }) => {
               : "Kirish"}
           </button>
         </form>
+        <a href="https://t.me/e_hisobot_offical" target="_blank">E-Hisobot haqida ko'proq ma'lumot</a>
       </div>
     </>
   );

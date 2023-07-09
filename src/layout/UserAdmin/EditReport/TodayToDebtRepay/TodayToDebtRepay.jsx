@@ -100,7 +100,7 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
         {/* TABLE */}
         <div
           className="container-fluid"
-          style={{ maxHeight: "calc(100vh - 200px)", overflowY: "scroll" }}
+          style={{ maxHeight: "calc(100vh - 235px)", overflowY: "scroll" }}
         >
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
@@ -142,9 +142,10 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
                       e.stopPropagation()
                       setCurData(item);
                       setDeleteModal(!deleteModal);
-                    }}>
+                    }}
+                    className="cursor_pointer">
                       <i
-                        className="fa fa-trash-can text-danger cursor_pointer"
+                        className="fa fa-trash-can text-danger"
                         
                       ></i>
                     </td>

@@ -13,9 +13,9 @@ const config = {
 export const profileGetAPI = async () =>
   API.get("/accounts/profile/", config);
 
-  // POST
+// POST
 export const profilePatchAPI = async (data) =>
-  API.patch(`/accounts/profile/`,data, config);
+  API.patch(`/accounts/profile/`, data, config);
 
 // ----------------------------------------DIRECTORS-----------------------------
 // POST
@@ -195,9 +195,10 @@ export const accountsExpensesGetAPI = async ({
   shift = "",
   report_date = "",
   to_pharmacy = "",
+  to_user__isnull = false
 }) =>
   API.get(
-    `/accounts/expenses/?expense_type=${expense_type}&expense_type__gte=${expense_type__gte}&shift=${shift}&report_date=${report_date}&to_pharmacy=${to_pharmacy}`,
+    `/accounts/expenses/?expense_type=${expense_type}&expense_type__gte=${expense_type__gte}&shift=${shift}&report_date=${report_date}&to_pharmacy=${to_pharmacy}&to_user__isnull=${to_user__isnull}`,
     config
   );
 
@@ -376,7 +377,7 @@ export const pharmaciesToDebtsGetAPI = async ({
   year = "",
   month = "",
   pharmacy = "",
-  report_date= ""
+  report_date = ""
 }) =>
   API.get(
     `/pharmacies/to-debts/?is_client=${is_client}&report_date=${report_date}&is_paid=${is_paid}&report_date__year=${year}&report_date__month=${month}&page=${page}&search=${search}&from_pharmacy=${pharmacy}`,

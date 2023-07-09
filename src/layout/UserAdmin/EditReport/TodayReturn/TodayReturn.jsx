@@ -107,7 +107,7 @@ const TodayReturn = (props) => {
         {/* TABLE */}
         <div
           className="container-fluid"
-          style={{ maxHeight: "calc(100vh - 130px)", overflowY: "scroll" }}
+          style={{ maxHeight: "calc(100vh - 235px)", overflowY: "scroll" }}
         >
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
@@ -151,8 +151,9 @@ const TodayReturn = (props) => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
                       }}
+                      className="cursor_pointer"
                     >
-                      <i className="fa fa-edit text-warning cursor_pointer"></i>
+                      <i className="fa fa-edit text-warning"></i>
                     </td>
                     <td
                       data-label="O'chirish"
@@ -160,8 +161,9 @@ const TodayReturn = (props) => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
                       }}
+                      className="cursor_pointer"
                     >
-                      <i className="fa fa-trash-can text-danger cursor_pointer"></i>
+                      <i className="fa fa-trash-can text-danger"></i>
                     </td>
                   </tr>
                 ))}
@@ -184,8 +186,9 @@ const TodayReturn = (props) => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
                       }}
+                      className="cursor_pointer"
                     >
-                      <i className="fa fa-edit text-warning cursor_pointer"></i>
+                      <i className="fa fa-edit text-warning"></i>
                     </td>
                     <td
                       data-label="O'chirish"
@@ -193,8 +196,9 @@ const TodayReturn = (props) => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
                       }}
+                      className="cursor_pointer"
                     >
-                      <i className="fa fa-trash-can text-danger cursor_pointer"></i>
+                      <i className="fa fa-trash-can text-danger"></i>
                     </td>
                   </tr>
                 ))}
