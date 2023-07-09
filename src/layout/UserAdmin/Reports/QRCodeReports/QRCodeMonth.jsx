@@ -7,7 +7,7 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
-import { months, years } from "../../../../api";
+import { months, number_0, years } from "../../../../api";
 import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
@@ -175,7 +175,7 @@ const QRCodeMonth = () => {
                       <td>
                         <b>
                           {item.receipt_price == 0
-                            ? ""
+                            ? number_0
                             : formatNumber(item.receipt_price)}
                         </b>
                       </td>
@@ -183,13 +183,13 @@ const QRCodeMonth = () => {
                         <b>
                           {formatNumber(
                             item.price + item.receipt_price == 0
-                              ? ""
+                              ? number_0
                               : item.price - item.receipt_price
                           )}
                         </b>
                       </td>
                       <td>
-                        <b>{formatNumber(item.price == 0 ? "" : item.price)}</b>
+                        <b>{formatNumber(item.price == 0 ? number_0 : item.price)}</b>
                       </td>
                     </tr>
                   ))}
