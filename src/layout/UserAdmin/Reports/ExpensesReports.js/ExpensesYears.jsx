@@ -94,7 +94,7 @@ const ExpensesYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Oy</b>
+                <b>{year}</b>
               </th>
               <th>
                 <b>
