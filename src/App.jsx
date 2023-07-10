@@ -35,6 +35,7 @@ import EmployeeHome from "./layout/UserEmployee/Home/EmployeeHome";
 import EditReportWorker from "./layout/UserEmployee/EditReport/EditReportWorker";
 import FirmsProfile from "./layout/UserAdmin/Profile/FirmsPofile/FirmsProfile";
 import ProfileBranches from "./layout/UserAdmin/Profile/Branches/ProfileBranches";
+import NotFound from "./components/404/NotFound";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -303,6 +304,9 @@ const Routing = ({ user, handleLogin, navigate }) => {
           </HodimElement>
         }
       />
+
+      <Route path="/notFound" element={<NotFound/>} />
+      <Route path="*" element={<NotFound/>} />
 
       
     </Routes>
