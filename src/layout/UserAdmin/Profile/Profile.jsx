@@ -21,6 +21,7 @@ const Profile = ({ userData }) => {
   const { deteils } = reduxData.deteils;
   const { toggle } = reduxData.toggle;
 
+  const savedUser = localStorage.getItem("user");
   let director = null;
   deteils.employees.map(user => {
     if (user.role == "d") {
@@ -108,7 +109,7 @@ const Profile = ({ userData }) => {
               <div className="card-body text-center">
                 <img src={profile} alt="avatar" width={120} className="rounded-circle img-fluid" />
                 <h5 className="my-1">
-                  {userData.role == "Director" ? "Director" : "Worker"}
+                  {userData.role == "Director" ? "Director" : userData.role == "Manager" ? "Menejer" : "Worker"}
                 </h5>
                 <h4 className="text-muted">
                   {director.first_name} {director.last_name}
@@ -159,19 +160,23 @@ const Profile = ({ userData }) => {
               <div className="col-md-12">
                 <div className="card mb-4 mb-md-0">
                   <div className="card-body">
-                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/managers")}>
-                      <div className="d-flex align-items-center">
-                        <img id="profile_img" src={profile}  alt="img" />
-                        <h4 className="mb-0">{t(0)}</h4>
-                      </div>
+                    {JSON.parse(savedUser)?.user.role == "Director" && (
+                      <>
+                        <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/managers")}>
+                          <div className="d-flex align-items-center">
+                            <img id="profile_img" src={profile} alt="img" />
+                            <h4 className="mb-0">{t(0)}</h4>
+                          </div>
 
-                      <i className="fa fa-angle-right fs-4" />
-                    </div>
-                    <hr />
+                          <i className="fa fa-angle-right fs-4" />
+                        </div>
+                        <hr />
+                      </>
+                    )}
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/branches/profile")}>
                       <div className="d-flex align-items-center">
-                        <img id="profile_img" src={branches}  alt="branches" />
+                        <img id="profile_img" src={branches} alt="branches" />
                         <h4 className="mb-0">{t(2)}</h4>
                       </div>
 
@@ -181,7 +186,7 @@ const Profile = ({ userData }) => {
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/workers")}>
                       <div className="d-flex align-items-center">
-                        <img id="profile_img" src={team}  alt="img" />
+                        <img id="profile_img" src={team} alt="img" />
                         <h4 className="mb-0">{t(3)}</h4>
                       </div>
 
@@ -191,7 +196,7 @@ const Profile = ({ userData }) => {
 
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
                       <div className="d-flex align-items-center">
-                        <img id="profile_img" src={firm_png}  alt="" />
+                        <img id="profile_img" src={firm_png} alt="" />
                         <h4 className="mb-0">{t(1)}</h4>
                       </div>
 

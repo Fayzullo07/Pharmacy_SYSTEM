@@ -156,11 +156,11 @@ const DiscountMonth = () => {
                 {r(1)}
               </th>
               <th>
-                {g(77)}
+                {g(78)}
 
               </th>
               <th>
-                {g(78)}
+                {g(77)}
 
               </th>
             </tr>

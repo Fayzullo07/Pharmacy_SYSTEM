@@ -6,7 +6,7 @@ import * as GlobalApi from "../api/GlobalRequest";
 export const receiptsPostAction = async datas => {
   try {
     await GlobalApi.receiptPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
   } catch (error) {
     console.log(error);
     if (error.response.status == 403) {
@@ -28,7 +28,7 @@ export const receiptsPostAction = async datas => {
 export const receiptsPatchAction = async (id, datas) => {
   try {
     await GlobalApi.receiptPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
   } catch (error) {
     const keys = Object.keys(error.response.data);
     toast.error(error.response.status);
@@ -51,7 +51,7 @@ export const receiptsPatchAction = async (id, datas) => {
 export const offersPostAction = async datas => {
   try {
     await GlobalApi.offersPostAPI(datas);
-    toast.success(`Jo'natildi`);
+    // toast.success(`Jo'natildi`);
   } catch (error) {
     if (error.response.status == 403) {
       localStorage.clear();
@@ -73,7 +73,7 @@ export const offersPostAction = async datas => {
 export const clientPostAction = async (datas, setShowModal) => {
   try {
     await GlobalApi.clientsPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -95,7 +95,7 @@ export const clientPostAction = async (datas, setShowModal) => {
 export const clientPatchAction = async (id, datas, setShowModal) => {
   try {
     await GlobalApi.clientsPatchAPI(id, datas);
-    toast.success(`O'zgartirildi`);
+    // toast.success(`O'zgartirildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -118,7 +118,7 @@ export const clientPatchAction = async (id, datas, setShowModal) => {
 export const popularProductsPostAction = async (datas, setShowModal) => {
   try {
     await GlobalApi.popularProductsPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -140,7 +140,7 @@ export const popularProductsPostAction = async (datas, setShowModal) => {
 export const popularProductsPatchAction = async (id, datas, setShowModal) => {
   try {
     await GlobalApi.popularProductsPatchAPI(id, datas);
-    toast.success(`O'zgartirildi`);
+    // toast.success(`O'zgartirildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -163,7 +163,7 @@ export const popularProductsPatchAction = async (id, datas, setShowModal) => {
 export const firmIncomePostAction = async (datas, setShowModal) => {
   try {
     await GlobalApi.firmsInComesPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -185,7 +185,7 @@ export const firmIncomePostAction = async (datas, setShowModal) => {
 export const firmIncomePatchAction = async (id, datas, setShowModal) => {
   try {
     await GlobalApi.firmsInComesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi`);
+    // toast.success(`O'zgartirildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -220,7 +220,7 @@ export const firmsExpenseDebtPostAction = async (
       setViewModal(true);
     } else {
       setShowModal(false);
-      toast.success(`Yaratildi`);
+      // toast.success(`Yaratildi`);
     }
     setFirmExpenseId(data);
   } catch (error) {
@@ -249,7 +249,7 @@ export const firmsExpenseVerifyPostAction = async (
 ) => {
   try {
     await GlobalApi.firmsExpenseVerifyPostAPI(datas);
-    toast.success(`Tekshirildi`);
+    // toast.success(`Tekshirildi`);
     setShowModal(false);
     if (isLeader.isTrue) {
       mutationAccount.mutate({ price: isLeader.price });
@@ -306,7 +306,7 @@ export const firmsReturnPostAction = async (
 export const firmsReturnsVerifyPostAction = async (datas, setShowModal) => {
   try {
     await GlobalApi.returnFirmsVerifyPostAPI(datas);
-    toast.success(`Tekshirildi`);
+    // toast.success(`Tekshirildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {

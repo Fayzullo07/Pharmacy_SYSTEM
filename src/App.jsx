@@ -74,7 +74,15 @@ export const handleLogout = () => {
 
 const Routing = ({ user, handleLogin, navigate }) => {
   function AdminElement({ children }) {
-    if (user && user.role === "Director") {
+    if (user && user.role === "Director" || user && user.role === "Manager") {
+      return <>{children}</>;
+    } else {
+      navigate("/notFound");
+    }
+  }
+
+  function OnlyDirectorElement({ children }) {
+    if (user && user.role === "Director" ) {
       return <>{children}</>;
     } else {
       navigate("/notFound");
@@ -93,7 +101,7 @@ const Routing = ({ user, handleLogin, navigate }) => {
       <Route
         path="/"
         element={
-          user && user.role === "Director" ? (
+          user && user.role === "Director" || user && user.role === "Manager"  ? (
             <Home />
           ) : user && user.role === "Worker" ? (
             <EmployeeHome />
@@ -184,9 +192,9 @@ const Routing = ({ user, handleLogin, navigate }) => {
       <Route
         path="/managers"
         element={
-          <AdminElement>
+          <OnlyDirectorElement>
             <Managers />
-          </AdminElement>
+          </OnlyDirectorElement>
         }
       />
 

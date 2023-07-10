@@ -21,7 +21,7 @@ const Navbar = () => {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
-      if (JSON.parse(savedUser).user.role == "Director") {
+      if (JSON.parse(savedUser).user.role == "Director" || JSON.parse(savedUser).user.role == "Manager") {
         setNavData(routes);
       } else if (JSON.parse(savedUser).user.role == "Worker") {
         setNavData(routesEmployee);

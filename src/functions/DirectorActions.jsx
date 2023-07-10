@@ -6,7 +6,7 @@ import * as DirectorApi from "../api/DirectorRequest";
 export const profilePatchAction = async datas => {
   try {
     await DirectorApi.profilePatchAPI(datas);
-    toast.success(`O'zgartirildi!`);
+    // toast.success(`O'zgartirildi!`);
   } catch (error) {
     if (error.response.status == 403) {
       localStorage.clear();
@@ -28,7 +28,7 @@ export const profilePatchAction = async datas => {
 export const directorPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.directorPostAPI(datas);
-    toast.success(`Director yaratildi`);
+    // toast.success(`Director yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -50,7 +50,7 @@ export const directorPostAction = async (datas, setShowModal) => {
 export const directorPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.directorPatchAPI(id, datas);
-    toast.success(`O'zgartirildi!`);
+    // toast.success(`O'zgartirildi!`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -73,7 +73,7 @@ export const directorPatchAction = async (id, datas, setShowModal) => {
 export const managerPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.managerPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -95,7 +95,7 @@ export const managerPostAction = async (datas, setShowModal) => {
 export const managerPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.managerPatchAPI(id, datas);
-    toast.success(`O'zgartirildi!`);
+    // toast.success(`O'zgartirildi!`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -118,7 +118,7 @@ export const managerPatchAction = async (id, datas, setShowModal) => {
 export const workerPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.xodimPostAPI(datas);
-    toast.success(`Yaratildi.`);
+    // toast.success(`Yaratildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -140,7 +140,7 @@ export const workerPostAction = async (datas, setShowModal) => {
 export const workerPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.xodimPatchAPI(id, datas);
-    toast.success(`O'zgartirildi!`);
+    // toast.success(`O'zgartirildi!`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -163,7 +163,7 @@ export const workerPatchAction = async (id, datas, setShowModal) => {
 export const aptekaPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.aptekaPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -185,7 +185,7 @@ export const aptekaPostAction = async (datas, setShowModal) => {
 export const aptekaPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.aptekaPatchAPI(id, datas);
-    toast.success(`O'zgartirildi`);
+    // toast.success(`O'zgartirildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -209,7 +209,7 @@ export const aptekaPatchAction = async (id, datas, setShowModal) => {
 export const firmaPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.firmsPostAPI(datas);
-    toast.success(`Yaratildi.`);
+    // toast.success(`Yaratildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -231,7 +231,7 @@ export const firmaPostAction = async (datas, setShowModal) => {
 export const firmaPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.firmsPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -254,7 +254,7 @@ export const firmaPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyExpensesTypesPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmacyExpensesTypesPostAPI(datas);
-    toast.success(`Yaratildi.`);
+    // toast.success(`Yaratildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -280,7 +280,7 @@ export const pharmacyExpensesTypesPatchAction = async (
 ) => {
   try {
     await DirectorApi.pharmacyExpensesTypesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -303,7 +303,7 @@ export const pharmacyExpensesTypesPatchAction = async (
 export const transfersTypesPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.transfersTypesPostAPI(datas);
-    toast.success(`Yaratildi.`);
+    // toast.success(`Yaratildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -325,7 +325,7 @@ export const transfersTypesPostAction = async (datas, setShowModal) => {
 export const transfersTypesPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.transfersTypesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -347,7 +347,7 @@ export const transfersTypesPatchAction = async (id, datas, setShowModal) => {
 export const accountsExpensesPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.accountsExpensesPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -369,7 +369,7 @@ export const accountsExpensesPostAction = async (datas, setShowModal) => {
 export const accountsExpensesPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.accountsExpensesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -392,7 +392,7 @@ export const accountsExpensesPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyInComesPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesInComesPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -414,7 +414,7 @@ export const pharmacyInComesPostAction = async (datas, setShowModal) => {
 export const pharmacyInComesPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesInComesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -437,7 +437,7 @@ export const pharmacyInComesPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyExpensesPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesExpensesPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -459,7 +459,7 @@ export const pharmacyExpensesPostAction = async (datas, setShowModal) => {
 export const pharmacyExpensesPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesExpensesPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -483,7 +483,7 @@ export const pharmacyExpensesPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyDebtsPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesDebtsPostAPI(datas);
-    toast.success(`Qarz olindi!`);
+    // toast.success(`Qarz olindi!`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -505,7 +505,7 @@ export const pharmacyDebtsPostAction = async (datas, setShowModal) => {
 export const pharmacyDebtsPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesDebtsPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -528,7 +528,7 @@ export const pharmacyDebtsPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyDebtsRePayPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesDebtsRePayPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -554,7 +554,7 @@ export const pharmacyDebtsRePayPatchAction = async (
 ) => {
   try {
     await DirectorApi.pharmaciesDebtsRePayPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -577,7 +577,7 @@ export const pharmacyDebtsRePayPatchAction = async (
 export const pharmacyToDebtsPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesToDebtsPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -599,7 +599,7 @@ export const pharmacyToDebtsPostAction = async (datas, setShowModal) => {
 export const pharmacyToDebtsPatchAction = async (id, datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesToDebtsPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -622,7 +622,7 @@ export const pharmacyToDebtsPatchAction = async (id, datas, setShowModal) => {
 export const pharmacyToDebtsRePayPostAction = async (datas, setShowModal) => {
   try {
     await DirectorApi.pharmaciesToDebtsRePayPostAPI(datas);
-    toast.success(`Yaratildi`);
+    // toast.success(`Yaratildi`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {
@@ -648,7 +648,7 @@ export const pharmacyToDebtsRePayPatchAction = async (
 ) => {
   try {
     await DirectorApi.pharmaciesToDebtsRePayPatchAPI(id, datas);
-    toast.success(`O'zgartirildi.`);
+    // toast.success(`O'zgartirildi.`);
     setShowModal(false);
   } catch (error) {
     if (error.response.status == 403) {

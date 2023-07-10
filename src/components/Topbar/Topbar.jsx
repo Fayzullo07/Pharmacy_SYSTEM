@@ -85,7 +85,7 @@ const Topbar = ({ children }) => {
           </label>
         </div> */}
         {/* <!-- userImg --> */}
-        {JSON.parse(savedUser)?.user.role == "Director" ? (
+        {JSON.parse(savedUser)?.user.role == "Director" || JSON.parse(savedUser)?.user.role == "Manager" ? (
           <NavLink to={`/profile`}>
             <div className="user border border-primary">
               <img src={profile} alt="user" />
