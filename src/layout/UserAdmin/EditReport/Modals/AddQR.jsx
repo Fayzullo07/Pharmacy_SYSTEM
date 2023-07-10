@@ -60,7 +60,7 @@ const AddQR = ({
   const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
 
   const handleSubmit = () => {
-    if (!qr < 100) {
+    if (qr < 100) {
       toast.warning(g(33));
       return;
     }

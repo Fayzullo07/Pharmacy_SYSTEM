@@ -119,7 +119,7 @@ const Profile = ({ userData }) => {
                 </h5>
               </div>
             </div>
-            <div className="card p-2">
+            <div className="card p-2 mb-3">
               <div className="row">
                 <div className="col-md-6 col">
                   <TextInput name={"first_name"} value={formData.first_name} handleInputChange={handleInputChange} handleSubmit={handleSubmit} isRequired={true} placeholder={"Ismingiz"} />

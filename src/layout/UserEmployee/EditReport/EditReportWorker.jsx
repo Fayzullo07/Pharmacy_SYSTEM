@@ -42,7 +42,7 @@ const EditReportWorker = ({ user }) => {
   });
 
   const getData = {
-    report_date: today,
+    report_date: "",
     shift: user.shift,
     to_pharmacy: user.pharmacy
   };
