@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 
 const SideBarEdit = ({ shows, setShows }) => {
    const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
-   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   const [showUl, setShowUl] = useState(false);
   return (
     <div id="btn_hover_parent" className="btn-toolbar w-100">
