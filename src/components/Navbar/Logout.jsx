@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalSimple from "../../utils/ModalSimple";
 import { handleLogout } from "../../App";
 import { useTranslation } from "react-i18next";
 
 const Logout = ({ showModal, setShowModal }) => {
+  useEffect(
+    () => {
+      document.body.style.overflow = `${showModal ? "hidden" : "scroll"}`;
+      window.scrollTo(0, 0);
+    },
+    [showModal]
+  );
   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   const { t: n } = useTranslation("translation", { keyPrefix: "Navbar" });
   return (

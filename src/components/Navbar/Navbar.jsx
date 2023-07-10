@@ -29,12 +29,6 @@ const Navbar = () => {
     }
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = `${
-      logOutModal  ? "hidden" : "scroll"
-    }`;
-    window.scrollTo(0, 0);
-  }, [logOutModal]);
 
   const { t } = useTranslation("translation", { keyPrefix: "Navbar" });
 
