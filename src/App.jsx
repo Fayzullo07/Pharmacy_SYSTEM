@@ -332,7 +332,6 @@ function App() {
     if (savedUser) {
       dispatch(getGlobalDeteilsAction());
     }
-    navigate("/")
   }, []);
 
   const handleLogin = (user) => {
