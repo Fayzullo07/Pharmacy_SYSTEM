@@ -51,3 +51,15 @@
     left: 40%;
     top: 35px;
 }
+
+/* Responsive */
+@media (max-width: 580px) {
+    .child li {
+        line-height: 25px;
+    }
+
+    .child li button {
+        padding: 2px;
+        font-size: 10px;
+    }
+}

@@ -91,10 +91,3 @@ body.dark .support a {
 .checkbox:checked+.checkbox-label .ball {
     transform: translateX(24px);
 }
-
-/* Responsive */
-@media (max-width: 480px) {
-    .toggle {
-        z-index: 1001;
-    }
-}
