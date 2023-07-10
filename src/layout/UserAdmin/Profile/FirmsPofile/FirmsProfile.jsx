@@ -14,6 +14,7 @@ import AddFirma from "../../Home/Firms/Modal/AddFirma";
 import DeleteFirm from "../../Home/Firms/Modal/DeleteFirm";
 import UpdateFirma from "../../Home/Firms/Modal/UpdateFirma";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const FirmsProfile = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const FirmsProfile = () => {
 
   if (error) return `Error: ${error.message}`;
 
-  //   const { t } = useTranslation("translation", { keyPrefix: "Home" });
+  const { t } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
       {showModal && (
@@ -70,7 +71,7 @@ const FirmsProfile = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Firmalar</h2>
+              <h2>{t(16)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -91,27 +92,25 @@ const FirmsProfile = () => {
               <div class="btn-group btn-group-sm me-2">
                 <button
                   type="button"
-                  className={`btn btn${
-                    is_favorite ? "" : "-outline"
-                  }-primary btn-sm`}
+                  className={`btn btn${is_favorite ? "" : "-outline"
+                    }-primary btn-sm`}
                   onClick={() => {
                     setPage(1);
                     dispatch(isFavoriteFunction(true));
                   }}
                 >
-                  Faol
+                  {t(8)}
                 </button>
                 <button
                   type="button"
-                  className={`btn btn${
-                    !is_favorite ? "" : "-outline"
-                  }-danger btn-sm`}
+                  className={`btn btn${!is_favorite ? "" : "-outline"
+                    }-danger btn-sm`}
                   onClick={() => {
                     setPage(1);
                     dispatch(isFavoriteFunction(false));
                   }}
                 >
-                  Faol emas
+                  {t(9)}
                 </button>
               </div>
             </div>
@@ -121,15 +120,32 @@ const FirmsProfile = () => {
             className="container-fluid"
             style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
           >
-            <table id="table" className="my-2 table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center"
+              style={{
+                width: "max-content",
+                minWidth: "100%"
+              }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55
+                }}>
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
+                  <th scope="col" style={{ width: "5px", padding: '10px' }}>
                     №
                   </th>
-                  <th scope="col">Firma nomi</th>
-                  <th scope="col">Telefon raqami</th>
-                  <th scope="col">Manzil</th>
+                  <th scope="col">
+                    {t(4)}
+                  </th>
+                  <th scope="col">
+                    {t(5)}
+                  </th>
+                  <th scope="col">
+                    {t(2)}
+                  </th>
                   <th scope="col" style={{ width: "5px" }}>
                     <i className="fa fa-edit text-warning"></i>
                   </th>
@@ -140,14 +156,14 @@ const FirmsProfile = () => {
                   >
                     <i className="fa fa-trash-can text-danger"></i>
                   </th>
-                 
+
                 </tr>
               </thead>
               <tbody>
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2>Malumot topilmadi!</h2>
+                      {t(15)}
                     </td>
                   </tr>
                 )}

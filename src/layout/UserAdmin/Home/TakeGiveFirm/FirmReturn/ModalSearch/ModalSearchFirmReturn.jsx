@@ -6,6 +6,7 @@ import { firmsGetAPI } from "../../../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../../../utils/SkeletLoading";
 import { pagination } from "../../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
   const [search, setSearch] = useState("");
@@ -21,11 +22,14 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
 
   if (error) return `Error: ${error.message}`;
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   return (
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Firmalar"}
+      title={g(16)}
     >
       <div className="header_flex mt-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
@@ -39,7 +43,7 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
               <th scope="col" style={{ width: "5px" }}>
                 №
               </th>
-              <th scope="col">Firma</th>
+              <th scope="col">{m(21)}</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +51,7 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
               data.data.results.length === 0 &&
               <tr>
                 <td colSpan={2}>
-                  <h2> Malumot topilmadi!</h2>
+                  {g(23)}
                 </td>
               </tr>}
             {data &&
@@ -63,7 +67,10 @@ const ModalSearchFirmReturn = ({ showModal, setShowModal, setCurData }) => {
                   <td data-label="№">
                     {index + 1}
                   </td>
-                  <td data-label="Firma" className="text-capitalize text-break text-start" >
+                  <td
+                    data-label="Firma"
+                    className="text-capitalize text-break text-start"
+                  >
                     <b>
                       {item.name}
                     </b>

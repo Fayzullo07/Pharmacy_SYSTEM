@@ -11,6 +11,7 @@ import {
 import DebtsModal from "./Modal/DebtsModal";
 import { Naqd_siz } from "../../../../api";
 import ModalDescription from "../../../../utils/ModalDescription";
+import { useTranslation } from "react-i18next";
 
 const TodayDebtRepay = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -35,6 +36,8 @@ const TodayDebtRepay = ({ deteils, getData }) => {
     total = totalMoney(data.data.results);
   }
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
 
@@ -71,7 +74,7 @@ const TodayDebtRepay = ({ deteils, getData }) => {
       <div>
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -98,10 +101,10 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Kimga qaytarildi</th>
-                <th>Kimdan berildi</th>
-                <th>To'lov turi</th>
-                <th>Berilgan summa</th>
+                <th>{g(100)}</th>
+                <th>{g(101)}</th>
+                <th>{g(92)}</th>
+                <th>{g(80)}</th>
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-trash-can text-danger"></i>
                 </th>
@@ -116,23 +119,23 @@ const TodayDebtRepay = ({ deteils, getData }) => {
                   }}>
                     <td data-label="№">{index + 1}</td>
                     <td
-                      data-label="Kimga qaytarildi"
+                      data-label={g(100)}
                       className="text-capitalize text-break"
                     >
                       {item.to_debt_name}
                     </td>
-                    <td data-label="Kimdan berildi" className="text-capitalize">
+                    <td data-label={g(101)} className="text-capitalize">
                       {item.from_user_name ? item.from_user_name : "Kassadan"}
                     </td>
-                    <td data-label="To'lov turi" className="text-capitalize">
+                    <td data-label={g(92)} className="text-capitalize">
                       {item.transfer_type_name == "payme"
-                        ? Naqd_siz
+                        ? m(35)
                         : item.transfer_type_name}
                     </td>
-                    <td data-label="Berilgan summa">
+                    <td data-label={g(80)}>
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'chirish" onClick={(e) => {
+                    <td data-label="" onClick={(e) => {
                       e.stopPropagation()
                       setCurData(item);
                       setDeleteModal(!deleteModal);

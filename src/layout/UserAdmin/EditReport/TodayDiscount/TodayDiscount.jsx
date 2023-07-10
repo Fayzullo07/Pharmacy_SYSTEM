@@ -10,6 +10,7 @@ import {
   formatNumber,
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
+import { useTranslation } from "react-i18next";
 
 const TodayDiscount = ({ getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +34,9 @@ const TodayDiscount = ({ getData }) => {
   if (data && data.data.results) {
     total = totalMoney(data && data.data.results);
   }
+
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {showModal && (
@@ -61,7 +65,7 @@ const TodayDiscount = ({ getData }) => {
       <div>
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -88,8 +92,8 @@ const TodayDiscount = ({ getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Mahsulot summasi</th>
-                <th>Chegirma summasi</th>
+                <th>{m(1)}</th>
+                <th>{m(4)}</th>
                 <th
                   scope="col"
                   className="text-center"
@@ -112,16 +116,16 @@ const TodayDiscount = ({ getData }) => {
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
                     <td
-                      data-label="Mahsulot summasi"
+                      data-label={m(1)}
                       className="text-capitalize"
                     >
                       <b>{formatNumber(item.second_name)}</b>
                     </td>
-                    <td data-label="Chegirma summasi">
+                    <td data-label={m(4)}>
                       <b className="text-danger">{formatNumber(item.price)}</b>{" "}
                       
                     </td>
-                    <td data-label="O'zgartirish"  onClick={() => {
+                    <td data-label=""  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
                         }}
@@ -131,7 +135,7 @@ const TodayDiscount = ({ getData }) => {
                        
                       ></i>
                     </td>
-                    <td data-label="O'chirish" onClick={() => {
+                    <td data-label="" onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
                         }}

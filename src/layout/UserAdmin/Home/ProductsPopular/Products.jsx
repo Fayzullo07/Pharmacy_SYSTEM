@@ -94,10 +94,20 @@ const Products = () => {
             className="container-fluid my-2"
             style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
           >
-            <table id="table" className="table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%",
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th style={{ width: "5px" }}>№</th>
+                  <th style={{ width: "5px", padding: '10px' }}>№</th>
                   <th>{t(17)}</th>
                   <th>{t(18)}</th>
                   <th>{t(19)}</th>

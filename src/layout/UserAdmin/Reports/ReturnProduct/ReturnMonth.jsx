@@ -10,6 +10,7 @@ import SideBar from "../../../../components/SideBar/SideBar";
 import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { PharmaciesExpensesReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const ReturnMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -51,15 +52,17 @@ const ReturnMonth = () => {
     queryClient.removeQueries("RETURN_MONTH");
   };
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}</h2>
         <div className="d-flex">
           <PharmaciesExpensesReportDayExcelGetDownload
             year={year}
@@ -113,7 +116,7 @@ const ReturnMonth = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -128,7 +131,7 @@ const ReturnMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
            style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -144,20 +147,16 @@ const ReturnMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+                {r(0)}
               </th>
               <th>
-                <b>Xodim F.I.O</b>
+              {r(1)}
               </th>
               <th>
-                <b>Qaytarib olingan</b>
-                <br />
-                <b>mahsulot nomi</b>
+                {g(87)}
               </th>
               <th>
-                <b>Mahsulot</b>
-                <br />
-                <b>summasi</b>
+                {g(19)}
               </th>
             </tr>
           </thead>
@@ -213,7 +212,7 @@ const ReturnMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="4" className="py-3">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&

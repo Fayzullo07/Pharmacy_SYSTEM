@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { months, years } from "../../../../api";
+import { months, number_0, years } from "../../../../api";
 import { useQuery } from "react-query";
 import { accountReportMonthGetAPI } from "../../../../api/FirmsRequest";
 import {
@@ -12,6 +12,7 @@ import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
 import { AccountReportMonthExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const LeaderYears = () => {
   const reduxData = useSelector((state) => state);
@@ -53,15 +54,19 @@ const LeaderYears = () => {
     result = totalYearToLeader(data.data);
   }
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
+
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>{ deteils.pharmacies.map((item) => {
-          if(item.id == pharmacy){
-            return item.name
+        <h2>{deteils.pharmacies.map((item) => {
+          if (item.id == pharmacy) {
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && f(11)}</h2>
         <div className="d-flex">
           <AccountReportMonthExcelGetDownload
             year={year}
@@ -88,7 +93,7 @@ const LeaderYears = () => {
               className="form-select my-3"
               onChange={(e) => setPharmacy(e.target.value)}
             >
-              <option value="">Hamma filial</option>
+              <option value="">{f(11)}</option>
               {deteils.pharmacies.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
@@ -102,7 +107,7 @@ const LeaderYears = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -115,9 +120,9 @@ const LeaderYears = () => {
       >
         <table
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
-           style={{
+          style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -133,17 +138,13 @@ const LeaderYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
-                <b>Rahbarga berilgan</b>
-                <br />
-                <b>pullar</b>
+                {g(83)}
               </th>
               <th>
-                <b>Rahbardan olingan</b>
-                <br />
-                <b>pullar</b>
+               {g(84)}
               </th>
             </tr>
           </thead>
@@ -206,7 +207,7 @@ const LeaderYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>{formatNumber(income_price)}</th>
                   <th>{formatNumber(expense_price)}</th>
@@ -249,11 +250,11 @@ const LeaderYears = () => {
                 }}
               >
                 <tr className="text-center">
-                  <th colSpan="2" className="py-3">
-                    Jami:
+                  <th colSpan="2" className="py-2">
+                    {r(12)}:
                   </th>
-                  <th>0</th>
-                  <th>0</th>
+                  <th>{number_0}</th>
+                  <th>{number_0}</th>
                 </tr>
               </tfoot>
             </>

@@ -11,6 +11,7 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import { naxt } from "../../../../api";
 import Receipts from "../Modals/Receipts";
+import { useTranslation } from "react-i18next";
 
 const TodayInComes = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -50,6 +51,8 @@ const TodayInComes = ({ deteils, getData }) => {
     total += totalMoney(debtTrade.data.results);
   }
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {showModal && (
@@ -86,7 +89,7 @@ const TodayInComes = ({ deteils, getData }) => {
               <div className="d-flex align-items-center justify-content-between mb-lg-0 mb-sm-2">
 
                 <p className="bg_c">
-                  Umumiy:{" "}
+                  {g(90)}:{" "}
                   <span>
                     <b>{formatNumber(total)}</b>.0
                   </span>{" "}
@@ -124,9 +127,9 @@ const TodayInComes = ({ deteils, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Tushum turi</th>
-                <th>Tushum summasi</th>
-                <th>Pul qayerga tushdi</th>
+                <th>{m(31)}</th>
+                <th>{m(2)}</th>
+                <th>{g(91)}</th>
                 <th
                   scope="col"
                   className="text-center"
@@ -148,23 +151,23 @@ const TodayInComes = ({ deteils, getData }) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Tushum turi" className="text-uppercase">
-                      {item.transfer_type_name == 'click' && item.to_user_name ? 'click - xodim': item.transfer_type_name }
+                    <td data-label={m(31)} className="text-uppercase">
+                      {item.transfer_type_name == 'click' && item.to_user_name ? `click - ${g(27)}`: item.transfer_type_name }
                     </td>
-                    <td data-label="Tushum summasi">
+                    <td data-label={m(2)}>
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
                     <td
-                      data-label="Pul qayerga tushdi"
+                      data-label={g(91)}
                       className="text-uppercase"
                     >
                       {item.to_user_name == null
                         ? item.transfer_type == naxt
-                          ? "Kassa"
+                          ? g(61)
                           : "Xisob raqam"
                         : item.to_user_name}
                     </td>
-                    <td data-label="O'zgartirish">
+                    <td data-label="">
                       <i
                         className="fa fa-edit text-warning cursor_pointer"
                         onClick={() => {
@@ -173,7 +176,7 @@ const TodayInComes = ({ deteils, getData }) => {
                         }}
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
+                    <td data-label="">
                       <i
                         className="fa fa-trash-can text-danger cursor_pointer"
                         onClick={() => {

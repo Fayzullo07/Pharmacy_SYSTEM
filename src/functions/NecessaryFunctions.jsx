@@ -94,7 +94,7 @@ export const totalReceiptPriceWithIndex = (datas, index) => {
   datas.map((data, i) => {
     if (i == index) {
       data.shifts.map(item => {
-        total += Number(item.receipt_price) + Number(item.debt_income);
+        total += Number(item.receipt_price);
       });
     }
   });
@@ -105,7 +105,7 @@ export const totalReceiptPrice = datas => {
   let total = 0;
   datas.map(data => {
     data.shifts.map(item => {
-      total += Number(item.receipt_price) + Number(item.debt_income);
+      total += Number(item.receipt_price);
     });
   });
   return total;

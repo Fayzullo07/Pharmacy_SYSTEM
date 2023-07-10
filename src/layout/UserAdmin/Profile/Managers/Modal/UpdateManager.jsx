@@ -10,6 +10,7 @@ import Modal from "../../../../../utils/Modal";
 import PasswordInput from "../../../../../ui/PasswordInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
 import TextInput from "../../../../../ui/TextInput";
+import { useTranslation } from "react-i18next";
 
 const UpdateManager = (props) => {
   const { showModal, setShowModal, data } = props;
@@ -83,20 +84,24 @@ const UpdateManager = (props) => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+
   const handleSubmit = () => {
-    if (checkPhoneNumber(formData.phone_number)) {
-      toast.warning("Telefon raqamini to'g'ri kitriting +998 9? 111 22 33");
+     if (checkPhoneNumber(formData.phone_number)) {
+      toast.warning(g(34));
       return;
     }
 
     if (chamgePass) {
       if (!formPassword.password) {
-        toast.warning("Parolni kiriting !");
+        toast.warning(m(8));
         return;
       }
 
       if (formPassword.password != formPassword.re_password) {
-        toast.warning("Parolni bir xil kiriting!");
+        toast.warning(m(9));
         return;
       }
       setFormData({ ...formData, password: formPassword.password });
@@ -159,7 +164,7 @@ const UpdateManager = (props) => {
 
         <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border py-3 p-1 rounded">
           <b className={formData.is_active ? "text-success" : "text-danger"}>
-            Active
+            {g(8)}
           </b>
           <input
             className="form-check-input mx-1"
@@ -175,7 +180,7 @@ const UpdateManager = (props) => {
         <div className="col-12">
           {/* CHECKBOX USER */}
           <div className="form-check form-switch d-flex justify-content-between align-item-center p-0 my-2 border rounded p-1 py-3 mb-3">
-            <b>Parol o'zgartirish</b>
+            <b>{p(7)}</b>
             <input
               className="form-check-input mx-1"
               type="checkbox"

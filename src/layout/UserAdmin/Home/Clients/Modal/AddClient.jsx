@@ -13,6 +13,7 @@ import PhoneInput from "../../../../../ui/PhoneInput";
 import NumberInput from "../../../../../ui/NumberInput";
 import TextInput from "../../../../../ui/TextInput";
 import DateInput from "../../../../../ui/DateInput";
+import { useTranslation } from "react-i18next";
 
 const AddClient = props => {
   const { showModal, setShowModal } = props;
@@ -65,24 +66,27 @@ const AddClient = props => {
     }
   );
 
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   const handleSubmit = () => {
     if (!tekshirish3(formData.first_name)) {
-      toast.warning("F.I.O !");
+      toast.warning(m(18));
       return;
     }
 
     if (!formData.birthdate) {
-      toast.warning("Tugilgan kun kiriting!");
+      toast.warning(m(0));
       return;
     }
 
     if (formData.total_amount < 100) {
-      toast.warning("Eng kam summa 100 so'm!");
+      toast.warning(g(33));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number1)) {
-      toast.warning("Telefon raqamni to'gri kiriting +998 99 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
 

@@ -169,16 +169,6 @@ const Profile = ({ userData }) => {
                     </div>
                     <hr />
 
-                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
-                      <div className="d-flex align-items-center">
-                        <img id="profile_img" src={firm_png}  alt="" />
-                        <h4 className="mb-0">{t(1)}</h4>
-                      </div>
-
-                      <i className="fa fa-angle-right fs-4" />
-                    </div>
-                    <hr />
-
                     <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/branches/profile")}>
                       <div className="d-flex align-items-center">
                         <img id="profile_img" src={branches}  alt="branches" />
@@ -193,6 +183,16 @@ const Profile = ({ userData }) => {
                       <div className="d-flex align-items-center">
                         <img id="profile_img" src={team}  alt="img" />
                         <h4 className="mb-0">{t(3)}</h4>
+                      </div>
+
+                      <i className="fa fa-angle-right fs-4" />
+                    </div>
+                    <hr />
+
+                    <div className="d-flex align-items-center justify-content-between cursor_pointer" onClick={() => navigate("/firms/profile")}>
+                      <div className="d-flex align-items-center">
+                        <img id="profile_img" src={firm_png}  alt="" />
+                        <h4 className="mb-0">{t(1)}</h4>
                       </div>
 
                       <i className="fa fa-angle-right fs-4" />

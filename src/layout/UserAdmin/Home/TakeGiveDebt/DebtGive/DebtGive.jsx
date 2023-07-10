@@ -8,10 +8,10 @@ import PaginationForModal from "../../../../../utils/PaginationForModal";
 import { useSelector } from "react-redux";
 import SideBarDebtGive from "../SideBar/SideBarDebtGive";
 import { pagination } from "../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const DebtGive = () => {
   const reduxData = useSelector((state) => state);
-  const { toggle } = reduxData.toggle;
   const { deteils } = reduxData.deteils;
 
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -43,6 +43,8 @@ const DebtGive = () => {
     setPage(1);
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   return (
     <>
       {/* SIDEBAR */}
@@ -62,13 +64,13 @@ const DebtGive = () => {
       {/* TABLE */}
       <div
         className="container-fluid my-2"
-        style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
+        style={{ maxHeight: "calc(100vh - 180px)", overflowY: "scroll" }}
       >
         <table
-          className="table table-sm table-hover table-bordered border-dark align-middle text-center"
+          className="table table-sm table-hover table-bordered border-secondary align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "78vw" : "96vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -82,20 +84,20 @@ const DebtGive = () => {
             }}
           >
             <tr>
-              <th style={{ width: "5px",padding: '20px 10px' }}>№</th>
-              <th>Sana</th>
-              <th>Xodim</th>
-              <th>Kim qarz oldi</th>
-              <th>Qarz summasi</th>
-              <th>Qanchasi berildi</th>
-              <th>Qanchasi qoldi</th>
+              <th style={{ width: "5px", padding: '20px 10px' }}>№</th>
+              <th>{r(0)}</th>
+              <th>{g(27)}</th>
+              <th>{g(12)}</th>
+              <th>{g(13)}</th>
+              <th>{g(28)}</th>
+              <th>{g(14)}</th>
             </tr>
           </thead>
           <tbody>
             {data && data.data.results.length === 0 && (
               <tr style={{ background: "var(--ch_white)" }}>
                 <td colSpan={12}>
-                  <h2>Malumot topilmadi!</h2>
+                  <h2>{g(23)}</h2>
                 </td>
               </tr>
             )}
@@ -114,7 +116,7 @@ const DebtGive = () => {
                   <td data-label="Kim qarz oldi" className="text-break">
                     <b className="fw-600">
 
-                    {item.to_who?.substring(0, 50)}
+                      {item.to_who?.substring(0, 50)}
                     </b>
                     <br />
                     {item.phone_number}

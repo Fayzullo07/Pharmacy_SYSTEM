@@ -13,22 +13,21 @@ const TakeGiveDebt = () => {
 
   const [choose, setChoose] = useState("1");
 
-  return <div className="d-flex">
+  return (
+    <div className="d-flex">
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
           <div className="header_flex justify-content-center">
-           
-            
-            
-              <SideBarTakeGive setShows={setChoose} shows={choose} />
+            <SideBarTakeGive setShows={setChoose} shows={choose} />
           </div>
         </Topbar>
         {choose == "1" && <DebtToTrade />}
         {choose == "2" && <DebtGive />}
         {choose == "3" && <DebtTake />}
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default TakeGiveDebt;

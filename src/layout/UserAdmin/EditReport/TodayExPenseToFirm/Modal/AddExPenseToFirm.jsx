@@ -17,6 +17,7 @@ import Textarea from "../../../../../ui/Textarea";
 import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
 import TextInput from "../../../../../ui/TextInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
+import { useTranslation } from "react-i18next";
 
 const AddExPenseToFirm = ({
   showModal,
@@ -110,31 +111,34 @@ const AddExPenseToFirm = ({
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
 
     if (!formData.from_user) {
-      toast.warning("Pul kimdan berildi!")
+      toast.warning(g(103))
       return;
     }
     if (!tekshirish3(formData.verified_firm_worker_name) && formData.transfer_type == naxt) {
-      toast.warning("Qabul qiluvchi F.I.O!");
+      toast.warning(m(26));
       return;
     }
 
     if (checkPhoneNumber(formData.verified_phone_number) && formData.transfer_type == naxt) {
       toast.warning(
-        "Qabul qiluvchi telefon raqamini to'gri kiriting +998 9? 111 22 33 !"
+        g(34)
       );
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
     if (formData.from_user == 'k_r' && formData.from_user_price < 100) {
-      toast.warning("Rahbardan eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(119));
       return;
     }
 
@@ -170,20 +174,20 @@ const AddExPenseToFirm = ({
                 value={formData.from_user}
                 onChange={handleInputChange}
               >
-                <option value="">Pul kimdan berildi . . .</option>
+                <option value="">{g(103)} . . .</option>
                 {formData.transfer_type == naxt &&
-                  <option value="k">Kassadan</option>}
+                  <option value="k">{g(61)}</option>}
 
-                <option value={director.id}>Rahbardan</option>
+                <option value={director.id}>{g(95)}</option>
 
                 {formData.transfer_type == naxt &&
-                  <option value="k_r">Kassa va Rahbardan</option>}
+                  <option value="k_r">{g(121)}</option>}
 
                 {formData.transfer_type != naxt &&
-                  <option value="h">Hisob raqamdan</option>}
+                  <option value="h">{g(96)}</option>}
               </select>
               <label htmlFor="from_user">
-                Pul kimdan berildi <b className="text-center">*</b>
+                {g(103)} <b className="text-center">*</b>
               </label>
             </div>
           </div>
@@ -222,12 +226,12 @@ const AddExPenseToFirm = ({
                 {/* MONEY FROM KASSA*/}
                 <div class="mb-3">
                   <label htmlFor="price" className="form-label">
-                    Berilgan summa <b className="text-danger">*</b>
+                    {g(80)} <b className="text-danger">*</b>
                   </label>
                   <input
                     type="number"
                     className="form-control"
-                    placeholder={`${formData.from_user == 'h' ? "Hisob raqamdan" : formData.from_user == director.id ? "Rahbardan" : 'Kassadan'}`}
+                    placeholder={`${formData.from_user == 'h' ? g(96) : formData.from_user == director.id ? g(95) : g(61)}`}
                     id="price"
                     name="price"
                     value={formData.price}
@@ -245,7 +249,7 @@ const AddExPenseToFirm = ({
                   {/* MONEY FROM LEADER*/}
                   <div class="mb-3">
                     <label htmlFor="from_user_price" className="form-label">
-                      Rahbardan berilgan summa <b className="text-danger">*</b>
+                      {g(120)} <b className="text-danger">*</b>
                     </label>
                     <input
                       type="number"

@@ -12,6 +12,7 @@ import { formatNumber } from "../../../../functions/NecessaryFunctions";
 import DeleteClient from "./Modal/DeleteClients";
 import UpdateClient from "./Modal/UpdateClient";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const Clients = () => {
   const reduxData = useSelector((state) => state);
@@ -35,6 +36,12 @@ const Clients = () => {
   });
 
   if (error) return `Error: ${error.message}`;
+
+  const { t: h } = useTranslation("translation", { keyPrefix: "Home" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: n } = useTranslation("translation", { keyPrefix: "Navbar" });
   return (
     <>
       {showModal && (
@@ -62,7 +69,7 @@ const Clients = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Mijozlar bazasi</h2>
+              <h2>{h(3)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -86,14 +93,24 @@ const Clients = () => {
             className="container-fluid my-2"
             style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
           >
-            <table id="table" className="table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%",
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th style={{ width: "5px" }}>№</th>
-                  <th>F.I.O</th>
-                  <th>Tug'ilgan kuni</th>
-                  <th>Telefon raqami</th>
-                  <th>Mahsulot summasi</th>
+                  <th style={{ width: "5px", padding: '10px' }}>№</th>
+                  <th>{m(18)}</th>
+                  <th>{m(0)}</th>
+                  <th>{g(5)}</th>
+                  <th>{g(19)}</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -114,7 +131,7 @@ const Clients = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2>Malumot topilmadi!</h2>
+                      <h2>{g(23)}</h2>
                     </td>
                   </tr>
                 )}

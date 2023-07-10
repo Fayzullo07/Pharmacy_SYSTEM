@@ -12,12 +12,13 @@ import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
 import { QR_CODE_ReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const QRCodeMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
   const { toggle } = reduxData.toggle;
-  
+
   const [change, setChange] = useState(false);
 
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -43,15 +44,18 @@ const QRCodeMonth = () => {
     refetch();
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
-          if(item.id == pharmacy){
-            return item.name
+          if (item.id == pharmacy) {
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}</h2>
         <div className="d-flex">
           <QR_CODE_ReportDayExcelGetDownload
             year={year}
@@ -104,7 +108,7 @@ const QRCodeMonth = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -119,7 +123,7 @@ const QRCodeMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -135,22 +139,18 @@ const QRCodeMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+                {r(0)}
               </th>
               <th>
-                <b>QR-code chek</b>
-                <br />
-                <b>berilmagan</b>
+                {r(10)}
               </th>
 
               <th>
-                <b>QR-code chek</b>
-                <br />
-                <b>berilgan</b>
+                {r(11)}
               </th>
 
               <th>
-                <b>Jami savdo</b>
+               {g(85)}
               </th>
             </tr>
           </thead>
@@ -167,20 +167,20 @@ const QRCodeMonth = () => {
                       }}
                     >
                       <td className="p-2">
-                        <b>{index + 1}</b>
+                        {index + 1}
                       </td>
                       <td>
-                        <b>{item.report_date}</b>
+                        {item.report_date}
                       </td>
                       <td>
-                        <b>
+                        <b className="fw-600">
                           {item.receipt_price == 0
                             ? number_0
                             : formatNumber(item.receipt_price)}
                         </b>
                       </td>
                       <td>
-                        <b>
+                        <b className="fw-600">
                           {formatNumber(
                             item.price + item.receipt_price == 0
                               ? number_0
@@ -214,7 +214,7 @@ const QRCodeMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&
@@ -226,7 +226,7 @@ const QRCodeMonth = () => {
                       data.data &&
                       formatNumber(
                         totalMoneyByKey(data.data, "price") -
-                          totalMoneyByKey(data.data, "receipt_price")
+                        totalMoneyByKey(data.data, "receipt_price")
                       )}
                   </th>
                   <th>

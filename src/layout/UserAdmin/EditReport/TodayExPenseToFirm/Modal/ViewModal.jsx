@@ -9,6 +9,7 @@ import { firmsExpenseVerifyPostAction } from "../../../../../functions/GlobalAct
 import ModalSimple from "../../../../../utils/ModalSimple";
 import { accountsExpensesPostAction } from "../../../../../functions/DirectorActions";
 import { naxt, xisob_raqam, xodim } from "../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const ViewModal = ({
   showModal,
@@ -72,43 +73,46 @@ const ViewModal = ({
     );
   });
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   const handleSubmit = () => {
     if (!formData.code || formData.code.length < 5) {
-      toast.warning("SMS Parolni to'g'ri kiriting!");
+      toast.warning(g(42));
       return;
     }
-    mutation.mutate(); 
+    mutation.mutate();
   };
   return (
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Tasdiqlash"}
+      title={r(15)}
     >
       <div className="modal-body">
         <h5>
-          Telefon nomer{" "}
+          {g(5)}{" "}
           <span className="mx-2 text-muted">
             {firm_expense_id.verified_phone_number}
           </span>
         </h5>
         <hr />
         <h5>
-          F.I.O{" "}
+          {m(18)}{" "}
           <span className="mx-2 text-muted">
             {firm_expense_id.verified_firm_worker_name}
           </span>
         </h5>
         <hr />
         <h5>
-          Firma nomi{" "}
+          {g(4)}{" "}
           <span className="mx-2 text-muted">
             {firm_expense_id.to_firm_name}
           </span>
         </h5>
         <hr />
         <h5>
-          Berilgan summa{" "}
+          {g(80)}{" "}
           <span className="mx-2 text-muted">
             {formatNumber(firm_expense_id.price)}
           </span>
@@ -116,15 +120,13 @@ const ViewModal = ({
         <hr />
 
         <h5>
-          Chiqim kimdan qilindi{" "}
+          {g(94)}{" "}
           <span className="mx-2 text-muted">
             {firm_expense_id.transfer_type == xisob_raqam
-              ? "HISOB RAQAM"
+              ? g(96)
               : firm_expense_id.from_user_name != null
-                ? "RAHBAR"
-                : firm_expense_id.from_user_price != 0
-                  ? "KASSA, RAHBAR"
-                  : "KASSA"}
+                ? g(95)
+                : firm_expense_id.from_user_price != 0 ? g(121) : g(61)}
           </span>
         </h5>
         <hr />
@@ -134,7 +136,7 @@ const ViewModal = ({
           <input
             type="number"
             className="form-control bg-light"
-            placeholder="SMS kodini kiriting"
+            placeholder={g(43)}
             id="code"
             name="code"
             value={formData.code}
@@ -146,7 +148,7 @@ const ViewModal = ({
             }}
           />
           <label htmlFor="code">
-            SMS kodini kiriting <b className="text-danger">*</b>
+            {g(43)} <b className="text-danger">*</b>
           </label>
         </div>
       </div>
@@ -157,7 +159,7 @@ const ViewModal = ({
             style={{ background: "red" }}
             onClick={() => setShowModal(false)}
           >
-            Bekor qilish
+            {g(44)}
           </button>
           <button
             className="btn btn-primary rounded-3 col-5 col-md-4 py-2"
@@ -167,7 +169,7 @@ const ViewModal = ({
           >
             {mutation.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Tasdiqlash"}
+              : r(15)}
           </button>
         </div>
       </div>

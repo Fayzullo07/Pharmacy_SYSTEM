@@ -5,6 +5,7 @@ import SkeletLoading from "../../../../../../utils/SkeletLoading";
 import { firmsInComesGetAPI } from "../../../../../../api/GlobalRequest";
 import { formatNumber } from "../../../../../../functions/NecessaryFunctions";
 import { pagination } from "../../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const DebtsModal = ({
   showModal,
@@ -29,6 +30,8 @@ const DebtsModal = ({
 
   if (error) return `Error: ${error.message}`;
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <div
       className="modal fade-centered d-flex justify-content-center align-items-center"
@@ -42,13 +45,13 @@ const DebtsModal = ({
             className="modal-title border border-primary p-1 rounded cursor_pointer"
             onClick={() => setSearchModal(true)}
           >
-            {from_firm.id == "" ? "Firmani tanlash" : from_firm.name}{" "}
+            {from_firm.id == "" ? g(39) : from_firm.name}{" "}
             <span>
               <i className="fa fa-angle-down"></i>
             </span>
           </h5>
           <h5 className="modal-title text-center ">
-            Olingan mahsulotlar
+            {g(40)}
           </h5>
 
           <span className="close">
@@ -67,16 +70,16 @@ const DebtsModal = ({
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th scope="col">Operatsiyalar</th>
-                <th scope="col">Olingan mahsulot summasi</th>
-                <th scope="col">Qolgan qarz</th>
+                <th scope="col">{f(1)}</th>
+                <th scope="col">{g(41)}</th>
+                <th scope="col">{g(14)}</th>
               </tr>
             </thead>
             <tbody>
               {data && data.data.results.length === 0 && (
                 <tr>
                   <td colSpan={4}>
-                    <h2> Malumot topilmadi!</h2>
+                    <h2>{g(23)}</h2>
                   </td>
                 </tr>
               )}

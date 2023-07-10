@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { pharmaciesDebtsGetAPI } from "../../../../../api/DirectorRequest";
 import SearchInput from "../../../../../utils/SearchInput";
 import { today } from "../../../../../api";
+import { useTranslation } from "react-i18next";
 
 const DebtsModal = ({
   showModal,
@@ -34,35 +35,71 @@ const DebtsModal = ({
 
   if (error) return `Error: ${error.message}`;
 
-  return <ModalSimple showModal={showModal} setShowModal={setShowModal} title="Olingan qarzlar">
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  return (
+    <ModalSimple
+      showModal={showModal}
+      setShowModal={setShowModal}
+      title={g(18)}
+    >
       <div className="header_flex m-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
         <div>
-          <input className="form-control-sm cursor_pointer " type="date" value={date} max={today} onChange={e => setDate(e.target.value)} />
+          <input
+            className="form-control-sm cursor_pointer "
+            type="date"
+            value={date}
+            max={today}
+            onChange={e => setDate(e.target.value)}
+          />
         </div>
       </div>
       <div className="modal-body my-0 py-0">
         {/* TABLE */}
-        <table id="table" className="table table-hover align-middle">
-          <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+        <table
+          className="table table-hover table-bordered border-secondary align-middle text-center"
+          style={{ width: "max-content", minWidth: "100%" }}
+        >
+          <thead
+            className="align-middle"
+            style={{
+              position: "sticky",
+              top: 0,
+              backgroundColor: "var(--blue)",
+              color: "#fff",
+              zIndex: 55
+            }}
+          >
             <tr>
-              <th scope="col" style={{ width: "5px" }}>
+              <th scope="col" style={{ width: "5px", padding: "10px" }}>
                 №
               </th>
-              <th scope="col">Ismi</th>
-              <th scope="col">Qarz</th>
-              <th scope="col">Berilgan</th>
-              <th scope="col">Qolgan</th>
+              <th scope="col">
+                {m(28)}
+              </th>
+              <th scope="col">
+                {g(12)}
+              </th>
+              <th scope="col">
+                {m(3)}
+              </th>
+              <th scope="col">
+                {g(114)}
+              </th>
               <th scope="col">Vaqt</th>
             </tr>
           </thead>
           <tbody>
-            {data && data.data.results.length === 0 && <tr className="cursor_pointer">
+            {data &&
+              data.data.results.length === 0 &&
+              <tr className="cursor_pointer">
                 <td colSpan={7}>
-                  <h2>Qarz topilmadi!</h2>
+                  {g(23)}
                 </td>
               </tr>}
-            {data && data.data.results.map((user, index) =>
+            {data &&
+              data.data.results.map((user, index) =>
                 <tr
                   key={user.id}
                   onClick={() => {
@@ -109,9 +146,14 @@ const DebtsModal = ({
         {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
       </div>
       <div className="modal-footer m-0 p-0">
-        <PaginationForModal page={page} pages={Math.ceil(data && data.data.count / 10)} setPage={setPage} />
+        <PaginationForModal
+          page={page}
+          pages={Math.ceil(data && data.data.count / 10)}
+          setPage={setPage}
+        />
       </div>
-    </ModalSimple>;
+    </ModalSimple>
+  );
 };
 
 export default DebtsModal;

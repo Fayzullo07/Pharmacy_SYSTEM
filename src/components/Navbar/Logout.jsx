@@ -1,18 +1,21 @@
 import React from "react";
 import ModalSimple from "../../utils/ModalSimple";
 import { handleLogout } from "../../App";
+import { useTranslation } from "react-i18next";
 
 const Logout = ({ showModal, setShowModal }) => {
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: n } = useTranslation("translation", { keyPrefix: "Navbar" });
   return (
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Tizimdan chiqish"}
+      title={n(7)}
       zIndex={55555555}
     >
       <div className="modal-body">
         <h2 className="text-muted text-center">
-          Siz haqiqatdan ham tizimdan chiqmoqchimisiz?
+          {g(66)}
         </h2>
       </div>
 
@@ -23,14 +26,14 @@ const Logout = ({ showModal, setShowModal }) => {
             style={{ background: "red" }}
             onClick={handleLogout}
           >
-            Ha
+            {g(54)}
           </button>
           <button
             className="btn btn-primary rounded-3 col-3"
             style={{ background: "var(--blue)" }}
             onClick={() => setShowModal(false)}
           >
-            Yo'q
+            {g(55)}
           </button>
         </div>
       </div>

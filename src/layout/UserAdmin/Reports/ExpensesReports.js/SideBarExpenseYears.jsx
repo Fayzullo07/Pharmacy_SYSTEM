@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../../../../components/SideBar/SideBar";
 import { years } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const SideBarExpenseYears = ({
   year,
@@ -12,8 +13,10 @@ const SideBarExpenseYears = ({
   expense_type,
   setExpense,
 }) => {
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
-    <SideBar title="">
+    <SideBar >
       {/* YEARS */}
       <select
         value={year}
@@ -33,7 +36,7 @@ const SideBarExpenseYears = ({
         className="form-select my-3"
         onChange={(e) => setPharmacy(e.target.value)}
       >
-        <option value="">Hamma filial</option>
+        <option value="">{f(11)}</option>
         {deteils &&
           deteils.pharmacies.map((item) => (
             <option key={item.id} value={item.id}>
@@ -59,7 +62,7 @@ const SideBarExpenseYears = ({
         onClick={filterFunction}
         style={{ background: "var(--blue)", color: "#fff" }}
       >
-        Tasdiqlash
+        {r(15)}
       </button>
     </SideBar>
   );

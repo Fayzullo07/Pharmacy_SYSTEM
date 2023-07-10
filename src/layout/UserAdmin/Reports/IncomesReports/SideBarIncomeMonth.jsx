@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../../../../components/SideBar/SideBar";
 import { months, years } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const SideBarIncomeMonth = ({
   month,
@@ -10,10 +11,11 @@ const SideBarIncomeMonth = ({
   pharmacy,
   setPharmacy,
   filterFunction,
-  deteils,
+  deteils
 }) => {
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   return (
-    <SideBar title="">
+    <SideBar>
       {/* MONTH BUTTON */}
       <select
         value={month}
@@ -61,7 +63,7 @@ const SideBarIncomeMonth = ({
         onClick={filterFunction}
         style={{ background: "var(--blue)", color: "#fff" }}
       >
-        Tasdiqlash
+        {r(15)}
       </button>
     </SideBar>
   );

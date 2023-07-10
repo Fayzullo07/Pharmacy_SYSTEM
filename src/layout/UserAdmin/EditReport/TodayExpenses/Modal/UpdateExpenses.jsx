@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { Naqd, Naqd_siz, naxt } from "../../../../../api";
+import { naxt } from "../../../../../api";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import {
   accountsExpensesPatchAction,
@@ -12,6 +12,7 @@ import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
 import SelectInput from "../../../../../ui/SelectInput";
 import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
+import { useTranslation } from "react-i18next";
 
 const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
   let director = null;
@@ -29,7 +30,6 @@ const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
     expense_type: data.expense_type,
     from_user: data.from_user ? data.from_user : null
   });
-  console.log(formData);
 
   const queryClient = useQueryClient();
 
@@ -75,14 +75,18 @@ const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+
   const handleSubmit = () => {
     if (!formData.expense_type) {
-      toast.warning("Xarajat turini tanlang!");
+      toast.warning(m(14));
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
@@ -135,13 +139,15 @@ const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
             disabled
           >
             <option value={director.id}>
-              Rahbar - {director.first_name} {director.last_name}
+              {g(95)} - {director.first_name} {director.last_name}
             </option>
             {formData.transfer_type == naxt &&
-              <option value={1}>Kassadan</option>}
+              <option value={1}>
+                {g(61)}
+              </option>}
           </select>
           <label htmlFor="from_user">
-            Xarajat kimdan qilindi <b className="text-danger">*</b>
+            {g(93)} <b className="text-danger">*</b>
           </label>
         </div>
 
@@ -173,7 +179,7 @@ const UpdateExpenses = ({ showModal, setShowModal, deteils, data }) => {
           >
             {mutationPharm.isLoading || mutationAccount.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Saqlash"}
+              : p(6)}
           </button>
         </div>
       </div>

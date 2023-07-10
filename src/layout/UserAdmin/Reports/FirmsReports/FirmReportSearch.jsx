@@ -6,6 +6,7 @@ import { firmsGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
   const [search, setSearch] = useState("");
@@ -21,28 +22,52 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
 
   if (error) return `Error: ${error.message}`;
 
-  return <ModalSimple showModal={showModal} setShowModal={setShowModal} title={"Firmalar"}>
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
+  return (
+    <ModalSimple
+      showModal={showModal}
+      setShowModal={setShowModal}
+      title={g(16)}
+    >
       <div className="header_flex my-2">
         <SearchInput search={search} setSearch={setSearch} setPage={setPage} />
       </div>
       <div className="modal-body py-0 mb-0">
         {/* TABLE */}
-        <table id="table" className="table table-hover">
-          <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+        <table
+          className="table table-hover table-bordered border-secondary align-middle text-center"
+          style={{ width: "max-content", minWidth: "100%" }}
+        >
+          <thead
+            className="align-middle"
+            style={{
+              position: "sticky",
+              top: 0,
+              backgroundColor: "var(--blue)",
+              color: "#fff",
+              zIndex: 55
+            }}
+          >
             <tr>
-              <th scope="col" style={{ width: "5px" }}>
+              <th scope="col" style={{ width: "5px", padding: "10px" }}>
                 №
               </th>
-              <th scope="col">Firma</th>
+              <th scope="col">
+                {g(4)}
+              </th>
             </tr>
           </thead>
           <tbody>
-            {data && data.data.results.length === 0 && <tr>
+            {data &&
+              data.data.results.length === 0 &&
+              <tr>
                 <td colSpan={2}>
-                  <h2> Firma topilmadi!</h2>
+                  {g(23)}
                 </td>
               </tr>}
-            {data && data.data.results.map((item, index) =>
+            {data &&
+              data.data.results.map((item, index) =>
                 <tr
                   key={item.id}
                   data-bs-toggle="offcanvas"
@@ -72,9 +97,14 @@ const FirmReportSearch = ({ showModal, setShowModal, setCurData }) => {
         {isLoading && <SkeletLoading height={60} count={6} rodius={20} />}
       </div>
       <div className="modal-footer">
-        <PaginationForModal page={page} pages={Math.ceil(data && data.data.count / pagination)} setPage={setPage} />
+        <PaginationForModal
+          page={page}
+          pages={Math.ceil(data && data.data.count / pagination)}
+          setPage={setPage}
+        />
       </div>
-    </ModalSimple>;
+    </ModalSimple>
+  );
 };
 
 export default FirmReportSearch;

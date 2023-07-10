@@ -7,6 +7,7 @@ import {
   formatNumber
 } from "../../../../../../functions/NecessaryFunctions";
 import ModalSimple from "../../../../../../utils/ModalSimple";
+import { useTranslation } from "react-i18next";
 
 const ViewModalSMS = props => {
   const { showModal, setShowModal, firm_return_id } = props;
@@ -38,9 +39,13 @@ const ViewModalSMS = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+
   const handleSubmit = () => {
     if (!formData.code || formData.code.length < 5) {
-      toast.warning("SMS Parolni to'g'ri kiriying!");
+      toast.warning(g(42));
       return;
     }
     mutation.mutate();
@@ -49,25 +54,25 @@ const ViewModalSMS = props => {
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Tasdiqlash"}
+      title={r(15)}
     >
       <div className="modal-body">
         <h5>
-          Telefon nomer{" "}
+          {g(5)}{" "}
           <span className="mx-2 text-muted">
             {firm_return_id.verified_phone_number}
           </span>
         </h5>
         <hr />
         <h5>
-          F.I.O{" "}
+          {m(18)}{" "}
           <span className="mx-2 text-muted">
             {firm_return_id.verified_firm_worker_name}
           </span>
         </h5>
         <hr />
         <h5>
-          Berilgan summa{" "}
+          {m(3)}{" "}
           <span className="mx-2 text-muted">
             {formatNumber(firm_return_id.price)}
           </span>
@@ -79,7 +84,7 @@ const ViewModalSMS = props => {
           <input
             type="number"
             className="form-control bg-light"
-            placeholder="SMS kodini kiriting"
+            placeholder={g(43)}
             id="code"
             name="code"
             value={formData.code}
@@ -91,7 +96,7 @@ const ViewModalSMS = props => {
             }}
           />
           <label htmlFor="code">
-            SMS kodini kiriting <b className="text-danger">*</b>
+            {g(43)} <b className="text-danger">*</b>
           </label>
         </div>
       </div>
@@ -102,7 +107,7 @@ const ViewModalSMS = props => {
             style={{ background: "red" }}
             onClick={() => setShowModal(false)}
           >
-            Bekor qilish
+            {g(44)}
           </button>
           <button
             className="btn btn-primary rounded-3 col-5 col-md-4 py-2"
@@ -112,7 +117,7 @@ const ViewModalSMS = props => {
           >
             {mutation.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Tasdiqlash"}
+              : r(15)}
           </button>
         </div>
       </div>

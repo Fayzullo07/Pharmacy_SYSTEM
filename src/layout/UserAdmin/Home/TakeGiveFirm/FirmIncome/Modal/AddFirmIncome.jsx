@@ -8,9 +8,10 @@ import Modal from "../../../../../../utils/Modal";
 import Textarea from "../../../../../../ui/Textarea";
 import TextInput from "../../../../../../ui/TextInput";
 import NumberInput from "../../../../../../ui/NumberInput";
+import { useTranslation } from "react-i18next";
 
 const AddFirmIncome = props => {
-  const { showModal, setShowModal, deteils, date_firm, curData } = props;
+  const { showModal, setShowModal, date_firm, curData } = props;
   const [formData, setFormData] = useState({
     price: "",
     desc: "",
@@ -52,19 +53,25 @@ const AddFirmIncome = props => {
     }
   );
 
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   const handleSubmit = () => {
     if (!formData.second_name) {
-      toast.warning("Nomini kiritin !");
+      toast.warning(m(27));
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 so'm !");
+      toast.warning(g(33));
       return;
     }
 
-    if (formData.deadline_date == "" || new Date(formData.deadline_date) < new Date(today)) {
-      toast.warning("Qaytarish muddati !");
+    if (
+      formData.deadline_date == "" ||
+      new Date(formData.deadline_date) < new Date(today)
+    ) {
+      toast.warning(g(38));
       return;
     }
 
@@ -123,7 +130,7 @@ const AddFirmIncome = props => {
                 }}
               />
               <label>
-                Qayatarish muddati <b className="text-danger">*</b>
+                {g(38)} <b className="text-danger">*</b>
               </label>
             </div>
           </div>
@@ -138,11 +145,11 @@ const AddFirmIncome = props => {
                 value={formData.is_transfer_return}
                 onChange={handleInputChange}
               >
-                <option value={false}>NAQD</option>
-                <option value={true}>NAQD PULSIZ</option>
+                <option value={false}>{m(34)}</option>
+                <option value={true}>{m(35)}</option>
               </select>
               <label htmlFor="is_transfer_return">
-                Qaytarish to'lov turi <b className="text-danger">*</b>
+                {g(37)} <b className="text-danger">*</b>
               </label>
             </div>
           </div>

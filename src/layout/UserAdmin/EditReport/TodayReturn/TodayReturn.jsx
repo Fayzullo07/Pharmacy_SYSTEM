@@ -11,6 +11,7 @@ import {
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
 import { accountsExpensesGetAPI } from "../../../../api/DirectorRequest";
+import { useTranslation } from "react-i18next";
 
 const TodayReturn = (props) => {
   const { deteils, getData } = props;
@@ -58,6 +59,8 @@ const TodayReturn = (props) => {
     total = totalMoney(data && data.data.results);
     total += totalMoney(dataAccount && dataAccount.data.results);
   }
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {showModal && (
@@ -88,7 +91,7 @@ const TodayReturn = (props) => {
       <div>
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -112,9 +115,9 @@ const TodayReturn = (props) => {
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
               <tr>
-                <th>Mahsulot nomi</th>
-                <th>Qaytarilgan pul</th>
-                <th>Kimdan pul berildi</th>
+                <th>{m(19)}</th>
+                <th>{g(102)}</th>
+                <th>{g(103)}</th>
                 <th
                   scope="col"
                   className="text-center"
@@ -136,17 +139,17 @@ const TodayReturn = (props) => {
                 data.data.results.map((item) => (
                   <tr key={item.id}>
                     <td
-                      data-label="Mahsulot nomi"
+                      data-label={m(19)}
                       className="text-capitalize text-break"
                     >
                       {item.second_name}
                     </td>
-                    <td data-label="Qaytarilgan pul">
+                    <td data-label={g(102)}>
                       <b className="text-danger">{formatNumber(item.price)}</b>{" "}
                     </td>
-                    <td data-label="Qaytarilgan pul">Kassadan</td>
+                    <td data-label={g(103)}>{g(61)}</td>
                     <td
-                      data-label="O'zgartirish"
+                      data-label=""
                       onClick={() => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
@@ -156,7 +159,7 @@ const TodayReturn = (props) => {
                       <i className="fa fa-edit text-warning"></i>
                     </td>
                     <td
-                      data-label="O'chirish"
+                      data-label=""
                       onClick={() => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);
@@ -171,17 +174,17 @@ const TodayReturn = (props) => {
                 dataAccount.data.results.map((item) => (
                   <tr key={item.id}>
                     <td
-                      data-label="Mahsulot nomi"
+                      data-label={m(19)}
                       className="text-capitalize text-break"
                     >
                       {item.second_name}
                     </td>
-                    <td data-label="Qaytarilgan pul">
+                    <td data-label={g(102)}>
                       <b className="text-danger">{formatNumber(item.price)}</b>{" "}
                     </td>
-                    <td data-label="Qaytarilgan pul">{item.from_user_name}</td>
+                    <td data-label={g(103)}>{item.from_user_name}</td>
                     <td
-                      data-label="O'zgartirish"
+                      data-label=""
                       onClick={() => {
                         setCurData(item);
                         setUpdateModal(!updateModal);
@@ -191,7 +194,7 @@ const TodayReturn = (props) => {
                       <i className="fa fa-edit text-warning"></i>
                     </td>
                     <td
-                      data-label="O'chirish"
+                      data-label=""
                       onClick={() => {
                         setCurData(item);
                         setDeleteModal(!deleteModal);

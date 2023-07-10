@@ -11,6 +11,7 @@ import NumberInput from "../../../../../ui/NumberInput";
 import Textarea from "../../../../../ui/Textarea";
 import ModalSimple from "../../../../../utils/ModalSimple";
 import TextInput from "../../../../../ui/TextInput";
+import { useTranslation } from "react-i18next";
 
 const AddReturn = props => {
   const { showModal, setShowModal, deteils, getData } = props;
@@ -87,18 +88,21 @@ const AddReturn = props => {
     }
   );
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+   
   const handleSubmit = () => {
-    if (!formData.second_name || formData.second_name.length < 2) {
-      toast.warning("Maxsulot nomini kiriting!");
+    if (!formData.second_name) {
+      toast.warning(g(18));
       return;
     }
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
     if (formData.from_user == null || formData.from_user == "") {
-      toast.warning("Pul qayerdan berilgan tanlang!");
+      toast.warning(g(103));
       return;
     }
 
@@ -140,13 +144,13 @@ const AddReturn = props => {
             value={formData.from_user}
             onChange={handleInputChange}
           >
-            <option value="k">Kassadan</option>
+            <option value="k">{g(61)}</option>
             <option value={director.id}>
-              Rahbar - {director.first_name} {director.last_name}
+              {g(95)} - {director.first_name} {director.last_name}
             </option>
           </select>
           <label htmlFor="to_user">
-            Pul kimdan berildi <b className="text-danger">*</b>
+            {g(103)} <b className="text-danger">*</b>
           </label>
         </div>
 
@@ -168,7 +172,7 @@ const AddReturn = props => {
           >
             {mutationPharm.isLoading || mutationAccount.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Saqlash"}
+              : p(6)}
           </button>
         </div>
       </div>

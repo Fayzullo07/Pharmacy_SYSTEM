@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import Textarea from "../../../../../ui/Textarea";
 import TextInput from "../../../../../ui/TextInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
+import { useTranslation } from "react-i18next";
 
 const AddFirma = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
@@ -65,14 +66,15 @@ const AddFirma = ({ showModal, setShowModal }) => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   const handleSubmit = () => {
     if (!formData.name) {
-      toast.warning("Firma nomini kiriting !");
+      toast.warning(g(4));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number1)) {
-      toast.warning("Telefon raqamni tog'ri kiriting +998 9? 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
     mutation.mutate();
@@ -125,11 +127,12 @@ const AddFirma = ({ showModal, setShowModal }) => {
                   formData.is_favorite ? "text-success" : "text-danger"
                 }
               >
-                Faol
+                {g(8)}
               </b>
             </div>
           </div>
           <div className="col-md-6 col-12">
+            {/* ADDRESS */}
             <TextInput
               name={"address"}
               value={formData.address}
@@ -139,8 +142,6 @@ const AddFirma = ({ showModal, setShowModal }) => {
             />
           </div>
         </div>
-
-        {/* ADDRESS */}
 
         {/* IZOH */}
         <Textarea

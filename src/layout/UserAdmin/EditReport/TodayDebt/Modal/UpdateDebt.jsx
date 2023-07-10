@@ -13,6 +13,7 @@ import PhoneInput from "../../../../../ui/PhoneInput";
 import TextInput from "../../../../../ui/TextInput";
 import NumberInput from "../../../../../ui/NumberInput";
 import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
+import { useTranslation } from "react-i18next";
 
 const UpdateDebt = props => {
   const { showModal, setShowModal, data } = props;
@@ -68,18 +69,20 @@ const UpdateDebt = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   const handleSubmit = () => {
     if (!formData.from_who) {
-      toast.warning("Kimdan qarz olganini kiriting !");
+      toast.warning(m(24));
       return;
     }
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number)) {
-      toast.warning("Telefon raqamni to'gri kiriting +998 99 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
     mutation.mutate();

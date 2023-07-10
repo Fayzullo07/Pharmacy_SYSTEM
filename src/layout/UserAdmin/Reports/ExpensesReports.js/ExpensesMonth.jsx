@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { returnReportDayGetAPI } from "../../../../api/FirmsRequest";
 import { useQuery, useQueryClient } from "react-query";
 import {
-  formatNumber,
-  totalMoneyByKey,
+  formatNumber
 } from "../../../../functions/NecessaryFunctions";
 import Empty from "../../../../utils/Empty";
 import SkeletLoading from "../../../../utils/SkeletLoading";
@@ -13,11 +12,11 @@ import PaginationForModal from "../../../../utils/PaginationForModal";
 import { PharmaciesExpensesReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
 import SideBarExpenseMonth from "./SideBarExpenseMonth";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const ExpensesMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
 
   const [change, setChange] = useState(false);
   const [page, setPage] = useState(1);
@@ -55,10 +54,9 @@ const ExpensesMonth = () => {
     queryClient.removeQueries("EXPENSE_MONTH");
   };
 
-  let discount = 0;
-  if (data && data.data.results) {
-    discount = totalMoneyByKey(data.data.results, "price");
-  }
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
 
   return (
     <>
@@ -66,9 +64,9 @@ const ExpensesMonth = () => {
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"} {" "} {change && deteils.expense_types.map((item) => {
+        })}  {change && deteils.expense_types.map((item) => {
           if(item.id == expense_type){
             return item.name
           }
@@ -104,7 +102,7 @@ const ExpensesMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
            style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -120,13 +118,13 @@ const ExpensesMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+                {r(0)}
               </th>
               <th>
-                <b>Operatsiyalar</b>
+                {f(1)}
               </th>
               <th>
-                <b>Berilgan summa</b>
+                {g(80)}
               </th>
             </tr>
           </thead>
@@ -178,7 +176,7 @@ const ExpensesMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="3" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&

@@ -10,6 +10,7 @@ import { pagination, transfers } from "../../../../api";
 import AddIncome from "./Modal/AddIncome";
 import DeleteIncome from "./Modal/DeleteIncome";
 import UpdateIncome from "./Modal/UpdateIncome";
+import { useTranslation } from "react-i18next";
 
 const Incomes = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -33,6 +34,9 @@ const Incomes = () => {
 
   if (error) return `Error: ${error.message}`;
 
+  const { t } = useTranslation("translation", { keyPrefix: "Profile" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
     {showModal && (
@@ -51,7 +55,7 @@ const Incomes = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Tushum turlari</h2>
+              <h2>{t(5)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -73,7 +77,7 @@ const Incomes = () => {
                   <th scope="col" style={{ width: "5px" }}>
                     №
                   </th>
-                  <th scope="col">Tushum nomi</th>
+                  <th scope="col">{m(31)}</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -97,7 +101,7 @@ const Incomes = () => {
                       {index + 1}
                     </td>
                     <td
-                      data-label="Tushum nomi"
+                      data-label={m(31)}
                       className="text-capitalize text-break"
                     >
                       {item.name}
@@ -113,12 +117,12 @@ const Incomes = () => {
                         {index + 1 + transfers.length}
                       </td>
                       <td
-                        data-label="Tushum nomi"
+                        data-label={m(31)}
                         className="text-capitalize text-break"
                       >
                         {item.name}
                       </td>
-                      <td data-label="O'zgartirish" onClick={() => {
+                      <td data-label={g(20)} onClick={() => {
                             setCurData(item);
                             setUpdateModal(!updateModal);
                           }}
@@ -128,7 +132,7 @@ const Incomes = () => {
                           
                         ></i>
                       </td>
-                      <td data-label="O'chirish"  onClick={() => {
+                      <td data-label={g(21)}  onClick={() => {
                             setCurData(item);
                             setDeleteModal(!deleteModal);
                           }}

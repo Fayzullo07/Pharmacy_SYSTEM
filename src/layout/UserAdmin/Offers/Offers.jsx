@@ -76,16 +76,16 @@ const Offers = () => {
     }
   );
 
+  const { t } = useTranslation("translation", { keyPrefix: "Offers" });
   const handleSubmit = () => {
     if (!formData.text) {
-      toast.warning("Taklifingiz bo'lsa yozing !");
+      toast.warning(t(3));
       return;
     }
     mutation.mutate();
     setFormData({ ...formData, text: "" });
   };
 
-  const { t } = useTranslation("translation", { keyPrefix: "Offers" });
   return (
     <section className="msger">
       <header className="msger-header">

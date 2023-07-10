@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { managerGetAPI } from "../../../../api/DirectorRequest";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const Managers = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -31,6 +32,10 @@ const Managers = () => {
   });
 
   if (error) return `Error: ${error.message}`;
+
+    const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+    const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+    const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
 
   return (
     <>
@@ -58,7 +63,7 @@ const Managers = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Menejerlar</h2>
+              <h2>{p(0)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -74,16 +79,26 @@ const Managers = () => {
             className="container-fluid m-1"
             style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
           >
-            <table id="table" className="my-2 table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%",
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
+                  <th scope="col" style={{ width: "5px",padding: '10px' }}>
                     №
                   </th>
-                  <th scope="col">F.I.O</th>
-                  <th scope="col">Telefon</th>
-                  <th scope="col">Manzil</th>
-                  <th scope="col">Faol</th>
+                  <th scope="col">{m(18)}</th>
+                  <th scope="col">{g(5)}</th>
+                  <th scope="col">{g(2)}</th>
+                  <th scope="col">{g(8)}</th>
                   <th
                     scope="col"
                     className="text-center"
@@ -104,7 +119,7 @@ const Managers = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2> Manager topilmadi!</h2>
+                      {g(23)}
                     </td>
                   </tr>
                 )}

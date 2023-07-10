@@ -10,11 +10,12 @@ import SideBar from "../../../../components/SideBar/SideBar";
 import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { AccountReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const LeaderMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
+
   const user = localStorage.getItem("user");
 
   const [change, setChange] = useState(false);
@@ -52,15 +53,18 @@ const LeaderMonth = () => {
     queryClient.removeQueries("LEADER_MONTH");
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}</h2>
         <div className="d-flex">
           <AccountReportDayExcelGetDownload
             year={year}
@@ -115,7 +119,7 @@ const LeaderMonth = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -130,7 +134,7 @@ const LeaderMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -146,20 +150,16 @@ const LeaderMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+                {r(0)}
               </th>
               <th>
-                <b>Operatsiyalar</b>
+               {f(1)}
               </th>
               <th>
-                <b>Rahbarga berilgan</b>
-                <br />
-                <b>pullar</b>
+                {g(83)}
               </th>
               <th>
-                <b>Rahbardan olingan</b>
-                <br />
-                <b>pullar</b>
+               {g(84)}
               </th>
             </tr>
           </thead>
@@ -215,7 +215,7 @@ const LeaderMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="3" className="py-3">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {formatNumber(data && data.data.month_income_total_price)}

@@ -13,6 +13,7 @@ import {
   formatNumber,
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
+import { useTranslation } from "react-i18next";
 
 const TodayExpenseToAccounts = ({ deteils, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -27,6 +28,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
       report_date: getData.report_date,
       shift: getData.shift,
       to_pharmacy: getData.to_pharmacy,
+      to_user__isnull: false
     });
   });
 
@@ -52,6 +54,8 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
     total += totalMoney(dataFarm && dataFarm.data.results);
   }
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {showModal && (
@@ -83,7 +87,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
       <div className="bg_head mb-2">
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -107,10 +111,10 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
           <table id="table" className="my-2 table table-hover">
             <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
               <tr>
-                <th>Kimdan berildi</th>
-                <th>Kimga berildi</th>
-                <th>To'lov turi</th>
-                <th>Berilgan summa</th>
+                <th>{g(101)}</th>
+                <th>{g(104)}</th>
+                <th>{g(92)}</th>
+                <th>{g(80)}</th>
                 <th
                   scope="col"
                   className="text-center"
@@ -131,21 +135,21 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
               {dataFarm &&
                 dataFarm.data.results.map((item) => (
                   <tr key={item.id}>
-                    <td data-label="Kimdan berildi">
-                      <span className="text-muted">Kassadan</span>{" "}
+                    <td data-label={g(101)}>
+                      <span className="text-muted">{g(61)}</span>{" "}
                     </td>
-                    <td data-label="Kimga berildi" className="text-capitalize">
+                    <td data-label={g(104)} className="text-capitalize">
                       {item.to_user_name}
                     </td>
-                    <td data-label="To'lov turi" className="text-capitalize">
+                    <td data-label={g(92)} className="text-capitalize">
                       {item.transfer_type_name == "payme"
-                        ? "Naqd pulsiz"
+                        ? m(35)
                         : item.transfer_type_name}
                     </td>
-                    <td data-label="Berilgan summa">
+                    <td data-label={g(80)}>
                       <b className="text-danger">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'zgartirish" onClick={() => {
+                    <td data-label="" onClick={() => {
                       setCurData(item);
                       setUpdateModal(!updateModal);
                     }}>
@@ -154,7 +158,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
 
                       ></i>
                     </td>
-                    <td data-label="O'chirish" onClick={() => {
+                    <td data-label="" onClick={() => {
                       setCurData(item);
                       setDeleteModal(!deleteModal);
                     }}>
@@ -168,21 +172,21 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
               {data &&
                 data.data.results.map((item) => (
                   <tr key={item.id} className="scaleY">
-                    <td data-label="Kimdan berildi">
-                      <span className="text-muted">Rahbardan</span>{" "}
+                    <td data-label={g(101)}>
+                      <span className="text-muted">{g(95)}</span>{" "}
                     </td>
-                    <td data-label="Kimga berildi" className="text-capitalize">
+                    <td data-label={g(104)} className="text-capitalize">
                       {item.to_user_name == null ? "Firmaga chiqim": item.to_user_name}
                     </td>
-                    <td data-label="To'lov turi" className="text-capitalize">
+                    <td data-label={g(92)} className="text-capitalize">
                       {item.transfer_type_name == "payme"
-                        ? "Naqd pulsiz"
+                        ? m(35)
                         : item.transfer_type_name}
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label={g(80)}>
                       <b className="text-danger">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'zgartirish">
+                    <td data-label="">
                       <i
                         className="fa fa-edit text-warning cursor_pointer"
                         onClick={() => {
@@ -191,7 +195,7 @@ const TodayExpenseToAccounts = ({ deteils, getData }) => {
                         }}
                       ></i>
                     </td>
-                    <td data-label="O'chirish">
+                    <td data-label="">
                       <i
                         className="fa fa-trash-can text-danger cursor_pointer"
                         onClick={() => {

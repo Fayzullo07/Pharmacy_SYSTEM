@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { months } from "../../../../api";
+import { months, number_0 } from "../../../../api";
 import { useQuery } from "react-query";
 import { returnReportMonthGetAPI } from "../../../../api/FirmsRequest";
 import {
@@ -11,11 +11,11 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 
 import { useSelector } from "react-redux";
 import SideBarExpenseYears from "./SideBarExpenseYears";
+import { useTranslation } from "react-i18next";
 
 const ExpensesYears = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
 
   const [year, setYears] = useState(new Date().getFullYear());
   const [pharmacy, setPharmacy] = useState("");
@@ -46,15 +46,18 @@ const ExpensesYears = () => {
     setChange(!change);
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{ deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && f(11)}</h2>
         <div className="d-flex">
           <SideBarExpenseYears
             year={year}
@@ -78,7 +81,7 @@ const ExpensesYears = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -94,7 +97,7 @@ const ExpensesYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
                 <b>
@@ -152,7 +155,7 @@ const ExpensesYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>{formatNumber(totalMoneyByKey(result, "price"))}</th>
                 </tr>
@@ -188,9 +191,9 @@ const ExpensesYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
-                  <th>0</th>
+                  <th>{number_0}</th>
                 </tr>
               </tfoot>
             </>

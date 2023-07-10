@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { months } from "../../../../api";
+import { months, number_0 } from "../../../../api";
 import { useQuery } from "react-query";
 import { firmReportMonthAPI } from "../../../../api/FirmsRequest";
 import {
@@ -12,11 +12,11 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import { useSelector } from "react-redux";
 import SideBarFirmYears from "./SideBarFirmYears";
 import FirmReportSearch from "./FirmReportSearch";
+import { useTranslation } from "react-i18next";
 
 const FirmsYears = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
 
   const [searchModal, setSearchModal] = useState(false);
   const [curData, setCurData] = useState(deteils.firms[0]);
@@ -47,6 +47,9 @@ const FirmsYears = () => {
   const filterFunction = () => {
     setChange(!change);
   };
+
+    const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+    const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
 
   return (
     <>
@@ -83,7 +86,7 @@ const FirmsYears = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -99,12 +102,10 @@ const FirmsYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "15px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
-                <b>Firmalarga berilgan</b>
-                <br />
-                <b>summasi</b>
+                {g(81)}
               </th>
             </tr>
           </thead>
@@ -154,7 +155,7 @@ const FirmsYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&
@@ -194,9 +195,9 @@ const FirmsYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
-                  <th>0</th>
+                  <th>{number_0}</th>
                 </tr>
               </tfoot>
             </>

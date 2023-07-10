@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { months, years } from "../../../../api";
+import { months, number_0, years } from "../../../../api";
 import { useQuery } from "react-query";
 import {
   accountReportMonthGetAPI,
@@ -15,6 +15,7 @@ import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
 import { AccountReportMonthExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const WorkerYears = () => {
   const reduxData = useSelector((state) => state);
@@ -60,6 +61,9 @@ const WorkerYears = () => {
     refetch();
   };
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
@@ -98,7 +102,7 @@ const WorkerYears = () => {
                 setWorker("");
               }}
             >
-              <option value="">Hamma filial</option>
+              <option value="">{f(11)}</option>
               {deteils.pharmacies.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
@@ -112,7 +116,7 @@ const WorkerYears = () => {
                 className="form-select my-3"
                 onChange={(e) => setWorker(e.target.value)}
               >
-                <option value="">Xodim tanlang</option>
+                <option value="">{g(88)}</option>
                 {accounts &&
                   accounts.data.results.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -128,7 +132,7 @@ const WorkerYears = () => {
                 onClick={filterFunction}
                 style={{ background: "var(--blue)", color: "#fff" }}
               >
-                Tasdiqlash
+                {r(15)}
               </button>
             )}
           </SideBar>
@@ -144,7 +148,7 @@ const WorkerYears = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -160,12 +164,10 @@ const WorkerYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
-                <b>Olgan ish haqi</b>
-                <br />
-                <b>summasi</b>
+                {g(89)}
               </th>
             </tr>
           </thead>
@@ -219,7 +221,7 @@ const WorkerYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&
@@ -263,9 +265,9 @@ const WorkerYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
-                  <th>0</th>
+                  <th>{number_0}</th>
                 </tr>
               </tfoot>
             </>

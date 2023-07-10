@@ -7,6 +7,7 @@ import { pharmacyInComesPostAction } from "../../../../../functions/DirectorActi
 import Modal from "../../../../../utils/Modal";
 import NumberInput from "../../../../../ui/NumberInput";
 import Textarea from "../../../../../ui/Textarea";
+import { useTranslation } from "react-i18next";
 
 const AddInComes = props => {
   const { showModal, setShowModal, deteils, getData } = props;
@@ -64,13 +65,16 @@ const AddInComes = props => {
     }
   );
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
     if (!input1) {
-      toast.warning("Pul turini tanlang!");
+      toast.warning(g(107));
       return;
     }
     if (input1 == "naxt_siz" && formData.transfer_type == 1) {
-      toast.warning("O'tkazma turini tanlang!");
+      toast.warning(g(108));
       return;
     }
 
@@ -78,12 +82,12 @@ const AddInComes = props => {
       (formData.transfer_type == "c" && formData.to_user == null) ||
       formData.to_user == ""
     ) {
-      toast.warning("Kimga tushirildi tanlang!");
+      toast.warning(g(109));
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
@@ -115,16 +119,16 @@ const AddInComes = props => {
               }
             }}
           >
-            <option value="">Tushum turini tanlang . . .</option>
+            <option value="">{g(107)} . . .</option>
             <option value={naxt}>
-              {Naqd}
+              {m(34)}
             </option>
             <option value="naxt_siz">
-              {Naqd_siz}
+              {m(35)}
             </option>
           </select>
           <label htmlFor="transfer_typ">
-            Tushum turini tanlang <b className="text-danger">*</b>
+            {g(107)} <b className="text-danger">*</b>
           </label>
         </div>
         <div className="row">
@@ -146,8 +150,8 @@ const AddInComes = props => {
                     handleInputChange(e);
                   }}
                 >
-                  <option value="">Naqdsiz tushum turini tanlang . . .</option>
-                  <option value="c">CLICK - XODIM</option>
+                  <option value="">{g(108)} . . .</option>
+                  <option value="c">CLICK - {g(27)}</option>
                   {transfersWorker.map(transfer =>
                     <option key={transfer.id} value={transfer.id}>
                       {transfer.name}
@@ -160,7 +164,7 @@ const AddInComes = props => {
                   )}
                 </select>
                 <label htmlFor="transfer_type">
-                  Naqdsiz tushum turini tanlang <b className="text-danger">*</b>
+                  {g(108)} <b className="text-danger">*</b>
                 </label>
               </div>}
           </div>
@@ -177,10 +181,10 @@ const AddInComes = props => {
                   disabled={!moveMoney}
                 >
                   {moveMoney &&
-                    <option value=""> Tushum kimga tashlandi . . .</option>}
+                    <option value="">{g(109)} . . .</option>}
                   {!moveMoney &&
                     <option value="" selected={!moveMoney}>
-                      Xisob raqam
+                      {g(96)}
                     </option>}
 
                   {moveMoney &&
@@ -191,7 +195,7 @@ const AddInComes = props => {
                     )}
                 </select>
                 <label htmlFor="to_user">
-                  Tushum kimga tashlandi <b className="text-danger">*</b>
+                  {g(109)} <b className="text-danger">*</b>
                 </label>
               </div>}
           </div>

@@ -110,7 +110,7 @@ const OneBranchReport = () => {
               className="table table-sm table-hover table-bordered border-dark align-middle text-center p-3"
               style={{
                 width: "max-content",
-                minWidth: `${ "95vw"}`,
+                minWidth: "100%",
               }}
             >
               <thead
@@ -142,9 +142,7 @@ const OneBranchReport = () => {
                     <h6>
                       <b>{t(2)}</b>
                     </h6>
-                   
                   </th>
-
                   <th style={{width: '100px'}}>
                     <h6>
                       <b>{t(3)}</b>
@@ -460,7 +458,7 @@ const OneBranchReport = () => {
                           ? number_0
                           : formatNumber(
                             totalMoneyWithIndex(result, index) -
-                            totalReceiptPriceWithIndex(result, index) 
+                            totalReceiptPriceWithIndex(result, index)  
                           )} 
                       </b>
                     </td>
@@ -557,7 +555,7 @@ const OneBranchReport = () => {
                       {data &&
                         data.data && totalWatntToByKey(result, "receipt_price") + totalWatntToByKey(result, "debt_income") == 0 ? number_0 :
                         formatNumber(
-                          totalWatntToByKey(result, "receipt_price") + totalWatntToByKey(result, "debt_income")
+                          totalWatntToByKey(result, "receipt_price")
                         )}
                     </b>
                   </th>

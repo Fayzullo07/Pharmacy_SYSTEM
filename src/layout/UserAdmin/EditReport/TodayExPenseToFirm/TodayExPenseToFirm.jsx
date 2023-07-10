@@ -11,6 +11,7 @@ import {
 import ModalSearchFirmExpense from "./ModalSearch/ModalSearchFirmExpense";
 import { today, xisob_raqam } from "../../../../api";
 import ModalDescription from "../../../../utils/ModalDescription";
+import { useTranslation } from "react-i18next";
 
 const TodayExPenseToFirm = ({ deteils, getData }) => {
   const [firm_expense_id, setFirmExpenseId] = useState({});
@@ -45,6 +46,9 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
   if (data && data.data.results) {
     total = totalMoney(data.data.results);
   }
+
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {descModal && (
@@ -87,7 +91,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
       <div className="bg_head mb-2">
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -116,12 +120,12 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Chiqim kimdan qilindi</th>
-                <th>Firma</th>
-                <th>F . I . O</th>
-                <th>Telofon nomeri</th>
-                <th>Berilgan summa</th>
-                <th>To'lov turi</th>
+                <th>{g(94)}</th>
+                <th>{m(21)}</th>
+                <th>{m(18)}</th>
+                <th>{g(5)}</th>
+                <th>{g(80)}</th>
+                <th>{g(92)}</th>
               </tr>
             </thead>
             <tbody>
@@ -132,23 +136,24 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
                     setDescModal(!descModal)
                   }}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Chiqim kimdan qilindi">{item.transfer_type == xisob_raqam ? "HISOB RAQAM" : item.from_user_name != null ? "RAHBAR" : item.from_user_price != 0 ? "KASSA, RAHBAR" : "KASSA"}</td>
-                    <td data-label="Firma" className="text-start">{item.to_firm_name}</td>
-                    <td data-label="F.I.O" className="text-capitalize">
+                    <td data-label={g(94)}>{item.transfer_type == xisob_raqam ? g(96) : item.from_user_name != null ? g(65) : item.from_user_price != 0 ? `${g(61)}, ${g(95)}` : g(61)}</td>
+                    <td data-label={m(31)} className="text-start">{item.to_firm_name}</td>
+                    <td data-label={m(18)} className="text-capitalize">
                       {item.verified_firm_worker_name
+
                         ? item.verified_firm_worker_name
                         : "~"}
                     </td>
-                    <td data-label="Telofon nomer" className="text-capitalize">
+                    <td data-label={g(5)} className="text-capitalize">
                       {item.verified_phone_number
                         ? item.verified_phone_number
                         : "~"}
                     </td>
-                    <td data-label="Berilgan summa">
+                    <td data-label={g(80)}>
                       <b>{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="To'lov turi" className="text-uppercase">
-                      {item.transfer_type_name == 'payme' ? "Naqd pulsiz" : item.transfer_type_name}
+                    <td data-label={g(92)} className="text-uppercase">
+                      {item.transfer_type_name == 'payme' ?  m(35): item.transfer_type_name}
                     </td>
                   </tr>
                 ))}

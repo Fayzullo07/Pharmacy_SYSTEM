@@ -7,6 +7,7 @@ import { pharmacyInComesPatchAction } from "../../../../../functions/DirectorAct
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
+import { useTranslation } from "react-i18next";
 
 const UpdateInComes = props => {
   const { showModal, setShowModal, deteils, data } = props;
@@ -22,7 +23,8 @@ const UpdateInComes = props => {
   const [formData, setFormData] = useState({
     price: data.price,
     desc: data.desc,
-    transfer_type: data.transfer_type == 3 && data.to_user ? 'c': data.transfer_type,
+    transfer_type:
+      data.transfer_type == 3 && data.to_user ? "c" : data.transfer_type,
     to_user: data.to_user
   });
 
@@ -66,13 +68,16 @@ const UpdateInComes = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
     if (!input1) {
-      toast.warning("Pul turini tanlang!");
+      toast.warning(g(107));
       return;
     }
     if (input1 == "naxt_siz" && formData.transfer_type == 1) {
-      toast.warning("O'tkazma turini tanlang!");
+      toast.warning(g(108));
       return;
     }
 
@@ -80,12 +85,12 @@ const UpdateInComes = props => {
       (formData.transfer_type == 3 && formData.to_user == null) ||
       formData.to_user == ""
     ) {
-      toast.warning("Kimga o'tkazildi tanlang!");
+      toast.warning(g(109));
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
@@ -108,26 +113,20 @@ const UpdateInComes = props => {
             id="transfer_typ"
             name="transfer_type"
             value={input1}
-            onChange={e => {
-              setInput1(e.target.value);
-              if (e.target.value == "naxt_siz") {
-                setFromClick(true);
-              } else {
-                setFromClick(false);
-              }
-            }}
             disabled
           >
-            <option value="">Pul turini tanlang . . .</option>
+            <option value="">
+              {g(107)} . . .
+            </option>
             <option value={naxt}>
-              {Naqd}
+              {m(34)}
             </option>
             <option value="naxt_siz">
-              {Naqd_siz}
+              {m(35)}
             </option>
           </select>
           <label htmlFor="transfer_typ">
-            Pul turini tanlang <b className="text-danger">*</b>
+            {g(107)} <b className="text-danger">*</b>
           </label>
         </div>
 
@@ -151,8 +150,8 @@ const UpdateInComes = props => {
                   }}
                   disabled
                 >
-                  <option value=""> Naqdsiz tushum turini tanlang . . .</option>
-                  <option value="c">CLICK - XODIM</option>
+                  <option value="">{g(108)} . . .</option>
+                  <option value="c">CLICK - {g(27)}</option>
                   {transfersWorker.map(transfer =>
                     <option key={transfer.id} value={transfer.id}>
                       {transfer.name}
@@ -165,7 +164,7 @@ const UpdateInComes = props => {
                   )}
                 </select>
                 <label htmlFor="transfer_type">
-                  Naqdsiz tushum turini tanlang <b className="text-danger">*</b>
+                  {g(108)} <b className="text-danger">*</b>
                 </label>
               </div>}
           </div>
@@ -182,10 +181,10 @@ const UpdateInComes = props => {
                   disabled
                 >
                   {moveMoney &&
-                    <option value=""> Tushum kimga tashlandi . . .</option>}
+                    <option value="">{g(109)} . . .</option>}
                   {!moveMoney &&
                     <option value="" selected={!moveMoney}>
-                      Xisob raqam
+                      {g(96)}
                     </option>}
 
                   {moveMoney &&
@@ -196,7 +195,7 @@ const UpdateInComes = props => {
                     )}
                 </select>
                 <label htmlFor="to_user">
-                  Tushum kimga tashlandi <b className="text-danger">*</b>
+                  {g(109)} <b className="text-danger">*</b>
                 </label>
               </div>}
           </div>

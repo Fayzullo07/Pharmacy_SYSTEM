@@ -3,24 +3,20 @@ import AddFirmIncome from "./Modal/AddFirmIncome";
 import DeleteFirmIncome from "./Modal/DeleteFirmIncome";
 import { useQuery } from "react-query";
 import { firmsInComesGetAPI } from "../../../../../api/GlobalRequest";
-import {
-  formatNumber,
-  totalMoney,
-} from "../../../../../functions/NecessaryFunctions";
+import {formatNumber} from "../../../../../functions/NecessaryFunctions";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import { today } from "../../../../../api";
 import ModalSearchFirmIncome from "./ModalSearch/ModalSearchFirmIncome";
-import DeteilsFirmIncome from "./Modal/DeteilsFirmIncome";
 import ModalDescription from "../../../../../utils/ModalDescription";
+import { useTranslation } from "react-i18next";
 
-const ProfileFirmIncome = ({ deteils, date_firm, setDateFirm }) => {
+const ProfileFirmIncome = ({  date_firm, setDateFirm }) => {
   const [searchModal, setSearchModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [deteilModal, setDeteilModal] = useState(false);
 
   const [curData, setCurData] = useState({});
-const [descModal, setDescModal] = useState(false);
+  const [descModal, setDescModal] = useState(false);
 
   const { data, isLoading, error } = useQuery(
     ["firms_incomes", date_firm],
@@ -33,13 +29,12 @@ const [descModal, setDescModal] = useState(false);
 
   if (error) return `Error: ${error.message}`;
 
-  let total = 0;
-  if (data && data.data.results) {
-    total = totalMoney(data.data.results);
-  }
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   return (
     <>
-    {descModal && (
+      {descModal && (
         <ModalDescription showModal={descModal} setShowModal={setDescModal} data={curData.desc} />
       )}
       {searchModal && (
@@ -55,7 +50,6 @@ const [descModal, setDescModal] = useState(false);
         <AddFirmIncome
           showModal={showModal}
           setShowModal={setShowModal}
-          deteils={deteils}
           date_firm={date_firm}
           curData={curData}
         />
@@ -69,16 +63,9 @@ const [descModal, setDescModal] = useState(false);
         />
       )}
 
-      {deteilModal && (
-        <DeteilsFirmIncome
-          showModal={deteilModal}
-          setShowModal={setDeteilModal}
-          data={curData}
-        />
-      )}
       <div>
         <div className="header_flex d-flex justify-content-end align-items-center mb-2">
-          
+
           <div className="d-flex align-items-center gap-2">
             <div>
               <input
@@ -87,9 +74,9 @@ const [descModal, setDescModal] = useState(false);
                 value={date_firm}
                 max={today}
                 onChange={(e) => {
-                  if(e.target.value){
+                  if (e.target.value) {
                     setDateFirm(e.target.value)
-                  }else {
+                  } else {
                     setDateFirm(today)
                   }
                 }}
@@ -110,18 +97,28 @@ const [descModal, setDescModal] = useState(false);
           className="container-fluid"
           style={{ maxHeight: "calc(100vh - 130px)", overflowY: "scroll" }}
         >
-          <table id="table" className="my-2 table table-hover">
-            <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+          <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+            width: "max-content",
+            minWidth: "100%",
+          }}>
+            <thead className="align-middle"
+              style={{
+                position: "sticky",
+                top: 0,
+                backgroundColor: "var(--blue)",
+                color: "#fff",
+                zIndex: 55,
+              }}>
               <tr className="align-middle">
-                <th scope="col" style={{ width: "5px" }}>
+                <th scope="col" style={{ width: "5px", padding: '10px' }}>
                   №
                 </th>
-                <th>Sana</th>
-                <th>Firma</th>
-                <th>Olingan mahsulot nomi</th>
-                <th>Mahsulot summasi</th>
-                <th>Qanday qaytariladi</th>
-                <th>Qaytarish muddati</th>
+                <th>{r(0)}</th>
+                <th>{g(4)}</th>
+                <th>{m(27)}</th>
+                <th>{g(19)}</th>
+                <th>{g(37)}</th>
+                <th>{g(38)}</th>
 
                 <th
                   scope="col"
@@ -133,6 +130,13 @@ const [descModal, setDescModal] = useState(false);
               </tr>
             </thead>
             <tbody>
+              {data && data.data.results.length === 0 && (
+                  <tr>
+                    <td colSpan={12}>
+                      <h2>{g(23)}</h2>
+                    </td>
+                  </tr>
+                )}
               {data &&
                 data.data.results.map((item, index) => (
                   <tr key={item.id} className="cursor_pointer" onClick={() => {
@@ -154,7 +158,7 @@ const [descModal, setDescModal] = useState(false);
                     </td>
                     <td data-label="Qanday qaytariladi">
                       <b className="text-success fw-600">
-                        {item.is_transfer_return ? "NAXT PULSIZ" : "NAXT"}
+                        {item.is_transfer_return ? m(35) : m(34)}
                       </b>
                     </td>
                     <td data-label="Qaytarish muddati">
@@ -168,10 +172,11 @@ const [descModal, setDescModal] = useState(false);
                         setCurData(item);
                         setDeleteModal(!deleteModal);
                       }}
+                      className="cursor_pointer"
                     >
-                      <i className="fa fa-trash-can text-danger cursor_pointer"></i>
+                      <i className="fa fa-trash-can text-danger"></i>
                     </td>
-                    
+
                   </tr>
                 ))}
             </tbody>

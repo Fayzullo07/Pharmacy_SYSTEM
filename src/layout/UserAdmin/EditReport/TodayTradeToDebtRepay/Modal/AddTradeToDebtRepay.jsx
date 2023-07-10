@@ -6,6 +6,7 @@ import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import { pharmacyToDebtsRePayPostAction } from "../../../../../functions/DirectorActions";
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
+import { useTranslation } from "react-i18next";
 
 const AddTradeToDebtRepay = ({
   showModal,
@@ -26,12 +27,14 @@ const AddTradeToDebtRepay = ({
     shift: getData.shift
   });
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+
   const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === "price" && Number(value) > user.remaining_debt) {
-      toast.warning(
-        `Qarz summasidan ko'p bervossiz tekshirib ko'ring! Qarz: ${user.remaining_debt}`
-      );
+      toast.warning(g(112));
       return;
     }
 
@@ -65,16 +68,16 @@ const AddTradeToDebtRepay = ({
 
   const handleSubmit = () => {
     if (formData.price < 100 && !disabledInput) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
     if (formData.price > user.remaining_debt) {
-      toast.warning("Qarz summasidan ko'p bervossiz tekshirib ko'ring!");
+      toast.warning(g(112));
       return;
     }
 
     if (input1 == "naxt_siz" && formData.transfer_type == 1) {
-      toast.warning("To'lov turini tanlang!");
+      toast.warning(g(92));
       return;
     }
     mutation.mutate();
@@ -101,22 +104,21 @@ const AddTradeToDebtRepay = ({
               {user.to_who}
             </option>
           </select>
-          <label>
-            Qarz <b className="text-danger">*</b>
-          </label>
         </div>
 
         <div className="my-2">
           <p>
-            Jami: <b>{user.price}</b> UZS
+            {r(12)}: <b>{user.price}</b> UZS
           </p>
           <p>
-            Qolgan: <b className="text-muted">{user.remaining_debt}</b> UZS
+            {g(114)}: <b className="text-muted">{user.remaining_debt}</b> UZS
           </p>
         </div>
 
         <div className="form-check form-switch d-flex  justify-content-between align-item-center p-0 my-2">
-          <p>Qarzdi hammasini qaytardi</p>
+          <p>
+            {g(113)}
+          </p>
           <input
             className="form-check-input mx-lg-4"
             type="checkbox"
@@ -145,14 +147,14 @@ const AddTradeToDebtRepay = ({
             }}
           >
             <option value={naxt}>
-              {Naqd}
+              {m(34)}
             </option>
             <option value="naxt_siz">
-              {Naqd_siz}
+              {m(35)}
             </option>
           </select>
           <label htmlFor="transfer_typ">
-            Pul turini tanlang <b className="text-danger">*</b>
+            {g(116)} <b className="text-danger">*</b>
           </label>
         </div>
 
@@ -165,7 +167,9 @@ const AddTradeToDebtRepay = ({
               value={formData.transfer_type}
               onChange={handleInputChange}
             >
-              <option value="">To'lov turini tanlang . . .</option>
+              <option value="">
+                {m(36)} . . .
+              </option>
               {transfersWorker.map(transfer =>
                 <option key={transfer.id} value={transfer.id}>
                   {transfer.name}
@@ -178,7 +182,7 @@ const AddTradeToDebtRepay = ({
               )}
             </select>
             <label htmlFor="transfer_type">
-              To'lov turini tanlang <b className="text-danger">*</b>
+              {mutation(36)} <b className="text-danger">*</b>
             </label>
           </div>}
 
@@ -187,7 +191,7 @@ const AddTradeToDebtRepay = ({
           <input
             type="number"
             className="form-control"
-            placeholder="Miqdor"
+            placeholder={g(115)}
             min={1}
             id="price"
             name="price"
@@ -201,7 +205,7 @@ const AddTradeToDebtRepay = ({
             }}
           />
           <label htmlFor="price">
-            Miqdor <b className="text-danger">*</b>
+            {g(115)} <b className="text-danger">*</b>
           </label>
         </div>
 

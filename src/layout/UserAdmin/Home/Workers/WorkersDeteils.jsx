@@ -11,6 +11,7 @@ import AddWorker from "./Modal/AddWorker";
 import DeleteWorker from "./Modal/DeleteWorker";
 import UpdateWorker from "./Modal/UpdateWorker";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const WorkersDeteils = () => {
   const toggleData = useSelector((state) => state.toggle);
@@ -33,6 +34,11 @@ const WorkersDeteils = () => {
   });
 
   if (error) return `Error: ${error.message}`;
+
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: n } = useTranslation("translation", { keyPrefix: "Navbar" });
   return (
     <>
       {showModal && (
@@ -59,7 +65,7 @@ const WorkersDeteils = () => {
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Xodimlar</h2>
+              <h2>{p(3)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -73,20 +79,30 @@ const WorkersDeteils = () => {
             className="container-fluid m-1"
             style={{ maxHeight: "calc(100vh - 150px)", overflowY: "scroll" }}
           >
-            <table id="table" className="my-2 table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%",
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
+                  <th scope="col" style={{ width: "5px", padding: "10px" }}>
                     №
                   </th>
-                  <th scope="col">F.I.O</th>
-                  <th scope="col">Telefon</th>
-                  <th scope="col">Filial</th>
-                  <th scope="col">Smena</th>
-                  <th scope="col">Manzil</th>
-                  <th scope="col">Ish haqi</th>
-                  <th scope="col">Faol</th>
-                  <th scope="col">Asosiy</th>
+                  <th scope="col">{m(18)}</th>
+                  <th scope="col">{g(5)}</th>
+                  <th scope="col">{g(0)}</th>
+                  <th scope="col">{m(16)}</th>
+                  <th scope="col">{m(20)}</th>
+                  <th scope="col">{m(7)}</th>
+                  <th scope="col">{g(8)}</th>
+                  <th scope="col">{n(0)}</th>
                   <th scope="col" style={{ width: "5px" }}>
                     <i className="fa fa-edit text-warning "></i>
                   </th>
@@ -99,7 +115,7 @@ const WorkersDeteils = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2>Xodimlar yo'q!</h2>
+                      <h2>{g(23)}</h2>
                     </td>
                   </tr>
                 )}
@@ -113,8 +129,8 @@ const WorkersDeteils = () => {
                         data-label="F.I.O"
                         className="text-capitalize text-break"
                       >
-                          {item.first_name} {item.last_name}
-                      
+                        {item.first_name} {item.last_name}
+
                       </td>
                       <td data-label="Telefon">{item.phone_number}</td>
                       <td data-label="Filial">{item.pharmacy_name}</td>
@@ -144,23 +160,23 @@ const WorkersDeteils = () => {
                         )}
                       </td>
                       <td data-label="O'zgartirish" onClick={() => {
-                            setCurData(item);
-                            setUpdateModal(!updateModal);
-                          }}
-                          className="cursor_pointer">
+                        setCurData(item);
+                        setUpdateModal(!updateModal);
+                      }}
+                        className="cursor_pointer">
                         <i
                           className="fa fa-edit text-warning"
-                          
+
                         ></i>
                       </td>
                       <td data-label="O'chirish" onClick={() => {
-                            setCurData(item);
-                            setDeleteModal(!deleteModal);
-                          }}
-                          className="cursor_pointer">
+                        setCurData(item);
+                        setDeleteModal(!deleteModal);
+                      }}
+                        className="cursor_pointer">
                         <i
                           className="fa fa-trash-can text-danger"
-                          
+
                         ></i>
                       </td>
                     </tr>

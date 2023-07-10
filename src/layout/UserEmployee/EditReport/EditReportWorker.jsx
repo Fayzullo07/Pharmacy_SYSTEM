@@ -21,6 +21,7 @@ import TodayReturn from "../../UserAdmin/EditReport/TodayReturn/TodayReturn";
 import TodayDiscount from "../../UserAdmin/EditReport/TodayDiscount/TodayDiscount";
 import TodayExpenseToAccounts from "../../UserAdmin/EditReport/TodayExpenseToAccounts/TodayExpenseToAccounts";
 import SideBarEdit from "../../UserAdmin/EditReport/Modals/SideBarEdit";
+import { useTranslation } from "react-i18next";
 
 const EditReportWorker = ({ user }) => {
   const reduxData = useSelector(state => state);
@@ -45,6 +46,9 @@ const EditReportWorker = ({ user }) => {
     shift: user.shift,
     to_pharmacy: user.pharmacy
   };
+
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   return (
     <div className="d-flex">
       <Navbar />
@@ -52,22 +56,22 @@ const EditReportWorker = ({ user }) => {
         <Topbar>
           <div className="header_flex mb-1">
             <h2>
-              {shows == "1" && "Tushumlar"}
-              {shows == "2" && "Xarajatlar"}
-              {shows == "3" && "Firmaga chiqim"}
-              {shows == "4" && "Qarzga qilingan savdo"}
-              {shows == "5" && "Qarzga qilingan savdoni qaytarish"}
-              {shows == "6" && "Qarz berish"}
-              {shows == "7" && "Berilgan qarzni qaytarish"}
-              {shows == "8" && "Qarz olish"}
-              {shows == "9" && "Olingan qarzni qaytarish"}
-              {shows == "10" && "Qaytarib olingan mahsulot"}
-              {shows == "11" && "Chegirma bilan savdo"}
-              {shows == "12" && "Xodimlarga berilgan summa"}
+              {shows == "1" && g(48)}
+              {shows == "2" && g(56)}
+              {shows == "3" && g(57)}
+              {shows == "4" && g(24)}
+              {shows == "5" && g(51)}
+              {shows == "6" && g(49)}
+              {shows == "7" && g(50)}
+              {shows == "8" && g(58)}
+              {shows == "9" && g(46)}
+              {shows == "10" && g(59)}
+              {shows == "11" && g(47)}
+              {shows == "12" && g(60)}
             </h2>
             {shows == "1" &&
               <h2 id="remeinder">
-                <span>Kassa: </span>
+                <span>{g(61)}: </span>
                 <b>
                   {isLoading
                     ? <span>

@@ -9,8 +9,11 @@ import {
   return_png,
   team
 } from "../../../../assets";
+import { useTranslation } from "react-i18next";
 
 const SideBarEdit = ({ shows, setShows }) => {
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   const [showUl, setShowUl] = useState(false);
   return (
     <div id="btn_hover_parent" className="btn-toolbar w-100">
@@ -104,7 +107,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
             
           >
-            Qarzga qilingan savdo
+            {g(24)}
           </button>
         </li>
         <li className={`${shows == "5" && "active"}`}>
@@ -117,7 +120,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
            
           >
-            Qarzga qilingan savdoni qaytarish
+            {g(51)}
           </button>
         </li>
         <li className={`${shows == "6" && "active"}`}>
@@ -130,7 +133,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
            
           >
-            Qarz berish
+            {g(49)}
           </button>
         </li>
 
@@ -144,7 +147,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
            
           >
-            Berilgan qarzni qaytarish
+            {g(50)}
           </button>
         </li>
 
@@ -158,7 +161,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
             
           >
-            Qarz olish
+            {g(58)}
           </button>
         </li>
 
@@ -172,7 +175,7 @@ const SideBarEdit = ({ shows, setShows }) => {
             }}
            
           >
-            Olingan qarzni qaytarish
+            {g(46)}
           </button>
         </li>
       </ul>

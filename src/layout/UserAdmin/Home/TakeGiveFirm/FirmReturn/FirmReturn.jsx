@@ -12,6 +12,7 @@ import { today } from "../../../../../api";
 import SkeletLoading from "../../../../../utils/SkeletLoading";
 import ModalSearchFirmReturn from "./ModalSearch/ModalSearchFirmReturn";
 import ModalDescription from "../../../../../utils/ModalDescription";
+import { useTranslation } from "react-i18next";
 
 const FirmReturn = ({ date_firm, setDateFirm }) => {
   const [showModal, setShowModal] = useState(false);
@@ -47,6 +48,9 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
   if (data && data.data.results) {
     total = totalMoney(data.data.results);
   }
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
 
   return (
     <>
@@ -129,21 +133,38 @@ const FirmReturn = ({ date_firm, setDateFirm }) => {
           className="container-fluid"
           style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
         >
-          <table id="table" className="my-2 table table-hover">
-            <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+          <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%",
+            }}>
+            <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
               <tr>
-                <th scope="col" style={{ width: "5px" }}>
+                <th scope="col" style={{ width: "5px",padding: '10px' }}>
                   №
                 </th>
-                <th>Sana</th>
-                <th>Mahsulot nomi</th>
-                <th>Qabul qiluvchi F.I.O</th>
-                <th>Qabul qiluvchi telefon</th>
-                <th>Pul</th>
-                <th>Firma</th>
+                <th>{r(0)}</th>
+                <th>{g(18)}</th>
+                <th>{m(26)}</th>
+                <th>{m(10)}</th>
+                <th>{g(19)}</th>
+                <th>{g(4)}</th>
               </tr>
             </thead>
             <tbody>
+              {data && data.data.results.length === 0 && (
+                  <tr>
+                    <td colSpan={12}>
+                      <h2>{g(23)}</h2>
+                    </td>
+                  </tr>
+                )}
               {data &&
                 data.data.results.map((item, index) => (
                   <tr key={item.id} className="cursor_pointer" onClick={() => {

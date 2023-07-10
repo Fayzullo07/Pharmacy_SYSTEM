@@ -12,6 +12,7 @@ import Textarea from "../../../../../../ui/Textarea";
 import TextInput from "../../../../../../ui/TextInput";
 import NumberInput from "../../../../../../ui/NumberInput";
 import PhoneInput from "../../../../../../ui/PhoneInput";
+import { useTranslation } from "react-i18next";
 
 const AddFirmReturn = ({
   showModal,
@@ -79,24 +80,28 @@ const AddFirmReturn = ({
       }
     }
   );
+
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
     if (!formData.second_name) {
-      toast.warning("Qaytarilgan mahsulot nomini kiriting !");
+      toast.warning(g(18));
       return;
     }
 
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 so'm");
+      toast.warning(g(33));
       return;
     }
 
     if (!tekshirish3(formData.verified_firm_worker_name)) {
-      toast.warning("F.I.O !");
+      toast.warning(m(18));
       return;
     }
 
     if (checkPhoneNumber(formData.verified_phone_number)) {
-      toast.warning("Telefon raqamni to'gri kiriting +998 99 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
 

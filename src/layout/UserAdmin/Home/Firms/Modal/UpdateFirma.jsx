@@ -11,6 +11,7 @@ import Modal from "../../../../../utils/Modal";
 import TextInput from "../../../../../ui/TextInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
 import Textarea from "../../../../../ui/Textarea";
+import { useTranslation } from "react-i18next";
 
 const UpdateFirma = ({ showModal, setShowModal, data }) => {
   const dispatch = useDispatch();
@@ -63,14 +64,15 @@ const UpdateFirma = ({ showModal, setShowModal, data }) => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   const handleSubmit = () => {
     if (!formData.name) {
-      toast.warning("Firma nomini kiriting !");
+      toast.warning(g(4));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number1)) {
-      toast.warning("Telefon raqamni tog'ri kiriting +998 9? 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
     mutation.mutate();
@@ -124,7 +126,7 @@ const UpdateFirma = ({ showModal, setShowModal, data }) => {
                   formData.is_favorite ? "text-success" : "text-danger"
                 }
               >
-                Faol
+                {g(8)}
               </b>
             </div>
           </div>

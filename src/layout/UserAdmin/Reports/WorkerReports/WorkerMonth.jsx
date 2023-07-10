@@ -13,11 +13,11 @@ import SideBar from "../../../../components/SideBar/SideBar";
 import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { AccountReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const WorkerMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
 
   const [change, setChange] = useState(false);
   const [page, setPage] = useState(1);
@@ -64,12 +64,15 @@ const WorkerMonth = () => {
     queryClient.removeQueries("WORKER_MONTH");
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.employees.map((item) => {
-          if(item.id == worker){
+          if (item.id == worker) {
             return item.short_name
           }
         })}</h2>
@@ -127,7 +130,7 @@ const WorkerMonth = () => {
                 className="form-select my-3"
                 onChange={(e) => setWorker(e.target.value)}
               >
-                <option value="">Xodim tanlang</option>
+                <option value="">{g(88)}</option>
                 {accounts &&
                   accounts.data.results.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -143,7 +146,7 @@ const WorkerMonth = () => {
                 onClick={filterFunction}
                 style={{ background: "var(--blue)", color: "#fff" }}
               >
-                Tasdiqlash
+                {f(12)}
               </button>
             )}
           </SideBar>
@@ -159,7 +162,7 @@ const WorkerMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -175,16 +178,14 @@ const WorkerMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+               {r(0)}
               </th>
               <th>
-                <b>Operatsiyalar</b>
+               {f(1)}
               </th>
 
               <th>
-                <b>Olgan ish haqi</b>
-                <br />
-                <b>summasi</b>
+                {g(89)}
               </th>
             </tr>
           </thead>
@@ -237,7 +238,7 @@ const WorkerMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="3" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&

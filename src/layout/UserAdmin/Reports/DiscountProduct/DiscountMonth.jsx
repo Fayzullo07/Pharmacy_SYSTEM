@@ -13,6 +13,7 @@ import SideBar from "../../../../components/SideBar/SideBar";
 import { useSelector } from "react-redux";
 import PaginationForModal from "../../../../utils/PaginationForModal";
 import { PharmaciesExpensesReportDayExcelGetDownload } from "../../../../functions/ExcelActions";
+import { useTranslation } from "react-i18next";
 
 const DiscountMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -54,15 +55,17 @@ const DiscountMonth = () => {
     queryClient.removeQueries("DISCOUNT_MONTH");
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
-          if(item.id == pharmacy){
+          if (item.id == pharmacy) {
             return item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}</h2>
         <div className="d-flex">
           <PharmaciesExpensesReportDayExcelGetDownload
             year={year}
@@ -116,7 +119,7 @@ const DiscountMonth = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -128,10 +131,10 @@ const DiscountMonth = () => {
         style={{ maxHeight: "calc(100vh - 200px)", overflowY: "scroll" }}
       >
         <table
-          className="table table-sm table-hover table-bordered border-dark align-middle text-center"
-           style={{
+          className="table table-sm table-hover table-bordered border-secondary align-middle text-center"
+          style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -147,20 +150,18 @@ const DiscountMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+                {r(0)}
               </th>
               <th>
-                <b>Xodim F.I.O</b>
+                {r(1)}
               </th>
               <th>
-                <b>Savdo qilingan</b>
-                <br />
-                <b>summa</b>
+                {g(77)}
+
               </th>
               <th>
-                <b>Chegirma berilgan</b>
-                <br />
-                <b>summa</b>
+                {g(78)}
+
               </th>
             </tr>
           </thead>
@@ -216,7 +217,7 @@ const DiscountMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="3" className="py-3">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
                     {data &&

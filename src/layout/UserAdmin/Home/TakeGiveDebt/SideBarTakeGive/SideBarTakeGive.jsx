@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SideBarTakeGive.css";
+import { useTranslation } from "react-i18next";
 
 const SideBarTakeGive = ({ shows, setShows }) => {
-  const [showUl, setShowUl] = useState(false);
+  const { t } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <div id="debts3">
       <button
@@ -11,7 +12,7 @@ const SideBarTakeGive = ({ shows, setShows }) => {
           setShows("1");
         }}
       >
-        Qarzga qilingan savdo
+        {t(24)}
       </button>
       <button
         className={`${shows == "2" ? "activeBtn" : ""}`}
@@ -19,7 +20,7 @@ const SideBarTakeGive = ({ shows, setShows }) => {
           setShows("2");
         }}
       >
-        Qarz berilganlar
+        {t(25)}
       </button>
       <button
         className={`${shows == "3" ? "activeBtn" : ""}`}
@@ -27,7 +28,7 @@ const SideBarTakeGive = ({ shows, setShows }) => {
           setShows("3");
         }}
       >
-        Qarz olinganlar
+        {t(26)}
       </button>
     </div>
   );

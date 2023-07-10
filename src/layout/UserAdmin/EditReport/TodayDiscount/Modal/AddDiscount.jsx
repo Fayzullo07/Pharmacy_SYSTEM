@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Naqd, Naqd_siz, chegirma, naxt } from "../../../../../api";
+import { chegirma, naxt } from "../../../../../api";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { cleanedData } from "../../../../../functions/NecessaryFunctions";
@@ -8,6 +8,7 @@ import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
 import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
+import { useTranslation } from "react-i18next";
 
 const AddDiscount = props => {
   const { showModal, setShowModal, getData } = props;
@@ -51,17 +52,19 @@ const AddDiscount = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   const handleSubmit = () => {
     if (formData.second_name < 100) {
-      toast.warning("Maxsulot summasini kiriting !");
+      toast.warning(g(19));
       return;
     }
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
     if (Number(formData.second_name) < Number(formData.price)) {
-      toast.warning("Umumiy summadan ko'p chegirma mumkun emas!");
+      toast.warning(g(110));
       return;
     }
     mutationPharm.mutate();

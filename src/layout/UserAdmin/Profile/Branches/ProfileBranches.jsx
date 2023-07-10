@@ -11,6 +11,7 @@ import AddApteka from "../../Home/Branchs/Modal/AddApteka";
 import DeleteApteka from "../../Home/Branchs/Modal/DeleteApteka";
 import UpdateApteka from "../../Home/Branchs/Modal/UpdateApteka";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const ProfileBranches = () => {
   const [page, setPage] = useState(1);
@@ -33,7 +34,7 @@ const ProfileBranches = () => {
 
   if (error) return `Error: ${error.message}`;
 
-  //   const { t } = useTranslation("translation", { keyPrefix: "Home" });
+  const { t } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
       {showModal && (
@@ -56,13 +57,13 @@ const ProfileBranches = () => {
         />
       )}
 
-     
+
       <div className="d-flex">
         <Navbar />
         <div className={`container_g ${toggle ? "" : "active"}`}>
           <Topbar>
             <div className="header_flex">
-              <h2>Filiallar</h2>
+              <h2>{t(1)}</h2>
             </div>
             <button
               className="btn btn-sm me-2"
@@ -78,14 +79,24 @@ const ProfileBranches = () => {
             className="container-fluid m-1"
             style={{ maxHeight: "calc(100vh - 150px)", overflowY: "scroll" }}
           >
-            <table id="table" className="table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%"
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
+                  <th scope="col" style={{ width: "5px", padding: '10px' }}>
                     №
                   </th>
-                  <th scope="col">Filial</th>
-                  <th scope="col">Manzil</th>
+                  <th scope="col">{t(0)}</th>
+                  <th scope="col">{t(2)}</th>
                   <th scope="col" style={{ width: "5px" }}>
                     <i className="fa fa-edit text-warning "></i>
                   </th>
@@ -98,7 +109,7 @@ const ProfileBranches = () => {
                 {data && data.data.results.length === 0 && (
                   <tr>
                     <td colSpan={12}>
-                      <h2> Filial topilmadi!</h2>
+                     {t(15)}
                     </td>
                   </tr>
                 )}
@@ -116,26 +127,26 @@ const ProfileBranches = () => {
                         {item.address ? item.address : "~"}
                       </td>
                       <td data-label="O'zgartirish" onClick={() => {
-                            setCurData(item);
-                            setUpdateModal(!updateModal);
-                          }}
-                          className="cursor_pointer">
+                        setCurData(item);
+                        setUpdateModal(!updateModal);
+                      }}
+                        className="cursor_pointer">
                         <i
                           className="fa fa-edit text-warning"
-                          
+
                         ></i>
                       </td>
                       <td data-label="O'chirish" onClick={() => {
-                            setCurData(item);
-                            setDeleteModal(!deleteModal);
-                          }}
-                          className="cursor_pointer">
+                        setCurData(item);
+                        setDeleteModal(!deleteModal);
+                      }}
+                        className="cursor_pointer">
                         <i
                           className="fa fa-trash-can text-danger"
-                          
+
                         ></i>
                       </td>
-                      
+
                     </tr>
                   ))}
               </tbody>

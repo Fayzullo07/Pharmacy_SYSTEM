@@ -11,6 +11,7 @@ import Textarea from "../../../../../ui/Textarea";
 import TextInput from "../../../../../ui/TextInput";
 import PhoneInput from "../../../../../ui/PhoneInput";
 import PasswordInput from "../../../../../ui/PasswordInput";
+import { useTranslation } from "react-i18next";
 
 const AddManager = props => {
   const { showModal, setShowModal } = props;
@@ -82,29 +83,37 @@ const AddManager = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
-    if (!formData.first_name || !formData.last_name) {
-      toast.warning("Ism Familiyani kiriting !");
-      return;
-    }
+     if (!formData.first_name) {
+       toast.warning(m(28));
+       return;
+     }
 
-    if (!formData.father_name) {
-      toast.warning("Otasini Ismi!");
-      return;
-    }
+     if (!formData.last_name) {
+       toast.warning(m(29));
+       return;
+     }
 
-    if (checkPhoneNumber(formData.phone_number)) {
-      toast.warning("Telefon raqamini to'g'ri kitriting +998 9? 111 22 33");
-      return;
-    }
+     if (!formData.father_name) {
+       toast.warning(m(30));
+       return;
+     }
+
+   if (checkPhoneNumber(formData.phone_number)) {
+     toast.warning(g(34));
+     return;
+   }
 
     if (!formData.password) {
-      toast.warning("Parolni kiriting !");
+       toast.warning(m(8));
       return;
     }
 
     if (formData.password != formData.re_password) {
-      toast.warning("Parolni bir xil kiriting!");
+       toast.warning(m(9));
       return;
     }
     mutation.mutate();
@@ -207,7 +216,7 @@ const AddManager = props => {
               setFormData({ ...formData, is_active: !formData.is_active })}
           />
           <b className={formData.is_active ? "text-success" : "text-danger"}>
-            Active
+            {g(8)}
           </b>
         </div>
 

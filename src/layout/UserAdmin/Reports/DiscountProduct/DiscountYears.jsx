@@ -11,6 +11,7 @@ import SkeletLoading from "../../../../utils/SkeletLoading";
 import SideBar from "../../../../components/SideBar/SideBar";
 
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const DiscountYears = () => {
   const reduxData = useSelector((state) => state);
@@ -50,15 +51,19 @@ const DiscountYears = () => {
     setChange(!change);
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && f(11)}</h2>
         <div className="d-flex">
           <SideBar>
             {/* YEARS */}
@@ -80,7 +85,7 @@ const DiscountYears = () => {
               className="form-select my-3"
               onChange={(e) => setPharmacy(e.target.value)}
             >
-              <option value="">Hamma filial</option>
+              <option value="">{f(11)}</option>
               {deteils.pharmacies.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
@@ -94,7 +99,7 @@ const DiscountYears = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {r(15)}
             </button>
           </SideBar>
         </div>
@@ -106,10 +111,10 @@ const DiscountYears = () => {
         style={{ maxHeight: "calc(100vh - 170px)", overflowY: "scroll" }}
       >
         <table
-          className="table table-sm table-hover table-bordered border-dark align-middle text-center"
+          className="table table-sm table-hover table-bordered border-secondary align-middle text-center"
            style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -125,16 +130,13 @@ const DiscountYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
-                <b>Chegirma berilgan</b>
-                <br />
-                <b>summa</b>
+                 {g(78)}
               </th>
               <th>
-                <b>Mahsulot summasi</b>
-               
+               {m(1)}
               </th>
             </tr>
           </thead>
@@ -196,7 +198,7 @@ const DiscountYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>{formatNumber(total)}</th>
                   <th>{formatNumber(second_name)}</th>
@@ -237,7 +239,7 @@ const DiscountYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-3">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>0</th>
                   <th>0</th>

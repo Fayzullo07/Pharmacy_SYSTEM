@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../../../../components/SideBar/SideBar";
 import { years } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const SideBarFirmYears = ({
   year,
@@ -12,6 +13,8 @@ const SideBarFirmYears = ({
   curData,
   setSearchModal
 }) => {
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <SideBar id={77}>
       {/* YEARS */}
@@ -33,7 +36,9 @@ const SideBarFirmYears = ({
         className="form-select my-3"
         onChange={e => setPharmacy(e.target.value)}
       >
-        <option value="">Hamma filial</option>
+        <option value="">
+          {f(11)}
+        </option>
         {deteils.pharmacies.map(item =>
           <option key={item.id} value={item.id}>
             {item.name}
@@ -53,7 +58,9 @@ const SideBarFirmYears = ({
           ? <span>
               {curData.name}
             </span>
-          : <span>Firmani tanlang</span>}
+          : <span>
+              {g(39)}
+            </span>}
         <i className="fa fa-angle-down mx-1" />
       </div>
 
@@ -64,7 +71,7 @@ const SideBarFirmYears = ({
           onClick={filterFunction}
           style={{ background: "var(--blue)", color: "#fff" }}
         >
-          Tasdiqlash
+          {f(12)}
         </button>}
     </SideBar>
   );

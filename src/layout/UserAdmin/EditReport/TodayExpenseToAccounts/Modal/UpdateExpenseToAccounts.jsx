@@ -10,6 +10,7 @@ import { cleanedData } from "../../../../../functions/NecessaryFunctions";
 import ModalSimple from "../../../../../utils/ModalSimple";
 import Textarea from "../../../../../ui/Textarea";
 import NumberInput from "../../../../../ui/NumberInput";
+import { useTranslation } from "react-i18next";
 
 const UpdateExpenseToAccounts = ({
   showModal,
@@ -81,14 +82,16 @@ const UpdateExpenseToAccounts = ({
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+
   const handleSubmit = () => {
     if (formData.to_user == formData.from_user) {
-      toast.warning("O'zidan o'zidan mumkun emas!");
+      toast.warning(g(111));
       return;
     }
-
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
@@ -102,7 +105,7 @@ const UpdateExpenseToAccounts = ({
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title="Xodimlarga berilgan summa"
+      title={g(60)}
     >
       <div className="modal-body">
         <div className="row">
@@ -124,7 +127,7 @@ const UpdateExpenseToAccounts = ({
                 )}
               </select>
               <label htmlFor="to_user">
-                Xodimni tanlang <b className="text-danger">*</b>
+                {m(13)} <b className="text-danger">*</b>
               </label>
             </div>
           </div>
@@ -142,11 +145,15 @@ const UpdateExpenseToAccounts = ({
                 }}
                 disabled
               >
-                <option value={naxt}>{Naqd}</option>
-                <option value={2}>{Naqd_siz}</option>
+                <option value={naxt}>
+                  {m(34)}
+                </option>
+                <option value={2}>
+                  {m(35)}
+                </option>
               </select>
               <label htmlFor="transfer_type">
-                To'lov turini tanlang <b className="text-danger">*</b>
+                {m(36)} <b className="text-danger">*</b>
               </label>
             </div>
           </div>
@@ -162,17 +169,23 @@ const UpdateExpenseToAccounts = ({
             onChange={handleInputChange}
             disabled
           >
-            <option value="">Xarajat kimdan qilindi . . .</option>
+            <option value="">
+              {g(93)} . . .
+            </option>
 
             {formData.transfer_type == naxt
-              ? <option value={"k"}>Kassadan</option>
-              : <option value={"h"}>Hisob raqamdan</option>}
+              ? <option value={"k"}>
+                  {g(61)}
+                </option>
+              : <option value={"h"}>
+                  {g(96)}
+                </option>}
             <option value={director.id}>
-              Rahbardan - {director.first_name} {director.last_name}
+              {g(95)} - {director.first_name} {director.last_name}
             </option>
           </select>
           <label htmlFor="from_user">
-            Xarajat kimdan qilindi <b className="text-danger">*</b>
+            {g(93)} <b className="text-danger">*</b>
           </label>
         </div>
 
@@ -203,7 +216,7 @@ const UpdateExpenseToAccounts = ({
           >
             {mutation.isLoading || mutationFarm.isLoading
               ? <i className="fa fa-spinner fa-spin" />
-              : "Saqlash"}
+              : p(6)}
           </button>
         </div>
       </div>

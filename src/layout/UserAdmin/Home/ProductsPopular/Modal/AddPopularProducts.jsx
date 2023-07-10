@@ -8,6 +8,7 @@ import TextInput from "../../../../../ui/TextInput";
 import NumberInput from "../../../../../ui/NumberInput";
 import Textarea from "../../../../../ui/Textarea";
 import SelectInput from "../../../../../ui/SelectInput";
+import { useTranslation } from "react-i18next";
 
 const AddPopularProducts = ({ showModal, setShowModal, deteils }) => {
   const [formData, setFormData] = useState({
@@ -46,18 +47,21 @@ const AddPopularProducts = ({ showModal, setShowModal, deteils }) => {
     }
   );
 
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   const handleSubmit = () => {
     if (!formData.name) {
-      toast.warning("Mahsulot nomi !");
+      toast.warning(m(19));
       return;
     }
     if (formData.price < 100) {
-      toast.warning("Mahsulot summasi eng kami 100 so'm !");
+      toast.warning(g(33));
       return;
     }
 
     if (!formData.pharmacy) {
-      toast.warning("Filialni tanlang!");
+      toast.warning(m(12));
       return;
     }
     mutation.mutate();

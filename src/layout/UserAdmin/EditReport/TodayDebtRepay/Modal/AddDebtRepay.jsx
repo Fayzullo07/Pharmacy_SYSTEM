@@ -13,6 +13,7 @@ import { pharmacyDebtsRePayPostAction } from "../../../../../functions/DirectorA
 import Modal from "../../../../../utils/Modal";
 import Textarea from "../../../../../ui/Textarea";
 import TransferTypeSelect from "../../../../../ui/TransferTypeSelect";
+import { useTranslation } from "react-i18next";
 
 const AddDebtRepay = props => {
   const { showModal, setShowModal, deteils, curData, getData } = props;
@@ -37,10 +38,14 @@ const AddDebtRepay = props => {
     shift: getData.shift
   });
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
   const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (name === "price" && Number(value) > curData.remaining_debt) {
+      toast.warning(g(112));
       return;
     }
 
@@ -72,18 +77,19 @@ const AddDebtRepay = props => {
     }
   );
 
+  
   const handleSubmit = () => {
     if (!formData.transfer_type) {
-      toast.warning("To'lov turini tanlang!");
+      toast.warning(m(36));
       return;
     }
 
     if (formData.price < 100 && !disabledInput) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
     if (formData.price > curData.remaining_debt) {
-      toast.warning("Qarz summasidan ko'p bervossiz tekshirib ko'ring!");
+      toast.warning(g(112));
       return;
     }
     mutation.mutate();
@@ -114,15 +120,17 @@ const AddDebtRepay = props => {
 
         <div className="my-2">
           <p>
-            Jami: <b>{curData.price}</b> UZS
+            {r(12)}: <b>{curData.price}</b> UZS
           </p>
           <p>
-            Qolgan: <b className="text-muted">{curData.remaining_debt}</b> UZS
+            {g(114)}: <b className="text-muted">{curData.remaining_debt}</b> UZS
           </p>
         </div>
 
         <div className="form-check form-switch d-flex  justify-content-between align-item-center p-0 my-2">
-          <p>Qarzni hammasini qaytarish</p>
+          <p>
+            {g(113)}
+          </p>
           <input
             className="form-check-input mx-lg-4"
             type="checkbox"
@@ -156,12 +164,16 @@ const AddDebtRepay = props => {
                 disabled={formData.transfer_type != naxt}
               >
                 {formData.transfer_type == naxt &&
-                  <option value={"k"}>Kassadan</option>}
+                  <option value={"k"}>
+                    {g(61)}
+                  </option>}
                 <option value={director.id}>
-                  Rahbar - {director.first_name} {director.last_name}
+                  {g(95)} - {director.first_name} {director.last_name}
                 </option>
               </select>
-              <label htmlFor="from_user">Chiqim kimdan qilindi</label>
+              <label htmlFor="from_user">
+                {g(94)}
+              </label>
             </div>
           </div>
         </div>
@@ -171,7 +183,7 @@ const AddDebtRepay = props => {
           <input
             type="number"
             className="form-control"
-            placeholder="Qarz summasi"
+            placeholder={g(115)}
             min={1}
             id="price"
             name="price"
@@ -185,7 +197,7 @@ const AddDebtRepay = props => {
             }}
           />
           <label htmlFor="price">
-            Qarz summasi <b className="text-danger">*</b>
+            {g(115)} <b className="text-danger">*</b>
           </label>
         </div>
 

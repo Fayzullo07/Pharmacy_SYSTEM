@@ -5,6 +5,7 @@ import {
 import { useQuery } from "react-query";
 import { receiptGetAPI } from "../../../../api/GlobalRequest";
 import AddQR from "./AddQR";
+import { useTranslation } from "react-i18next";
 
 const Receipts = ({ getData, total }) => {
   const [qr_price, setQRPrice] = useState({ price: 0 });
@@ -43,6 +44,7 @@ const Receipts = ({ getData, total }) => {
   if (errorReceipt) return `Error: ${errorReceipt.message}`;
 
  
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
       {qrModal && (
@@ -58,7 +60,7 @@ const Receipts = ({ getData, total }) => {
       <div className="d-flex align-items-center gap-2">
         <div>
           <p className="bg_c cursor_pointer" onClick={() => setQRModal(!qrModal)}>
-            Chek berilmagan:{" "}
+            {g(105)}:{" "}
             <span>
               <b>{formatNumber(qr_price.price)}</b>.0
             </span>{" "}
@@ -68,7 +70,7 @@ const Receipts = ({ getData, total }) => {
         </div>
         <div>
           <p className="bg_c">
-            Chek berilgan:{" "}
+            {g(106)}:{" "}
             <span>
               <b>{formatNumber(total - qr_price.price)}</b>.0
             </span>{" "}

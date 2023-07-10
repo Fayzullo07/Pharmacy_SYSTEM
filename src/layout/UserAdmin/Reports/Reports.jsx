@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../../components/Navbar/Navbar";
 import Topbar from "../../../components/Topbar/Topbar";
@@ -22,6 +22,7 @@ import ChooseReports from "./ChooseReports";
 
 import "./Reports.css";
 import { isFavoriteFunction } from "../../../redux/Actions/ToggleActions";
+import { useTranslation } from "react-i18next";
 const Reports = () => {
   const dispatch = useDispatch();
   const reduxData = useSelector(state => state);
@@ -29,37 +30,52 @@ const Reports = () => {
   const { is_favorite } = reduxData.is_favorite;
 
   const [choose, setChoose] = useState("0");
-
-  return <div className="d-flex">
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  return (
+    <div className="d-flex">
       <Navbar />
       <div className={`container_g ${toggle ? "" : "active"}`}>
         <Topbar>
           <div className="header_flex ">
             <div className="d-flex align-items-center justify-content-beetwen">
-              {choose != "0" && <i id="back_arrow" className="fa fa-arrow-left fs-4 me-2" style={{ color: "var(--text_color_blue)" }} onClick={() => setChoose("0")} />}
+              {choose != "0" &&
+                <i
+                  id="back_arrow"
+                  className="fa fa-arrow-left fs-4 me-2"
+                  style={{ color: "var(--text_color_blue)" }}
+                  onClick={() => setChoose("0")}
+                />}
               <h2>
-                {choose == "0" && "Hisbotlar"}
-                {choose == "1" && "Tushum hisob-kitobi"}
-                {choose == "2" && "Chiqim hisob-kitobi"}
-                {choose == "3" && "Firmalarga chiqim hisob-kitobi"}
-                {choose == "4" && "QR-kod bilan qilingan savdo"}
-                {choose == "5" && "Chegirma bilan savdo"}
-                {choose == "6" && "Qaytarib olingan mahsulotlar"}
-                {choose == "7" && "Rahbar bilan hisob-kitobi"}
-                {choose == "8" && "Xodim bilan hisob-kitobi"}
+                {choose == "0" && g(74)}
+                {choose == "1" && g(67)}
+                {choose == "2" && g(68)}
+                {choose == "3" && g(69)}
+                {choose == "4" && g(70)}
+                {choose == "5" && g(47)}
+                {choose == "6" && g(71)}
+                {choose == "7" && g(72)}
+                {choose == "8" && g(73)}
               </h2>
             </div>
-            {choose == "0" && <div id="yearOrMonth">
-                <button className={`${is_favorite == true ? "activeBtn" : ""}`} onClick={() => dispatch(isFavoriteFunction(true))}>
-                  OYLIK
+            {choose == "0" &&
+              <div id="yearOrMonth">
+                <button
+                  className={`${is_favorite == true ? "activeBtn" : ""}`}
+                  onClick={() => dispatch(isFavoriteFunction(true))}
+                >
+                  {g(75)}
                 </button>
-                <button className={`${is_favorite == false ? "activeBtn" : ""}`} onClick={() => dispatch(isFavoriteFunction(false))}>
-                  YILLIK
+                <button
+                  className={`${is_favorite == false ? "activeBtn" : ""}`}
+                  onClick={() => dispatch(isFavoriteFunction(false))}
+                >
+                  {g(76)}
                 </button>
               </div>}
           </div>
         </Topbar>
-        {choose == "0" && <ChooseReports setChoose={setChoose} dispatc={dispatch} />}
+        {choose == "0" &&
+          <ChooseReports setChoose={setChoose} dispatc={dispatch} />}
         {choose == "1" && is_favorite == false && <IncomesYears />}
         {choose == "1" && is_favorite == true && <IncomesMonth />}
 
@@ -84,7 +100,8 @@ const Reports = () => {
         {choose == "8" && is_favorite == false && <WorkerYears />}
         {choose == "8" && is_favorite == true && <WorkerMonth />}
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Reports;

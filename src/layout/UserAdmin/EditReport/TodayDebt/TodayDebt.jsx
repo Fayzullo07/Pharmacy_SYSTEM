@@ -9,6 +9,7 @@ import {
   formatNumber,
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
+import { useTranslation } from "react-i18next";
 
 const TodayDebt = (props) => {
   const { getData } = props;
@@ -39,6 +40,9 @@ const TodayDebt = (props) => {
   if (data && data.data.results) {
     total = totalMoney(data.data.results);
   }
+
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
   return (
     <>
       {showModal && (
@@ -67,7 +71,7 @@ const TodayDebt = (props) => {
       <div className="bg_head mb-2">
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -94,10 +98,10 @@ const TodayDebt = (props) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Kimdan qarz olindi</th>
-                <th>Telefon raqami</th>
-                <th>Olingan summa</th>
-                <th>Qolgan summa</th>
+                <th>{m(24)}</th>
+                <th>{g(5)}</th>
+                <th>{g(98)}</th>
+                <th>{g(99)}</th>
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-edit text-warning"></i>
                 </th>
@@ -111,16 +115,16 @@ const TodayDebt = (props) => {
                 data.data.results.map((item, index) => (
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Kimdan qarz olindi" className="text-capitalize">
+                    <td data-label={m(28)} className="text-capitalize">
                       {item.from_who}
                     </td>
-                    <td data-label="Telefon raqami">
+                    <td data-label={g(5)}>
                       {item.phone_number}
                     </td>
-                    <td data-label="Olingan summa">
+                    <td data-label={g(98)}>
                       {formatNumber(item.price)}
                     </td>
-                    <td data-label="Qolgan summa">
+                    <td data-label={g(99)}>
                       <b className="text-danger fw-600">
                         {item.remaining_debt == 0 ? (
                           <span class="badge text-bg-success"><i className="fa fa-check"></i></span>
@@ -129,7 +133,7 @@ const TodayDebt = (props) => {
                         )}
                       </b>
                     </td>
-                    <td data-label="O'zgartirish"  onClick={() => {
+                    <td data-label=""  onClick={() => {
                           setCurData(item);
                           setUpdateModal(!updateModal);
                         }}
@@ -139,7 +143,7 @@ const TodayDebt = (props) => {
                        
                       ></i>
                     </td>
-                    <td data-label="O'chirish"  onClick={() => {
+                    <td data-label=""  onClick={() => {
                           setCurData(item);
                           setDeleteModal(!deleteModal);
                         }}

@@ -7,6 +7,7 @@ import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalActio
 import { useDispatch } from "react-redux";
 import Modal from "../../../../../utils/Modal";
 import TextInput from "../../../../../ui/TextInput";
+import { useTranslation } from "react-i18next";
 
 const AddExpense = props => {
   const { showModal, setShowModal } = props;
@@ -40,9 +41,11 @@ const AddExpense = props => {
     }
   );
 
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = e => {
     if (!formData.name) {
-      toast.warning("Xarajat turini kiriting !");
+      toast.warning(m(33));
       return;
     }
     mutation.mutate();

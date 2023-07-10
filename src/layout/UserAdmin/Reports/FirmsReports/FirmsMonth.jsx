@@ -10,6 +10,7 @@ import PaginationForModal from "../../../../utils/PaginationForModal";
 import SideBarFirmMonth from "./SideBarFirmMonth";
 import FirmReportSearch from "./FirmReportSearch";
 import { pagination } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const FirmsMonth = () => {
   const reduxData = useSelector((state) => state);
@@ -57,10 +58,13 @@ const FirmsMonth = () => {
     queryClient.removeQueries("FIRM_MONTH");
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
+
   return (
     <>
-
-     {searchModal && (
+      {searchModal && (
         <FirmReportSearch
           showModal={searchModal}
           setShowModal={setSearchModal}
@@ -95,7 +99,7 @@ const FirmsMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -111,16 +115,16 @@ const FirmsMonth = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>Sana</b>
+               {r(0)}
               </th>
               <th>
-                <b>Operatsiyalar</b>
+               {f(1)}
               </th>
               <th>
-                <b>Firma xodimi</b>
+                {g(82)}
               </th>
               <th>
-                <b>Berilgan summa</b>
+                {g(80)}
               </th>
             </tr>
           </thead>
@@ -186,7 +190,7 @@ const FirmsMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="4" className="py-3">
-                    Jami:
+                    {r(12)}:
                   </th>
 
                   <th>
@@ -194,7 +198,7 @@ const FirmsMonth = () => {
                       data.data &&
                       formatNumber(
                         data.data.expense_transfer_total_price +
-                          data.data.expense_not_transfer_total_price + data.data.income_not_transfer_total_price
+                        data.data.expense_not_transfer_total_price + data.data.income_not_transfer_total_price
                       )}
                   </th>
                 </tr>

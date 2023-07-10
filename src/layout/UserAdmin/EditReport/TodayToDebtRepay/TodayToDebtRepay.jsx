@@ -12,6 +12,7 @@ import {
 } from "../../../../functions/NecessaryFunctions";
 import DebtsModalTrade from "../TodayTradeToDebtRepay/Modal/DebtsModalTrade";
 import ModalDescription from "../../../../utils/ModalDescription";
+import { useTranslation } from "react-i18next";
 
 const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -44,6 +45,7 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
     total = totalMoney(data.data.results);
   }
 
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
     {descModal && (
@@ -81,7 +83,7 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
       <div>
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -108,9 +110,9 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Kim qaytardi</th>
-                <th>To'lov turi</th>
-                <th>Miqdor</th>
+                <th>{g(97)}</th>
+                <th>{g(92)}</th>
+                <th>{g(80)}</th>
 
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-trash-can text-danger"></i>
@@ -125,19 +127,19 @@ const TodayToDeptRepay = ({ deteils, is_client, getData }) => {
                     setDescModal(!descModal);
                   }}>
                     <td data-label="№">{index + 1}</td>
-                    <td data-label="Kim qaytardi" className="text-capitalize">
+                    <td data-label={g(97)} className="text-capitalize">
                       <b>{item.from_debt_name}</b>
                     </td>
                     <td
-                      data-label="To'lov turi"
+                      data-label={g(92)}
                       className="text-capitalize text-break"
                     >
                       <b>{item.transfer_type_name}</b>
                     </td>
-                    <td data-label="Miqdor">
+                    <td data-label={g(80)}>
                       <b className="text-success">{formatNumber(item.price)}</b>
                     </td>
-                    <td data-label="O'chirish"
+                    <td data-label=""
                      onClick={e => {
                       e.stopPropagation()
                       setCurData(item);

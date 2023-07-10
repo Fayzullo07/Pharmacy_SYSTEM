@@ -3,9 +3,10 @@ import { today } from "../../../../../api";
 import { useNavigate } from "react-router-dom";
 import ModalSimple from "../../../../../utils/ModalSimple";
 import SmenaSelect from "../../../../../ui/SmenaSelect";
+import { useTranslation } from "react-i18next";
 
 const ChooseDate = props => {
-  const { showModal, setShowModal, pharm_id, pharm_name  } = props;
+  const { showModal, setShowModal, pharm_id, pharm_name } = props;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -18,13 +19,16 @@ const ChooseDate = props => {
     setFormData({ ...formData, [name]: value });
   };
   const handleSubmit = () => {
-    navigate(`/edit/report/${pharm_id}/${formData.shift}/${formData.date}/${pharm_name}`);
+    navigate(
+      `/edit/report/${pharm_id}/${formData.shift}/${formData.date}/${pharm_name}`
+    );
   };
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <ModalSimple
       showModal={showModal}
       setShowModal={setShowModal}
-      title={"Sana va Smena tanlang"}
+      title={g(30)}
     >
       <div className="modal-body">
         <SmenaSelect
@@ -51,7 +55,7 @@ const ChooseDate = props => {
             }}
           />
           <label>
-            Sanani tanlang <b className="text-danger">*</b>
+            {g(31)} <b className="text-danger">*</b>
           </label>
         </div>
       </div>
@@ -63,7 +67,7 @@ const ChooseDate = props => {
             style={{ background: "var(--blue)" }}
             onClick={() => handleSubmit()}
           >
-            Tanlash
+            {g(32)}
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { months, years } from "../../../../api";
+import { months, number_0, years } from "../../../../api";
 import { useQuery } from "react-query";
 import { QR_CODE_ReportMonthGetAPI } from "../../../../api/FirmsRequest";
 import {
@@ -11,6 +11,7 @@ import {
 import SkeletLoading from "../../../../utils/SkeletLoading";
 import SideBar from "../../../../components/SideBar/SideBar";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const QRCodeYears = () => {
   const reduxData = useSelector((state) => state);
@@ -50,15 +51,18 @@ const QRCodeYears = () => {
     setChange(!change);
   };
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: r } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
-        <h2>{ deteils.pharmacies.map((item) => {
-          if(item.id == pharmacy){
-            return item.name
+        <h2>{deteils.pharmacies.map((item) => {
+          if (item.id == pharmacy) {
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && f(11)}</h2>
         <div className="d-flex">
           <SideBar>
             {/* YEARS */}
@@ -80,7 +84,7 @@ const QRCodeYears = () => {
               className="form-select my-3"
               onChange={(e) => setPharmacy(e.target.value)}
             >
-              <option value="">Hamma filial</option>
+              <option value="">{f(11)}</option>
               {deteils.pharmacies.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
@@ -94,7 +98,7 @@ const QRCodeYears = () => {
               onClick={filterFunction}
               style={{ background: "var(--blue)", color: "#fff" }}
             >
-              Tasdiqlash
+              {f(12)}
             </button>
           </SideBar>
         </div>
@@ -107,9 +111,9 @@ const QRCodeYears = () => {
       >
         <table
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
-           style={{
+          style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -125,22 +129,18 @@ const QRCodeYears = () => {
             <tr>
               <th style={{ width: "5px", padding: "20px 10px" }}>№</th>
               <th>
-                <b>{year} - yil</b>
+                <b>{year} - {g(79)}</b>
               </th>
               <th>
-                <b>QR-code chek</b>
-                <br />
-                <b>berilmagan</b>
+                {r(10)}
               </th>
 
               <th>
-                <b>QR-code chek</b>
-                <br />
-                <b>berilgan</b>
+                {r(11)}
               </th>
 
               <th>
-                <b>Jami savdo</b>
+                {g(85)}
               </th>
             </tr>
           </thead>
@@ -169,7 +169,7 @@ const QRCodeYears = () => {
                               item.month == m.id &&
                               (item.receipt_price == 0
                                 ? ""
-                                : "")
+                                : formatNumber(item.receipt_price))
                           )}
                         </b>
                       </td>
@@ -178,7 +178,7 @@ const QRCodeYears = () => {
                           {result.map(
                             (item) =>
                               item.month == m.id &&
-                              formatNumber(item.price)
+                              formatNumber(item.price - item.receipt_price)
                           )}
                         </b>
                       </td>
@@ -214,15 +214,15 @@ const QRCodeYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
                   <th>
-                    {/* {formatNumber(totalMoneyByKey(result, "receipt_price"))} */}
+                    {formatNumber(totalMoneyByKey(result, "receipt_price"))}
                   </th>
                   <th>
                     {formatNumber(
-                      totalMoneyByKey(result, "price") 
-                        
+                      totalMoneyByKey(result, "price") - totalMoneyByKey(result, "receipt_price")
+
                     )}
                   </th>
                   <th>{formatNumber(totalMoneyByKey(result, "price"))}</th>
@@ -270,11 +270,11 @@ const QRCodeYears = () => {
               >
                 <tr className="text-center">
                   <th colSpan="2" className="py-2">
-                    Jami:
+                    {r(12)}:
                   </th>
-                  <th>0</th>
-                  <th>0</th>
-                  <th>0</th>
+                  <th>{number_0}</th>
+                  <th>{number_0}</th>
+                  <th>{number_0}</th>
                 </tr>
               </tfoot>
             </>

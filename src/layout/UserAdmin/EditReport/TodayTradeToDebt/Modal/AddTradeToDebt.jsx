@@ -12,6 +12,7 @@ import Textarea from "../../../../../ui/Textarea";
 import PhoneInput from "../../../../../ui/PhoneInput";
 import NumberInput from "../../../../../ui/NumberInput";
 import TextInput from "../../../../../ui/TextInput";
+import { useTranslation } from "react-i18next";
 
 const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
   const [formData, setFormData] = useState({
@@ -72,24 +73,25 @@ const AddTradeToDebt = ({ showModal, setShowModal, is_client, getData }) => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
-    if (!formData.second_name || formData.second_name.length < 2) {
-      toast.warning("Mahsulot nomini kiriting eng kami 2ta harf!");
+    if (!formData.second_name) {
+      toast.warning(m(19));
       return;
     }
-
-    if (!formData.to_who || formData.to_who.length < 3) {
-      toast.warning("Kimga qarz berildi kiriting eng kami 3ta harf!");
+    if (!formData.to_who) {
+      toast.warning(m(35));
       return;
     }
-
     if (formData.price < 100) {
-      toast.warning("Eng kam summa 100 somdan ko'p bo'lish kerak!");
+      toast.warning(g(33));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number)) {
-      toast.warning("Telefon raqamni to'gri kiriting +998 9? 111 22 33 !");
+      toast.warning(g(34));
       return;
     }
     mutation.mutate();

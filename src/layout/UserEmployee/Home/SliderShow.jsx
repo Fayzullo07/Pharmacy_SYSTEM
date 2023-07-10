@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./SliderShow.css";
-import { slide1, slider, slider1 } from "../../../assets";
 
 const SliderShow = () => {
   let slides1 = [

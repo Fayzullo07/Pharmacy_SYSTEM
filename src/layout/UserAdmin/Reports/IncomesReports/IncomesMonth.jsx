@@ -15,11 +15,11 @@ import { useSelector } from "react-redux";
 import { ReportsPharmacyExcelDownload } from "../../../../functions/ExcelActions";
 import SideBarIncomeMonth from "./SideBarIncomeMonth";
 import { number_0 } from "../../../../api";
+import { useTranslation } from "react-i18next";
 
 const IncomesMonth = () => {
   const reduxData = useSelector((state) => state);
   const { deteils } = reduxData.deteils;
-  const { toggle } = reduxData.toggle;
 
   const [change, setChange] = useState(false);
 
@@ -53,15 +53,17 @@ const IncomesMonth = () => {
     refetch();
   };
 
+  const { t } = useTranslation("translation", { keyPrefix: "Reports" });
+  const { t: f } = useTranslation("translation", { keyPrefix: "Firm" });
   return (
     <>
       {/* TOPBAR */}
       <div className="header_flex">
         <h2>{change && deteils.pharmacies.map((item) => {
           if(item.id == pharmacy){
-            return item.name
+            return item.name.length > 16 ? `${item.name.substring(0, 16)}. . .` : item.name
           }
-        })}{pharmacy == "" && "Hamma filiallar"}</h2>
+        })}{pharmacy == "" && f(11)}</h2>
         <div className="d-flex">
           <ReportsPharmacyExcelDownload
             pharmacy={pharmacy}
@@ -90,7 +92,7 @@ const IncomesMonth = () => {
           className="table table-sm table-hover table-bordered border-dark align-middle text-center"
           style={{
             width: "max-content",
-            minWidth: `${toggle ? "75vw" : "95vw"}`,
+            minWidth: "100%",
           }}
         >
           <thead
@@ -105,37 +107,49 @@ const IncomesMonth = () => {
           >
             <tr>
               <th style={{ width: "5px",padding: "20px 10px" }}>№</th>
-              <th>
-                <b>Sana</b>
-              </th>
-              <th>
-                <b>Xodim F.I.O</b>
-              </th>
-              <th>
-                <b>Naqt pulga</b>
-                <br />
-                <b>savdo</b>
-              </th>
-              <th>
-                <b>Naqt pulsiz</b>
-                <br />
-                <b>savdo</b>
-              </th>
-              <th>
-                <b>Qarzga savdo</b>
-              </th>
+              <th style={{width: '80px'}}>
+                    <h6>
+                      <b>{t(0)}</b>
+                    </h6>
+                  </th>
 
-              <th>
-                <b>Jami savdo</b>
-                <br />
-                <b>tushumi</b>
-              </th>
+                  <th style={{width: '155px'}}>
+                    <h6>
+                      <b>{t(1)}</b>
+                    </h6>
+                  </th>
 
-              <th>
-                <b>Kunlik jami</b>
-                <br />
-                <b>tushum</b>
-              </th>
+                  <th style={{width: '120px'}}>
+                    <h6>
+                      <b>{t(2)}</b>
+                    </h6>
+                   
+                  </th>
+
+                  <th style={{width: '100px'}}>
+                    <h6>
+                      <b>{t(3)}</b>
+                    </h6>
+                  </th>
+
+                  <th style={{width: '100px'}}>
+                    <h6>
+                      <b>{t(4)}</b>
+                    </h6>
+                  </th>
+
+                  <th style={{width: '120px'}}>
+                    <h6>
+                      <b>{t(6)}</b>
+                    </h6>
+                  </th>
+
+                  <th style={{ backgroundColor: "#d9d9d9", color: "#000",width: '120px' }}>
+                    <h6>
+                      <b>{t(9)}</b>
+                    </h6>
+                    
+                  </th>
             </tr>
           </thead>
           {data && data.data.length != 0 ? (
@@ -329,7 +343,7 @@ const IncomesMonth = () => {
               >
                 <tr className="text-center">
                   <th colSpan="3" className="py-2">
-                    Jami:
+                    {t(12)}:
                   </th>
                   <th>
                     <b className="fw-600">

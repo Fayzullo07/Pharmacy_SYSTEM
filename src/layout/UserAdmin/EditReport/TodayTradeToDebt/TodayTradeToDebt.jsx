@@ -9,6 +9,7 @@ import {
   formatNumber,
   totalMoney,
 } from "../../../../functions/NecessaryFunctions";
+import { useTranslation } from "react-i18next";
 
 const TodayTradeToDebt = ({ is_client, getData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +39,10 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
   if (data && data.data.results) {
     total = totalMoney(data && data.data.results);
   }
+
+   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   return (
     <>
       {showModal && (
@@ -67,7 +72,7 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
       <div className="bg_head mb-2">
         <div className="header_flex d-flex justify-content-between align-items-center mb-2">
           <p className="bg_c">
-            Umumiy:{" "}
+            {g(90)}:{" "}
             <span>
               <b>{formatNumber(total)}</b>.0
             </span>{" "}
@@ -94,11 +99,11 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
                 <th scope="col" style={{ width: "5px" }}>
                   №
                 </th>
-                <th>Kimga qarz berildi</th>
-                <th>Maxsulot nomi</th>
-                <th>Telefon</th>
-                <th>Qancha berildi</th>
-                <th>Qancha qoldi</th>
+                <th>{m(25)}</th>
+                <th>{m(19)}</th>
+                <th>{g(5)}</th>
+                <th>{g(28)}</th>
+                <th>{g(14)}</th>
                 <th scope="col" style={{ width: "5px" }}>
                   <i className="fa fa-edit text-warning"></i>
                 </th>
@@ -113,24 +118,24 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
                   <tr key={item.id}>
                     <td data-label="№">{index + 1}</td>
                     <td
-                      data-label="Kimga qarz berildi"
+                      data-label={m(25)}
                       className="text-capitalize text-break"
                     >
                       {item.to_who}
                     </td>
                     <td
-                      data-label="Maxsulot nomi"
+                      data-label={m(19)}
                       className="text-capitalize text-break"
                     >
                       {item.second_name ? item.second_name : "~"}
                     </td>
-                    <td data-label="Telefon">
+                    <td data-label={g(5)}>
                       {item.phone_number}
                     </td>
-                    <td data-label="Qancha berildi">
+                    <td data-label={g(28)}>
                       {formatNumber(item.price)}
                     </td>
-                    <td data-label="Qancha qoldi">
+                    <td data-label={g(14)}>
                       <b className="text-danger">
                         {item.remaining_debt == 0 ? (
                           <span class="badge text-bg-success"><i className="fa fa-check"></i></span>
@@ -139,7 +144,7 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
                         )}
                       </b>
                     </td>
-                    <td data-label="O'zgartirish" onClick={() => {
+                    <td data-label="" onClick={() => {
                       setCurData(item);
                       setUpdateModal(!updateModal);
                     }}
@@ -149,7 +154,7 @@ const TodayTradeToDebt = ({ is_client, getData }) => {
 
                       ></i>
                     </td>
-                    <td data-label="O'chirish" onClick={() => {
+                    <td data-label="" onClick={() => {
                       setCurData(item);
                       setDeleteModal(!deleteModal);
                     }}

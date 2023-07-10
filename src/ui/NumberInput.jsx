@@ -10,7 +10,7 @@ const NumberInput = ({
   placeholder = ""
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
-const { t } = useTranslation("translation", { keyPrefix: "Modal" });
+  const { t } = useTranslation("translation", { keyPrefix: "Modal" });
   useEffect(
     () => {
       switch (placeholder) {

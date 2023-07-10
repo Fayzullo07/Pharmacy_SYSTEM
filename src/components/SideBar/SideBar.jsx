@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SideBar = ({
   children,
@@ -6,6 +7,8 @@ const SideBar = ({
   icon = "fa fa-filter",
   id,
 }) => {
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  title = g(31)
   return (
     <>
       <button

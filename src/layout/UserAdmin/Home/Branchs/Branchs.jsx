@@ -18,12 +18,12 @@ const Branchs = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [chooseDate, setChooseDate] = useState(false);
-  
+
   const [curData, setCurData] = useState();
-  
+
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
-  
+
   useEffect(() => {
     dispatch(toggleFunction(true));
   }, [])
@@ -38,11 +38,9 @@ const Branchs = () => {
 
   if (error) return `Error: ${error.message}`;
 
-    const { t } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t } = useTranslation("translation", { keyPrefix: "Global" });
   return (
     <>
-     
-
       {chooseDate && (
         <ChooseDate
           showModal={chooseDate}
@@ -57,7 +55,7 @@ const Branchs = () => {
           <Topbar>
             <div className="header_flex">
               <h2>{t(1)}</h2>
-            </div>   
+            </div>
           </Topbar>
 
           {/* TABLE */}
@@ -65,10 +63,20 @@ const Branchs = () => {
             className="container-fluid m-1"
             style={{ maxHeight: "calc(100vh - 150px)", overflowY: "scroll" }}
           >
-            <table id="table" className="table table-hover">
-              <thead style={{ position: "sticky", top: 0, zIndex: 55 }}>
+            <table className="table table-hover table-bordered border-secondary align-middle text-center" style={{
+              width: "max-content",
+              minWidth: "100%"
+            }}>
+              <thead className="align-middle"
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "var(--blue)",
+                  color: "#fff",
+                  zIndex: 55,
+                }}>
                 <tr>
-                  <th scope="col" style={{ width: "5px" }}>
+                  <th scope="col" style={{ width: "5px", padding: '10px' }}>
                     №
                   </th>
                   <th scope="col">{t(0)}</th>

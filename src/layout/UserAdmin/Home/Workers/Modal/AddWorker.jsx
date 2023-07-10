@@ -16,6 +16,7 @@ import NumberInput from "../../../../../ui/NumberInput";
 import SelectInput from "../../../../../ui/SelectInput";
 import SmenaSelect from "../../../../../ui/SmenaSelect";
 import PasswordInput from "../../../../../ui/PasswordInput";
+import { useTranslation } from "react-i18next";
 
 const AddWorker = props => {
   const { showModal, setShowModal } = props;
@@ -97,44 +98,52 @@ const AddWorker = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   const handleSubmit = () => {
-    if (!formData.first_name || !formData.last_name) {
-      toast.warning("Ism Familiyani kiriting !");
+    if (!formData.first_name) {
+      toast.warning(m(28));
+      return;
+    }
+
+    if (!formData.last_name) {
+      toast.warning(m(29));
       return;
     }
 
     if (!formData.father_name) {
-      toast.warning("Otasini Ismini kiriting !");
+      toast.warning(m(30));
       return;
     }
 
     if (checkPhoneNumber(formData.phone_number)) {
-      toast.warning("Telefon raqamini to'g'ri kitriting +998 9? 111 22 33");
+      toast.warning(g(34));
       return;
     }
 
     if (!formData.pharmacy) {
-      toast.warning("Filial tanlang !");
+      toast.warning(m(12));
       return;
     }
 
     if (!formData.shift) {
-      toast.warning("Smena tanlang !");
+      toast.warning(m(15));
       return;
     }
 
     if (!formData.wage) {
-      toast.warning("Ish haqini kiriting !");
+      toast.warning(m(7));
       return;
     }
 
     if (!formData.password) {
-      toast.warning("Parolni kiriting !");
+      toast.warning(m(8));
       return;
     }
 
     if (formData.password != formData.re_password) {
-      toast.warning("Parolni bir xil kiriting!");
+      toast.warning(m(9));
       return;
     }
     mutation.mutate();
@@ -222,7 +231,7 @@ const AddWorker = props => {
                   formData.is_main_worker ? "text-success" : "text-danger"
                 }
               >
-                Asosiy xodim sifatida belgilash
+                {g(45)}
               </b>
               <input
                 className="form-check-input mx-1"
@@ -243,7 +252,7 @@ const AddWorker = props => {
               <b
                 className={formData.is_active ? "text-success" : "text-danger"}
               >
-                Active
+                {g(8)}
               </b>
               <input
                 className="form-check-input mx-1"

@@ -8,6 +8,7 @@ import { getGlobalDeteilsAction } from "../../../../../redux/Actions/GlobalActio
 import Modal from "../../../../../utils/Modal";
 import TextInput from "../../../../../ui/TextInput";
 import Textarea from "../../../../../ui/Textarea";
+import { useTranslation } from "react-i18next";
 
 const UpdateApteka = props => {
   const { showModal, setShowModal, data } = props;
@@ -56,9 +57,11 @@ const UpdateApteka = props => {
     }
   );
 
+  const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
+
   const handleSubmit = () => {
     if (!formData.name) {
-      toast.warning("Filial nomini kiriting !");
+      toast.warning(g(17));
       return;
     }
     mutation.mutate();
@@ -86,8 +89,7 @@ const UpdateApteka = props => {
         {/* DATE */}
         <div className="mb-3">
           <label for="basic-url" className="form-label">
-            Filial 00:00 gacha ishlaydimi? Agar yo'q bo'lsa, ish kuni qachon
-            tugashini kiriting. <b className="text-danger">*</b>
+            {g(29)} <b className="text-danger">*</b>
           </label>
           <div className="input-group">
             <select

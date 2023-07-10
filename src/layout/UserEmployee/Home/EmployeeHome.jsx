@@ -13,6 +13,7 @@ import {
 } from "../../../api/GlobalRequest";
 import Offers from "../../UserAdmin/Offers/Offers";
 import SliderShow from "./SliderShow";
+import { useTranslation } from "react-i18next";
 
 const EmployeeHome = () => {
   const navigate = useNavigate();
@@ -49,6 +50,8 @@ const EmployeeHome = () => {
   if (error) return `Error: ${error.message}`;
   if (productsError) return `Error: ${productsError.message}`;
 
+  const { t: h } = useTranslation("translation", { keyPrefix: "Home" });
+  const { t: n } = useTranslation("translation", { keyPrefix: "Navbar" });
   return (
     <>
       <div className="d-flex">
@@ -62,7 +65,7 @@ const EmployeeHome = () => {
               <SliderShow />
             </div>
             <div className="col-md-4">
-              <h2 style={{ color: "var(--text_color_blue)" }}>Takliflar</h2>
+              <h2 style={{ color: "var(--text_color_blue)" }}>{h(4)}</h2>
               <Offers />
             </div>
           </div>
@@ -82,7 +85,7 @@ const EmployeeHome = () => {
                       />
                     )}
                   </div>
-                  <div className="cardName">Mijozlar</div>
+                  <div className="cardName">{h(3)}</div>
                 </div>
               </div>
             </div>
@@ -101,7 +104,7 @@ const EmployeeHome = () => {
                       />
                     )}
                   </div>
-                  <div className="cardName">Ommabop maxsulotlar</div>
+                  <div className="cardName">{n(6)}</div>
                 </div>
               </div>
             </div>

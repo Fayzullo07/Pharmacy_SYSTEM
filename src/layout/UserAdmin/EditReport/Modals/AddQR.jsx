@@ -56,8 +56,11 @@ const AddQR = ({
   );
 
   const handleSubmit = () => {
+    if (!qr) {
+      return;
+    }
     if (total < qr) {
-      toast.warning("Tushumdan ko'p summa mumkunemas!");
+      toast.warning("Tushumdan ko'p summa mumkun emas!");
       return;
     }
     if (check_qr_price == false) {
