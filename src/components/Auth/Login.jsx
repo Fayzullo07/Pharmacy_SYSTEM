@@ -65,7 +65,7 @@ const Login = ({ onLogin }) => {
         <div className="btn-group btn-group-sm p-2">
           <button type="button" className="btn btn-primary" disabled>Demo</button>
           <button type="button" className="btn btn-outline-primary" onClick={() => {
-            Director.mutate({phone:"+998974068686", pass: "+998974068686" })
+            Director.mutate({phone:"+998331234567 ", pass: "JSVOsadlocby554647" })
           }}
             disabled={Director.isLoading}
           >
@@ -73,7 +73,7 @@ const Login = ({ onLogin }) => {
               ? <i className="fa fa-spinner fa-spin" />
               : "Director"}</button>
           <button type="button" className="btn btn-outline-primary" onClick={() => {
-            Worker.mutate({phone:"+998900000000", pass: "111aAa111" })
+            Worker.mutate({phone:"+998337654321 ", pass: "qpnsadJHGJ292459" })
           }}
             disabled={Worker.isLoading}
           >
