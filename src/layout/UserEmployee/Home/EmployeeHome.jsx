@@ -19,13 +19,6 @@ const EmployeeHome = () => {
   const navigate = useNavigate();
   const reduxData = useSelector((state) => state);
   const { toggle } = reduxData.toggle;
-  const { deteils } = reduxData.deteils;
-
-  const [showModal, setShowModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [updateModal, setUpdateModal] = useState(false);
-
-  const [curData, setCurData] = useState();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["clients"],
