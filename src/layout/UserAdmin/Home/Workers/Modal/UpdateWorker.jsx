@@ -25,6 +25,7 @@ const UpdateWorker = (props) => {
     last_name: datas.last_name.split(" ")[0],
     father_name: datas.last_name.split(" ")[1],
     phone_number: datas.phone_number,
+    address: datas.address,
     shift: datas.shift,
     wage: datas.wage,
     is_main_worker: datas.is_main_worker,
@@ -53,6 +54,10 @@ const UpdateWorker = (props) => {
     }
 
     if (name == "father_name" && value.length > 50) {
+      return;
+    }
+
+    if (name == "address" && value.length > 50) {
       return;
     }
 
@@ -192,7 +197,7 @@ const UpdateWorker = (props) => {
         </div>
 
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             {/* PHONE */}
             <PhoneInput
               name={"phone_number"}
@@ -202,7 +207,7 @@ const UpdateWorker = (props) => {
               isRequired={true}
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             {/* SHIFT */}
             <SmenaSelect
               name={"shift"}
@@ -211,7 +216,7 @@ const UpdateWorker = (props) => {
               isRequired={true}
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             {/* WAGE */}
             <NumberInput
               name={"wage"}
@@ -222,6 +227,17 @@ const UpdateWorker = (props) => {
               placeholder={"Ish haqi"}
             />
 
+          </div>
+          <div className="col-md-3">
+            {/* FATHER NAME */}
+            <TextInput
+              name={"address"}
+              value={formData.address}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isRequired={true}
+              placeholder={"Manzil"}
+            />
           </div>
           <div className="col-md-6">
             {/* CHECKBOX USER */}
