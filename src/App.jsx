@@ -343,7 +343,7 @@ function App() {
       {isLoading && <Loading />}
       {!isLoading && (
         <>
-          <ToastContainer autoClose={1000} />
+          <ToastContainer autoClose={1500} position='bottom-left'/>
           <Routing user={user} handleLogin={handleLogin} navigate={navigate} />
         </>
       )}
