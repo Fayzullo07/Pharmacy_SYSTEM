@@ -189,10 +189,10 @@ const DiscountMonth = () => {
                         {item.created_at}
                       </td>
                       <td>
-                        <b>{formatNumber(item.second_name)}</b>
+                        <b>{formatNumber(item.price)}</b>
                       </td>
                       <td className="text-center fw-bold">
-                        {formatNumber(item.price)}
+                        {formatNumber(item.second_name)}
                       </td>
                     </tr>
                   ))}
@@ -222,14 +222,15 @@ const DiscountMonth = () => {
                   <th>
                     {data &&
                       data.data &&
-                      formatNumber(
-                        totalMoneyByKey(data.data.results, "second_name")
-                      )}
+                      formatNumber(data.data.total_month_price)}
                   </th>
                   <th>
                     {data &&
                       data.data &&
-                      formatNumber(data.data.total_month_price)}
+                       formatNumber(
+                        totalMoneyByKey(data.data.results, "second_name")
+                      )}
+                     
                   </th>
                 </tr>
               </tfoot>
