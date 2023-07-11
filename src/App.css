@@ -67,7 +67,8 @@
 
 .container_g.active {
   width: calc(100% - 0px);
-  /* height: 90vh; */
+  max-height: 100vh;
+  overflow-y: scroll;
   left: 0px;
 }
 
