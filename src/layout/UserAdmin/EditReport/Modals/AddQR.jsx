@@ -24,7 +24,7 @@ const AddQR = ({
     async () => {
       return receiptsPostAction(
         cleanedData({
-          price: qr,
+          price: qr == "" ? 0 : qr,
           report_date: getData.report_date,
           shift: getData.shift,
           pharmacy: getData.to_pharmacy
@@ -44,7 +44,7 @@ const AddQR = ({
       return receiptsPatchAction(
         qr_price.id,
         cleanedData({
-          price: qr
+          price: qr == "" ? 0 : qr
         })
       );
     },
@@ -60,10 +60,6 @@ const AddQR = ({
   const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
 
   const handleSubmit = () => {
-    if (qr < 100) {
-      toast.warning(g(33));
-      return;
-    }
     if (total < qr) {
       toast.warning(g(122));
       return;

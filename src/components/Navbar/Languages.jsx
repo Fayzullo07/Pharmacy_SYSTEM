@@ -17,7 +17,7 @@ const Languages = () => {
         }}
         className="select"
       >
-        <option value={"uz"}>Uzbek</option>
+        <option value={"uz"}>O'zbek</option>
         <option value={"ru"}>Русский язык</option>
         <option value={"en"}>English</option>
       </select>

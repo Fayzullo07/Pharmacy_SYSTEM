@@ -38,6 +38,13 @@ const Login = ({ onLogin }) => {
   const mutation = useMutation(() => {
     return loginAction(phone_number, password, navigate, onLogin);
   });
+
+   const Director = useMutation(({phone, pass}) => {
+    return loginAction(phone, pass, navigate, onLogin);
+  });
+   const Worker = useMutation(({phone, pass}) => {
+    return loginAction(phone, pass, navigate, onLogin);
+  });
   const handleSubmit = e => {
     e.preventDefault();
     if (checkPhoneNumber(phone_number)) {
@@ -54,7 +61,26 @@ const Login = ({ onLogin }) => {
   };
   return (
     <>
-      <div id="body_image">
+      <div id="body_image" className="text-end">
+        <div className="btn-group btn-group-sm p-2">
+          <button type="button" className="btn btn-primary" disabled>Demo</button>
+          <button type="button" className="btn btn-outline-primary" onClick={() => {
+            Director.mutate({phone:"+998974068686", pass: "+998974068686" })
+          }}
+            disabled={Director.isLoading}
+          >
+            {Director.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Director"}</button>
+          <button type="button" className="btn btn-outline-primary" onClick={() => {
+            Worker.mutate({phone:"+998900000000", pass: "111aAa111" })
+          }}
+            disabled={Worker.isLoading}
+          >
+            {Worker.isLoading
+              ? <i className="fa fa-spinner fa-spin" />
+              : "Xodim"}</button>
+        </div>
       </div>
       <div className="box">
 
