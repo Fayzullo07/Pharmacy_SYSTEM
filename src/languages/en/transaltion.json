@@ -1,7 +1,7 @@
 {
     "Home": {
         "0": "Branches",
-        "1": "Companies",
+        "1": "Firms",
         "2": "Employees",
         "3": "Customers",
         "4": "Offers"
@@ -9,7 +9,7 @@
     "Navbar": {
         "0": "Main",
         "1": "Branches",
-        "2": "Companies",
+        "2": "Firms",
         "3": "Debts Given",
         "4": "Reports",
         "5": "Debts Given to Company",
@@ -20,7 +20,7 @@
     },
     "Profile": {
         "0": "Managers",
-        "1": "Companies",
+        "1": "Firms",
         "2": "Branches",
         "3": "Employees",
         "4": "Expense Categories",
@@ -88,7 +88,7 @@
         "13": "Debt Amount",
         "14": "Remaining Amount",
         "15": "Information Not Found",
-        "16": "Companies",
+        "16": "Firms",
         "17": "Branch Name",
         "18": "Product Name",
         "19": "Product Amount",
@@ -141,7 +141,7 @@
         "66": "Are you sure you want to exit the system?",
         "67": "Income Statement",
         "68": "Expense Statement",
-        "69": "Expense Statement for Companies",
+        "69": "Expense Statement for Firms",
         "70": "Sales with QR Code",
         "71": "Returned Products",
         "72": "Accounting with Manager",
@@ -153,7 +153,7 @@
         "78": "Total Discount Given",
         "79": "year",
         "80": "Given Amount",
-        "81": "Amount Given to Companies",
+        "81": "Amount Given to Firms",
         "82": "Company Employee",
         "83": "Amount Given to Supervisor",
         "84": "Amount Taken from Supervisor",
