@@ -57,10 +57,8 @@
 .container_g {
   position: absolute;
   width: calc(100% - 300px);
-  height: 100vh;
-  overflow: auto;
   left: 300px;
-  /* min-height: 100vh; */
+  min-height: 100vh;
   background: var(--body_color);
   transition: 0.5s;
   padding: 10px 20px;
@@ -69,7 +67,6 @@
 .container_g.active {
   width: calc(100% - 0px);
   left: 0px;
-  height: 100vh;
 }
 
 .cursor_pointer {
