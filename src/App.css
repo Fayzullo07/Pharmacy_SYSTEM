@@ -58,7 +58,8 @@
   position: absolute;
   width: calc(100% - 300px);
   left: 300px;
-  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: scroll;
   background: var(--body_color);
   transition: 0.5s;
   padding: 10px 20px;
@@ -66,6 +67,7 @@
 
 .container_g.active {
   width: calc(100% - 0px);
+  /* height: 90vh; */
   left: 0px;
 }
 
