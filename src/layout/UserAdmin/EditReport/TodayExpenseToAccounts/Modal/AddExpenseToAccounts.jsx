@@ -92,6 +92,7 @@ const AddExpenseToAccounts = ({
 
   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   const { t: p } = useTranslation("translation", { keyPrefix: "Profile" });
+  const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
    
   const handleSubmit = () => {
     if (formData.to_user == formData.from_user) {
