@@ -30,6 +30,7 @@ const Profile = ({ userData }) => {
     }
   });
 
+
   const [formData, setFormData] = useState({
     first_name: director.first_name,
     last_name: director.last_name
@@ -115,7 +116,7 @@ const Profile = ({ userData }) => {
                   {director.first_name} {director.last_name}
                 </h4>
                 <h5 className="my-1">
-                  {director.phone_number}
+                  {JSON.parse(savedUser)?.user.phone_number}
                 </h5>
               </div>
             </div>
