@@ -109,9 +109,9 @@ const Profile = ({ userData }) => {
             <div className="card mb-4">
               <div className="card-body text-center">
                 <img src={profile} alt="avatar" width={120} className="rounded-circle img-fluid" />
-                <h5 className="my-1">
+                {/* <h5 className="my-1">
                   {userData.role == "Director" ? "Director" : userData.role == "Manager" ? "Menejer" : "Worker"}
-                </h5>
+                </h5> */}
                 <h4 className="text-muted">
                   {director.first_name} {director.last_name}
                 </h4>

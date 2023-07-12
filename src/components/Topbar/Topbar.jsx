@@ -121,10 +121,6 @@ const Topbar = ({ children }) => {
           <div className="row mb-4">
             <div className=" text-center">
               <img src={profile} alt="avatar" width={80} className="rounded-circle img-fluid mt-2" />
-              <h5 className="my-1">
-                {JSON.parse(savedUser)?.user.role == "Director" ? "Director" : "Worker"}
-
-              </h5>
              
               <h5 className="mt-1 mb-0">
                 {JSON.parse(savedUser)?.user.phone_number}
