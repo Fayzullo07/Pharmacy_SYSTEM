@@ -33,51 +33,51 @@ export const routesEmployee = [
 export const months = [
   {
     id: 1,
-    month: "YANVAR"
+    month: "ЯНВАРЬ"
   },
   {
     id: 2,
-    month: "FEBRAL"
+    month: "ФЕВРАЛЬ"
   },
   {
     id: 3,
-    month: "MART"
+    month: "МАРТ"
   },
   {
     id: 4,
-    month: "APREL"
+    month: "АПРЕЛЬ"
   },
   {
     id: 5,
-    month: "MAY"
+    month: "МАЙ"
   },
   {
     id: 6,
-    month: "IYUN"
+    month: "ИЮНЬ"
   },
   {
     id: 7,
-    month: "IYUL"
+    month: "ИЮЛЬ"
   },
   {
     id: 8,
-    month: "AVGUST"
+    month: "АВГУСТ"
   },
   {
     id: 9,
-    month: "SENTYABR"
+    month: "СЕНТЯБРЬ"
   },
   {
     id: 10,
-    month: "OKTYABR"
+    month: "ОКТЯБРЬ"
   },
   {
     id: 11,
-    month: "NOYABR"
+    month: "НОЯБРЬ"
   },
   {
     id: 12,
-    month: "DEKABR"
+    month: "ДЕКАБРЬ"
   }
 ];
 
