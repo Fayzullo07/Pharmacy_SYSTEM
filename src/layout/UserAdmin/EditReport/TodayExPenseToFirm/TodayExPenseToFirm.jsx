@@ -49,6 +49,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
 
   const { t: g } = useTranslation("translation", { keyPrefix: "Global" });
   const { t: m } = useTranslation("translation", { keyPrefix: "Modal" });
+
   return (
     <>
       {descModal && (
@@ -97,8 +98,17 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
             </span>{" "}
             UZS
           </p>
-          {getData.report_date == today && (
+          {getData.report_date == ""  && (
+            <button
+              className="btn btn-sm"
+              style={{ background: "var(--blue)", color: "var(--g_white)" }}
+              onClick={() => setSearchModal(!searchModal)}
+            >
+              <i className="fa fa-add"></i>
+            </button>
+          )}
 
+          {getData.report_date == today  && (
             <button
               className="btn btn-sm"
               style={{ background: "var(--blue)", color: "var(--g_white)" }}

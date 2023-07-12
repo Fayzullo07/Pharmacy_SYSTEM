@@ -140,6 +140,7 @@ const Topbar = ({ children }) => {
                 handleSubmit={handleSubmit}
                 isRequired={true}
                 placeholder={"Ismingiz"}
+                dis={true}
               />
             </div>
             <div className="col-md-6">
@@ -150,6 +151,7 @@ const Topbar = ({ children }) => {
                 handleSubmit={handleSubmit}
                 isRequired={true}
                 placeholder={"Familiyangiz"}
+                dis={true}
               />
             </div>
             <div className="col-md-6">
@@ -160,6 +162,7 @@ const Topbar = ({ children }) => {
                 handleSubmit={handleSubmit}
                 isRequired={true}
                 placeholder={"Otasini ismi"}
+                dis={true}
               />
             </div>
             <div className="col-md-6">

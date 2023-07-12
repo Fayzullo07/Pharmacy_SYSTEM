@@ -7,7 +7,8 @@ const TextInput = ({
   handleInputChange,
   handleSubmit,
   isRequired = false,
-  placeholder = ""
+  placeholder = "",
+  dis = false
 }) => {
   const [placeholderInput, setPlaceholderInput] = useState("");
   const { t } = useTranslation("translation", { keyPrefix: "Modal" });
@@ -83,6 +84,7 @@ const TextInput = ({
             handleSubmit();
           }
         }}
+        disabled={dis}
       />
       <label>
         {placeholderInput}{" "}
