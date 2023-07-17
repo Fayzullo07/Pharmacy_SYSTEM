@@ -245,12 +245,14 @@ export const firmsExpenseVerifyPostAction = async (
   datas,
   setShowModal,
   isLeader,
-  mutationAccount
+  mutationAccount,
+  setDataModal
 ) => {
   try {
     await GlobalApi.firmsExpenseVerifyPostAPI(datas);
     // toast.success(`Tekshirildi`);
     setShowModal(false);
+    setDataModal(false);
     if (isLeader.isTrue) {
       mutationAccount.mutate({ price: isLeader.price });
     }

@@ -72,6 +72,7 @@ const TodayExPenseToFirm = ({ deteils, getData }) => {
           getData={getData}
           deteils={deteils}
           isLeader={isLeader}
+          setDataModal={setShowModal}
         />
       )}
 

@@ -17,7 +17,8 @@ const ViewModal = ({
   firm_expense_id,
   getData,
   deteils,
-  isLeader
+  isLeader,
+  setDataModal
 }) => {
   let director = null;
   deteils.employees.map(user => {
@@ -44,10 +45,14 @@ const ViewModal = ({
   const mutation = useMutation(
     async () => {
       return firmsExpenseVerifyPostAction(
-        cleanedData({ ...formData, code: Number(formData.code) }),
+        cleanedData({
+          ...formData,
+          code: Number(formData.code)
+        }),
         setShowModal,
         isLeader,
-        mutationAccount
+        mutationAccount,
+        setDataModal
       );
     },
     {
